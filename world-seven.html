@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ 英语单词听写 · 基础词汇 (七)</title>
+    <style>
+        /* 全局亮丽英伦风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f9f3e8 0%, #ffe9d6 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 248, 240, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            padding: 30px 35px 45px;
+            transition: all 0.2s;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            border-bottom: 3px dashed #fbc4ab;
+            padding-bottom: 18px;
+        }
+
+        .header h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c44b3c, #e6865f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 span {
+            font-size: 2.4rem;
+            -webkit-text-fill-color: initial;
+            color: #f5a623;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: white;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #3d2c1f;
+            border: 1px solid #f0d5c0;
+        }
+
+        .btn-primary {
+            background: #f5a623;
+            color: white;
+            border: none;
+            box-shadow: 0 8px 18px rgba(245, 166, 35, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(245, 166, 35, 0.45);
+        }
+
+        .btn-secondary {
+            background: #fceae3;
+            border-color: #eccfc0;
+        }
+
+        .btn-secondary:hover {
+            background: #fadac8;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #4caf84;
+            color: white;
+            border: none;
+            box-shadow: 0 8px 18px rgba(76, 175, 132, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(76, 175, 132, 0.4);
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 30px;
+            background: rgba(255, 237, 224, 0.6);
+            padding: 14px 28px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+            justify-content: center;
+            backdrop-filter: blur(2px);
+            border: 1px solid #faddcd;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #4d362a;
+        }
+
+        .stat-item .badge {
+            background: #c44b3c;
+            color: white;
+            border-radius: 40px;
+            padding: 2px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .stat-item .badge.green {
+            background: #4caf84;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin: 20px 0 30px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            padding: 16px 18px 18px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f3e3d8;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-card:hover {
+            border-color: #eccfc0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .q-number {
+            font-weight: 700;
+            color: #c44b3c;
+            background: #fce8de;
+            padding: 0 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            line-height: 26px;
+        }
+
+        .q-part {
+            font-size: 0.75rem;
+            color: #b08a78;
+            background: #f7ede7;
+            padding: 0 14px;
+            border-radius: 30px;
+            line-height: 24px;
+        }
+
+        .q-chinese {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d1f16;
+            margin: 6px 0 10px;
+        }
+
+        .q-input {
+            border: 2px solid #ecd9ce;
+            border-radius: 60px;
+            padding: 10px 18px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+            background: #fcf8f5;
+            width: 100%;
+        }
+
+        .q-input:focus {
+            border-color: #f5a623;
+            box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.15);
+            background: white;
+        }
+
+        .q-input.correct {
+            border-color: #4caf84;
+            background: #e8f5ee;
+        }
+
+        .q-input.wrong {
+            border-color: #e06050;
+            background: #fcebe8;
+        }
+
+        .q-result {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-height: 26px;
+        }
+
+        .q-result .correct-answer {
+            color: #4caf84;
+            font-weight: 600;
+        }
+
+        .q-result .wrong-answer {
+            color: #e06050;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .result-panel {
+            margin-top: 30px;
+            background: white;
+            border-radius: 32px;
+            padding: 24px 30px 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f3e3d8;
+            display: none;
+        }
+
+        .result-panel.visible {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d1f16;
+            margin-bottom: 8px;
+        }
+
+        .result-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: #fcf6f0;
+            padding: 16px 24px;
+            border-radius: 60px;
+            margin: 12px 0 20px;
+        }
+
+        .result-stats .stat {
+            font-size: 1.1rem;
+        }
+
+        .result-stats .stat strong {
+            font-size: 1.5rem;
+            color: #c44b3c;
+        }
+
+        .result-stats .stat .trend {
+            font-size: 1.2rem;
+            margin-left: 8px;
+        }
+        .result-stats .stat .trend.up { color: #4caf84; }
+        .result-stats .stat .trend.down { color: #e06050; }
+
+        .suggestion {
+            background: #fef7e9;
+            border-radius: 40px;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            display: inline-block;
+            border: 1px solid #f5dcc8;
+        }
+
+        .wrong-list {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .wrong-item {
+            background: #fcebe8;
+            border-radius: 16px;
+            padding: 12px 18px;
+            border-left: 6px solid #e06050;
+        }
+
+        .wrong-item .en {
+            font-weight: 700;
+            color: #2d1f16;
+            font-size: 1.1rem;
+        }
+
+        .wrong-item .zh {
+            color: #5d4033;
+        }
+
+        .wrong-item .pos {
+            color: #b08a78;
+            font-size: 0.8rem;
+            background: #f3ded3;
+            padding: 0 12px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            animation: fadeIn 0.25s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-box {
+            background: #fffaf5;
+            border-radius: 40px;
+            max-width: 600px;
+            width: 90%;
+            padding: 30px 35px 40px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #f3e3d8;
+        }
+
+        .modal-box h2 {
+            font-size: 1.8rem;
+            color: #2d1f16;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .modal-box .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #b08a78;
+            transition: 0.2s;
+        }
+
+        .modal-box .close-btn:hover {
+            color: #c44b3c;
+            transform: rotate(90deg);
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .history-list li {
+            padding: 10px 14px;
+            border-bottom: 1px solid #ecd9ce;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
+
+        .history-list li:last-child {
+            border: none;
+        }
+
+        .history-list .score-high {
+            font-weight: 700;
+            color: #c44b3c;
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 8px 12px;
+            margin-top: 18px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .bank-item {
+            background: #f7ede7;
+            border-radius: 30px;
+            padding: 4px 16px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bank-item .en {
+            font-weight: 600;
+            color: #2d1f16;
+        }
+        .bank-item .zh {
+            color: #7a5f4f;
+        }
+        .bank-item .pos {
+            color: #b08a78;
+            font-size: 0.7rem;
+            background: white;
+            padding: 0 10px;
+            border-radius: 30px;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 18px; }
+            .header h1 { font-size: 1.6rem; }
+            .question-grid { grid-template-columns: 1fr; }
+            .result-stats { flex-direction: column; gap: 8px; border-radius: 30px; }
+            .modal-box { padding: 20px; }
+        }
+
+        .bank-grid::-webkit-scrollbar,
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .bank-grid::-webkit-scrollbar-track,
+        .modal-box::-webkit-scrollbar-track {
+            background: #f3e3d8;
+            border-radius: 10px;
+        }
+        .bank-grid::-webkit-scrollbar-thumb,
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #c44b3c;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>
+                <span>📘</span> 英语单词听写
+                <span style="font-size:1rem; background:#f5e3d8; padding:0 16px; border-radius:40px; -webkit-text-fill-color:#6b4f3e;">基础词汇 (七)</span>
+            </h1>
+            <div class="toolbar">
+                <button class="btn btn-primary" id="randomBtn">🎲 重新随机</button>
+                <button class="btn btn-secondary" id="showBankBtn">📖 显示题库</button>
+                <button class="btn btn-secondary" id="showHistoryBtn">🏆 历史分数</button>
+            </div>
+        </div>
+
+        <!-- 统计 -->
+        <div class="stats" id="statsBar">
+            <div class="stat-item">📝 题目 <span class="badge" id="totalCount">30</span></div>
+            <div class="stat-item">✅ 已答 <span class="badge green" id="answeredCount">0</span></div>
+            <div class="stat-item">🏅 历史最高 <span class="badge" id="highestScore">--</span></div>
+        </div>
+
+        <!-- 题目区域 -->
+        <div id="questionContainer" class="question-grid"></div>
+
+        <!-- 底部按钮 -->
+        <div class="actions">
+            <button class="btn btn-success" id="submitBtn">✍️ 提交答案</button>
+        </div>
+
+        <!-- 结果面板 -->
+        <div class="result-panel" id="resultPanel">
+            <div class="result-title">📊 听写结果</div>
+            <div class="result-stats" id="resultStats">
+                <div class="stat">正确率 <strong id="accuracy">0%</strong></div>
+                <div class="stat">得分 <strong id="scoreNum">0</strong> / 30</div>
+                <div class="stat">
+                    趋势 
+                    <span class="trend" id="trendIcon">—</span>
+                    <span id="trendText"></span>
+                </div>
+            </div>
+            <div class="suggestion" id="suggestionText">继续加油！</div>
+            <div style="margin-top:20px; font-weight:600; color:#2d1f16;">❌ 错题回顾</div>
+            <div class="wrong-list" id="wrongList"></div>
+        </div>
+    </div>
+
+    <!-- 模态框：历史分数 -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeHistoryModal">✕</button>
+            <h2>🏆 历史分数记录</h2>
+            <div id="historyContent"><p style="color:#7a5f4f;">暂无记录</p></div>
+        </div>
+    </div>
+
+    <!-- 模态框：显示题库 -->
+    <div class="modal-overlay" id="bankModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeBankModal">✕</button>
+            <h2>📖 全部单词（57个）</h2>
+            <div id="bankContent" class="bank-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        // ======================== 数据 ========================
+        const WORD_BANK = [
+            { en: "sport", zh: "运动", pos: "n." },
+            { en: "station", zh: "车站", pos: "n." },
+            { en: "stop", zh: "停止；车站", pos: "v./n." },
+            { en: "store", zh: "商店", pos: "n." },
+            { en: "story", zh: "故事", pos: "n." },
+            { en: "strawberry", zh: "草莓", pos: "n." },
+            { en: "subway", zh: "地铁", pos: "n." },
+            { en: "Sunday", zh: "星期日", pos: "n." },
+            { en: "sweater", zh: "毛衣", pos: "n." },
+            { en: "swim", zh: "游泳", pos: "v./n." },
+            { en: "table", zh: "桌子", pos: "n." },
+            { en: "take", zh: "拿；花费；乘坐", pos: "v." },
+            { en: "talk", zh: "谈话", pos: "v./n." },
+            { en: "tape", zh: "磁带；胶带", pos: "n." },
+            { en: "taste", zh: "尝；味道", pos: "v./n." },
+            { en: "telephone", zh: "电话；打电话", pos: "n./v." },
+            { en: "tell", zh: "告诉", pos: "v." },
+            { en: "tennis", zh: "网球", pos: "n." },
+            { en: "then", zh: "那么；然后", pos: "adv." },
+            { en: "these", zh: "这些", pos: "pron." },
+            { en: "think", zh: "想；认为", pos: "v." },
+            { en: "third", zh: "第三", pos: "num." },
+            { en: "thirteen", zh: "十三", pos: "num." },
+            { en: "thirty", zh: "三十", pos: "num." },
+            { en: "those", zh: "那些", pos: "pron." },
+            { en: "Thursday", zh: "星期四", pos: "n." },
+            { en: "tidy", zh: "整洁的；整理", pos: "adj./v." },
+            { en: "today", zh: "今天", pos: "adv./n." },
+            { en: "tomato", zh: "西红柿", pos: "n." },
+            { en: "tooth", zh: "牙齿", pos: "n." },
+            { en: "train", zh: "火车；训练", pos: "n./v." },
+            { en: "trousers", zh: "长裤", pos: "n.(pl.)" },
+            { en: "true", zh: "真的；真实的", pos: "adj." },
+            { en: "Tuesday", zh: "星期二", pos: "n." },
+            { en: "twelfth", zh: "第十二", pos: "num." },
+            { en: "twelve", zh: "十二", pos: "num." },
+            { en: "twentieth", zh: "第二十", pos: "num." },
+            { en: "twenty", zh: "二十", pos: "num." },
+            { en: "under", zh: "在......下面", pos: "prep." },
+            { en: "uniform", zh: "制服", pos: "n." },
+            { en: "up", zh: "向上", pos: "adv./prep." },
+            { en: "vegetable", zh: "蔬菜", pos: "n." },
+            { en: "village", zh: "村庄", pos: "n." },
+            { en: "villager", zh: "村民", pos: "n." },
+            { en: "violin", zh: "小提琴", pos: "n." },
+            { en: "volleyball", zh: "排球", pos: "n." },
+            { en: "walk", zh: "散步；步行", pos: "v./n." },
+            { en: "watch", zh: "观看；手表", pos: "v./n." },
+            { en: "wear", zh: "穿；戴", pos: "v." },
+            { en: "Wednesday", zh: "星期三", pos: "n." },
+            { en: "week", zh: "星期；周", pos: "n." },
+            { en: "weekend", zh: "周末", pos: "n." },
+            { en: "welcome", zh: "欢迎", pos: "v./n./adj." },
+            { en: "well", zh: "好；健康的；井", pos: "adv./adj./n." },
+            { en: "where", zh: "在哪里", pos: "adv." },
+            { en: "white", zh: "白色的；白色", pos: "adj./n." },
+            { en: "why", zh: "为什么", pos: "adv." }
+        ];
+
+        // ======================== 状态 ========================
+        let currentQuestions = [];
+        let answered = false;
+
+        // DOM 引用
+        const container = document.getElementById('questionContainer');
+        const totalSpan = document.getElementById('totalCount');
+        const answeredSpan = document.getElementById('answeredCount');
+        const highestSpan = document.getElementById('highestScore');
+        const resultPanel = document.getElementById('resultPanel');
+        const accuracySpan = document.getElementById('accuracy');
+        const scoreNumSpan = document.getElementById('scoreNum');
+        const trendIcon = document.getElementById('trendIcon');
+        const trendText = document.getElementById('trendText');
+        const suggestionDiv = document.getElementById('suggestionText');
+        const wrongListDiv = document.getElementById('wrongList');
+
+        const randomBtn = document.getElementById('randomBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const showBankBtn = document.getElementById('showBankBtn');
+        const showHistoryBtn = document.getElementById('showHistoryBtn');
+
+        // ======================== 工具函数 ========================
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function pickRandom(arr, n) {
+            const shuffled = shuffle(arr);
+            return shuffled.slice(0, n);
+        }
+
+        // 历史记录存储键名（独立）
+        const STORAGE_KEY = 'wordQuizHistory7';
+
+        function getHistory() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            } catch { return []; }
+        }
+
+        function saveHistory(record) {
+            const history = getHistory();
+            history.push(record);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+        }
+
+        function getHighestScore() {
+            const history = getHistory();
+            if (history.length === 0) return null;
+            return Math.max(...history.map(r => r.score));
+        }
+
+        function updateHighestDisplay() {
+            const max = getHighestScore();
+            highestSpan.textContent = max !== null ? `${max}/30` : '--';
+        }
+
+        function updateAnswered() {
+            const inputs = document.querySelectorAll('.q-input');
+            let filled = 0;
+            inputs.forEach(inp => {
+                if (inp.value.trim() !== '') filled++;
+            });
+            answeredSpan.textContent = filled;
+        }
+
+        // ======================== 渲染题目 ========================
+        function renderQuestions(questions) {
+            currentQuestions = questions;
+            answered = false;
+            resultPanel.classList.remove('visible');
+            container.innerHTML = '';
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <div class="q-header">
+                        <span class="q-number">#${index + 1}</span>
+                        <span class="q-part">${q.pos}</span>
+                    </div>
+                    <div class="q-chinese">${q.zh}</div>
+                    <input class="q-input" type="text" placeholder="输入英文..." autocomplete="off" spellcheck="false" data-index="${index}">
+                    <div class="q-result" id="result-${index}"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            document.querySelectorAll('.q-input').forEach(inp => {
+                inp.addEventListener('input', updateAnswered);
+            });
+
+            totalSpan.textContent = questions.length;
+            updateAnswered();
+            updateHighestDisplay();
+            resultPanel.classList.remove('visible');
+        }
+
+        // ======================== 提交逻辑 ========================
+        function handleSubmit() {
+            if (answered) {
+                alert('已经提交过了，点击“重新随机”可再次练习。');
+                return;
+            }
+
+            const inputs = document.querySelectorAll('.q-input');
+            let correct = 0;
+            const wrongs = [];
+
+            inputs.forEach((inp, idx) => {
+                const userAns = inp.value.trim();
+                const correctAns = currentQuestions[idx].en;
+                const isCorrect = userAns.toLowerCase() === correctAns.toLowerCase();
+                const resultDiv = document.getElementById(`result-${idx}`);
+
+                inp.classList.remove('correct', 'wrong');
+                if (isCorrect) {
+                    correct++;
+                    inp.classList.add('correct');
+                    resultDiv.innerHTML = `<span style="color:#4caf84;">✅ 正确</span>`;
+                } else {
+                    inp.classList.add('wrong');
+                    resultDiv.innerHTML = `
+                        <span class="wrong-answer">❌ 错误</span> 
+                        <span class="correct-answer">正确: ${correctAns}</span>
+                    `;
+                    wrongs.push({
+                        en: correctAns,
+                        zh: currentQuestions[idx].zh,
+                        pos: currentQuestions[idx].pos,
+                        your: userAns || '(未填写)'
+                    });
+                }
+            });
+
+            const total = currentQuestions.length;
+            const accuracy = (correct / total * 100);
+            const score = correct;
+
+            const record = { score, total, date: new Date().toLocaleString('zh-CN') };
+            saveHistory(record);
+            updateHighestDisplay();
+
+            resultPanel.classList.add('visible');
+            accuracySpan.textContent = accuracy.toFixed(0) + '%';
+            scoreNumSpan.textContent = score;
+
+            const highest = getHighestScore();
+            let trend = '';
+            let trendClass = '';
+            if (highest !== null) {
+                if (score > highest) {
+                    trend = '📈 上升';
+                    trendClass = 'up';
+                } else if (score < highest) {
+                    trend = '📉 下降';
+                    trendClass = 'down';
+                } else {
+                    trend = '➖ 持平';
+                    trendClass = '';
+                }
+                trendIcon.textContent = trend;
+                trendIcon.className = 'trend ' + trendClass;
+                trendText.textContent = ` (历史最高 ${highest}/30)`;
+            } else {
+                trendIcon.textContent = '—';
+                trendText.textContent = '首次记录';
+            }
+
+            let suggestion = '';
+            if (accuracy >= 90) suggestion = '🌟 优秀！继续保持，你已经掌握了这些单词！';
+            else if (accuracy >= 70) suggestion = '👍 良好！复习一下错题，下次争取全对！';
+            else if (accuracy >= 50) suggestion = '📖 需要加强记忆，建议多读多写错题。';
+            else suggestion = '💪 别灰心！从错题开始，逐一攻破，你一定可以！';
+            suggestionDiv.textContent = suggestion;
+
+            wrongListDiv.innerHTML = '';
+            if (wrongs.length === 0) {
+                wrongListDiv.innerHTML = '<p style="color:#4caf84; font-weight:500;">🎉 全部正确，太棒了！</p>';
+            } else {
+                wrongs.forEach(w => {
+                    const item = document.createElement('div');
+                    item.className = 'wrong-item';
+                    item.innerHTML = `
+                        <div><span class="en">${w.en}</span>  <span class="pos">${w.pos}</span></div>
+                        <div class="zh">${w.zh}</div>
+                        <div style="font-size:0.8rem; color:#b08a78;">你的答案: ${w.your}</div>
+                    `;
+                    wrongListDiv.appendChild(item);
+                });
+            }
+
+            answered = true;
+        }
+
+        // ======================== 随机出题 ========================
+        function randomQuestions() {
+            const selected = pickRandom(WORD_BANK, 30);
+            renderQuestions(selected);
+        }
+
+        // ======================== 显示题库 ========================
+        function showBank() {
+            const modal = document.getElementById('bankModal');
+            const content = document.getElementById('bankContent');
+            content.innerHTML = '';
+            WORD_BANK.forEach(w => {
+                const div = document.createElement('div');
+                div.className = 'bank-item';
+                div.innerHTML = `
+                    <span class="en">${w.en}</span>
+                    <span class="zh">${w.zh}</span>
+                    <span class="pos">${w.pos}</span>
+                `;
+                content.appendChild(div);
+            });
+            modal.classList.add('open');
+        }
+
+        // ======================== 显示历史 ========================
+        function showHistory() {
+            const modal = document.getElementById('historyModal');
+            const content = document.getElementById('historyContent');
+            const history = getHistory();
+            if (history.length === 0) {
+                content.innerHTML = '<p style="color:#7a5f4f;">暂无记录，快去练习吧！</p>';
+            } else {
+                const max = Math.max(...history.map(r => r.score));
+                let html = `<p style="margin-bottom:12px;">🏅 最高分: <strong style="color:#c44b3c;">${max}/30</strong> (共 ${history.length} 次)</p><ul class="history-list">`;
+                history.slice().reverse().forEach((r, i) => {
+                    const isMax = r.score === max;
+                    html += `<li>
+                        <span>#${history.length - i}  ${r.date}</span>
+                        <span class="${isMax ? 'score-high' : ''}">${r.score} / ${r.total}</span>
+                    </li>`;
+                });
+                html += '</ul>';
+                content.innerHTML = html;
+            }
+            modal.classList.add('open');
+        }
+
+        // ======================== 事件绑定 ========================
+        randomBtn.addEventListener('click', randomQuestions);
+        submitBtn.addEventListener('click', handleSubmit);
+
+        showBankBtn.addEventListener('click', showBank);
+        document.getElementById('closeBankModal').addEventListener('click', () => {
+            document.getElementById('bankModal').classList.remove('open');
+        });
+        document.getElementById('bankModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('bankModal').classList.remove('open');
+        });
+
+        showHistoryBtn.addEventListener('click', showHistory);
+        document.getElementById('closeHistoryModal').addEventListener('click', () => {
+            document.getElementById('historyModal').classList.remove('open');
+        });
+        document.getElementById('historyModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('historyModal').classList.remove('open');
+        });
+
+        // ======================== 初始化 ========================
+        randomQuestions();
+    </script>
+</body>
+</html>
