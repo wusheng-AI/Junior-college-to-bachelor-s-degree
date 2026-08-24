@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>📘 名词专项 · 200题（单题模式）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f5faff 0%, #e3f0fa 100%);
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 20, 40, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            padding: 20px 22px 32px;
+            transition: all 0.2s;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 3px dashed #b3d4f0;
+            padding-bottom: 12px;
+            gap: 10px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2a6b9e, #4a90d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 span {
+            font-size: 1.6rem;
+            -webkit-text-fill-color: initial;
+            color: #f5b041;
+        }
+
+        .header h1 .subtag {
+            font-size: 0.7rem;
+            background: #dce8f5;
+            padding: 0 14px;
+            border-radius: 40px;
+            -webkit-text-fill-color: #1e3b5a;
+            font-weight: 600;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #1e3b5a;
+            border: 1px solid #d4e3f0;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.30);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(74, 144, 217, 0.40);
+        }
+
+        .btn-secondary {
+            background: #f0f7ff;
+            border-color: #c3d9ed;
+        }
+        .btn-secondary:hover {
+            background: #dce8f5;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.28);
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.36);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #b3d4f0;
+        }
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            background: rgba(235, 245, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 60px;
+            margin-bottom: 16px;
+            justify-content: center;
+            border: 1px solid #cde0f0;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            color: #1e3b5a;
+        }
+
+        .stat-item .badge {
+            background: #2a6b9e;
+            color: white;
+            border-radius: 40px;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            line-height: 24px;
+            font-weight: 600;
+        }
+        .stat-item .badge.green {
+            background: #27ae60;
+        }
+        .stat-item .badge.gold {
+            background: #f5b041;
+        }
+        .stat-item .badge.orange {
+            background: #e67e22;
+        }
+
+        /* ---- 单题卡片 ---- */
+        .single-card-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 8px 0 16px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px 24px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e3eef9;
+            width: 100%;
+            max-width: 600px;
+            transition: 0.2s;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .q-number {
+            font-weight: 700;
+            color: #2a6b9e;
+            background: #e3eef9;
+            padding: 0 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            line-height: 26px;
+        }
+
+        .q-type {
+            font-size: 0.7rem;
+            color: #6f8faa;
+            background: #edf4fa;
+            padding: 0 16px;
+            border-radius: 30px;
+            line-height: 24px;
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #1a2f44;
+            margin: 8px 0 16px;
+            line-height: 1.6;
+        }
+
+        .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 6px 0 12px;
+        }
+
+        .q-options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: 0.1s;
+            border: 1px solid transparent;
+        }
+        .q-options label:hover {
+            background: #f0f7ff;
+            border-color: #d4e3f0;
+        }
+
+        .q-options input[type="radio"] {
+            accent-color: #4a90d9;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .q-input {
+            border: 2px solid #d4e3f0;
+            border-radius: 60px;
+            padding: 8px 18px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+            background: #f9fcff;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+        .q-input:focus {
+            border-color: #4a90d9;
+            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.12);
+            background: white;
+        }
+
+        .q-error-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .q-error-group .q-input {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .q-result {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            min-height: 28px;
+            padding: 6px 12px;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+        .q-result .correct-answer {
+            color: #27ae60;
+        }
+        .q-result .wrong-answer {
+            color: #e74c3c;
+        }
+        .q-result .info {
+            color: #2a6b9e;
+        }
+
+        /* 导航 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .nav-bar .progress {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3b5a;
+        }
+
+        .nav-bar .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* 结果面板 */
+        .result-panel {
+            margin-top: 22px;
+            background: white;
+            border-radius: 28px;
+            padding: 20px 24px 24px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e3eef9;
+            display: none;
+        }
+        .result-panel.visible {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a2f44;
+            margin-bottom: 4px;
+        }
+
+        .result-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: #f5faff;
+            padding: 10px 18px;
+            border-radius: 60px;
+            margin: 8px 0 14px;
+            font-size: 0.9rem;
+        }
+
+        .result-stats .stat strong {
+            font-size: 1.2rem;
+            color: #2a6b9e;
+        }
+        .result-stats .stat .trend {
+            font-size: 1rem;
+            margin-left: 4px;
+        }
+        .result-stats .stat .trend.up {
+            color: #27ae60;
+        }
+        .result-stats .stat .trend.down {
+            color: #e74c3c;
+        }
+
+        .suggestion {
+            background: #fef9e7;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            border: 1px solid #f5dbaa;
+        }
+
+        .wrong-list {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 10px;
+        }
+
+        .wrong-item {
+            background: #fdedec;
+            border-radius: 14px;
+            padding: 10px 14px;
+            border-left: 4px solid #e74c3c;
+            font-size: 0.85rem;
+        }
+        .wrong-item .q-original {
+            font-weight: 600;
+            color: #1a2f44;
+        }
+        .wrong-item .q-answer {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        .wrong-item .q-user {
+            color: #e74c3c;
+            font-size: 0.8rem;
+        }
+
+        /* ---- 模态框 ---- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            padding: 16px;
+        }
+        .modal-overlay.open {
+            display: flex;
+            animation: fadeIn 0.2s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 32px;
+            max-width: 780px;
+            width: 100%;
+            padding: 24px 28px 30px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #e3eef9;
+        }
+
+        .modal-box h2 {
+            font-size: 1.4rem;
+            color: #1a2f44;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .modal-box .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #8aa9c9;
+            transition: 0.2s;
+            line-height: 1;
+        }
+        .modal-box .close-btn:hover {
+            color: #2a6b9e;
+            transform: rotate(90deg);
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .bank-item {
+            background: #f5faff;
+            border-radius: 12px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #e3eef9;
+            gap: 4px;
+        }
+        .bank-item .b-q {
+            font-weight: 500;
+            color: #1a2f44;
+        }
+        .bank-item .b-answer {
+            color: #27ae60;
+            font-weight: 500;
+            font-size: 0.8rem;
+            padding-left: 12px;
+            border-left: 3px solid #27ae60;
+        }
+        .bank-item .b-type {
+            color: #6f8faa;
+            font-size: 0.7rem;
+            background: #e3eef9;
+            padding: 0 12px;
+            border-radius: 30px;
+            line-height: 20px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+        .history-list li {
+            padding: 6px 10px;
+            border-bottom: 1px solid #e3eef9;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        .history-list li:last-child {
+            border: none;
+        }
+        .history-list .score-high {
+            font-weight: 700;
+            color: #2a6b9e;
+        }
+
+        /* 滚动条 */
+        .bank-grid::-webkit-scrollbar,
+        .modal-box::-webkit-scrollbar {
+            width: 5px;
+        }
+        .bank-grid::-webkit-scrollbar-track,
+        .modal-box::-webkit-scrollbar-track {
+            background: #e3eef9;
+            border-radius: 10px;
+        }
+        .bank-grid::-webkit-scrollbar-thumb,
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #4a90d9;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px 14px 22px;
+            }
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .question-card {
+                padding: 16px 16px 20px;
+            }
+            .q-text {
+                font-size: 0.95rem;
+            }
+            .q-options label {
+                font-size: 0.85rem;
+            }
+            .q-input {
+                font-size: 0.85rem;
+                padding: 6px 14px;
+            }
+            .stats {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .nav-bar .btn-group {
+                justify-content: center;
+            }
+            .modal-box {
+                padding: 16px 14px 20px;
+            }
+            .bank-item {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1>
+                <span>📘</span> 名词专项 · 200题
+                <span class="subtag">单题模式</span>
+            </h1>
+            <div class="toolbar">
+                <button class="btn btn-primary" id="randomBtn">🎲 重随机</button>
+                <button class="btn btn-secondary" id="showBankBtn">📖 题库（含答案）</button>
+                <button class="btn btn-secondary" id="showHistoryBtn">🏆 历史</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">📝 总题 <span class="badge" id="totalCount">30</span></div>
+            <div class="stat-item">✅ 已答 <span class="badge green" id="answeredCount">0</span></div>
+            <div class="stat-item">📊 当前得分 <span class="badge gold" id="liveScore">0</span></div>
+            <div class="stat-item">📌 最新 <span class="badge orange" id="latestScore">--</span></div>
+        </div>
+
+        <!-- 单题卡片区域 -->
+        <div class="single-card-wrap">
+            <div id="questionCard" class="question-card">
+                <!-- 由 js 动态渲染 -->
+            </div>
+
+            <div class="nav-bar">
+                <div class="progress" id="progressDisplay">第 1 / 30 题</div>
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="prevBtn" disabled>◀ 上一题</button>
+                    <button class="btn btn-success" id="submitBtn">✅ 提交本题</button>
+                    <button class="btn btn-outline" id="nextBtn">下一题 ▶</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果面板（全部完成后显示） -->
+        <div class="result-panel" id="resultPanel">
+            <div class="result-title">📊 练习结果</div>
+            <div class="result-stats" id="resultStats">
+                <div class="stat">正确率 <strong id="accuracy">0%</strong></div>
+                <div class="stat">得分 <strong id="scoreNum">0</strong> / 30</div>
+                <div class="stat">趋势 <span class="trend" id="trendIcon">—</span> <span id="trendText"></span></div>
+            </div>
+            <div class="suggestion" id="suggestionText">继续加油！</div>
+            <div style="margin-top:14px; font-weight:600; color:#1a2f44; font-size:0.9rem;">❌ 错题回顾</div>
+            <div class="wrong-list" id="wrongList"></div>
+        </div>
+    </div>
+
+    <!-- 题库模态框（含完整答案） -->
+    <div class="modal-overlay" id="bankModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeBankModal">✕</button>
+            <h2>📖 全部题目（含答案）</h2>
+            <div id="bankContent" class="bank-grid"></div>
+        </div>
+    </div>
+
+    <!-- 历史模态框 -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeHistoryModal">✕</button>
+            <h2>🏆 历史记录</h2>
+            <div id="historyContent"><p style="color:#6f8faa;">暂无记录</p></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  完整题库：选择题 1-79，填空 80-139，改错 140-199
+        //  共 200 题（索引 0~199）
+        // ============================================================
+
+        // ---------- 选择题 (1-79) ----------
+        const choiceData = [
+            { type: 'choice', question: 'I saw some ______ and ______ dancing in the street yesterday.', options: ['Germen; Englishmen',
+                    'Germans; Englishmans', 'Germans; Englishmen', 'German; Englishmans'
+                ], answer: 2 },
+            { type: 'choice', question: '—How can I get some ______ about the 2016 Olympic Games? —Why not search the Internet?',
+                options: ['information', 'experience', 'practice', 'advice'], answer: 0 },
+            { type: 'choice', question: '______ the teachers in their school is about 200 and one fourth of them are ______ teachers.',
+                options: ['A number of; women', 'A number of; woman', 'The number of; women', 'The number of; woman'],
+                answer: 2 },
+            { type: 'choice', question: 'He is a success as a leader but he hasn’t ______ in teaching.', options: [
+                    'many experiences', 'much experience', 'many experience', 'much experiences'
+                ], answer: 1 },
+            { type: 'choice', question: 'Mr. Black, a good friend of ______, likes drawing horses.', options: ['me',
+                    'my', 'mine', 'I'
+                ], answer: 2 },
+            { type: 'choice', question: 'The ______ of the book is very interesting.', options: ['cover', 'covers',
+                    'cover\'s', 'covers\''
+                ], answer: 0 },
+            { type: 'choice', question: 'There are two ______ and three ______ in the room.', options: [
+                    'woman doctors; man teachers', 'women doctors; men teachers', 'woman doctor; man teacher',
+                    'women doctor; men teacher'
+                ], answer: 1 },
+            { type: 'choice', question: '—How many ______ are there in your class? —Thirty.', options: ['boy student',
+                    'boys student', 'boy students', 'boys students'
+                ], answer: 2 },
+            { type: 'choice', question: 'The ______ office is on the second floor.', options: ['teacher',
+                    'teachers\'', 'teacher\'s', 'teachers\'s'
+                ], answer: 1 },
+            { type: 'choice', question: 'It\'s about ten ______ walk from my home to school.', options: ['minute',
+                    'minutes', 'minute\'s', 'minutes\''
+                ], answer: 3 },
+            { type: 'choice', question: 'The ______ of the river is very clean.', options: ['water', 'waters',
+                    'a water', 'the water'
+                ], answer: 0 },
+            { type: 'choice', question: 'I have a lot of ______ to do today.', options: ['works', 'work', 'job',
+                    'jobs'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ are playing football on the playground.', options: ['child',
+                    'childs', 'children', 'childrens'
+                ], answer: 2 },
+            { type: 'choice', question: 'She bought two ______ in the supermarket.', options: ['knifes', 'knives',
+                    'knife', 'knifves'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the house is made of wood.', options: ['roof', 'roofs',
+                    'rooves', 'roofes'
+                ], answer: 1 },
+            { type: 'choice', question: 'There are many ______ in the river.', options: ['fish', 'fishes', 'a fish',
+                    'the fish'
+                ], answer: 0 },
+            { type: 'choice', question: 'I need some ______ for my new dress.', options: ['cloth', 'cloths',
+                    'clothes', 'clothing'
+                ], answer: 2 },
+            { type: 'choice', question: 'The ______ of the story is very moving.', options: ['end', 'ends', 'ending',
+                    'endings'
+                ], answer: 2 },
+            { type: 'choice', question: 'He has two ______.', options: ['sister-in-law', 'sisters-in-law',
+                    'sister-in-laws', 'sisters-in-laws'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ are going to visit the museum.', options: ['lookers-on',
+                    'looker-ons', 'looker-on', 'lookers-ons'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ is made of glass.', options: ['window', 'windows', 'a window',
+                    'the window'
+                ], answer: 0 },
+            { type: 'choice', question: 'We have got plenty of ______.', options: ['time', 'times', 'a time',
+                    'the time'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the cinema are very comfortable.', options: ['seat', 'seats',
+                    'sit', 'sits'
+                ], answer: 1 },
+            { type: 'choice', question: 'I\'d like some ______ and ______.', options: ['tomato; potato',
+                    'tomatoes; potatoes', 'tomatos; potatos', 'tomato; potatoes'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the factory are all very kind.', options: ['workers', 'work',
+                    'working', 'worked'
+                ], answer: 0 },
+            { type: 'choice', question: 'There are about five ______ people in the city.', options: ['million',
+                    'millions', 'million of', 'millions of'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ is very high.', options: ['price', 'prices', 'a price',
+                    'the price'
+                ], answer: 0 },
+            { type: 'choice', question: 'She has much ______ in teaching English.', options: ['experience',
+                    'experiences', 'an experience', 'the experience'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of this book are very useful.', options: ['advice', 'advices',
+                    'a advice', 'the advices'
+                ], answer: 0 },
+            { type: 'choice', question: '—Would you like some ______? —Yes, please.', options: ['bread', 'breads',
+                    'a bread', 'the bread'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the mountain is covered with snow.', options: ['top', 'tops',
+                    'a top', 'the top'
+                ], answer: 0 },
+            { type: 'choice', question: 'He gave me a piece of ______.', options: ['paper', 'papers', 'a paper',
+                    'the paper'
+                ], answer: 0 },
+            { type: 'choice', question: 'Many ______ are working in the hospital.', options: ['woman doctor',
+                    'women doctors', 'woman doctors', 'women doctor'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the house are both tall.', options: ['door', 'doors',
+                    'a door', 'the door'
+                ], answer: 1 },
+            { type: 'choice', question: 'I have some ______ for you.', options: ['news', 'new', 'a news',
+                    'the news'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ in this restaurant are delicious.', options: ['dish', 'dishes',
+                    'a dish', 'the dish'
+                ], answer: 1 },
+            { type: 'choice', question: 'There is a ______ near the river.', options: ['bridge', 'bridges',
+                    'a bridge', 'the bridge'
+                ], answer: 0 },
+            { type: 'choice', question: 'He has a good ______ of humor.', options: ['sense', 'senses', 'a sense',
+                    'the sense'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the meeting is very important.', options: ['conclusion',
+                    'conclusions', 'a conclusion', 'the conclusion'
+                ], answer: 0 },
+            { type: 'choice', question: 'She bought two ______ of shoes.', options: ['pair', 'pairs', 'a pair',
+                    'the pair'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the team are all very young.', options: ['members', 'member',
+                    'a member', 'the member'
+                ], answer: 0 },
+            { type: 'choice', question: 'I need some ______ about the city.', options: ['information', 'informations',
+                    'an information', 'the information'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the forest are very tall.', options: ['tree', 'trees',
+                    'a tree', 'the tree'
+                ], answer: 1 },
+            { type: 'choice', question: 'He has a lot of ______ in his house.', options: ['furniture', 'furnitures',
+                    'a furniture', 'the furniture'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the road is very wide.', options: ['width', 'widths',
+                    'a width', 'the width'
+                ], answer: 0 },
+            { type: 'choice', question: 'There are two ______ in the bag.', options: ['apple', 'apples', 'an apple',
+                    'the apple'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the party is very interesting.', options: ['activity',
+                    'activities', 'an activity', 'the activity'
+                ], answer: 0 },
+            { type: 'choice', question: 'I have a great ______ of books.', options: ['number', 'numbers',
+                    'a number', 'the number'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the mountain is about 3000 meters.', options: ['height',
+                    'heights', 'a height', 'the height'
+                ], answer: 0 },
+            { type: 'choice', question: 'She gave me some ______.', options: ['advice', 'advices', 'an advice',
+                    'the advice'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the lake are very beautiful.', options: ['view', 'views',
+                    'a view', 'the view'
+                ], answer: 1 },
+            { type: 'choice', question: 'I need a ______ of gloves.', options: ['pair', 'pairs', 'a pair',
+                    'the pair'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the school are very friendly.', options: ['teacher',
+                    'teachers', 'a teacher', 'the teacher'
+                ], answer: 1 },
+            { type: 'choice', question: 'She has a lot of ______.', options: ['homework', 'homeworks', 'a homework',
+                    'the homework'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the car is very fast.', options: ['speed', 'speeds',
+                    'a speed', 'the speed'
+                ], answer: 0 },
+            { type: 'choice', question: 'There are many ______ in the zoo.', options: ['deer', 'deers', 'a deer',
+                    'the deer'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the book are very exciting.', options: ['story', 'stories',
+                    'a story', 'the story'
+                ], answer: 1 },
+            { type: 'choice', question: 'He has two ______.', options: ['sheep', 'sheeps', 'a sheep', 'the sheep'],
+                answer: 0 },
+            { type: 'choice', question: 'The ______ of the city are very crowded.', options: ['street', 'streets',
+                    'a street', 'the street'
+                ], answer: 1 },
+            { type: 'choice', question: 'I have a lot of ______ in my room.', options: ['baggage', 'baggages',
+                    'a baggage', 'the baggage'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the movie is very good.', options: ['music', 'musics',
+                    'a music', 'the music'
+                ], answer: 0 },
+            { type: 'choice', question: 'She has two ______.', options: ['watch', 'watches', 'a watch', 'the watch'],
+                answer: 1 },
+            { type: 'choice', question: 'The ______ of the river is very long.', options: ['length', 'lengths',
+                    'a length', 'the length'
+                ], answer: 0 },
+            { type: 'choice', question: 'I need some ______ for my coffee.', options: ['sugar', 'sugars', 'a sugar',
+                    'the sugar'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the team are very hard-working.', options: ['player',
+                    'players', 'a player', 'the player'
+                ], answer: 1 },
+            { type: 'choice', question: 'There are a lot of ______ in the forest.', options: ['leaf', 'leaves',
+                    'a leaf', 'the leaf'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the house is very large.', options: ['room', 'rooms',
+                    'a room', 'the room'
+                ], answer: 0 },
+            { type: 'choice', question: 'She has two ______.', options: ['child', 'children', 'a child',
+                    'the child'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the factory are very tall.', options: ['chimney', 'chimneys',
+                    'a chimney', 'the chimney'
+                ], answer: 1 },
+            { type: 'choice', question: 'I need some ______ to write on.', options: ['paper', 'papers', 'a paper',
+                    'the paper'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the team are all very tall.', options: ['member', 'members',
+                    'a member', 'the member'
+                ], answer: 1 },
+            { type: 'choice', question: 'She has a lot of ______.', options: ['money', 'moneys', 'a money',
+                    'the money'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the building are very strong.', options: ['wall', 'walls',
+                    'a wall', 'the wall'
+                ], answer: 1 },
+            { type: 'choice', question: 'There are many ______ in the garden.', options: ['flower', 'flowers',
+                    'a flower', 'the flower'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the story is very sad.', options: ['end', 'ends', 'an end',
+                    'the end'
+                ], answer: 0 },
+            { type: 'choice', question: 'I have two ______ of socks.', options: ['pair', 'pairs', 'a pair',
+                    'the pair'
+                ], answer: 1 },
+            { type: 'choice', question: 'The ______ of the class is very noisy.', options: ['student', 'students',
+                    'a student', 'the student'
+                ], answer: 1 },
+            { type: 'choice', question: 'She needs some ______.', options: ['bread', 'breads', 'a bread',
+                    'the bread'
+                ], answer: 0 },
+            { type: 'choice', question: 'The ______ of the city is very modern.', options: ['architecture',
+                    'architectures', 'an architecture', 'the architecture'
+                ], answer: 0 },
+            { type: 'choice', question: 'There are a lot of ______ in the sky.', options: ['cloud', 'clouds',
+                    'a cloud', 'the cloud'
+                ], answer: 1 }
+        ];
+
+        // ---------- 语法填空 (80-139) ----------
+        const fillData = [
+            { type: 'fill', question: 'The ______ (child) are playing in the park.', answer: 'children' },
+            { type: 'fill', question: 'There are many ______ (deer) in the forest.', answer: 'deer' },
+            { type: 'fill', question: 'I have two ______ (tooth) problems.', answer: 'teeth' },
+            { type: 'fill', question: 'The ______ (man) over there are my teachers.', answer: 'men' },
+            { type: 'fill', question: 'She bought three ______ (tomato) for dinner.', answer: 'tomatoes' },
+            { type: 'fill', question: 'The ______ (roof) of the houses are all red.', answer: 'roofs' },
+            { type: 'fill', question: 'He gave me some ______ (advice) on how to learn English.', answer: 'advice' },
+            { type: 'fill', question: 'I need a piece of ______ (paper) to write a letter.', answer: 'paper' },
+            { type: 'fill', question: 'The ______ (photo) of the trip are very beautiful.', answer: 'photos' },
+            { type: 'fill', question: 'There are two ______ (potato) in the basket.', answer: 'potatoes' },
+            { type: 'fill', question: 'She has a lot of ______ (furniture) in her new house.', answer: 'furniture' },
+            { type: 'fill', question: 'The ______ (information) you gave me is very useful.', answer: 'information' },
+            { type: 'fill', question: 'I have a great number of ______ (book) in my study.', answer: 'books' },
+            { type: 'fill', question: 'The ______ (fish) in the river are very small.', answer: 'fish' },
+            { type: 'fill', question: 'He has a lot of ______ (work) to do today.', answer: 'work' },
+            { type: 'fill', question: 'The ______ (sheep) are eating grass on the hill.', answer: 'sheep' },
+            { type: 'fill', question: 'She bought two ______ (pair) of shoes.', answer: 'pairs' },
+            { type: 'fill', question: 'The ______ (child) mother is a doctor.', answer: 'child\'s' },
+            { type: 'fill', question: 'The ______ (teacher) office is on the third floor.', answer: 'teachers\'' },
+            { type: 'fill', question: 'It\'s about ten ______ (minute) walk from here.', answer: 'minutes\'' },
+            { type: 'fill', question: 'The ______ (cover) of the book is very beautiful.', answer: 'cover' },
+            { type: 'fill', question: 'I have a lot of ______ (homework) to do.', answer: 'homework' },
+            { type: 'fill', question: 'The ______ (team) are all very excited.', answer: 'team' },
+            { type: 'fill', question: 'She has two ______ (brother-in-law).', answer: 'brothers-in-law' },
+            { type: 'fill', question: 'The ______ (looker-on) were shocked by the accident.', answer: 'lookers-on' },
+            { type: 'fill', question: 'There are many ______ (woman) doctors in the hospital.', answer: 'women' },
+            { type: 'fill', question: 'The ______ (boy) toys are on the floor.', answer: 'boy\'s' },
+            { type: 'fill', question: 'I need some ______ (information) about the city.', answer: 'information' },
+            { type: 'fill', question: 'The ______ (water) in the glass is very clean.', answer: 'water' },
+            { type: 'fill', question: 'He has a lot of ______ (experience) in teaching.', answer: 'experience' },
+            { type: 'fill', question: 'The ______ (news) is very good today.', answer: 'news' },
+            { type: 'fill', question: 'There are several ______ (sheep) on the farm.', answer: 'sheep' },
+            { type: 'fill', question: 'The ______ (policeman) are standing at the gate.', answer: 'policemen' },
+            { type: 'fill', question: 'She bought two ______ (loaf) of bread.', answer: 'loaves' },
+            { type: 'fill', question: 'The ______ (leaf) on the tree are turning yellow.', answer: 'leaves' },
+            { type: 'fill', question: 'I have a lot of ______ (baggage) to carry.', answer: 'baggage' },
+            { type: 'fill', question: 'The ______ (house) windows are all closed.', answer: 'house' },
+            { type: 'fill', question: 'There are many ______ (mouse) in the old house.', answer: 'mice' },
+            { type: 'fill', question: 'The ______ (student) books are on the desk.', answer: 'students\'' },
+            { type: 'fill', question: 'She needs some ______ (milk) for her coffee.', answer: 'milk' },
+            { type: 'fill', question: 'The ______ (man) car is parked outside.', answer: 'man\'s' },
+            { type: 'fill', question: 'I have two ______ (watch) for sale.', answer: 'watches' },
+            { type: 'fill', question: 'The ______ (class) are all having a break.', answer: 'classes' },
+            { type: 'fill', question: 'There are a lot of ______ (people) in the square.', answer: 'people' },
+            { type: 'fill', question: 'He has a good ______ (knowledge) of history.', answer: 'knowledge' },
+            { type: 'fill', question: 'The ______ (factory) workers are on strike.', answer: 'factory' },
+            { type: 'fill', question: 'She gave me a ______ (glass) of water.', answer: 'glass' },
+            { type: 'fill', question: 'I need some ______ (wood) to make a fire.', answer: 'wood' },
+            { type: 'fill', question: 'The ______ (child) playground is very large.', answer: 'children\'s' },
+            { type: 'fill', question: 'There are two ______ (bus) at the stop.', answer: 'buses' },
+            { type: 'fill', question: 'The ______ (city) streets are very clean.', answer: 'city' },
+            { type: 'fill', question: 'She has a lot of ______ (money) in her bank.', answer: 'money' },
+            { type: 'fill', question: 'The ______ (story) in this book are very interesting.', answer: 'stories' },
+            { type: 'fill', question: 'He bought two ______ (knife) from the shop.', answer: 'knives' },
+            { type: 'fill', question: 'The ______ (wife) of the men are all very kind.', answer: 'wives' },
+            { type: 'fill', question: 'There are many ______ (goose) on the lake.', answer: 'geese' },
+            { type: 'fill', question: 'The ______ (tooth) of the lion are very sharp.', answer: 'teeth' },
+            { type: 'fill', question: 'I have a lot of ______ (furniture) to move.', answer: 'furniture' },
+            { type: 'fill', question: 'The ______ (traffic) in the city is very heavy.', answer: 'traffic' },
+            { type: 'fill', question: 'She needs some ______ (bread) for breakfast.', answer: 'bread' }
+        ];
+
+        // ---------- 改错 (140-199) ----------
+        const errorDataFull = [
+            { type: 'error', sentence: 'A house built of brick lasts longer than the one that is made of woods.',
+                error: 'woods', correction: 'wood' },
+            { type: 'error', sentence: 'The fire quickly spread to the first floor where it destroyed all the equipments in the language lab.',
+                error: 'equipments', correction: 'equipment' },
+            { type: 'error', sentence: 'There are a good news for you today.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'I have many homework to do.', error: 'many', correction: 'much' },
+            { type: 'error', sentence: 'She gave me some advices on how to learn English.', error: 'advices',
+                correction: 'advice' },
+            { type: 'error', sentence: 'The number of the students are 500.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'A number of the teachers is going to attend the meeting.', error: 'is',
+                correction: 'are' },
+            { type: 'error', sentence: 'I need a information about the exam.', error: 'a', correction: 'some' },
+            { type: 'error', sentence: 'He has two grown-ups children.', error: 'grown-ups', correction: 'grown-up' },
+            { type: 'error', sentence: 'The man who is standing there are my teacher.', error: 'are',
+            correction: 'is' },
+            { type: 'error', sentence: 'She bought two loaves of breads.', error: 'breads', correction: 'bread' },
+            { type: 'error', sentence: 'The childs are playing in the garden.', error: 'childs',
+            correction: 'children' },
+            { type: 'error', sentence: 'I saw some Germen and Englishmen in the street.', error: 'Germen',
+                correction: 'Germans' },
+            { type: 'error', sentence: 'The cover of the book are very beautiful.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'It is a ten-minutes walk from my home to school.', error: 'ten-minutes',
+                correction: 'ten-minute' },
+            { type: 'error', sentence: 'This is a friend of me.', error: 'me', correction: 'mine' },
+            { type: 'error', sentence: 'The teacher office is on the second floor.', error: 'teacher',
+                correction: 'teachers\'' },
+            { type: 'error', sentence: 'There are many furnitures in the room.', error: 'furnitures',
+                correction: 'furniture' },
+            { type: 'error', sentence: 'I have a lot of homeworks to do.', error: 'homeworks',
+            correction: 'homework' },
+            { type: 'error', sentence: 'They are woman teachers in our school.', error: 'woman',
+                correction: 'women' },
+            { type: 'error', sentence: 'The police is looking for the thief.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'I need some new informations.', error: 'informations',
+                correction: 'information' },
+            { type: 'error', sentence: 'The water in the rivers is clean.', error: 'rivers', correction: 'river' },
+            { type: 'error', sentence: 'He has much experiences in teaching.', error: 'experiences',
+                correction: 'experience' },
+            { type: 'error', sentence: 'There is two pair of shoes on the floor.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'The news are very good.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'I have many milk in the fridge.', error: 'many', correction: 'much' },
+            { type: 'error', sentence: 'The family is all very kind.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'I would like some fruits for dessert.', error: 'fruits',
+            correction: 'fruit' },
+            { type: 'error', sentence: 'The glass are on the table.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'I need a pair of glove.', error: 'glove', correction: 'gloves' },
+            { type: 'error', sentence: 'The children is playing happily.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'She bought two fish in the market.', error: 'fish', correction: 'fishes' },
+            { type: 'error', sentence: 'There are many deer in the forest.', error: 'deer', correction: 'deers' },
+            { type: 'error', sentence: 'The man and woman are teachers.', error: 'woman', correction: 'women' },
+            { type: 'error', sentence: 'I have many sheeps on the farm.', error: 'sheeps', correction: 'sheep' },
+            { type: 'error', sentence: 'The tomato in the basket are fresh.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'She is a friend of my sister.', error: 'sister', correction: 'sister\'s' },
+            { type: 'error', sentence: 'The teachers\' office are on the first floor.', error: 'are',
+                correction: 'is' },
+            { type: 'error', sentence: 'It is a two-hours journey.', error: 'two-hours', correction: 'two-hour' },
+            { type: 'error', sentence: 'I have a lot of baggages.', error: 'baggages', correction: 'baggage' },
+            { type: 'error', sentence: 'The information you gave me are useful.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'He has much furnitures in his room.', error: 'furnitures',
+                correction: 'furniture' },
+            { type: 'error', sentence: 'There are many policeman in the street.', error: 'policeman',
+                correction: 'policemen' },
+            { type: 'error', sentence: 'She bought two potatos and three tomatoes.', error: 'potatos',
+                correction: 'potatoes' },
+            { type: 'error', sentence: 'The child mother is very kind.', error: 'child', correction: 'child\'s' },
+            { type: 'error', sentence: 'I need some breads for breakfast.', error: 'breads', correction: 'bread' },
+            { type: 'error', sentence: 'The number of people are increasing.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'A number of students is waiting outside.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'The house of my parents is very big.', error: 'parents',
+                correction: 'parents\'' },
+            { type: 'error', sentence: 'He is a good friend of my.', error: 'my', correction: 'mine' },
+            { type: 'error', sentence: 'The city streets is very clean.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'She enjoys eating many fruits.', error: 'fruits', correction: 'fruit' },
+            { type: 'error', sentence: 'I have two watchs.', error: 'watchs', correction: 'watches' },
+            { type: 'error', sentence: 'The class are having a break.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'There are much water in the glass.', error: 'much', correction: 'many' },
+            { type: 'error', sentence: 'He has a good knowledge of history.', error: 'knowledge',
+                correction: 'knowledge' },
+            { type: 'error', sentence: 'I need some informations about the exam.', error: 'informations',
+                correction: 'information' },
+            { type: 'error', sentence: 'The woman doctors are very kind.', error: 'woman', correction: 'women' },
+            { type: 'error', sentence: 'She has two childs.', error: 'childs', correction: 'children' },
+            { type: 'error', sentence: 'The roofs of the house is red.', error: 'is', correction: 'are' }
+        ];
+
+        // ---------- 合并 ----------
+        const allQuestions = [...choiceData, ...fillData, ...errorDataFull];
+        console.log('总题数:', allQuestions.length); // 200
+
+        // ============================================================
+        //  单题模式状态
+        // ============================================================
+        let currentQuestions = []; // 当前随机抽取的30题
+        let currentIndex = 0; // 当前显示索引
+        let results = []; // 每道题的提交状态: { submitted, correct, userAnswer }
+        let allSubmitted = false; // 是否全部提交
+
+        // DOM 引用
+        const cardContainer = document.getElementById('questionCard');
+        const progressDisplay = document.getElementById('progressDisplay');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const randomBtn = document.getElementById('randomBtn');
+        const showBankBtn = document.getElementById('showBankBtn');
+        const showHistoryBtn = document.getElementById('showHistoryBtn');
+
+        const totalSpan = document.getElementById('totalCount');
+        const answeredSpan = document.getElementById('answeredCount');
+        const liveScoreSpan = document.getElementById('liveScore');
+        const latestScoreSpan = document.getElementById('latestScore');
+
+        const resultPanel = document.getElementById('resultPanel');
+        const accuracySpan = document.getElementById('accuracy');
+        const scoreNumSpan = document.getElementById('scoreNum');
+        const trendIcon = document.getElementById('trendIcon');
+        const trendText = document.getElementById('trendText');
+        const suggestionDiv = document.getElementById('suggestionText');
+        const wrongListDiv = document.getElementById('wrongList');
+
+        // ---------- 工具 ----------
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function pickRandom(arr, n) {
+            const shuffled = shuffle(arr);
+            return shuffled.slice(0, n);
+        }
+
+        // ---------- 历史 ----------
+        const STORAGE_KEY = 'nounPracticeHistory_single';
+
+        function getHistory() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+        }
+
+        function saveHistory(record) {
+            const h = getHistory();
+            h.push(record);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
+        }
+
+        function getLatestScore() {
+            const h = getHistory();
+            if (h.length === 0) return null;
+            return h[h.length - 1].score;
+        }
+
+        function updateLatestDisplay() {
+            const latest = getLatestScore();
+            latestScoreSpan.textContent = latest !== null ? `${latest}/30` : '--';
+        }
+
+        // ---------- 统计更新 ----------
+        function updateStats() {
+            const total = currentQuestions.length;
+            const submitted = results.filter(r => r.submitted).length;
+            const correct = results.filter(r => r.submitted && r.correct).length;
+            totalSpan.textContent = total;
+            answeredSpan.textContent = submitted;
+            liveScoreSpan.textContent = correct;
+            // 更新进度
+            progressDisplay.textContent = `第 ${currentIndex+1} / ${total} 题`;
+            // 导航按钮状态
+            prevBtn.disabled = (currentIndex === 0);
+            nextBtn.disabled = (currentIndex === total - 1);
+            // 如果全部提交，显示结果面板
+            if (submitted === total && total > 0) {
+                allSubmitted = true;
+                showFinalResult();
+            } else {
+                allSubmitted = false;
+                resultPanel.classList.remove('visible');
+            }
+        }
+
+        // ---------- 获取当前题目的正确答案文本 ----------
+        function getCorrectAnswerText(q) {
+            if (q.type === 'choice') {
+                return q.options[q.answer];
+            } else if (q.type === 'fill') {
+                return q.answer;
+            } else if (q.type === 'error') {
+                return `错误: ${q.error} → 正确: ${q.correction}`;
+            }
+            return '';
+        }
+
+        // ---------- 渲染当前题目 ----------
+        function renderCurrentQuestion() {
+            if (!currentQuestions.length) return;
+            const q = currentQuestions[currentIndex];
+            const result = results[currentIndex];
+            const isSubmitted = result.submitted;
+
+            let typeLabel = '';
+            if (q.type === 'choice') typeLabel = '选择';
+            else if (q.type === 'fill') typeLabel = '填空';
+            else if (q.type === 'error') typeLabel = '改错';
+
+            let html = `<div class="q-header">
+                            <span class="q-number">#${currentIndex+1}</span>
+                            <span class="q-type">${typeLabel}</span>
+                        </div>`;
+            html += `<div class="q-text">${q.question || q.sentence}</div>`;
+
+            // 输入区域
+            if (q.type === 'choice') {
+                html += `<div class="q-options">`;
+                q.options.forEach((opt, oi) => {
+                    const letter = String.fromCharCode(65 + oi);
+                    const checked = (isSubmitted && result.userAnswer === opt) ? 'checked' : '';
+                    const disabled = isSubmitted ? 'disabled' : '';
+                    html += `<label><input type="radio" name="q" value="${oi}" ${checked} ${disabled}> ${letter}. ${opt}</label>`;
+                });
+                html += `</div>`;
+            } else if (q.type === 'fill') {
+                const val = isSubmitted ? result.userAnswer : '';
+                const disabled = isSubmitted ? 'disabled' : '';
+                html += `<input class="q-input" type="text" placeholder="填写答案..." value="${val}" ${disabled} autocomplete="off">`;
+            } else if (q.type === 'error') {
+                const errVal = isSubmitted ? (result.userAnswer.err || '') : '';
+                const corVal = isSubmitted ? (result.userAnswer.cor || '') : '';
+                const disabled = isSubmitted ? 'disabled' : '';
+                html += `<div class="q-error-group">
+                            <input class="q-input" type="text" placeholder="错误部分" value="${errVal}" ${disabled} autocomplete="off">
+                            <input class="q-input" type="text" placeholder="正确形式" value="${corVal}" ${disabled} autocomplete="off">
+                        </div>`;
+            }
+
+            // 结果显示
+            if (isSubmitted) {
+                const correctText = getCorrectAnswerText(q);
+                const isCorrect = result.correct;
+                const icon = isCorrect ? '✅' : '❌';
+                const cls = isCorrect ? 'correct-answer' : 'wrong-answer';
+                html += `<div class="q-result"><span class="${cls}">${icon} ${isCorrect ? '正确' : '错误'}</span> 正确答案: <span class="correct-answer">${correctText}</span></div>`;
+            } else {
+                html += `<div class="q-result" style="color:#8aa9c9;">请作答后点击“提交本题”</div>`;
+            }
+
+            cardContainer.innerHTML = html;
+
+            // 绑定事件（仅当未提交时）
+            if (!isSubmitted) {
+                const inputs = cardContainer.querySelectorAll('input');
+                inputs.forEach(inp => {
+                    inp.addEventListener('change', () => {
+                        // 实时更新结果（但不提交）
+                    });
+                });
+            }
+
+            updateStats();
+        }
+
+        // ---------- 提交当前题目 ----------
+        function submitCurrent() {
+            if (allSubmitted) {
+                alert('所有题目已提交，点击“重随机”可重新练习。');
+                return;
+            }
+            const q = currentQuestions[currentIndex];
+            const result = results[currentIndex];
+            if (result.submitted) {
+                alert('本题已提交，可点击下一题继续。');
+                return;
+            }
+
+            let userAnswer = '';
+            let isCorrect = false;
+
+            if (q.type === 'choice') {
+                const checked = cardContainer.querySelector('input[type="radio"]:checked');
+                if (!checked) {
+                    alert('请先选择一个选项。');
+                    return;
+                }
+                const val = parseInt(checked.value);
+                userAnswer = q.options[val];
+                isCorrect = (val === q.answer);
+            } else if (q.type === 'fill') {
+                const inp = cardContainer.querySelector('.q-input');
+                if (!inp) return;
+                const val = inp.value.trim();
+                if (val === '') {
+                    alert('请填写答案。');
+                    return;
+                }
+                userAnswer = val;
+                isCorrect = (val.toLowerCase() === q.answer.trim().toLowerCase());
+            } else if (q.type === 'error') {
+                const inputs = cardContainer.querySelectorAll('.q-input');
+                if (inputs.length !== 2) return;
+                const errVal = inputs[0].value.trim();
+                const corVal = inputs[1].value.trim();
+                if (errVal === '' || corVal === '') {
+                    alert('请填写错误部分和正确形式。');
+                    return;
+                }
+                userAnswer = { err: errVal, cor: corVal };
+                const stdErr = q.error.trim().toLowerCase();
+                const stdCor = q.correction.trim().toLowerCase();
+                isCorrect = (errVal.toLowerCase() === stdErr && corVal.toLowerCase() === stdCor);
+            }
+
+            // 记录结果
+            result.submitted = true;
+            result.correct = isCorrect;
+            result.userAnswer = userAnswer;
+
+            // 重新渲染
+            renderCurrentQuestion();
+
+            // 如果全部提交，自动显示结果
+            const submittedCount = results.filter(r => r.submitted).length;
+            if (submittedCount === currentQuestions.length) {
+                allSubmitted = true;
+                showFinalResult();
+            }
+            updateStats();
+
+            // 自动跳到下一题（如果有）
+            if (currentIndex < currentQuestions.length - 1) {
+                setTimeout(() => {
+                    goToNext();
+                }, 600);
+            }
+        }
+
+        // ---------- 导航 ----------
+        function goToPrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderCurrentQuestion();
+            }
+        }
+
+        function goToNext() {
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderCurrentQuestion();
+            }
+        }
+
+        // ---------- 显示最终结果 ----------
+        function showFinalResult() {
+            const total = currentQuestions.length;
+            const correct = results.filter(r => r.submitted && r.correct).length;
+            const accuracy = (correct / total * 100);
+
+            // 保存历史
+            const record = { score: correct, total, date: new Date().toLocaleString('zh-CN') };
+            saveHistory(record);
+            updateLatestDisplay();
+
+            resultPanel.classList.add('visible');
+            accuracySpan.textContent = accuracy.toFixed(0) + '%';
+            scoreNumSpan.textContent = correct;
+
+            // 趋势
+            const history = getHistory();
+            let trend = '',
+                trendClass = '';
+            if (history.length >= 2) {
+                const prev = history[history.length - 2].score;
+                if (correct > prev) { trend = '📈 上升';
+                    trendClass = 'up'; } else if (correct < prev) { trend = '📉 下降';
+                    trendClass = 'down'; } else { trend = '➖ 持平';
+                    trendClass = ''; }
+                trendIcon.textContent = trend;
+                trendIcon.className = 'trend ' + trendClass;
+                trendText.textContent = ` (上次 ${prev}/30)`;
+            } else if (history.length === 1) {
+                trendIcon.textContent = '—';
+                trendText.textContent = '首次记录';
+            } else {
+                trendIcon.textContent = '—';
+                trendText.textContent = '无历史';
+            }
+
+            // 建议
+            let suggestion = '';
+            if (accuracy >= 90) suggestion = '🌟 优秀！名词掌握扎实！';
+            else if (accuracy >= 70) suggestion = '👍 良好，复习错题巩固。';
+            else if (accuracy >= 50) suggestion = '📖 建议回顾名词单复数、所有格等规则。';
+            else suggestion = '💪 别灰心，从基础开始，逐一分析每道错题。';
+            suggestionDiv.textContent = suggestion;
+
+            // 错题列表
+            wrongListDiv.innerHTML = '';
+            const wrongs = results.filter(r => r.submitted && !r.correct);
+            if (wrongs.length === 0) {
+                wrongListDiv.innerHTML = '<p style="color:#27ae60; font-weight:500;">🎉 全部正确！</p>';
+            } else {
+                wrongs.forEach((w, idx) => {
+                    const q = currentQuestions[idx];
+                    const item = document.createElement('div');
+                    item.className = 'wrong-item';
+                    const userAns = typeof w.userAnswer === 'string' ? w.userAnswer : (w.userAnswer.err + ' → ' + w
+                        .userAnswer.cor);
+                    const correctAns = getCorrectAnswerText(q);
+                    item.innerHTML = `
+                                <div class="q-original">${q.question || q.sentence}</div>
+                                <div class="q-user">你的答案: ${userAns}</div>
+                                <div class="q-answer">正确答案: ${correctAns}</div>
+                            `;
+                    wrongListDiv.appendChild(item);
+                });
+            }
+        }
+
+        // ---------- 初始化 / 随机出题 ----------
+        function randomQuestions() {
+            const selected = pickRandom(allQuestions, 30);
+            currentQuestions = selected;
+            results = currentQuestions.map(() => ({ submitted: false, correct: false, userAnswer: null }));
+            currentIndex = 0;
+            allSubmitted = false;
+            resultPanel.classList.remove('visible');
+            renderCurrentQuestion();
+            updateLatestDisplay();
+        }
+
+        // ---------- 题库模态框（显示完整答案） ----------
+        function showBank() {
+            const modal = document.getElementById('bankModal');
+            const content = document.getElementById('bankContent');
+            content.innerHTML = '';
+            allQuestions.forEach((q, i) => {
+                const div = document.createElement('div');
+                div.className = 'bank-item';
+                let type = '';
+                if (q.type === 'choice') type = '选择';
+                else if (q.type === 'fill') type = '填空';
+                else type = '改错';
+
+                let answerText = '';
+                if (q.type === 'choice') {
+                    answerText = `正确答案: ${q.options[q.answer]}`;
+                } else if (q.type === 'fill') {
+                    answerText = `答案: ${q.answer}`;
+                } else if (q.type === 'error') {
+                    answerText = `错误: ${q.error} → 正确: ${q.correction}`;
+                }
+
+                div.innerHTML = `
+                            <div class="b-q">${i+1}. ${q.question || q.sentence}</div>
+                            <div class="b-answer">${answerText}</div>
+                            <span class="b-type">${type}</span>
+                        `;
+                content.appendChild(div);
+            });
+            modal.classList.add('open');
+        }
+
+        // ---------- 历史 ----------
+        function showHistory() {
+            const modal = document.getElementById('historyModal');
+            const content = document.getElementById('historyContent');
+            const history = getHistory();
+            if (history.length === 0) {
+                content.innerHTML = '<p style="color:#6f8faa;">暂无记录</p>';
+            } else {
+                let html = `<ul class="history-list">`;
+                history.slice().reverse().forEach((r, i) => {
+                    const isLatest = (i === 0);
+                    html +=
+                        `<li><span>#${history.length - i}  ${r.date}</span><span class="${isLatest ? 'score-high' : ''}">${r.score} / ${r.total}</span></li>`;
+                });
+                html += '</ul>';
+                content.innerHTML = html;
+            }
+            modal.classList.add('open');
+        }
+
+        // ---------- 事件绑定 ----------
+        randomBtn.addEventListener('click', randomQuestions);
+        submitBtn.addEventListener('click', submitCurrent);
+        prevBtn.addEventListener('click', goToPrev);
+        nextBtn.addEventListener('click', goToNext);
+
+        showBankBtn.addEventListener('click', showBank);
+        document.getElementById('closeBankModal').addEventListener('click', () => {
+            document.getElementById('bankModal').classList.remove('open');
+        });
+        document.getElementById('bankModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('bankModal').classList.remove('open');
+        });
+
+        showHistoryBtn.addEventListener('click', showHistory);
+        document.getElementById('closeHistoryModal').addEventListener('click', () => {
+            document.getElementById('historyModal').classList.remove('open');
+        });
+        document.getElementById('historyModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('historyModal').classList.remove('open');
+        });
+
+        // 键盘支持：左右箭头切换
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            if (e.key === 'ArrowLeft') goToPrev();
+            else if (e.key === 'ArrowRight') goToNext();
+        });
+
+        // ---------- 启动 ----------
+        randomQuestions();
+    </script>
+</body>
+</html>

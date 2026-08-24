@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>📘 代词专项 · 150题（单题模式）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f5faff 0%, #e3f0fa 100%);
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 20, 40, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            padding: 20px 22px 32px;
+            transition: all 0.2s;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 3px dashed #b3d4f0;
+            padding-bottom: 12px;
+            gap: 10px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2a6b9e, #4a90d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 span {
+            font-size: 1.6rem;
+            -webkit-text-fill-color: initial;
+            color: #f5b041;
+        }
+
+        .header h1 .subtag {
+            font-size: 0.7rem;
+            background: #dce8f5;
+            padding: 0 14px;
+            border-radius: 40px;
+            -webkit-text-fill-color: #1e3b5a;
+            font-weight: 600;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #1e3b5a;
+            border: 1px solid #d4e3f0;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.30);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(74, 144, 217, 0.40);
+        }
+
+        .btn-secondary {
+            background: #f0f7ff;
+            border-color: #c3d9ed;
+        }
+        .btn-secondary:hover {
+            background: #dce8f5;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.28);
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.36);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #b3d4f0;
+        }
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            background: rgba(235, 245, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 60px;
+            margin-bottom: 16px;
+            justify-content: center;
+            border: 1px solid #cde0f0;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            color: #1e3b5a;
+        }
+
+        .stat-item .badge {
+            background: #2a6b9e;
+            color: white;
+            border-radius: 40px;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            line-height: 24px;
+            font-weight: 600;
+        }
+        .stat-item .badge.green {
+            background: #27ae60;
+        }
+        .stat-item .badge.gold {
+            background: #f5b041;
+        }
+        .stat-item .badge.orange {
+            background: #e67e22;
+        }
+
+        /* ---- 单题卡片 ---- */
+        .single-card-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 8px 0 16px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px 24px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e3eef9;
+            width: 100%;
+            max-width: 600px;
+            transition: 0.2s;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .q-number {
+            font-weight: 700;
+            color: #2a6b9e;
+            background: #e3eef9;
+            padding: 0 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            line-height: 26px;
+        }
+
+        .q-type {
+            font-size: 0.7rem;
+            color: #6f8faa;
+            background: #edf4fa;
+            padding: 0 16px;
+            border-radius: 30px;
+            line-height: 24px;
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #1a2f44;
+            margin: 8px 0 16px;
+            line-height: 1.6;
+        }
+
+        .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 6px 0 12px;
+        }
+
+        .q-options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: 0.1s;
+            border: 1px solid transparent;
+        }
+        .q-options label:hover {
+            background: #f0f7ff;
+            border-color: #d4e3f0;
+        }
+
+        .q-options input[type="radio"] {
+            accent-color: #4a90d9;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .q-input {
+            border: 2px solid #d4e3f0;
+            border-radius: 60px;
+            padding: 8px 18px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+            background: #f9fcff;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+        .q-input:focus {
+            border-color: #4a90d9;
+            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.12);
+            background: white;
+        }
+
+        .q-error-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .q-error-group .q-input {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .q-result {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            min-height: 28px;
+            padding: 6px 12px;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+        .q-result .correct-answer {
+            color: #27ae60;
+        }
+        .q-result .wrong-answer {
+            color: #e74c3c;
+        }
+        .q-result .info {
+            color: #2a6b9e;
+        }
+
+        /* 导航 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .nav-bar .progress {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3b5a;
+        }
+
+        .nav-bar .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* 结果面板 */
+        .result-panel {
+            margin-top: 22px;
+            background: white;
+            border-radius: 28px;
+            padding: 20px 24px 24px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e3eef9;
+            display: none;
+        }
+        .result-panel.visible {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a2f44;
+            margin-bottom: 4px;
+        }
+
+        .result-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: #f5faff;
+            padding: 10px 18px;
+            border-radius: 60px;
+            margin: 8px 0 14px;
+            font-size: 0.9rem;
+        }
+
+        .result-stats .stat strong {
+            font-size: 1.2rem;
+            color: #2a6b9e;
+        }
+        .result-stats .stat .trend {
+            font-size: 1rem;
+            margin-left: 4px;
+        }
+        .result-stats .stat .trend.up {
+            color: #27ae60;
+        }
+        .result-stats .stat .trend.down {
+            color: #e74c3c;
+        }
+
+        .suggestion {
+            background: #fef9e7;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            border: 1px solid #f5dbaa;
+        }
+
+        .wrong-list {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 10px;
+        }
+
+        .wrong-item {
+            background: #fdedec;
+            border-radius: 14px;
+            padding: 10px 14px;
+            border-left: 4px solid #e74c3c;
+            font-size: 0.85rem;
+        }
+        .wrong-item .q-original {
+            font-weight: 600;
+            color: #1a2f44;
+        }
+        .wrong-item .q-answer {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        .wrong-item .q-user {
+            color: #e74c3c;
+            font-size: 0.8rem;
+        }
+
+        /* ---- 模态框 ---- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            padding: 16px;
+        }
+        .modal-overlay.open {
+            display: flex;
+            animation: fadeIn 0.2s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 32px;
+            max-width: 780px;
+            width: 100%;
+            padding: 24px 28px 30px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #e3eef9;
+        }
+
+        .modal-box h2 {
+            font-size: 1.4rem;
+            color: #1a2f44;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .modal-box .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #8aa9c9;
+            transition: 0.2s;
+            line-height: 1;
+        }
+        .modal-box .close-btn:hover {
+            color: #2a6b9e;
+            transform: rotate(90deg);
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .bank-item {
+            background: #f5faff;
+            border-radius: 12px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #e3eef9;
+            gap: 4px;
+        }
+        .bank-item .b-q {
+            font-weight: 500;
+            color: #1a2f44;
+        }
+        .bank-item .b-answer {
+            color: #27ae60;
+            font-weight: 500;
+            font-size: 0.8rem;
+            padding-left: 12px;
+            border-left: 3px solid #27ae60;
+        }
+        .bank-item .b-type {
+            color: #6f8faa;
+            font-size: 0.7rem;
+            background: #e3eef9;
+            padding: 0 12px;
+            border-radius: 30px;
+            line-height: 20px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+        .history-list li {
+            padding: 6px 10px;
+            border-bottom: 1px solid #e3eef9;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        .history-list li:last-child {
+            border: none;
+        }
+        .history-list .score-high {
+            font-weight: 700;
+            color: #2a6b9e;
+        }
+
+        /* 滚动条 */
+        .bank-grid::-webkit-scrollbar,
+        .modal-box::-webkit-scrollbar {
+            width: 5px;
+        }
+        .bank-grid::-webkit-scrollbar-track,
+        .modal-box::-webkit-scrollbar-track {
+            background: #e3eef9;
+            border-radius: 10px;
+        }
+        .bank-grid::-webkit-scrollbar-thumb,
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #4a90d9;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px 14px 22px;
+            }
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .question-card {
+                padding: 16px 16px 20px;
+            }
+            .q-text {
+                font-size: 0.95rem;
+            }
+            .q-options label {
+                font-size: 0.85rem;
+            }
+            .q-input {
+                font-size: 0.85rem;
+                padding: 6px 14px;
+            }
+            .stats {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .nav-bar .btn-group {
+                justify-content: center;
+            }
+            .modal-box {
+                padding: 16px 14px 20px;
+            }
+            .bank-item {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1>
+                <span>📘</span> 代词专项 · 150题
+                <span class="subtag">单题模式</span>
+            </h1>
+            <div class="toolbar">
+                <button class="btn btn-primary" id="randomBtn">🎲 重随机</button>
+                <button class="btn btn-secondary" id="showBankBtn">📖 题库（含答案）</button>
+                <button class="btn btn-secondary" id="showHistoryBtn">🏆 历史</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">📝 总题 <span class="badge" id="totalCount">30</span></div>
+            <div class="stat-item">✅ 已答 <span class="badge green" id="answeredCount">0</span></div>
+            <div class="stat-item">📊 当前得分 <span class="badge gold" id="liveScore">0</span></div>
+            <div class="stat-item">📌 最新 <span class="badge orange" id="latestScore">--</span></div>
+        </div>
+
+        <!-- 单题卡片区域 -->
+        <div class="single-card-wrap">
+            <div id="questionCard" class="question-card">
+                <!-- 由 js 动态渲染 -->
+            </div>
+
+            <div class="nav-bar">
+                <div class="progress" id="progressDisplay">第 1 / 30 题</div>
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="prevBtn" disabled>◀ 上一题</button>
+                    <button class="btn btn-success" id="submitBtn">✅ 提交本题</button>
+                    <button class="btn btn-outline" id="nextBtn">下一题 ▶</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果面板（全部完成后显示） -->
+        <div class="result-panel" id="resultPanel">
+            <div class="result-title">📊 练习结果</div>
+            <div class="result-stats" id="resultStats">
+                <div class="stat">正确率 <strong id="accuracy">0%</strong></div>
+                <div class="stat">得分 <strong id="scoreNum">0</strong> / 30</div>
+                <div class="stat">趋势 <span class="trend" id="trendIcon">—</span> <span id="trendText"></span></div>
+            </div>
+            <div class="suggestion" id="suggestionText">继续加油！</div>
+            <div style="margin-top:14px; font-weight:600; color:#1a2f44; font-size:0.9rem;">❌ 错题回顾</div>
+            <div class="wrong-list" id="wrongList"></div>
+        </div>
+    </div>
+
+    <!-- 题库模态框（含完整答案） -->
+    <div class="modal-overlay" id="bankModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeBankModal">✕</button>
+            <h2>📖 全部题目（含答案）</h2>
+            <div id="bankContent" class="bank-grid"></div>
+        </div>
+    </div>
+
+    <!-- 历史模态框 -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeHistoryModal">✕</button>
+            <h2>🏆 历史记录</h2>
+            <div id="historyContent"><p style="color:#6f8faa;">暂无记录</p></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  完整题库：代词专项 150题
+        //  选择题 1-60，填空 61-110，改错 111-150
+        // ============================================================
+
+        // ---------- 选择题 (1-60) ----------
+        const choiceData = [
+            { type: 'choice', question: 'The young couple often eats out because ______ of them can cook.', options: ['both',
+                    'either', 'neither', 'none'
+                ], answer: 2 },
+            { type: 'choice', question: 'Hurry up! We have ______ time to waste on such trivial things.', options: [
+                    'a little', 'a few', 'few', 'little'
+                ], answer: 3 },
+            { type: 'choice', question: 'The population of our city is about three times as large as ______ of theirs.',
+                options: ['one', 'that', 'it', 'this'], answer: 1 },
+            { type: 'choice', question: 'That idea of ______ sounds much better than Clare\'s. I will vote for her.',
+                options: ['hers', 'her', 'her\'s', 'she'], answer: 0 },
+            { type: 'choice', question: 'The little girl was left alone in the room; with ______ to look after her.',
+                options: ['anyone', 'someone', 'everyone', 'no one'], answer: 3 },
+            { type: 'choice', question: 'The books here are not so well written as ______ on the shelf.', options: [
+                    'that', 'those', 'ones', 'them'
+                ], answer: 1 },
+            { type: 'choice', question: 'Since both methods lead to the same result, you can choose ______ one.',
+                options: ['each', 'both', 'either', 'some'], answer: 2 },
+            { type: 'choice', question: 'Two people were killed in the accident. One was an old woman and ______ was a little girl.',
+                options: ['any other', 'another', 'the other', 'the another'], answer: 2 },
+            { type: 'choice', question: 'The radios made in Beijing are as good as ______ made in Qingdao.', options: [
+                    'that', 'these', 'those', 'this'
+                ], answer: 2 },
+            { type: 'choice', question: 'Please keep quiet, everybody! I have ______ important to tell you.', options: [
+                    'nothing', 'something', 'everything', 'anything'
+                ], answer: 1 },
+            { type: 'choice', question: 'The notebook on the desk is ______.', options: ['my', 'mine', 'me', 'I'],
+                answer: 1 },
+            { type: 'choice', question: 'She can do it all by ______.', options: ['herself', 'herself', 'her',
+                    'hers'
+                ], answer: 0 },
+            { type: 'choice', question: 'We all want respect for ______.', options: ['each other', 'one another',
+                    'both A and B', 'ourselves'
+                ], answer: 2 },
+            { type: 'choice', question: '______ of us agrees with the plan.', options: ['Both', 'Either', 'Neither',
+                    'All'
+                ], answer: 2 },
+            { type: 'choice', question: 'There are two books, and you can choose ______ of them.', options: ['either',
+                    'both', 'all', 'none'
+                ], answer: 0 },
+            { type: 'choice', question: 'I have ______ homework to do today.', options: ['many', 'much', 'few',
+                    'a few'
+                ], answer: 1 },
+            { type: 'choice', question: 'Would you like ______ tea?', options: ['some', 'any', 'many', 'few'],
+                answer: 0 },
+            { type: 'choice', question: 'She didn\'t buy ______ books yesterday.', options: ['some', 'any', 'much',
+                    'a little'
+                ], answer: 1 },
+            { type: 'choice', question: 'My family means ______ to me.', options: ['everything', 'nothing',
+                    'anything', 'something'
+                ], answer: 0 },
+            { type: 'choice', question: 'Jim is much cleverer than ______ student in Grade 3.', options: ['any other',
+                    'another', 'the other', 'other'
+                ], answer: 0 },
+            { type: 'choice', question: 'I have two brothers. One is a doctor, ______ is a teacher.', options: [
+                    'another', 'the other', 'others', 'the others'
+                ], answer: 1 },
+            { type: 'choice', question: 'Some people like coffee, ______ like tea.', options: ['other', 'others',
+                    'the other', 'another'
+                ], answer: 1 },
+            { type: 'choice', question: 'This present is for her and ______ one is for you.', options: ['that',
+                    'those', 'these', 'this'
+                ], answer: 0 },
+            { type: 'choice', question: 'The apples are as sweet as ______ I bought last week.', options: ['that',
+                    'those', 'ones', 'them'
+                ], answer: 1 },
+            { type: 'choice', question: 'He has a right to decide for ______.', options: ['him', 'himself', 'his',
+                    'he'
+                ], answer: 1 },
+            { type: 'choice', question: 'The professor told us that we should do it for ______ own good.', options: [
+                    'us', 'our', 'ours', 'ourselves'
+                ], answer: 1 },
+            { type: 'choice', question: 'It is hard for me to ______ for the trip all by myself.', options: [
+                    'prepare', 'prepares', 'preparing', 'prepared'
+                ], answer: 0 },
+            { type: 'choice', question: 'Both Lisa and I have long hair, but my hair is longer than ______.', options: [
+                    'her', 'hers', 'she', 'herself'
+                ], answer: 1 },
+            { type: 'choice', question: 'There are few apples left, ______?', options: ['are there', 'aren\'t there',
+                    'are they', 'aren\'t they'
+                ], answer: 0 },
+            { type: 'choice', question: 'There is a little milk left. We can use ______.', options: ['it', 'one',
+                    'that', 'this'
+                ], answer: 0 },
+            { type: 'choice', question: 'Each of them ______ the whole thing.', options: ['know', 'knows',
+                    'knowing', 'have known'
+                ], answer: 1 },
+            { type: 'choice', question: 'Every student needs to be careful with ______ studies.', options: ['his',
+                    'their', 'our', 'its'
+                ], answer: 1 },
+            { type: 'choice', question: 'I have much work to do, so I can\'t go with ______.', options: ['your',
+                    'you', 'yours', 'yourself'
+                ], answer: 1 },
+            { type: 'choice', question: 'The little girl was left alone; with no one to look after ______.', options: [
+                    'she', 'her', 'hers', 'herself'
+                ], answer: 1 },
+            { type: 'choice', question: 'You should help ______.', options: ['each other', 'one another',
+                    'both A and B', 'ourselves'
+                ], answer: 2 },
+            { type: 'choice', question: 'None of them ______ about this thing.', options: ['care', 'cares',
+                    'both A and B', 'caring'
+                ], answer: 2 },
+            { type: 'choice', question: 'All the people you invited ______ coming.', options: ['is', 'are', 'was',
+                    'were'
+                ], answer: 1 },
+            { type: 'choice', question: 'I lost my book, so I have to buy a new ______.', options: ['one', 'it',
+                    'that', 'this'
+                ], answer: 0 },
+            { type: 'choice', question: 'The new one is more interesting than ______ I bought yesterday.', options: [
+                    'one', 'that', 'it', 'this'
+                ], answer: 1 },
+            { type: 'choice', question: 'Yesterday I bought a book. ______ was interesting.', options: ['One',
+                    'That', 'It', 'This'
+                ], answer: 2 },
+            { type: 'choice', question: 'Both of us ______ this job.', options: ['can do', 'can does', 'can doing',
+                    'can to do'
+                ], answer: 0 },
+            { type: 'choice', question: 'Neither of us ______ with the plan.', options: ['agree', 'agrees',
+                    'agreeing', 'have agreed'
+                ], answer: 1 },
+            { type: 'choice', question: 'There are some new books on the desk. You can take ______.', options: ['it',
+                    'one', 'them', 'that'
+                ], answer: 2 },
+            { type: 'choice', question: 'He is working at ______ place in the north.', options: ['some', 'any',
+                    'no', 'every'
+                ], answer: 0 },
+            { type: 'choice', question: 'Don\'t do ______ before we get there.', options: ['something', 'anything',
+                    'nothing', 'everything'
+                ], answer: 1 },
+            { type: 'choice', question: 'We didn\'t do ______ at the weekend.', options: ['nothing', 'anything',
+                    'something', 'everything'
+                ], answer: 1 },
+            { type: 'choice', question: 'Would you like me to do ______ for you?', options: ['something', 'anything',
+                    'nothing', 'everything'
+                ], answer: 0 },
+            { type: 'choice', question: 'There is ______ interesting at the party.', options: ['something',
+                    'anything', 'nothing', 'everything'
+                ], answer: 0 },
+            { type: 'choice', question: 'You, she and I ______ all enjoy music.', options: ['am', 'is', 'are',
+                    'be'], answer: 2 },
+            { type: 'choice', question: 'My parents are proud of ______.', options: ['I', 'my', 'me', 'mine'],
+                answer: 2 },
+            { type: 'choice', question: 'The notebook on the desk is ______.', options: ['my', 'mine', 'me', 'I'],
+                answer: 1 },
+            { type: 'choice', question: '______ history teacher is so knowledgeable.', options: ['Me', 'My', 'Mine',
+                    'I'
+                ], answer: 1 },
+            { type: 'choice', question: 'We often go to see ______ on Saturday.', options: ['she', 'her', 'hers',
+                    'herself'
+                ], answer: 1 },
+            { type: 'choice', question: 'I myself finished the task. The underlined part is used as a(n) ______.',
+                options: ['subject', 'object', 'appositive', 'attributive'], answer: 2 },
+            { type: 'choice', question: 'The population of China is much larger than ______ of America.', options: [
+                    'that', 'one', 'it', 'this'
+                ], answer: 0 },
+            { type: 'choice', question: 'These apples are sweeter than ______ I bought yesterday.', options: ['that',
+                    'those', 'ones', 'them'
+                ], answer: 1 },
+            { type: 'choice', question: 'There are two books, and you can choose either of ______.', options: ['they',
+                    'them', 'their', 'theirs'
+                ], answer: 1 },
+            { type: 'choice', question: 'All of us want to go, but ______ of us can.', options: ['both', 'either',
+                    'neither', 'none'
+                ], answer: 3 },
+            { type: 'choice', question: 'I have a few friends, but ______ of them can speak French.', options: ['both',
+                    'either', 'neither', 'none'
+                ], answer: 3 },
+            { type: 'choice', question: 'He has little money, so he can\'t buy ______.', options: ['something',
+                    'anything', 'nothing', 'everything'
+                ], answer: 1 }
+        ];
+
+        // ---------- 语法填空 (61-110) ----------
+        const fillData = [
+            { type: 'fill', question: 'This is ______ (I) book, not yours.', answer: 'my' },
+            { type: 'fill', question: 'The notebook on the desk is ______ (she).', answer: 'hers' },
+            { type: 'fill', question: 'They enjoyed ______ (they) very much at the party.', answer: 'themselves' },
+            { type: 'fill', question: 'She can do it all by ______ (she).', answer: 'herself' },
+            { type: 'fill', question: 'We should help ______ (each other / one another) when we are in trouble. (选填一个)',
+                answer: 'each other' },
+            { type: 'fill', question: '______ (both / either) of us can do this job.', answer: 'Both' },
+            { type: 'fill', question: '______ (neither / none) of the two books is interesting.', answer: 'Neither' },
+            { type: 'fill', question: 'I have ______ (few / a few) apples, so we can share.', answer: 'a few' },
+            { type: 'fill', question: 'There is ______ (little / a little) milk left, so we need to buy some.',
+                answer: 'little' },
+            { type: 'fill', question: '______ (every / each) student has a dictionary.', answer: 'Every' },
+            { type: 'fill', question: '______ (each / every) of them knows the truth.', answer: 'Each' },
+            { type: 'fill', question: 'I have ______ (much / many) homework to do today.', answer: 'much' },
+            { type: 'fill', question: 'She didn\'t buy ______ (some / any) books yesterday.', answer: 'any' },
+            { type: 'fill', question: 'Would you like ______ (some / any) coffee?', answer: 'some' },
+            { type: 'fill', question: 'There is ______ (something / anything) interesting in the newspaper.',
+                answer: 'something' },
+            { type: 'fill', question: 'Don\'t tell ______ (somebody / anybody) about it.', answer: 'anybody' },
+            { type: 'fill', question: 'My family means ______ (everything / nothing) to me.', answer: 'everything' },
+            { type: 'fill', question: 'I have two sisters. One is a nurse, ______ (other / the other) is a teacher.',
+                answer: 'the other' },
+            { type: 'fill', question: 'Some people like singing, ______ (other / others) like dancing.', answer: 'others' },
+            { type: 'fill', question: 'Jim is taller than ______ (any other / any) student in his class.',
+                answer: 'any other' },
+            { type: 'fill', question: 'The population of our city is larger than ______ (that / it) of yours.',
+                answer: 'that' },
+            { type: 'fill', question: 'The apples here are as sweet as ______ (those / them) I bought yesterday.',
+                answer: 'those' },
+            { type: 'fill', question: 'I lost my pen, so I have to buy a new ______ (one / it).', answer: 'one' },
+            { type: 'fill', question: 'Yesterday I bought a book. ______ (It / One) was very interesting.',
+                answer: 'It' },
+            { type: 'fill', question: 'You, she and I ______ (am / are) all students.', answer: 'are' },
+            { type: 'fill', question: 'My parents are proud of ______ (I / me).', answer: 'me' },
+            { type: 'fill', question: 'The notebook on the desk is ______ (my / mine).', answer: 'mine' },
+            { type: 'fill', question: '______ (Me / My) history teacher is very kind.', answer: 'My' },
+            { type: 'fill', question: 'We often go to see ______ (she / her) on weekends.', answer: 'her' },
+            { type: 'fill', question: 'He made the decision by ______ (him / himself).', answer: 'himself' },
+            { type: 'fill', question: 'The little girl can dress ______ (her / herself) now.', answer: 'herself' },
+            { type: 'fill', question: 'We all want respect for ______ (each other / ourselves). (选填一个)',
+                answer: 'each other' },
+            { type: 'fill', question: 'Both of us ______ (agree / agrees) with you.', answer: 'agree' },
+            { type: 'fill', question: 'Neither of them ______ (know / knows) the answer.', answer: 'knows' },
+            { type: 'fill', question: 'None of the students ______ (is / are) absent today. (可填单数或复数)',
+                answer: 'are' },
+            { type: 'fill', question: 'All the people ______ (is / are) here.', answer: 'are' },
+            { type: 'fill', question: 'I have much work ______ (do / to do).', answer: 'to do' },
+            { type: 'fill', question: 'There are a few apples ______ (leave / left) on the table.', answer: 'left' },
+            { type: 'fill', question: 'He has a right to decide for ______ (him / himself).', answer: 'himself' },
+            { type: 'fill', question: 'The professor told us to do it for ______ (us / our) own good.', answer: 'our' },
+            { type: 'fill', question: 'I have two brothers. One is a doctor, and ______ (another / the other) is a teacher.',
+                answer: 'the other' },
+            { type: 'fill', question: 'Some students like sports, ______ (others / the others) like reading.',
+                answer: 'others' },
+            { type: 'fill', question: 'There are twenty students in the class. Ten are boys, ______ (others / the others) are girls.',
+                answer: 'the others' },
+            { type: 'fill', question: 'This present is for you, and ______ (that / those) one is for me.', answer: 'that' },
+            { type: 'fill', question: 'The books on the shelf are more expensive than ______ (that / those) on the desk.',
+                answer: 'those' },
+            { type: 'fill', question: '______ (This / These) is a loaf of chocolate.', answer: 'This' },
+            { type: 'fill', question: '______ (This / These) presents are for her.', answer: 'These' },
+            { type: 'fill', question: 'She can do it all by ______ (her / herself).', answer: 'herself' },
+            { type: 'fill', question: 'He has a right to decide for ______ (him / himself).', answer: 'himself' },
+            { type: 'fill', question: 'I myself finished the task. The word “myself” is used as a(n) ______ (subject / appositive).',
+                answer: 'appositive' }
+        ];
+
+        // ---------- 改错 (111-150) ----------
+        const errorData = [
+            { type: 'error', sentence: 'Helen has two brothers. None of them likes chocolate, but she loves it.',
+                error: 'None', correction: 'Neither' },
+            { type: 'error', sentence: 'Much teenagers like to talk with their friends when they have trouble.',
+                error: 'Much', correction: 'Many' },
+            { type: 'error', sentence: 'All students are busy, so a few of them will go to the concert.', error: 'a few',
+                correction: 'few' },
+            { type: 'error', sentence: 'Both Lisa and I have long hair, but my hair is longer than her.', error: 'her',
+                correction: 'hers' },
+            { type: 'error', sentence: 'I usually ask him to do his homework by him.', error: 'him',
+            correction: 'himself' },
+            { type: 'error', sentence: 'The professor told us that we should do it for us own good.', error: 'us',
+                correction: 'our' },
+            { type: 'error', sentence: 'The little girl was left alone; with no one to look after she.', error: 'she',
+                correction: 'her' },
+            { type: 'error', sentence: 'There are few apples left, aren\'t there?', error: 'aren\'t',
+            correction: 'are' },
+            { type: 'error', sentence: 'Each of them know the whole thing.', error: 'know', correction: 'knows' },
+            { type: 'error', sentence: 'Every student needs to be careful with their studies.', error: 'their',
+                correction: 'his' },
+            { type: 'error', sentence: 'I have many work to do today.', error: 'many', correction: 'much' },
+            { type: 'error', sentence: 'She didn\'t buy some books yesterday.', error: 'some', correction: 'any' },
+            { type: 'error', sentence: 'Would you like any tea? (context: polite request)', error: 'any',
+                correction: 'some' },
+            { type: 'error', sentence: 'There is something interesting in the newspaper, isn\'t it?', error: 'isn\'t it',
+                correction: 'isn\'t there' },
+            { type: 'error', sentence: 'Don\'t do nothing before we get there.', error: 'nothing',
+            correction: 'anything' },
+            { type: 'error', sentence: 'We didn\'t do something at the weekend.', error: 'something',
+                correction: 'anything' },
+            { type: 'error', sentence: 'My family means nothing to me. (改为肯定意义)', error: 'nothing',
+                correction: 'everything' },
+            { type: 'error', sentence: 'I have two sisters. One is a nurse, another is a teacher.', error: 'another',
+                correction: 'the other' },
+            { type: 'error', sentence: 'Some people like coffee, other like tea.', error: 'other',
+            correction: 'others' },
+            { type: 'error', sentence: 'Jim is much cleverer than any student in Grade 3.', error: 'any',
+                correction: 'any other' },
+            { type: 'error', sentence: 'The population of our city is larger than it of yours.', error: 'it',
+                correction: 'that' },
+            { type: 'error', sentence: 'The apples here are as sweet as them I bought yesterday.', error: 'them',
+                correction: 'those' },
+            { type: 'error', sentence: 'I lost my book, so I have to buy a new it.', error: 'it', correction: 'one' },
+            { type: 'error', sentence: 'Yesterday I bought a book. One was very interesting.', error: 'One',
+                correction: 'It' },
+            { type: 'error', sentence: 'You, she and I is all students.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'My parents are proud of I.', error: 'I', correction: 'me' },
+            { type: 'error', sentence: 'The notebook on the desk is my.', error: 'my', correction: 'mine' },
+            { type: 'error', sentence: 'Me history teacher is very kind.', error: 'Me', correction: 'My' },
+            { type: 'error', sentence: 'We often go to see she on weekends.', error: 'she', correction: 'her' },
+            { type: 'error', sentence: 'He made the decision by him.', error: 'him', correction: 'himself' },
+            { type: 'error', sentence: 'The little girl can dress her now.', error: 'her', correction: 'herself' },
+            { type: 'error', sentence: 'We all want respect for ourselves. (改为相互代词)', error: 'ourselves',
+                correction: 'each other' },
+            { type: 'error', sentence: 'Both of us agrees with you.', error: 'agrees', correction: 'agree' },
+            { type: 'error', sentence: 'Neither of them know the answer.', error: 'know', correction: 'knows' },
+            { type: 'error', sentence: 'None of the students is absent today. (复数意义，改为复数动词)', error: 'is',
+                correction: 'are' },
+            { type: 'error', sentence: 'All the people is here.', error: 'is', correction: 'are' },
+            { type: 'error', sentence: 'I have much works to do.', error: 'works', correction: 'work' },
+            { type: 'error', sentence: 'There are a few apple left.', error: 'apple', correction: 'apples' },
+            { type: 'error', sentence: 'He has a right to decide for his.', error: 'his', correction: 'himself' },
+            { type: 'error', sentence: 'The professor told us to do it for ourselves own good.', error: 'ourselves',
+                correction: 'our' }
+        ];
+
+        // ---------- 合并 ----------
+        const allQuestions = [...choiceData, ...fillData, ...errorData];
+        console.log('总题数:', allQuestions.length); // 150
+
+        // ============================================================
+        //  单题模式状态
+        // ============================================================
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let results = [];
+        let allSubmitted = false;
+
+        // DOM 引用
+        const cardContainer = document.getElementById('questionCard');
+        const progressDisplay = document.getElementById('progressDisplay');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const randomBtn = document.getElementById('randomBtn');
+        const showBankBtn = document.getElementById('showBankBtn');
+        const showHistoryBtn = document.getElementById('showHistoryBtn');
+
+        const totalSpan = document.getElementById('totalCount');
+        const answeredSpan = document.getElementById('answeredCount');
+        const liveScoreSpan = document.getElementById('liveScore');
+        const latestScoreSpan = document.getElementById('latestScore');
+
+        const resultPanel = document.getElementById('resultPanel');
+        const accuracySpan = document.getElementById('accuracy');
+        const scoreNumSpan = document.getElementById('scoreNum');
+        const trendIcon = document.getElementById('trendIcon');
+        const trendText = document.getElementById('trendText');
+        const suggestionDiv = document.getElementById('suggestionText');
+        const wrongListDiv = document.getElementById('wrongList');
+
+        // ---------- 工具 ----------
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function pickRandom(arr, n) {
+            const shuffled = shuffle(arr);
+            return shuffled.slice(0, n);
+        }
+
+        // ---------- 历史 ----------
+        const STORAGE_KEY = 'pronounPracticeHistory_single';
+
+        function getHistory() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+        }
+
+        function saveHistory(record) {
+            const h = getHistory();
+            h.push(record);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
+        }
+
+        function getLatestScore() {
+            const h = getHistory();
+            if (h.length === 0) return null;
+            return h[h.length - 1].score;
+        }
+
+        function updateLatestDisplay() {
+            const latest = getLatestScore();
+            latestScoreSpan.textContent = latest !== null ? `${latest}/30` : '--';
+        }
+
+        // ---------- 统计更新 ----------
+        function updateStats() {
+            const total = currentQuestions.length;
+            const submitted = results.filter(r => r.submitted).length;
+            const correct = results.filter(r => r.submitted && r.correct).length;
+            totalSpan.textContent = total;
+            answeredSpan.textContent = submitted;
+            liveScoreSpan.textContent = correct;
+            progressDisplay.textContent = `第 ${currentIndex+1} / ${total} 题`;
+            prevBtn.disabled = (currentIndex === 0);
+            nextBtn.disabled = (currentIndex === total - 1);
+            if (submitted === total && total > 0) {
+                allSubmitted = true;
+                showFinalResult();
+            } else {
+                allSubmitted = false;
+                resultPanel.classList.remove('visible');
+            }
+        }
+
+        // ---------- 获取当前题目的正确答案文本 ----------
+        function getCorrectAnswerText(q) {
+            if (q.type === 'choice') {
+                return q.options[q.answer];
+            } else if (q.type === 'fill') {
+                return q.answer;
+            } else if (q.type === 'error') {
+                return `错误: ${q.error} → 正确: ${q.correction}`;
+            }
+            return '';
+        }
+
+        // ---------- 渲染当前题目 ----------
+        function renderCurrentQuestion() {
+            if (!currentQuestions.length) return;
+            const q = currentQuestions[currentIndex];
+            const result = results[currentIndex];
+            const isSubmitted = result.submitted;
+
+            let typeLabel = '';
+            if (q.type === 'choice') typeLabel = '选择';
+            else if (q.type === 'fill') typeLabel = '填空';
+            else if (q.type === 'error') typeLabel = '改错';
+
+            let html = `<div class="q-header">
+                            <span class="q-number">#${currentIndex+1}</span>
+                            <span class="q-type">${typeLabel}</span>
+                        </div>`;
+            html += `<div class="q-text">${q.question || q.sentence}</div>`;
+
+            if (q.type === 'choice') {
+                html += `<div class="q-options">`;
+                q.options.forEach((opt, oi) => {
+                    const letter = String.fromCharCode(65 + oi);
+                    const checked = (isSubmitted && result.userAnswer === opt) ? 'checked' : '';
+                    const disabled = isSubmitted ? 'disabled' : '';
+                    html += `<label><input type="radio" name="q" value="${oi}" ${checked} ${disabled}> ${letter}. ${opt}</label>`;
+                });
+                html += `</div>`;
+            } else if (q.type === 'fill') {
+                const val = isSubmitted ? result.userAnswer : '';
+                const disabled = isSubmitted ? 'disabled' : '';
+                html += `<input class="q-input" type="text" placeholder="填写答案..." value="${val}" ${disabled} autocomplete="off">`;
+            } else if (q.type === 'error') {
+                const errVal = isSubmitted ? (result.userAnswer.err || '') : '';
+                const corVal = isSubmitted ? (result.userAnswer.cor || '') : '';
+                const disabled = isSubmitted ? 'disabled' : '';
+                html += `<div class="q-error-group">
+                            <input class="q-input" type="text" placeholder="错误部分" value="${errVal}" ${disabled} autocomplete="off">
+                            <input class="q-input" type="text" placeholder="正确形式" value="${corVal}" ${disabled} autocomplete="off">
+                        </div>`;
+            }
+
+            if (isSubmitted) {
+                const correctText = getCorrectAnswerText(q);
+                const isCorrect = result.correct;
+                const icon = isCorrect ? '✅' : '❌';
+                const cls = isCorrect ? 'correct-answer' : 'wrong-answer';
+                html += `<div class="q-result"><span class="${cls}">${icon} ${isCorrect ? '正确' : '错误'}</span> 正确答案: <span class="correct-answer">${correctText}</span></div>`;
+            } else {
+                html += `<div class="q-result" style="color:#8aa9c9;">请作答后点击“提交本题”</div>`;
+            }
+
+            cardContainer.innerHTML = html;
+            updateStats();
+        }
+
+        // ---------- 提交当前题目 ----------
+        function submitCurrent() {
+            if (allSubmitted) {
+                alert('所有题目已提交，点击“重随机”可重新练习。');
+                return;
+            }
+            const q = currentQuestions[currentIndex];
+            const result = results[currentIndex];
+            if (result.submitted) {
+                alert('本题已提交，可点击下一题继续。');
+                return;
+            }
+
+            let userAnswer = '';
+            let isCorrect = false;
+
+            if (q.type === 'choice') {
+                const checked = cardContainer.querySelector('input[type="radio"]:checked');
+                if (!checked) {
+                    alert('请先选择一个选项。');
+                    return;
+                }
+                const val = parseInt(checked.value);
+                userAnswer = q.options[val];
+                isCorrect = (val === q.answer);
+            } else if (q.type === 'fill') {
+                const inp = cardContainer.querySelector('.q-input');
+                if (!inp) return;
+                const val = inp.value.trim();
+                if (val === '') {
+                    alert('请填写答案。');
+                    return;
+                }
+                userAnswer = val;
+                isCorrect = (val.toLowerCase() === q.answer.trim().toLowerCase());
+            } else if (q.type === 'error') {
+                const inputs = cardContainer.querySelectorAll('.q-input');
+                if (inputs.length !== 2) return;
+                const errVal = inputs[0].value.trim();
+                const corVal = inputs[1].value.trim();
+                if (errVal === '' || corVal === '') {
+                    alert('请填写错误部分和正确形式。');
+                    return;
+                }
+                userAnswer = { err: errVal, cor: corVal };
+                const stdErr = q.error.trim().toLowerCase();
+                const stdCor = q.correction.trim().toLowerCase();
+                isCorrect = (errVal.toLowerCase() === stdErr && corVal.toLowerCase() === stdCor);
+            }
+
+            result.submitted = true;
+            result.correct = isCorrect;
+            result.userAnswer = userAnswer;
+
+            renderCurrentQuestion();
+
+            const submittedCount = results.filter(r => r.submitted).length;
+            if (submittedCount === currentQuestions.length) {
+                allSubmitted = true;
+                showFinalResult();
+            }
+            updateStats();
+
+            if (currentIndex < currentQuestions.length - 1) {
+                setTimeout(() => {
+                    goToNext();
+                }, 600);
+            }
+        }
+
+        // ---------- 导航 ----------
+        function goToPrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderCurrentQuestion();
+            }
+        }
+
+        function goToNext() {
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderCurrentQuestion();
+            }
+        }
+
+        // ---------- 显示最终结果 ----------
+        function showFinalResult() {
+            const total = currentQuestions.length;
+            const correct = results.filter(r => r.submitted && r.correct).length;
+            const accuracy = (correct / total * 100);
+
+            const record = { score: correct, total, date: new Date().toLocaleString('zh-CN') };
+            saveHistory(record);
+            updateLatestDisplay();
+
+            resultPanel.classList.add('visible');
+            accuracySpan.textContent = accuracy.toFixed(0) + '%';
+            scoreNumSpan.textContent = correct;
+
+            const history = getHistory();
+            let trend = '',
+                trendClass = '';
+            if (history.length >= 2) {
+                const prev = history[history.length - 2].score;
+                if (correct > prev) { trend = '📈 上升';
+                    trendClass = 'up'; } else if (correct < prev) { trend = '📉 下降';
+                    trendClass = 'down'; } else { trend = '➖ 持平';
+                    trendClass = ''; }
+                trendIcon.textContent = trend;
+                trendIcon.className = 'trend ' + trendClass;
+                trendText.textContent = ` (上次 ${prev}/30)`;
+            } else if (history.length === 1) {
+                trendIcon.textContent = '—';
+                trendText.textContent = '首次记录';
+            } else {
+                trendIcon.textContent = '—';
+                trendText.textContent = '无历史';
+            }
+
+            let suggestion = '';
+            if (accuracy >= 90) suggestion = '🌟 优秀！代词掌握扎实！';
+            else if (accuracy >= 70) suggestion = '👍 良好，复习错题巩固。';
+            else if (accuracy >= 50) suggestion = '📖 建议回顾代词表格及用法。';
+            else suggestion = '💪 别灰心，从基础开始，逐一分析。';
+            suggestionDiv.textContent = suggestion;
+
+            wrongListDiv.innerHTML = '';
+            const wrongs = results.filter(r => r.submitted && !r.correct);
+            if (wrongs.length === 0) {
+                wrongListDiv.innerHTML = '<p style="color:#27ae60; font-weight:500;">🎉 全部正确！</p>';
+            } else {
+                wrongs.forEach((w, idx) => {
+                    const q = currentQuestions[idx];
+                    const item = document.createElement('div');
+                    item.className = 'wrong-item';
+                    const userAns = typeof w.userAnswer === 'string' ? w.userAnswer : (w.userAnswer.err + ' → ' + w
+                        .userAnswer.cor);
+                    const correctAns = getCorrectAnswerText(q);
+                    item.innerHTML = `
+                                <div class="q-original">${q.question || q.sentence}</div>
+                                <div class="q-user">你的答案: ${userAns}</div>
+                                <div class="q-answer">正确答案: ${correctAns}</div>
+                            `;
+                    wrongListDiv.appendChild(item);
+                });
+            }
+        }
+
+        // ---------- 随机出题 ----------
+        function randomQuestions() {
+            const selected = pickRandom(allQuestions, 30);
+            currentQuestions = selected;
+            results = currentQuestions.map(() => ({ submitted: false, correct: false, userAnswer: null }));
+            currentIndex = 0;
+            allSubmitted = false;
+            resultPanel.classList.remove('visible');
+            renderCurrentQuestion();
+            updateLatestDisplay();
+        }
+
+        // ---------- 题库模态框（显示完整答案） ----------
+        function showBank() {
+            const modal = document.getElementById('bankModal');
+            const content = document.getElementById('bankContent');
+            content.innerHTML = '';
+            allQuestions.forEach((q, i) => {
+                const div = document.createElement('div');
+                div.className = 'bank-item';
+                let type = '';
+                if (q.type === 'choice') type = '选择';
+                else if (q.type === 'fill') type = '填空';
+                else type = '改错';
+
+                let answerText = '';
+                if (q.type === 'choice') {
+                    answerText = `正确答案: ${q.options[q.answer]}`;
+                } else if (q.type === 'fill') {
+                    answerText = `答案: ${q.answer}`;
+                } else if (q.type === 'error') {
+                    answerText = `错误: ${q.error} → 正确: ${q.correction}`;
+                }
+
+                div.innerHTML = `
+                            <div class="b-q">${i+1}. ${q.question || q.sentence}</div>
+                            <div class="b-answer">${answerText}</div>
+                            <span class="b-type">${type}</span>
+                        `;
+                content.appendChild(div);
+            });
+            modal.classList.add('open');
+        }
+
+        // ---------- 历史 ----------
+        function showHistory() {
+            const modal = document.getElementById('historyModal');
+            const content = document.getElementById('historyContent');
+            const history = getHistory();
+            if (history.length === 0) {
+                content.innerHTML = '<p style="color:#6f8faa;">暂无记录</p>';
+            } else {
+                let html = `<ul class="history-list">`;
+                history.slice().reverse().forEach((r, i) => {
+                    const isLatest = (i === 0);
+                    html +=
+                        `<li><span>#${history.length - i}  ${r.date}</span><span class="${isLatest ? 'score-high' : ''}">${r.score} / ${r.total}</span></li>`;
+                });
+                html += '</ul>';
+                content.innerHTML = html;
+            }
+            modal.classList.add('open');
+        }
+
+        // ---------- 事件绑定 ----------
+        randomBtn.addEventListener('click', randomQuestions);
+        submitBtn.addEventListener('click', submitCurrent);
+        prevBtn.addEventListener('click', goToPrev);
+        nextBtn.addEventListener('click', goToNext);
+
+        showBankBtn.addEventListener('click', showBank);
+        document.getElementById('closeBankModal').addEventListener('click', () => {
+            document.getElementById('bankModal').classList.remove('open');
+        });
+        document.getElementById('bankModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('bankModal').classList.remove('open');
+        });
+
+        showHistoryBtn.addEventListener('click', showHistory);
+        document.getElementById('closeHistoryModal').addEventListener('click', () => {
+            document.getElementById('historyModal').classList.remove('open');
+        });
+        document.getElementById('historyModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('historyModal').classList.remove('open');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            if (e.key === 'ArrowLeft') goToPrev();
+            else if (e.key === 'ArrowRight') goToNext();
+        });
+
+        // ---------- 启动 ----------
+        randomQuestions();
+    </script>
+</body>
+</html>

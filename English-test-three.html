@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语句子成分 · 专项训练</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f0f7ff 0%, #e6f0fa 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 760px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(6px);
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0, 20, 40, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            padding: 28px 32px 36px;
+        }
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px dashed #b3d4f0;
+            padding-bottom: 16px;
+        }
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2a6b9e, #4a90d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header h1 span.icon {
+            font-size: 2rem;
+            -webkit-text-fill-color: initial;
+            color: #f5b041;
+        }
+        .header h1 .tag {
+            font-size: 0.8rem;
+            background: #dce8f5;
+            padding: 2px 14px;
+            border-radius: 40px;
+            -webkit-text-fill-color: #1e3b5a;
+            font-weight: 600;
+        }
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 9px 18px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #1e3b5a;
+            border: 1px solid #d4e3f0;
+        }
+        .btn-primary {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            box-shadow: 0 6px 16px rgba(74, 144, 217, 0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(74, 144, 217, 0.45);
+        }
+        .btn-secondary {
+            background: #f0f7ff;
+            border-color: #c3d9ed;
+        }
+        .btn-secondary:hover {
+            background: #dce8f5;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background: #27ae60;
+            color: white;
+            border: none;
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.3);
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(39, 174, 96, 0.4);
+        }
+        .btn-nav {
+            padding: 10px 24px;
+            font-size: 0.9rem;
+        }
+        .btn-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            background: rgba(235, 245, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 18px;
+            justify-content: center;
+            border: 1px solid #cde0f0;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            color: #1e3b5a;
+            font-size: 0.85rem;
+        }
+        .stat-item .badge {
+            background: #2a6b9e;
+            color: white;
+            border-radius: 40px;
+            padding: 0 12px;
+            font-size: 0.8rem;
+            line-height: 24px;
+            font-weight: 600;
+        }
+        .stat-item .badge.green { background: #27ae60; }
+        .stat-item .badge.gold { background: #f5b041; }
+
+        /* ===== 单题显示区域 ===== */
+        .question-area {
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+        }
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px 28px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e3eef9;
+            transition: 0.2s;
+            flex: 1;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+        .q-number {
+            font-weight: 700;
+            color: #2a6b9e;
+            background: #e3eef9;
+            padding: 0 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            line-height: 26px;
+        }
+        .q-type {
+            font-size: 0.72rem;
+            color: #6f8faa;
+            background: #edf4fa;
+            padding: 0 14px;
+            border-radius: 30px;
+            line-height: 24px;
+        }
+        .q-text {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #1a2f44;
+            margin: 10px 0 16px;
+            line-height: 1.6;
+        }
+        .q-text .en-sentence {
+            color: #2a6b9e;
+            font-style: italic;
+        }
+        .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 8px 0 12px;
+        }
+        .q-options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 12px;
+            transition: 0.15s;
+            border: 1px solid transparent;
+        }
+        .q-options label:hover {
+            background: #f0f7ff;
+            border-color: #d4e3f0;
+        }
+        .q-options input[type="radio"] {
+            accent-color: #4a90d9;
+            width: 18px;
+            height: 18px;
+        }
+        .q-input {
+            border: 2px solid #d4e3f0;
+            border-radius: 14px;
+            padding: 10px 18px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+            background: #f9fcff;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        .q-input:focus {
+            border-color: #4a90d9;
+            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+            background: white;
+        }
+        .q-input.correct {
+            border-color: #27ae60;
+            background: #eafaf1;
+        }
+        .q-input.wrong {
+            border-color: #e74c3c;
+            background: #fdedec;
+        }
+        .q-error-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .q-error-group .q-input {
+            flex: 1;
+            min-width: 120px;
+        }
+        .q-result {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-height: 24px;
+        }
+        .q-result .correct-answer {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        .q-result .wrong-answer {
+            color: #e74c3c;
+        }
+
+        /* ===== 导航栏 ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            gap: 12px;
+        }
+        .nav-progress {
+            font-size: 0.9rem;
+            color: #6f8faa;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: center;
+        }
+        .nav-progress .current {
+            color: #2a6b9e;
+            font-size: 1.1rem;
+        }
+
+        /* ===== 提交与结果 ===== */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .result-panel {
+            margin-top: 24px;
+            background: white;
+            border-radius: 28px;
+            padding: 24px 28px 28px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e3eef9;
+            display: none;
+        }
+        .result-panel.visible {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a2f44;
+            margin-bottom: 6px;
+        }
+        .result-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #f5faff;
+            padding: 14px 22px;
+            border-radius: 50px;
+            margin: 10px 0 16px;
+        }
+        .result-stats .stat {
+            font-size: 0.95rem;
+            color: #1e3b5a;
+        }
+        .result-stats .stat strong {
+            font-size: 1.3rem;
+            color: #2a6b9e;
+        }
+        .result-stats .stat .trend {
+            font-size: 1.1rem;
+            margin-left: 4px;
+        }
+        .result-stats .stat .trend.up { color: #27ae60; }
+        .result-stats .stat .trend.down { color: #e74c3c; }
+        .suggestion {
+            background: #fef9e7;
+            border-radius: 30px;
+            padding: 10px 22px;
+            font-size: 0.95rem;
+            display: inline-block;
+            border: 1px solid #f5dbaa;
+        }
+        .wrong-list {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        .wrong-item {
+            background: #fdedec;
+            border-radius: 16px;
+            padding: 12px 16px;
+            border-left: 5px solid #e74c3c;
+        }
+        .wrong-item .q-original {
+            font-weight: 600;
+            color: #1a2f44;
+            margin-bottom: 4px;
+        }
+        .wrong-item .q-answer {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        .wrong-item .q-user {
+            color: #e74c3c;
+            font-size: 0.85rem;
+        }
+
+        /* ===== 模态框 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .modal-overlay.open {
+            display: flex;
+            animation: fadeIn 0.25s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-box {
+            background: #fff;
+            border-radius: 32px;
+            max-width: 760px;
+            width: 92%;
+            padding: 28px 32px 36px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid #e3eef9;
+        }
+        .modal-box h2 {
+            font-size: 1.4rem;
+            color: #1a2f44;
+            margin-bottom: 14px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .modal-box .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #8aa9c9;
+            transition: 0.2s;
+        }
+        .modal-box .close-btn:hover {
+            color: #2a6b9e;
+            transform: rotate(90deg);
+        }
+        .bank-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 12px;
+            max-height: 55vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .bank-item {
+            background: #f5faff;
+            border-radius: 14px;
+            padding: 10px 16px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid #e3eef9;
+        }
+        .bank-item .b-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .bank-item .b-type {
+            color: #6f8faa;
+            font-size: 0.68rem;
+            background: #e3eef9;
+            padding: 0 10px;
+            border-radius: 30px;
+            line-height: 22px;
+        }
+        .bank-item .b-question {
+            color: #1a2f44;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .bank-item .b-answer {
+            margin-top: 4px;
+            color: #27ae60;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+        .history-list li {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e3eef9;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.92rem;
+        }
+        .history-list li:last-child { border: none; }
+        .history-list .score-high { font-weight: 700; color: #2a6b9e; }
+
+        @media (max-width: 700px) {
+            .container { padding: 16px; }
+            .header h1 { font-size: 1.2rem; }
+            .result-stats { flex-direction: column; gap: 6px; border-radius: 20px; }
+            .modal-box { padding: 20px; }
+            .question-card { padding: 18px; }
+        }
+        .bank-grid::-webkit-scrollbar, .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .bank-grid::-webkit-scrollbar-track, .modal-box::-webkit-scrollbar-track {
+            background: #e3eef9;
+            border-radius: 10px;
+        }
+        .bank-grid::-webkit-scrollbar-thumb, .modal-box::-webkit-scrollbar-thumb {
+            background: #4a90d9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1><span class="icon">📘</span> 句子成分 · 基本句型 <span class="tag">专项训练</span></h1>
+            <div class="toolbar">
+                <button class="btn btn-primary" id="randomBtn">🎲 重新随机</button>
+                <button class="btn btn-secondary" id="showBankBtn">📖 题库</button>
+                <button class="btn btn-secondary" id="showHistoryBtn">🏆 历史</button>
+            </div>
+        </div>
+        <div class="stats">
+            <div class="stat-item">📝 题数 <span class="badge" id="totalCount">30</span></div>
+            <div class="stat-item">✅ 已答 <span class="badge green" id="answeredCount">0</span></div>
+            <div class="stat-item">📊 最新得分 <span class="badge gold" id="latestScore">--</span></div>
+        </div>
+
+        <!-- 单题显示区域 -->
+        <div class="question-area">
+            <div id="questionContainer"></div>
+            <div class="nav-bar">
+                <button class="btn btn-secondary btn-nav" id="prevBtn">⬅ 上一题</button>
+                <div class="nav-progress"><span class="current" id="curIdx">1</span> / <span id="totalIdx">30</span></div>
+                <button class="btn btn-secondary btn-nav" id="nextBtn">下一题 ➡</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-success" id="submitBtn">✍️ 提交答案</button>
+        </div>
+
+        <div class="result-panel" id="resultPanel">
+            <div class="result-title">📊 练习结果</div>
+            <div class="result-stats" id="resultStats">
+                <div class="stat">正确率 <strong id="accuracy">0%</strong></div>
+                <div class="stat">得分 <strong id="scoreNum">0</strong> / 30</div>
+                <div class="stat">趋势 <span class="trend" id="trendIcon">—</span> <span id="trendText"></span></div>
+            </div>
+            <div class="suggestion" id="suggestionText">继续加油！</div>
+            <div style="margin-top:18px; font-weight:600; color:#1a2f44;">❌ 错题回顾</div>
+            <div class="wrong-list" id="wrongList"></div>
+        </div>
+    </div>
+
+    <!-- 题库模态框 -->
+    <div class="modal-overlay" id="bankModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeBankModal">✕</button>
+            <h2>📖 全部题目（含答案）</h2>
+            <div id="bankContent" class="bank-grid"></div>
+        </div>
+    </div>
+
+    <!-- 历史模态框 -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-box">
+            <button class="close-btn" id="closeHistoryModal">✕</button>
+            <h2>🏆 历史记录</h2>
+            <div id="historyContent"><p style="color:#6f8faa;">暂无记录</p></div>
+        </div>
+    </div>
+
+    <script>
+        // ========================= 题库数据（已中文化） =========================
+
+        // 选择题 (1-50) — 题目描述和选项均为中文，英语句子保留原文
+        const choiceData = [
+            { type: 'choice', question: '在句子 <em class="en-sentence">"The sun was shining."</em> 中，句型是 ______。', options: ['主+谓', '主+谓+宾', '主+谓+表', '主+谓+宾+宾补'], answer: 0 },
+            { type: 'choice', question: '以下哪个是系动词？', options: ['run（跑）', 'become（变成）', 'hit（打）', 'eat（吃）'], answer: 1 },
+            { type: 'choice', question: '在 <em class="en-sentence">"He asked me to come back soon."</em> 中，画线部分 <em class="en-sentence">"me to come back soon"</em> 充当 ______。', options: ['宾语', '宾语补足语', '状语', '定语'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"I find this math problem very easy."</em> 的句子结构是 ______。', options: ['主+谓+宾', '主+谓+表', '主+谓+间宾+直宾', '主+谓+宾+宾补'], answer: 3 },
+            { type: 'choice', question: '在 <em class="en-sentence">"The little girl is singing."</em> 中，哪个词作谓语？', options: ['girl', 'is', 'singing', 'is singing'], answer: 3 },
+            { type: 'choice', question: '在 <em class="en-sentence">"We consider him a good teacher."</em> 中，<em class="en-sentence">"a good teacher"</em> 是 ______。', options: ['宾语', '宾语补足语', '主语补足语（表语）', '直接宾语'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"Everything looks different."</em> 属于 ______ 句型。', options: ['主+谓', '主+谓+宾', '主+谓+表', '主+谓+宾+宾补'], answer: 2 },
+            { type: 'choice', question: '在 <em class="en-sentence">"The photo in the book is my mother\'s."</em> 中，画线部分 <em class="en-sentence">"in the book"</em> 是 ______。', options: ['定语', '状语', '同位语', '宾语'], answer: 0 },
+            { type: 'choice', question: '以下哪个不是系动词？', options: ['keep（保持）', 'stay（保持）', 'become（变成）', 'hit（打）'], answer: 3 },
+            { type: 'choice', question: '在 <em class="en-sentence">"Can you give it to Tom?"</em> 中，<em class="en-sentence">"it"</em> 是 ______。', options: ['间接宾语', '直接宾语', '宾语补足语', '主语'], answer: 1 },
+            { type: 'choice', question: '句子 <em class="en-sentence">"He was appointed president of the Student Union."</em> 中含有 ______。', options: ['主语补足语（表语）', '宾语补足语', '同位语', '状语'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"We two went to the bank yesterday."</em> 中，<em class="en-sentence">"two"</em> 是 ______。', options: ['定语', '同位语', '状语', '主语'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"His words sound reasonable."</em> 中的系动词是 ______。', options: ['sound', 'reasonable', 'his', 'words'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"I have got something interesting to tell you."</em> 中，<em class="en-sentence">"interesting"</em> 是 ______。', options: ['定语', '状语', '宾语补足语', '同位语'], answer: 0 },
+            { type: 'choice', question: '<em class="en-sentence">"He enjoys reading."</em> 属于什么句型？', options: ['主+谓', '主+谓+宾', '主+谓+间宾+直宾', '主+谓+宾+宾补'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"She often looks cheerful."</em> 的谓语部分是 ______。', options: ['looks cheerful', 'looks', 'cheerful', 'often looks'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"You can\'t take photos in the museum."</em> 中，<em class="en-sentence">"in the museum"</em> 是 ______。', options: ['地点状语', '时间状语', '定语', '宾语'], answer: 0 },
+            { type: 'choice', question: '句子 <em class="en-sentence">"A mother lost her child."</em> 的结构是 ______。', options: ['主+谓+宾', '主+谓+间宾+直宾', '主+谓+表', '主+谓+宾+宾补'], answer: 0 },
+            { type: 'choice', question: '以下哪个不是正确的宾语补足语？', options: ['make me happy（使我开心）', 'consider him a fool（认为他是傻瓜）', 'see him run（看见他跑）', 'give me a book（给我一本书）'], answer: 3 },
+            { type: 'choice', question: '在 <em class="en-sentence">"The moon rose."</em> 中，动词 <em class="en-sentence">"rose"</em> 是 ______。', options: ['及物动词', '不及物动词', '系动词', '助动词'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"They appointed him manager."</em> 的宾语补足语是 ______。', options: ['him', 'manager', 'appointed', 'they'], answer: 1 },
+            { type: 'choice', question: '在 <em class="en-sentence">"Nancy was born in Berkeley, a small town in California."</em> 中，<em class="en-sentence">"a small town in California"</em> 是 ______。', options: ['同位语', '定语', '状语', '主语'], answer: 0 },
+            { type: 'choice', question: '句子 <em class="en-sentence">"Let me read you the notice."</em> 有两个宾语：<em class="en-sentence">"you"</em> 和 <em class="en-sentence">"the notice"</em>。<em class="en-sentence">"you"</em> 是 ______。', options: ['直接宾语', '间接宾语', '宾语补足语', '主语'], answer: 1 },
+            { type: 'choice', question: '以下哪个动词可以接宾语补足语？', options: ['arrive（到达）', 'make（使）', 'become（变成）', 'seem（似乎）'], answer: 1 },
+            { type: 'choice', question: '在 <em class="en-sentence">"He can never forgive her."</em> 中，<em class="en-sentence">"never"</em> 是 ______。', options: ['程度状语', '频率状语', '时间状语', '方式状语'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"This is Miss Yang, our English teacher."</em> 的同位语是 ______。', options: ['Miss Yang', 'our English teacher', 'This', 'teacher'], answer: 1 },
+            { type: 'choice', question: '句子 <em class="en-sentence">"His face turned red."</em> 含有 ______。', options: ['主语补足语（表语）', '宾语', '状语', '定语'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"We go to school every day."</em> 中，<em class="en-sentence">"every day"</em> 是 ______。', options: ['时间状语', '地点状语', '宾语', '定语'], answer: 0 },
+            { type: 'choice', question: '以下哪个是感官系动词？', options: ['become（变成）', 'feel（感觉）', 'keep（保持）', 'seem（似乎）'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"She likes English very much."</em> 的宾语是 ______。', options: ['English', 'very much', 'likes', 'she'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"I found a good article."</em> 中，<em class="en-sentence">"a good article"</em> 是 ______。', options: ['宾语', '主语补足语（表语）', '状语', '定语'], answer: 0 },
+            { type: 'choice', question: '<em class="en-sentence">"The universe remains."</em> 的句型是 ______。', options: ['主+谓', '主+谓+表', '主+谓+宾', '主+谓+宾+宾补'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"He can speak English well."</em> 中，谓语是 ______。', options: ['He', 'can speak', 'English', 'well'], answer: 1 },
+            { type: 'choice', question: '在 <em class="en-sentence">"You can teach me many things."</em> 中，<em class="en-sentence">"many things"</em> 是 ______。', options: ['直接宾语', '间接宾语', '宾语补足语', '主语'], answer: 0 },
+            { type: 'choice', question: '<em class="en-sentence">"People say him running away."</em> 的宾语补足语是 ______。', options: ['him', 'running away', 'say', 'people'], answer: 1 },
+            { type: 'choice', question: '在 <em class="en-sentence">"The car is mine."</em> 中，<em class="en-sentence">"mine"</em> 是 ______。', options: ['表语（主语补足语）', '宾语', '定语', '同位语'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"You can\'t take photos in the museum."</em> 中，状语是 ______。', options: ['in the museum', 'can\'t', 'take photos', 'you'], answer: 0 },
+            { type: 'choice', question: '系动词 <em class="en-sentence">"prove"</em> 属于哪一类？', options: ['感官类', '变化类', '外观类', '终止类'], answer: 3 },
+            { type: 'choice', question: '在 <em class="en-sentence">"I find you a good teacher."</em> 中，句子结构是 ______。', options: ['主+谓+间宾+直宾', '主+谓+宾+宾补', '主+谓+表', '主+谓+宾'], answer: 1 },
+            { type: 'choice', question: '<em class="en-sentence">"To see is to believe."</em> 的主语是 ______。', options: ['To see', 'is', 'to believe', 'see'], answer: 0 },
+            { type: 'choice', question: '以下哪个是不及物动词？', options: ['tell（告诉）', 'give（给）', 'arrive（到达）', 'make（使）'], answer: 2 },
+            { type: 'choice', question: '在 <em class="en-sentence">"He made me happy."</em> 中，<em class="en-sentence">"happy"</em> 是 ______。', options: ['宾语补足语', '主语补足语（表语）', '状语', '定语'], answer: 0 },
+            { type: 'choice', question: '句子 <em class="en-sentence">"It cost me three dollars."</em> 的结构是 ______。', options: ['主+谓+间宾+直宾', '主+谓+宾+宾补', '主+谓+表', '主+谓+宾'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"We saw him out."</em> 中，<em class="en-sentence">"out"</em> 是 ______。', options: ['宾语补足语', '地点状语', '定语', '谓语'], answer: 0 },
+            { type: 'choice', question: '以下哪个是表示变化的系动词？', options: ['look（看）', 'remain（保持）', 'grow（变得）', 'seem（似乎）'], answer: 2 },
+            { type: 'choice', question: '<em class="en-sentence">"She likes English very much."</em> 的状语是 ______。', options: ['very much', 'English', 'likes', 'She'], answer: 0 },
+            { type: 'choice', question: '在 <em class="en-sentence">"I have got something interesting to tell you."</em> 中，不定式短语 <em class="en-sentence">"to tell you"</em> 是 ______。', options: ['定语', '目的状语', '宾语补足语', '同位语'], answer: 0 },
+            { type: 'choice', question: '句子 <em class="en-sentence">"The sun was shining."</em> 中的动词是 ______ 动词。', options: ['及物', '不及物', '系动词', '助动词'], answer: 1 },
+            { type: 'choice', question: '在 <em class="en-sentence">"He asked me to come back soon."</em> 中，<em class="en-sentence">"me"</em> 是 ______。', options: ['间接宾语', '直接宾语', '宾语补足语', '主语'], answer: 0 },
+            { type: 'choice', question: '以下哪个不是基本句型？', options: ['主+谓+宾', '主+谓+表', '主+谓+宾+宾', '主+谓+宾+宾补'], answer: 2 }
+        ];
+
+        // 语法填空 (51-100) — 题目描述为中文，答案保留英语原文
+        const fillData = [
+            { type: 'fill', question: '在句子 <em class="en-sentence">"The moon rose."</em> 中，谓语是 <em class="en-sentence">"________"</em>。', answer: 'rose' },
+            { type: 'fill', question: '在 <em class="en-sentence">"Everything looks different."</em> 中，主语补足语（表语）是 <em class="en-sentence">"________"</em>。', answer: 'different' },
+            { type: 'fill', question: '<em class="en-sentence">"He enjoys reading."</em> —— 宾语是 <em class="en-sentence">"________"</em>。', answer: 'reading' },
+            { type: 'fill', question: '<em class="en-sentence">"They appointed him manager."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'manager' },
+            { type: 'fill', question: '在 <em class="en-sentence">"Can you give it to Tom?"</em> 中，间接宾语是 <em class="en-sentence">"________"</em>。', answer: 'Tom' },
+            { type: 'fill', question: '<em class="en-sentence">"We consider him a good teacher."</em> —— 宾语是 <em class="en-sentence">"________"</em>。', answer: 'him' },
+            { type: 'fill', question: '<em class="en-sentence">"His words sound reasonable."</em> 中的系动词是 <em class="en-sentence">"________"</em>。', answer: 'sound' },
+            { type: 'fill', question: '在 <em class="en-sentence">"I find this math problem very easy."</em> 中，宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'very easy' },
+            { type: 'fill', question: '<em class="en-sentence">"The photo in the book is my mother\'s."</em> —— 定语是短语 <em class="en-sentence">"________"</em>。', answer: 'in the book' },
+            { type: 'fill', question: '在 <em class="en-sentence">"We two went to the bank yesterday."</em> 中，同位语是 <em class="en-sentence">"________"</em>。', answer: 'two' },
+            { type: 'fill', question: '<em class="en-sentence">"He can speak English well."</em> —— 状语是 <em class="en-sentence">"________"</em>。', answer: 'well' },
+            { type: 'fill', question: '句子 <em class="en-sentence">"The little girl is singing."</em> 中的动词是 ________ 动词。', answer: 'intransitive' },
+            { type: 'fill', question: '<em class="en-sentence">"She often looks cheerful."</em> —— 谓语是 <em class="en-sentence">"________"</em>。', answer: 'looks cheerful' },
+            { type: 'fill', question: '在 <em class="en-sentence">"I found a good article."</em> 中，宾语是 <em class="en-sentence">"________"</em>。', answer: 'a good article' },
+            { type: 'fill', question: '<em class="en-sentence">"You can teach me many things."</em> —— 直接宾语是 <em class="en-sentence">"________"</em>。', answer: 'many things' },
+            { type: 'fill', question: '<em class="en-sentence">"People say him running away."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'running away' },
+            { type: 'fill', question: '<em class="en-sentence">"The car is mine."</em> —— 主语补足语（表语）是 <em class="en-sentence">"________"</em>。', answer: 'mine' },
+            { type: 'fill', question: '在 <em class="en-sentence">"Nancy was born in Berkeley, a small town in California."</em> 中，同位语是 <em class="en-sentence">"________"</em>。', answer: 'a small town in California' },
+            { type: 'fill', question: '<em class="en-sentence">"His face turned red."</em> —— 主语补足语（表语）是 <em class="en-sentence">"________"</em>。', answer: 'red' },
+            { type: 'fill', question: '<em class="en-sentence">"We go to school every day."</em> —— 时间状语是 <em class="en-sentence">"________"</em>。', answer: 'every day' },
+            { type: 'fill', question: '动词 <em class="en-sentence">"keep"</em> 是 ________ 动词。', answer: 'linking' },
+            { type: 'fill', question: '在 <em class="en-sentence">"He made me happy."</em> 中，宾语是 <em class="en-sentence">"________"</em>。', answer: 'me' },
+            { type: 'fill', question: '<em class="en-sentence">"It cost me three dollars."</em> —— 间接宾语是 <em class="en-sentence">"________"</em>。', answer: 'me' },
+            { type: 'fill', question: '<em class="en-sentence">"We saw him out."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'out' },
+            { type: 'fill', question: '<em class="en-sentence">"I have got something interesting to tell you."</em> —— 定语是 <em class="en-sentence">"________"</em>。', answer: 'interesting' },
+            { type: 'fill', question: '<em class="en-sentence">"To see is to believe."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'To see' },
+            { type: 'fill', question: '句子 <em class="en-sentence">"The universe remains."</em> 属于 ________ 句型。', answer: 'S+V' },
+            { type: 'fill', question: '在 <em class="en-sentence">"A mother lost her child."</em> 中，动词 <em class="en-sentence">"lost"</em> 是 ________ 动词。', answer: 'transitive' },
+            { type: 'fill', question: '<em class="en-sentence">"He asked me to come back soon."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'to come back soon' },
+            { type: 'fill', question: '<em class="en-sentence">"She likes English very much."</em> —— 宾语是 <em class="en-sentence">"________"</em>。', answer: 'English' },
+            { type: 'fill', question: '<em class="en-sentence">"Let me read you the notice."</em> —— 间接宾语是 <em class="en-sentence">"________"</em>。', answer: 'you' },
+            { type: 'fill', question: '<em class="en-sentence">"You can\'t take photos in the museum."</em> —— 地点状语是 <em class="en-sentence">"________"</em>。', answer: 'in the museum' },
+            { type: 'fill', question: '系动词 <em class="en-sentence">"seem"</em> 属于 ________ 类。', answer: 'appearance' },
+            { type: 'fill', question: '在 <em class="en-sentence">"He can never forgive her."</em> 中，状语是 <em class="en-sentence">"________"</em>。', answer: 'never' },
+            { type: 'fill', question: '<em class="en-sentence">"This is Miss Yang, our English teacher."</em> —— 同位语是 <em class="en-sentence">"________"</em>。', answer: 'our English teacher' },
+            { type: 'fill', question: '<em class="en-sentence">"They appointed him manager."</em> —— 直接宾语是 <em class="en-sentence">"________"</em>。', answer: 'him' },
+            { type: 'fill', question: '<em class="en-sentence">"We consider him a good teacher."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'a good teacher' },
+            { type: 'fill', question: '<em class="en-sentence">"I find you a good teacher."</em> —— 结构是 主+谓+宾+________。', answer: 'OC' },
+            { type: 'fill', question: '<em class="en-sentence">"The sun was shining."</em> —— 谓语是 <em class="en-sentence">"________"</em>。', answer: 'was shining' },
+            { type: 'fill', question: '<em class="en-sentence">"Everything looks different."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'Everything' },
+            { type: 'fill', question: '<em class="en-sentence">"His words sound reasonable."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'His words' },
+            { type: 'fill', question: '<em class="en-sentence">"She often looks cheerful."</em> —— 频率状语是 <em class="en-sentence">"________"</em>。', answer: 'often' },
+            { type: 'fill', question: '在 <em class="en-sentence">"I found a good article."</em> 中，定语是 <em class="en-sentence">"________"</em>。', answer: 'good' },
+            { type: 'fill', question: '<em class="en-sentence">"He enjoys reading."</em> —— 谓语动词是 <em class="en-sentence">"________"</em>。', answer: 'enjoys' },
+            { type: 'fill', question: '<em class="en-sentence">"Can you give it to Tom?"</em> —— 直接宾语是 <em class="en-sentence">"________"</em>。', answer: 'it' },
+            { type: 'fill', question: '<em class="en-sentence">"The photo in the book is my mother\'s."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'The photo' },
+            { type: 'fill', question: '<em class="en-sentence">"We two went to the bank yesterday."</em> —— 时间状语是 <em class="en-sentence">"________"</em>。', answer: 'yesterday' },
+            { type: 'fill', question: '<em class="en-sentence">"He was appointed president of the Student Union."</em> —— 主语补足语（表语）是 <em class="en-sentence">"________"</em>。', answer: 'president' },
+            { type: 'fill', question: '<em class="en-sentence">"People say him running away."</em> —— 宾语是 <em class="en-sentence">"________"</em>。', answer: 'him' },
+            { type: 'fill', question: '<em class="en-sentence">"I have got something interesting to tell you."</em> —— 主要动词是 <em class="en-sentence">"________"</em>。', answer: 'have got' }
+        ];
+
+        // 改错 (101-150) — 英语句子保留原文
+        const errorData = [
+            { type: 'error', sentence: 'The sun were shining brightly.', error: 'were', correction: 'was' },
+            { type: 'error', sentence: 'Everything look different from before.', error: 'look', correction: 'looks' },
+            { type: 'error', sentence: 'He enjoys to read books every day.', error: 'to read', correction: 'reading' },
+            { type: 'error', sentence: 'They appointed him as manager.', error: 'as', correction: '(删除)' },
+            { type: 'error', sentence: 'Can you give it for Tom?', error: 'for', correction: 'to' },
+            { type: 'error', sentence: 'We consider him is a good teacher.', error: 'is', correction: '(删除)' },
+            { type: 'error', sentence: 'His words sound reasonably to me.', error: 'reasonably', correction: 'reasonable' },
+            { type: 'error', sentence: 'I find this math problem very easily.', error: 'easily', correction: 'easy' },
+            { type: 'error', sentence: 'The photo in the book are my mother\'s.', error: 'are', correction: 'is' },
+            { type: 'error', sentence: 'We two go to the bank yesterday.', error: 'go', correction: 'went' },
+            { type: 'error', sentence: 'He can speaks English well.', error: 'speaks', correction: 'speak' },
+            { type: 'error', sentence: 'She often look cheerful today.', error: 'look', correction: 'looks' },
+            { type: 'error', sentence: 'I found a good articles.', error: 'articles', correction: 'article' },
+            { type: 'error', sentence: 'You can teach me many thing.', error: 'thing', correction: 'things' },
+            { type: 'error', sentence: 'People say him running away.', error: 'say', correction: 'see' },
+            { type: 'error', sentence: 'The car is mine and her.', error: 'her', correction: 'hers' },
+            { type: 'error', sentence: 'His face turned red and angrily.', error: 'angrily', correction: 'angry' },
+            { type: 'error', sentence: 'We go to school everydays.', error: 'everydays', correction: 'every day' },
+            { type: 'error', sentence: 'He made I happy yesterday.', error: 'I', correction: 'me' },
+            { type: 'error', sentence: 'It cost I three dollars.', error: 'I', correction: 'me' },
+            { type: 'error', sentence: 'I have got something interested to tell you.', error: 'interested', correction: 'interesting' },
+            { type: 'error', sentence: 'To see is to believing.', error: 'believing', correction: 'believe' },
+            { type: 'error', sentence: 'The universe remain unchanged forever.', error: 'remain', correction: 'remains' },
+            { type: 'error', sentence: 'A mother lost her childs in the crowd.', error: 'childs', correction: 'children' },
+            { type: 'error', sentence: 'He asked me to come back soonly.', error: 'soonly', correction: 'soon' },
+            { type: 'error', sentence: 'She likes English very much in every day.', error: 'in', correction: '(删除)' },
+            { type: 'error', sentence: 'The little girl is sing a song.', error: 'sing', correction: 'singing' },
+            { type: 'error', sentence: 'The moon rised slowly behind the hill.', error: 'rised', correction: 'rose' },
+            { type: 'error', sentence: 'Lucy and Mary get up early every mornings.', error: 'mornings', correction: 'morning' },
+            { type: 'error', sentence: 'Everything looks differently from before.', error: 'differently', correction: 'different' },
+            { type: 'error', sentence: 'He enjoys to read books in the library.', error: 'to read', correction: 'reading' },
+            { type: 'error', sentence: 'Can you give it to I?', error: 'I', correction: 'me' },
+            { type: 'error', sentence: 'We consider him as a good teacher.', error: 'as', correction: '(删除)' },
+            { type: 'error', sentence: 'His words sound reasonable and convincingly.', error: 'convincingly', correction: 'convincing' },
+            { type: 'error', sentence: 'The photo in the book is my mother.', error: 'mother', correction: 'mother\'s' },
+            { type: 'error', sentence: 'We two went to the bank in yesterday.', error: 'in', correction: '(删除)' },
+            { type: 'error', sentence: 'He can speak English good.', error: 'good', correction: 'well' },
+            { type: 'error', sentence: 'I found an good article.', error: 'an', correction: 'a' },
+            { type: 'error', sentence: 'He said me a story.', error: 'said', correction: 'told' },
+            { type: 'error', sentence: 'She don\'t like apples.', error: 'don\'t', correction: 'doesn\'t' },
+            { type: 'error', sentence: 'He can sings well.', error: 'sings', correction: 'sing' },
+            { type: 'error', sentence: 'She is a good student, is she?', error: 'is', correction: 'isn\'t' },
+            { type: 'error', sentence: 'I don\'t know where is he.', error: 'is he', correction: 'he is' },
+            { type: 'error', sentence: 'He asked me that I could help.', error: 'that I could help', correction: 'to help' },
+            { type: 'error', sentence: 'She enjoys watch TV.', error: 'watch', correction: 'watching' },
+            { type: 'error', sentence: 'We should studying hard.', error: 'studying', correction: 'study' },
+            { type: 'error', sentence: 'He is more taller than me.', error: 'more taller', correction: 'taller' },
+            { type: 'error', sentence: 'She runs fastly.', error: 'fastly', correction: 'fast' },
+            { type: 'error', sentence: 'I have two hundreds books.', error: 'hundreds', correction: 'hundred' },
+            { type: 'error', sentence: 'There are a book on the desk.', error: 'are', correction: 'is' }
+        ];
+
+        // 合并所有题目
+        const allQuestions = [...choiceData, ...fillData, ...errorData];
+
+        let currentQuestions = [];
+        let answered = false;
+        let userAnswers = [];
+        let currentIndex = 0;
+
+        // DOM
+        const container = document.getElementById('questionContainer');
+        const totalSpan = document.getElementById('totalCount');
+        const answeredSpan = document.getElementById('answeredCount');
+        const latestScoreSpan = document.getElementById('latestScore');
+        const resultPanel = document.getElementById('resultPanel');
+        const accuracySpan = document.getElementById('accuracy');
+        const scoreNumSpan = document.getElementById('scoreNum');
+        const trendIcon = document.getElementById('trendIcon');
+        const trendText = document.getElementById('trendText');
+        const suggestionDiv = document.getElementById('suggestionText');
+        const wrongListDiv = document.getElementById('wrongList');
+        const curIdxSpan = document.getElementById('curIdx');
+        const totalIdxSpan = document.getElementById('totalIdx');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // 工具
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+        function pickRandom(arr, n) {
+            return shuffle(arr).slice(0, n);
+        }
+
+        // 历史记录
+        const STORAGE_KEY = 'sentencePatternHistory';
+        function getHistory() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+        }
+        function saveHistory(record) {
+            const h = getHistory();
+            h.push(record);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
+        }
+        function getLatestScore() {
+            const h = getHistory();
+            return h.length === 0 ? null : h[h.length - 1].score;
+        }
+        function updateLatestDisplay() {
+            const latest = getLatestScore();
+            latestScoreSpan.textContent = latest !== null ? `${latest}/30` : '--';
+        }
+
+        // 获取题目的中文答案文本
+        function getAnswerText(q) {
+            if (q.type === 'choice') return q.options[q.answer];
+            if (q.type === 'fill') return q.answer;
+            if (q.type === 'error') return `错误: "${q.error}" → 正确: "${q.correction}"`;
+            return '';
+        }
+
+        // 获取题目显示文本
+        function getQuestionText(q) {
+            return q.question || q.sentence || '';
+        }
+
+        // 渲染单道题目
+        function renderCurrentQuestion() {
+            if (currentIndex < 0 || currentIndex >= currentQuestions.length) return;
+            const q = currentQuestions[currentIndex];
+            const card = document.createElement('div');
+            card.className = 'question-card';
+
+            let typeLabel = '';
+            if (q.type === 'choice') typeLabel = '选择题';
+            else if (q.type === 'fill') typeLabel = '填空题';
+            else if (q.type === 'error') typeLabel = '改错题';
+
+            let bodyHtml = `<div class="q-header"><span class="q-number">第 ${currentIndex + 1} 题</span><span class="q-type">${typeLabel}</span></div>`;
+
+            if (q.type === 'choice') {
+                bodyHtml += `<div class="q-text">${q.question}</div>`;
+                bodyHtml += `<div class="q-options">`;
+                q.options.forEach((opt, oi) => {
+                    const letter = String.fromCharCode(65 + oi);
+                    const checked = userAnswers[currentIndex] === oi ? 'checked' : '';
+                    bodyHtml += `<label><input type="radio" name="q${currentIndex}" value="${oi}" ${checked}> ${letter}. ${opt}</label>`;
+                });
+                bodyHtml += `</div>`;
+            } else if (q.type === 'fill') {
+                bodyHtml += `<div class="q-text">${q.question}</div>`;
+                const savedVal = userAnswers[currentIndex] || '';
+                bodyHtml += `<input class="q-input" type="text" placeholder="请填写答案..." data-index="${currentIndex}" value="${savedVal}" autocomplete="off">`;
+            } else if (q.type === 'error') {
+                bodyHtml += `<div class="q-text">请找出下列句子中的错误并写出正确形式：</div>`;
+                bodyHtml += `<div class="q-text"><em class="en-sentence">${q.sentence}</em></div>`;
+                const savedErr = (userAnswers[currentIndex] && userAnswers[currentIndex].err) || '';
+                const savedCor = (userAnswers[currentIndex] && userAnswers[currentIndex].cor) || '';
+                bodyHtml += `<div class="q-error-group">
+                    <input class="q-input" type="text" placeholder="错误部分" data-index="${currentIndex}-err" value="${savedErr}" autocomplete="off">
+                    <input class="q-input" type="text" placeholder="正确形式" data-index="${currentIndex}-cor" value="${savedCor}" autocomplete="off">
+                </div>`;
+            }
+
+            // 如果已提交，显示结果
+            if (answered) {
+                bodyHtml += `<div class="q-result" id="result-${currentIndex}"></div>`;
+            }
+
+            card.innerHTML = bodyHtml;
+            container.innerHTML = '';
+            container.appendChild(card);
+
+            // 绑定事件
+            if (q.type === 'choice') {
+                const radios = card.querySelectorAll('input[type="radio"]');
+                radios.forEach(r => {
+                    r.addEventListener('change', () => {
+                        userAnswers[currentIndex] = parseInt(r.value);
+                        updateAnsweredCount();
+                    });
+                });
+            } else if (q.type === 'fill') {
+                const inp = card.querySelector('.q-input');
+                inp.addEventListener('input', () => {
+                    userAnswers[currentIndex] = inp.value;
+                    updateAnsweredCount();
+                });
+            } else if (q.type === 'error') {
+                const inputs = card.querySelectorAll('.q-input');
+                inputs.forEach(inp => {
+                    inp.addEventListener('input', () => {
+                        if (!userAnswers[currentIndex] || typeof userAnswers[currentIndex] !== 'object') {
+                            userAnswers[currentIndex] = { err: '', cor: '' };
+                        }
+                        if (inp.dataset.index.endsWith('-err')) {
+                            userAnswers[currentIndex].err = inp.value;
+                        } else {
+                            userAnswers[currentIndex].cor = inp.value;
+                        }
+                        updateAnsweredCount();
+                    });
+                });
+            }
+
+            // 如果已提交，显示该题结果
+            if (answered) {
+                showQuestionResult(currentIndex);
+            }
+
+            // 更新导航
+            curIdxSpan.textContent = currentIndex + 1;
+            totalIdxSpan.textContent = currentQuestions.length;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === currentQuestions.length - 1;
+        }
+
+        // 显示单题结果
+        function showQuestionResult(index) {
+            const q = currentQuestions[index];
+            const resultDiv = document.getElementById(`result-${index}`);
+            if (!resultDiv) return;
+
+            const card = container.querySelector('.question-card');
+            let isCorrect = false;
+
+            if (q.type === 'choice') {
+                const val = userAnswers[index];
+                isCorrect = (val === q.answer);
+                if (isCorrect) {
+                    resultDiv.innerHTML = `<span style="color:#27ae60;">✅ 回答正确！</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="wrong-answer">❌ 回答错误</span> <span class="correct-answer">正确答案: ${q.options[q.answer]}</span>`;
+                }
+            } else if (q.type === 'fill') {
+                const userVal = (userAnswers[index] || '').trim().toLowerCase();
+                const std = q.answer.trim().toLowerCase();
+                isCorrect = (userVal === std);
+                const inp = card.querySelector('.q-input');
+                if (inp) inp.classList.add(isCorrect ? 'correct' : 'wrong');
+                if (isCorrect) {
+                    resultDiv.innerHTML = `<span style="color:#27ae60;">✅ 回答正确！</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="wrong-answer">❌ 回答错误</span> <span class="correct-answer">正确答案: ${q.answer}</span>`;
+                }
+            } else if (q.type === 'error') {
+                const ua = userAnswers[index] || { err: '', cor: '' };
+                const errVal = (ua.err || '').trim().toLowerCase();
+                const corVal = (ua.cor || '').trim().toLowerCase();
+                const stdErr = q.error.trim().toLowerCase();
+                const stdCor = q.correction.trim().toLowerCase();
+                const isErrMatch = (errVal === stdErr) || (stdErr === '(删除)' && errVal === '');
+                const isCorMatch = (corVal === stdCor) || (stdCor === '(删除)' && corVal === '');
+                isCorrect = isErrMatch && isCorMatch;
+                card.querySelectorAll('.q-input').forEach(inp => inp.classList.add(isCorrect ? 'correct' : 'wrong'));
+                if (isCorrect) {
+                    resultDiv.innerHTML = `<span style="color:#27ae60;">✅ 回答正确！</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="wrong-answer">❌ 回答错误</span> <span class="correct-answer">错误: "${q.error}" → 正确: "${q.correction}"</span>`;
+                }
+            }
+        }
+
+        function updateAnsweredCount() {
+            let filled = 0;
+            currentQuestions.forEach((q, idx) => {
+                const ua = userAnswers[idx];
+                if (q.type === 'choice') {
+                    if (ua !== null && ua !== undefined) filled++;
+                } else if (q.type === 'fill') {
+                    if (ua && ua.trim() !== '') filled++;
+                } else if (q.type === 'error') {
+                    if (ua && typeof ua === 'object' && ua.err && ua.cor && ua.err.trim() !== '' && ua.cor.trim() !== '') filled++;
+                }
+            });
+            answeredSpan.textContent = filled;
+        }
+
+        // 提交
+        function handleSubmit() {
+            if (answered) {
+                alert('已提交，点击"重新随机"可再次练习。');
+                return;
+            }
+
+            let correct = 0;
+            const wrongs = [];
+
+            currentQuestions.forEach((q, idx) => {
+                let isCorrect = false;
+                let userAns = '';
+
+                if (q.type === 'choice') {
+                    const val = userAnswers[idx];
+                    if (val !== null && val !== undefined) {
+                        userAns = q.options[val];
+                        isCorrect = (val === q.answer);
+                    } else {
+                        userAns = '(未选)';
+                    }
+                } else if (q.type === 'fill') {
+                    userAns = (userAnswers[idx] || '').trim();
+                    isCorrect = (userAns.toLowerCase() === q.answer.trim().toLowerCase());
+                } else if (q.type === 'error') {
+                    const ua = userAnswers[idx] || { err: '', cor: '' };
+                    const errVal = (ua.err || '').trim();
+                    const corVal = (ua.cor || '').trim();
+                    userAns = `错误:${errVal} → 正确:${corVal}`;
+                    const stdErr = q.error.trim().toLowerCase();
+                    const stdCor = q.correction.trim().toLowerCase();
+                    const isErrMatch = (errVal.toLowerCase() === stdErr) || (stdErr === '(删除)' && errVal === '');
+                    const isCorMatch = (corVal.toLowerCase() === stdCor) || (stdCor === '(删除)' && corVal === '');
+                    isCorrect = isErrMatch && isCorMatch;
+                }
+
+                if (isCorrect) {
+                    correct++;
+                } else {
+                    wrongs.push({
+                        index: idx + 1,
+                        question: getQuestionText(q),
+                        userAnswer: userAns,
+                        correctAnswer: getAnswerText(q)
+                    });
+                }
+            });
+
+            const total = currentQuestions.length;
+            const score = correct;
+            const accuracy = (correct / total * 100);
+
+            // 保存记录
+            const record = { score, total, date: new Date().toLocaleString('zh-CN') };
+            saveHistory(record);
+            updateLatestDisplay();
+
+            // 显示结果面板
+            resultPanel.classList.add('visible');
+            accuracySpan.textContent = accuracy.toFixed(0) + '%';
+            scoreNumSpan.textContent = score;
+
+            // 趋势
+            const history = getHistory();
+            let trend = '';
+            let trendClass = '';
+            if (history.length >= 2) {
+                const prev = history[history.length - 2].score;
+                if (score > prev) { trend = '📈 上升'; trendClass = 'up'; }
+                else if (score < prev) { trend = '📉 下降'; trendClass = 'down'; }
+                else { trend = '➖ 持平'; trendClass = ''; }
+                trendIcon.textContent = trend;
+                trendIcon.className = 'trend ' + trendClass;
+                trendText.textContent = `（上次 ${prev}/${total}）`;
+            } else if (history.length === 1) {
+                trendIcon.textContent = '—';
+                trendText.textContent = '首次记录';
+            } else {
+                trendIcon.textContent = '—';
+                trendText.textContent = '无历史';
+            }
+
+            // 建议
+            let suggestion = '';
+            if (accuracy >= 90) suggestion = '🌟 优秀！已掌握句子成分核心！';
+            else if (accuracy >= 70) suggestion = '👍 良好，复习错题可进一步提升。';
+            else if (accuracy >= 50) suggestion = '📖 建议回顾五大基本句型及成分定义。';
+            else suggestion = '💪 别灰心，从基础开始，逐一分析句子结构。';
+            suggestionDiv.textContent = suggestion;
+
+            // 错题列表
+            wrongListDiv.innerHTML = '';
+            if (wrongs.length === 0) {
+                wrongListDiv.innerHTML = '<p style="color:#27ae60; font-weight:500;">🎉 全部正确！</p>';
+            } else {
+                wrongs.forEach(w => {
+                    const item = document.createElement('div');
+                    item.className = 'wrong-item';
+                    item.innerHTML = `
+                        <div class="q-original">第${w.index}题：${w.question}</div>
+                        <div class="q-user">你的答案: ${w.userAnswer}</div>
+                        <div class="q-answer">正确答案: ${w.correctAnswer}</div>
+                    `;
+                    wrongListDiv.appendChild(item);
+                });
+            }
+
+            answered = true;
+
+            // 重新渲染当前题以显示结果
+            renderCurrentQuestion();
+        }
+
+        // 随机出题
+        function randomQuestions() {
+            const selected = pickRandom(allQuestions, 30);
+            currentQuestions = selected;
+            answered = false;
+            userAnswers = new Array(selected.length).fill(null);
+            // 为改错题初始化对象
+            selected.forEach((q, i) => {
+                if (q.type === 'error') {
+                    userAnswers[i] = { err: '', cor: '' };
+                }
+            });
+            currentIndex = 0;
+            resultPanel.classList.remove('visible');
+            totalSpan.textContent = selected.length;
+            renderCurrentQuestion();
+            updateAnsweredCount();
+            updateLatestDisplay();
+        }
+
+        // 显示题库（含答案）
+        function showBank() {
+            const modal = document.getElementById('bankModal');
+            const content = document.getElementById('bankContent');
+            content.innerHTML = '';
+            allQuestions.forEach((q, i) => {
+                const div = document.createElement('div');
+                div.className = 'bank-item';
+                let type = '';
+                if (q.type === 'choice') type = '选择题';
+                else if (q.type === 'fill') type = '填空题';
+                else type = '改错题';
+                let questionText = getQuestionText(q);
+                // 去掉HTML标签用于显示
+                let plainText = questionText.replace(/<[^>]+>/g, '');
+                if (plainText.length > 60) plainText = plainText.substring(0, 60) + '...';
+                const answerText = getAnswerText(q);
+                div.innerHTML = `
+                    <div class="b-top">
+                        <span style="font-weight:600; color:#2a6b9e;">第 ${i + 1} 题</span>
+                        <span class="b-type">${type}</span>
+                    </div>
+                    <div class="b-question">${plainText}</div>
+                    <div class="b-answer">✅ 正确答案：${answerText}</div>
+                `;
+                content.appendChild(div);
+            });
+            modal.classList.add('open');
+        }
+
+        // 显示历史
+        function showHistory() {
+            const modal = document.getElementById('historyModal');
+            const content = document.getElementById('historyContent');
+            const history = getHistory();
+            if (history.length === 0) {
+                content.innerHTML = '<p style="color:#6f8faa;">暂无记录</p>';
+            } else {
+                let html = `<ul class="history-list">`;
+                history.slice().reverse().forEach((r, i) => {
+                    const isLatest = (i === 0);
+                    html += `<li><span>#${history.length - i}  ${r.date}</span><span class="${isLatest ? 'score-high' : ''}">${r.score} / ${r.total}</span></li>`;
+                });
+                html += '</ul>';
+                content.innerHTML = html;
+            }
+            modal.classList.add('open');
+        }
+
+        // 事件绑定
+        document.getElementById('randomBtn').addEventListener('click', randomQuestions);
+        document.getElementById('submitBtn').addEventListener('click', handleSubmit);
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderCurrentQuestion();
+            }
+        });
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderCurrentQuestion();
+            }
+        });
+
+        // 键盘左右翻页
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                currentIndex--;
+                renderCurrentQuestion();
+            } else if (e.key === 'ArrowRight' && currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderCurrentQuestion();
+            }
+        });
+
+        document.getElementById('showBankBtn').addEventListener('click', showBank);
+        document.getElementById('closeBankModal').addEventListener('click', () => {
+            document.getElementById('bankModal').classList.remove('open');
+        });
+        document.getElementById('bankModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('bankModal').classList.remove('open');
+        });
+
+        document.getElementById('showHistoryBtn').addEventListener('click', showHistory);
+        document.getElementById('closeHistoryModal').addEventListener('click', () => {
+            document.getElementById('historyModal').classList.remove('open');
+        });
+        document.getElementById('historyModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('historyModal').classList.remove('open');
+        });
+
+        // 初始化
+        randomQuestions();
+    </script>
+</body>
+</html>
