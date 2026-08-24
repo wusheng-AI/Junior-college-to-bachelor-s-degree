@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>✨ 英语词汇 · 华丽听写</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ===== 全局重置 & 基础 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 20% 20%, #0d1b3e, #0a0e1f 70%);
+            font-family: 'Inter', sans-serif;
+            color: #e8e6f0;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-attachment: fixed;
+        }
+
+        /* 背景装饰光晕 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(180, 120, 255, 0.08), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.06), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app-container {
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 顶部标题 ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 36px;
+            padding: 32px 20px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 60px 60px 30px 30px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 215, 100, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 215, 100, 0.03), transparent, rgba(180, 120, 255, 0.03), transparent);
+            animation: rotateGlow 30s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotateGlow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f6e6a0, #d4a853, #f6e6a0);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerGold 4s ease-in-out infinite;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes shimmerGold {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .header .sub {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 6px;
+            margin-top: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .header .sub i {
+            color: #d4a853;
+            margin: 0 6px;
+        }
+
+        /* ===== 控制栏 ===== */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin: 18px 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .toolbar button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #e8e6f0;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+        .toolbar button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+        .toolbar button:active {
+            transform: scale(0.96);
+        }
+        .toolbar .btn-primary {
+            background: linear-gradient(135deg, #d4a853, #b38b3a);
+            color: #0a0e1f;
+            border: none;
+            font-weight: 700;
+        }
+        .toolbar .btn-primary:hover {
+            background: linear-gradient(135deg, #e8c86a, #c9a04a);
+            box-shadow: 0 8px 30px rgba(212, 168, 83, 0.3);
+        }
+        .toolbar .btn-secondary {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .toolbar .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+        .toolbar .btn-glow {
+            background: rgba(180, 120, 255, 0.12);
+            border: 1px solid rgba(180, 120, 255, 0.25);
+        }
+        .toolbar .btn-glow:hover {
+            background: rgba(180, 120, 255, 0.22);
+            box-shadow: 0 0 30px rgba(180, 120, 255, 0.15);
+        }
+        .toolbar .badge-count {
+            background: rgba(212, 168, 83, 0.2);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #d4a853;
+            border: 1px solid rgba(212, 168, 83, 0.15);
+        }
+
+        /* ===== 题目列表 ===== */
+        .question-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 30px;
+            animation: fadeUp 0.6s ease;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 215, 100, 0.15);
+            transform: translateX(4px);
+        }
+        .question-card .q-index {
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.2);
+            min-width: 32px;
+            text-align: right;
+            font-feature-settings: "tnum";
+        }
+        .question-card .q-chinese {
+            font-weight: 600;
+            font-size: 1.05rem;
+            min-width: 130px;
+            color: #f0ecf5;
+        }
+        .question-card .q-pos {
+            font-size: 0.75rem;
+            color: rgba(212, 168, 83, 0.7);
+            background: rgba(212, 168, 83, 0.08);
+            padding: 2px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(212, 168, 83, 0.1);
+            white-space: nowrap;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+        .question-card .q-input-wrap {
+            flex: 1;
+            min-width: 120px;
+            position: relative;
+        }
+        .question-card .q-input-wrap input {
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #f0ecf5;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            outline: none;
+        }
+        .question-card .q-input-wrap input:focus {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(212, 168, 83, 0.4);
+            box-shadow: 0 0 0 4px rgba(212, 168, 83, 0.06), 0 0 20px rgba(212, 168, 83, 0.03);
+        }
+        .question-card .q-input-wrap input::placeholder {
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: 300;
+            font-size: 0.85rem;
+        }
+
+        /* 提交后的状态标记 */
+        .question-card .q-status {
+            font-size: 1.3rem;
+            min-width: 32px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .question-card .q-status.correct {
+            color: #5be07a;
+            text-shadow: 0 0 20px rgba(91, 224, 122, 0.3);
+        }
+        .question-card .q-status.wrong {
+            color: #ff6b7a;
+            text-shadow: 0 0 20px rgba(255, 107, 122, 0.3);
+        }
+        .question-card .q-answer-reveal {
+            font-size: 0.85rem;
+            color: #ff6b7a;
+            background: rgba(255, 107, 122, 0.08);
+            padding: 2px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 107, 122, 0.15);
+            display: none;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .question-card .q-answer-reveal.show {
+            display: inline-block;
+            animation: popIn 0.3s ease;
+        }
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== 提交按钮区 ===== */
+        .submit-area {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        .submit-area .btn-submit {
+            padding: 18px 60px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4a853, #b38b3a);
+            color: #0a0e1f;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 40px rgba(212, 168, 83, 0.2);
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .submit-area .btn-submit:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 60px rgba(212, 168, 83, 0.35);
+        }
+        .submit-area .btn-submit:active {
+            transform: scale(0.96);
+        }
+        .submit-area .btn-submit:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ===== 结果面板 ===== */
+        .result-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 28px 32px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: none;
+            animation: fadeUp 0.6s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .result-panel.show {
+            display: block;
+        }
+
+        .result-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .result-stats .stat-item {
+            text-align: center;
+        }
+        .result-stats .stat-item .number {
+            font-size: 2.6rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f6e6a0, #d4a853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .result-stats .stat-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 4px;
+        }
+        .result-stats .stat-item .number.green {
+            background: linear-gradient(135deg, #5be07a, #3ab85a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .result-stats .stat-item .number.red {
+            background: linear-gradient(135deg, #ff6b7a, #e03a4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-advice {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 400;
+            padding: 16px 0 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .result-advice strong {
+            color: #f6e6a0;
+            font-weight: 600;
+        }
+
+        .result-compare {
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 8px 0 4px;
+        }
+        .result-compare .up {
+            color: #5be07a;
+        }
+        .result-compare .down {
+            color: #ff6b7a;
+        }
+        .result-compare .same {
+            color: #d4a853;
+        }
+
+        /* ===== 错题列表 ===== */
+        .wrong-list {
+            margin-top: 24px;
+        }
+        .wrong-list h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 107, 122, 0.7);
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .wrong-list .wrong-item {
+            background: rgba(255, 107, 122, 0.05);
+            border-left: 3px solid #ff6b7a;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            font-size: 0.95rem;
+        }
+        .wrong-list .wrong-item .wi-english {
+            font-weight: 700;
+            color: #f0ecf5;
+            font-size: 1.05rem;
+        }
+        .wrong-list .wrong-item .wi-chinese {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .wrong-list .wrong-item .wi-pos {
+            color: #d4a853;
+            font-size: 0.8rem;
+            background: rgba(212, 168, 83, 0.1);
+            padding: 0 12px;
+            border-radius: 30px;
+        }
+        .wrong-list .wrong-item .wi-your {
+            color: #ff6b7a;
+            font-weight: 400;
+        }
+
+        /* ===== 模态框 ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.show {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: rgba(20, 25, 50, 0.95);
+            border-radius: 30px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 80vh;
+            padding: 32px 36px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-content .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
+            padding: 0 8px;
+        }
+        .modal-content .modal-close:hover {
+            color: #fff;
+        }
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #f6e6a0;
+        }
+        .modal-content .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            font-size: 0.9rem;
+        }
+        .modal-content .modal-grid .mg-item {
+            display: flex;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            align-items: baseline;
+        }
+        .modal-content .modal-grid .mg-item .mg-en {
+            font-weight: 600;
+            color: #f0ecf5;
+            min-width: 100px;
+        }
+        .modal-content .modal-grid .mg-item .mg-zh {
+            color: rgba(255, 255, 255, 0.6);
+            flex: 1;
+        }
+        .modal-content .modal-grid .mg-item .mg-pos {
+            color: #d4a853;
+            font-size: 0.7rem;
+            background: rgba(212, 168, 83, 0.08);
+            padding: 0 10px;
+            border-radius: 30px;
+        }
+
+        /* ===== 历史分数 ===== */
+        .history-list {
+            margin-top: 12px;
+        }
+        .history-list .h-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .history-list .h-item .h-score {
+            font-weight: 700;
+            color: #f6e6a0;
+        }
+        .history-list .h-item .h-time {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ===== 滚动条 ===== */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(212, 168, 83, 0.3);
+            border-radius: 10px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header .sub {
+                font-size: 0.7rem;
+                letter-spacing: 3px;
+            }
+            .question-card {
+                flex-wrap: wrap;
+                padding: 14px 16px;
+                gap: 10px;
+            }
+            .question-card .q-chinese {
+                min-width: 80px;
+                font-size: 0.95rem;
+            }
+            .question-card .q-input-wrap {
+                min-width: 100%;
+                flex: 1 1 100%;
+                order: 10;
+            }
+            .question-card .q-pos {
+                font-size: 0.65rem;
+            }
+            .question-card .q-index {
+                min-width: 24px;
+                font-size: 0.65rem;
+            }
+            .question-card .q-status {
+                min-width: 24px;
+                font-size: 1rem;
+            }
+            .toolbar button {
+                padding: 10px 18px;
+                font-size: 0.8rem;
+            }
+            .submit-area .btn-submit {
+                padding: 14px 36px;
+                font-size: 1rem;
+            }
+            .result-stats {
+                gap: 12px 20px;
+            }
+            .result-stats .stat-item .number {
+                font-size: 2rem;
+            }
+            .modal-content {
+                padding: 20px;
+                max-height: 90vh;
+            }
+            .modal-content .modal-grid {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+            .modal-content .modal-grid .mg-item .mg-en {
+                min-width: 70px;
+            }
+            .result-panel {
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .question-card .q-chinese {
+                font-size: 0.85rem;
+                min-width: 60px;
+            }
+            .question-card .q-input-wrap input {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
+
+        /* ===== 辅助类 ===== */
+        .text-gold {
+            color: #d4a853;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <h1>✦ 英 语 听 写 ✦</h1>
+            <div class="sub">
+                <i class="fas fa-feather-alt"></i> 随机 30 题 · 汉译英 <i class="fas fa-feather-alt"></i>
+            </div>
+        </header>
+
+        <!-- ===== TOOLBAR ===== -->
+        <div class="toolbar">
+            <button class="btn-primary" id="btnRandom">
+                <i class="fas fa-dice"></i> 重新随机
+            </button>
+            <button class="btn-secondary" id="btnBank">
+                <i class="fas fa-book-open"></i> 显示题库
+            </button>
+            <button class="btn-glow" id="btnHistory">
+                <i class="fas fa-chart-line"></i> 历史分数
+            </button>
+            <span class="badge-count" id="questionCount">30 题</span>
+        </div>
+
+        <!-- ===== 题目列表 ===== -->
+        <div id="questionGrid" class="question-grid"></div>
+
+        <!-- ===== 提交 ===== -->
+        <div class="submit-area">
+            <button class="btn-submit" id="btnSubmit">
+                <i class="fas fa-check-circle"></i> 提交答案
+            </button>
+        </div>
+
+        <!-- ===== 结果面板 ===== -->
+        <div class="result-panel" id="resultPanel">
+            <div class="result-stats" id="resultStats"></div>
+            <div class="result-advice" id="resultAdvice"></div>
+            <div class="result-compare" id="resultCompare"></div>
+            <div class="wrong-list" id="wrongList">
+                <h3><i class="fas fa-times-circle"></i> 错题回顾</h3>
+                <div id="wrongItems"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== MODAL 题库 ===== -->
+    <div class="modal-overlay" id="modalBank">
+        <div class="modal-content">
+            <button class="modal-close" id="closeBank"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-book-open text-gold"></i> 完整题库 · 61 词</h2>
+            <div class="modal-grid" id="bankGrid"></div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL 历史 ===== -->
+    <div class="modal-overlay" id="modalHistory">
+        <div class="modal-content">
+            <button class="modal-close" id="closeHistory"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-chart-line text-gold"></i> 历史分数</h2>
+            <div id="historyContent">
+                <p style="color:rgba(255,255,255,0.3);">暂无记录</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  数 据
+        // ================================================================
+        const FULL_DATA = [
+            { id: 1, en: 'knowledge', zh: '知识；了解', pos: 'n.' },
+            { id: 2, en: 'ignore', zh: '忽视；不顾', pos: 'v.' },
+            { id: 3, en: 'ignorance', zh: '无知；愚昧', pos: 'n.' },
+            { id: 4, en: 'ignorant', zh: '无知的；不了解的', pos: 'adj.' },
+            { id: 5, en: 'recognize', zh: '认出；承认', pos: 'v.' },
+            { id: 6, en: 'loan', zh: '贷款；借款；借出', pos: 'n./v.' },
+            { id: 7, en: 'jealous', zh: '嫉妒的；猜疑的', pos: 'adj.' },
+            { id: 8, en: 'through', zh: '通过；穿过；彻底地', pos: 'prep./adv.' },
+            { id: 9, en: 'throughout', zh: '遍及；贯穿；到处', pos: 'prep./adv.' },
+            { id: 10, en: 'thorough', zh: '彻底的；详尽的', pos: 'adj.' },
+            { id: 11, en: 'thoroughly', zh: '彻底地；完全地', pos: 'adv.' },
+            { id: 12, en: 'though', zh: '虽然；尽管；可是', pos: 'conj./adv.' },
+            { id: 13, en: 'declare', zh: '宣布；声明', pos: 'v.' },
+            { id: 14, en: 'claim', zh: '声称；要求；声明；索赔', pos: 'v./n.' },
+            { id: 15, en: 'call', zh: '呼叫；命名；打电话；电话；召唤', pos: 'v./n.' },
+            { id: 16, en: 'recall', zh: '回忆；召回；记忆力；召回', pos: 'v./n.' },
+            { id: 17, en: 'belt', zh: '腰带；传送带；用带系住', pos: 'n./v.' },
+            { id: 18, en: 'satisfy', zh: '使满意；满足', pos: 'v.' },
+            { id: 19, en: 'satisfaction', zh: '满意；满足', pos: 'n.' },
+            { id: 20, en: 'satisfactory', zh: '令人满意的', pos: 'adj.' },
+            { id: 21, en: 'decorate', zh: '装饰；装修', pos: 'v.' },
+            { id: 22, en: 'predict', zh: '预言；预测', pos: 'v.' },
+            { id: 23, en: 'dictionary', zh: '词典；字典', pos: 'n.' },
+            { id: 24, en: 'indicate', zh: '表明；指示', pos: 'v.' },
+            { id: 25, en: 'know', zh: '知道；认识', pos: 'v.' },
+            { id: 26, en: 'salary', zh: '薪水；工资', pos: 'n.' },
+            { id: 27, en: 'beyond', zh: '超出；在……那边；在更远处', pos: 'prep./adv.' },
+            { id: 28, en: 'character', zh: '性格；角色；字符', pos: 'n.' },
+            { id: 29, en: 'characteristic', zh: '特征；典型的', pos: 'n./adj.' },
+            { id: 30, en: 'haste', zh: '匆忙；急忙；赶快', pos: 'n./v.' },
+            { id: 31, en: 'custom', zh: '习俗；惯例；海关', pos: 'n.' },
+            { id: 32, en: 'accustomed', zh: '习惯的；适应的', pos: 'adj.' },
+            { id: 33, en: 'decide', zh: '决定；裁决', pos: 'v.' },
+            { id: 34, en: 'decision', zh: '决定；决心', pos: 'n.' },
+            { id: 35, en: 'decisive', zh: '决定性的；果断的', pos: 'adj.' },
+            { id: 36, en: 'bored', zh: '无聊的；厌烦的', pos: 'adj.' },
+            { id: 37, en: 'unique', zh: '独特的；唯一的', pos: 'adj.' },
+            { id: 38, en: 'combine', zh: '结合；联合；联合体', pos: 'v./n.' },
+            { id: 39, en: 'remove', zh: '移开；去掉', pos: 'v.' },
+            { id: 40, en: 'promote', zh: '促进；提升；推广', pos: 'v.' },
+            { id: 41, en: 'automobile', zh: '汽车；汽车的', pos: 'n./adj.' },
+            { id: 42, en: 'emotion', zh: '情感；情绪', pos: 'n.' },
+            { id: 43, en: 'emotional', zh: '情感的；情绪化的', pos: 'adj.' },
+            { id: 44, en: 'fulfill', zh: '履行；实现；满足', pos: 'v.' },
+            { id: 45, en: 'deaf', zh: '聋的；不愿听的', pos: 'adj.' },
+            { id: 46, en: 'female', zh: '女性的；雌性的；女性；雌性动物', pos: 'adj./n.' },
+            { id: 47, en: 'male', zh: '男性的；雄性的；男性；雄性动物', pos: 'adj./n.' },
+            { id: 48, en: 'wage', zh: '工资；报酬；进行（战争等）', pos: 'n./v.' },
+            { id: 49, en: 'popular', zh: '流行的；受欢迎的', pos: 'adj.' },
+            { id: 50, en: 'population', zh: '人口；种群', pos: 'n.' },
+            { id: 51, en: 'reason', zh: '原因；理由；推理；推论', pos: 'n./v.' },
+            { id: 52, en: 'reasonable', zh: '合理的；公道的', pos: 'adj.' },
+            { id: 53, en: 'form', zh: '形式；表格；形成；构成', pos: 'n./v.' },
+            { id: 54, en: 'uniform', zh: '制服；统一的；一致的', pos: 'n./adj.' },
+            { id: 55, en: 'formal', zh: '正式的；形式上的', pos: 'adj.' },
+            { id: 56, en: 'perform', zh: '表演；执行；表现', pos: 'v.' },
+            { id: 57, en: 'performance', zh: '表演；表现；业绩', pos: 'n.' },
+            { id: 58, en: 'inform', zh: '通知；告知', pos: 'v.' },
+            { id: 59, en: 'information', zh: '信息；资料', pos: 'n.' },
+            { id: 60, en: 'bore', zh: '使厌烦；令人厌烦的人/事', pos: 'v./n.' },
+            { id: 61, en: 'boring', zh: '无聊的；令人厌烦的', pos: 'adj.' }
+        ];
+
+        // ================================================================
+        //  状 态
+        // ================================================================
+        let currentQuestions = []; // 当前抽取的30题
+        let submitted = false;
+        let currentScore = 0; // 正确数
+        let totalQuestions = 0;
+        let wrongList = []; // { en, zh, pos, yourAnswer }
+
+        // DOM 引用
+        const grid = document.getElementById('questionGrid');
+        const btnRandom = document.getElementById('btnRandom');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const btnBank = document.getElementById('btnBank');
+        const btnHistory = document.getElementById('btnHistory');
+        const resultPanel = document.getElementById('resultPanel');
+        const resultStats = document.getElementById('resultStats');
+        const resultAdvice = document.getElementById('resultAdvice');
+        const resultCompare = document.getElementById('resultCompare');
+        const wrongItems = document.getElementById('wrongItems');
+        const questionCount = document.getElementById('questionCount');
+        const modalBank = document.getElementById('modalBank');
+        const modalHistory = document.getElementById('modalHistory');
+        const closeBank = document.getElementById('closeBank');
+        const closeHistory = document.getElementById('closeHistory');
+        const bankGrid = document.getElementById('bankGrid');
+        const historyContent = document.getElementById('historyContent');
+
+        // ================================================================
+        //  工 具 函 数
+        // ================================================================
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function pickRandom(arr, n) {
+            const copy = [...arr];
+            shuffleArray(copy);
+            return copy.slice(0, n);
+        }
+
+        function normalize(s) {
+            return s.trim().toLowerCase().replace(/\s+/g, ' ');
+        }
+
+        function getHistory() {
+            try {
+                return JSON.parse(localStorage.getItem('dictation_history')) || [];
+            } catch { return []; }
+        }
+
+        function saveHistory(score, total) {
+            const hist = getHistory();
+            hist.push({
+                score,
+                total,
+                rate: Math.round((score / total) * 100),
+                time: new Date().toLocaleString('zh-CN', { hour12: false })
+            });
+            localStorage.setItem('dictation_history', JSON.stringify(hist));
+        }
+
+        function getBestScore() {
+            const hist = getHistory();
+            if (hist.length === 0) return null;
+            return Math.max(...hist.map(h => h.score));
+        }
+
+        // ================================================================
+        //  渲 染 题 目
+        // ================================================================
+        function renderQuestions() {
+            submitted = false;
+            resultPanel.classList.remove('show');
+            btnSubmit.disabled = false;
+            const total = currentQuestions.length;
+            questionCount.textContent = total + ' 题';
+
+            let html = '';
+            currentQuestions.forEach((q, idx) => {
+                html += `
+                    <div class="question-card" data-id="${q.id}" data-idx="${idx}">
+                        <span class="q-index">${idx + 1}</span>
+                        <span class="q-chinese">${q.zh}</span>
+                        <span class="q-pos">${q.pos}</span>
+                        <div class="q-input-wrap">
+                            <input type="text" id="input_${q.id}" placeholder="输入英文..." autocomplete="off" />
+                        </div>
+                        <span class="q-status" id="status_${q.id}"></span>
+                        <span class="q-answer-reveal" id="reveal_${q.id}"></span>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+
+            // 回车键跳转
+            const inputs = grid.querySelectorAll('input');
+            inputs.forEach((inp, i) => {
+                inp.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const next = inputs[i + 1];
+                        if (next) next.focus();
+                        else btnSubmit.focus();
+                    }
+                });
+            });
+
+            // 清空结果区
+            wrongItems.innerHTML = '';
+            resultStats.innerHTML = '';
+            resultAdvice.textContent = '';
+            resultCompare.textContent = '';
+        }
+
+        // ================================================================
+        //  提 交 判 卷
+        // ================================================================
+        function handleSubmit() {
+            if (submitted) return;
+            if (currentQuestions.length === 0) return;
+
+            let correct = 0;
+            const wrong = [];
+            const total = currentQuestions.length;
+
+            currentQuestions.forEach((q) => {
+                const input = document.getElementById(`input_${q.id}`);
+                const status = document.getElementById(`status_${q.id}`);
+                const reveal = document.getElementById(`reveal_${q.id}`);
+                const userAns = input ? input.value : '';
+                const normalizedUser = normalize(userAns);
+                const normalizedCorrect = normalize(q.en);
+
+                const isCorrect = normalizedUser === normalizedCorrect;
+                if (isCorrect) {
+                    correct++;
+                    if (status) {
+                        status.textContent = '✓';
+                        status.className = 'q-status correct';
+                    }
+                } else {
+                    wrong.push({
+                        ...q,
+                        yourAnswer: userAns.trim() || '(未填写)'
+                    });
+                    if (status) {
+                        status.textContent = '✗';
+                        status.className = 'q-status wrong';
+                    }
+                    if (reveal) {
+                        reveal.textContent = `正确答案: ${q.en}`;
+                        reveal.className = 'q-answer-reveal show';
+                    }
+                }
+            });
+
+            // 统计数据
+            currentScore = correct;
+            totalQuestions = total;
+            wrongList = wrong;
+
+            // 保存分数
+            saveHistory(correct, total);
+
+            // 显示结果
+            showResult(correct, total, wrong);
+
+            submitted = true;
+            btnSubmit.disabled = true;
+        }
+
+        // ================================================================
+        //  显 示 结 果
+        // ================================================================
+        function showResult(correct, total, wrong) {
+            const rate = Math.round((correct / total) * 100);
+            const best = getBestScore();
+
+            // 统计
+            resultStats.innerHTML = `
+                <div class="stat-item">
+                    <div class="number green">${correct}</div>
+                    <div class="label">正确</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number red">${total - correct}</div>
+                    <div class="label">错误</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">${rate}%</div>
+                    <div class="label">正确率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number" style="font-size:1.8rem; -webkit-text-fill-color:rgba(255,255,255,0.3);">${total}</div>
+                    <div class="label">总题数</div>
+                </div>
+            `;
+
+            // 建议
+            let advice = '';
+            if (rate === 100) advice = '🎉 完美！你是词汇大师！继续保持！';
+            else if (rate >= 80) advice = '🌟 优秀！再接再厉，冲击满分！';
+            else if (rate >= 60) advice = '📚 良好，继续努力，多复习错题！';
+            else if (rate >= 40) advice = '📖 需要加强复习，建议每天过一遍单词表。';
+            else advice = '💪 别灰心！重新学习这些单词，再来一次！';
+            resultAdvice.innerHTML = `<i class="fas fa-lightbulb text-gold"></i> ${advice}`;
+
+            // 对比
+            let compareHtml = '';
+            if (best === null) {
+                compareHtml = `📝 首次记录，已保存分数！`;
+            } else {
+                const diff = correct - best;
+                let icon = '📊';
+                let cls = 'same';
+                let label = '与最高分持平';
+                if (diff > 0) { icon = '📈';
+                    cls = 'up';
+                    label = `上升了 ${diff} 分，新纪录！ 🏆`; } else if (diff < 0) { icon = '📉';
+                    cls = 'down';
+                    label = `下降了 ${Math.abs(diff)} 分，继续加油`; }
+                compareHtml = `${icon} 历史最高 <strong>${best}</strong> 分 · 本次 <strong>${correct}</strong> 分 · <span class="${cls}">${label}</span>`;
+            }
+            resultCompare.innerHTML = compareHtml;
+
+            // 错题
+            if (wrong.length === 0) {
+                wrongItems.innerHTML = `<p style="color:rgba(255,255,255,0.2); text-align:center; padding:20px;">🎯 全部正确，太棒了！</p>`;
+            } else {
+                let wHtml = '';
+                wrong.forEach(w => {
+                    wHtml += `
+                        <div class="wrong-item">
+                            <span class="wi-english">${w.en}</span>
+                            <span class="wi-pos">${w.pos}</span>
+                            <span class="wi-chinese">${w.zh}</span>
+                            <span class="wi-your">你的答案: ${w.yourAnswer}</span>
+                        </div>
+                    `;
+                });
+                wrongItems.innerHTML = wHtml;
+            }
+
+            resultPanel.classList.add('show');
+            // 滚动到结果
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ================================================================
+        //  随 机 抽 题
+        // ================================================================
+        function randomizeQuestions() {
+            currentQuestions = pickRandom(FULL_DATA, 30);
+            renderQuestions();
+            // 清除旧结果
+            resultPanel.classList.remove('show');
+            submitted = false;
+            btnSubmit.disabled = false;
+        }
+
+        // ================================================================
+        //  显 示 题 库
+        // ================================================================
+        function showBank() {
+            let html = '';
+            FULL_DATA.forEach(q => {
+                html += `
+                    <div class="mg-item">
+                        <span class="mg-en">${q.en}</span>
+                        <span class="mg-pos">${q.pos}</span>
+                        <span class="mg-zh">${q.zh}</span>
+                    </div>
+                `;
+            });
+            bankGrid.innerHTML = html;
+            modalBank.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ================================================================
+        //  显 示 历 史
+        // ================================================================
+        function showHistory() {
+            const hist = getHistory();
+            if (hist.length === 0) {
+                historyContent.innerHTML = `<p style="color:rgba(255,255,255,0.3); text-align:center; padding:30px;">暂无历史记录</p>`;
+            } else {
+                let html = `<div class="history-list">`;
+                const sorted = [...hist].reverse();
+                sorted.forEach((h, i) => {
+                    const idx = sorted.length - i;
+                    html += `
+                        <div class="h-item">
+                            <span>#${idx}  <span class="h-score">${h.score}/${h.total}</span>  (${h.rate}%)</span>
+                            <span class="h-time">${h.time}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                historyContent.innerHTML = html;
+            }
+            modalHistory.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ================================================================
+        //  关 闭 模 态
+        // ================================================================
+        function closeModal(modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // ================================================================
+        //  初 始 化
+        // ================================================================
+        function init() {
+            randomizeQuestions();
+
+            // 事件绑定
+            btnRandom.addEventListener('click', () => {
+                if (submitted) {
+                    if (!confirm('重新随机将清空当前结果，确定继续吗？')) return;
+                }
+                randomizeQuestions();
+            });
+
+            btnSubmit.addEventListener('click', handleSubmit);
+
+            btnBank.addEventListener('click', showBank);
+            closeBank.addEventListener('click', () => closeModal(modalBank));
+            modalBank.addEventListener('click', (e) => {
+                if (e.target === modalBank) closeModal(modalBank);
+            });
+
+            btnHistory.addEventListener('click', showHistory);
+            closeHistory.addEventListener('click', () => closeModal(modalHistory));
+            modalHistory.addEventListener('click', (e) => {
+                if (e.target === modalHistory) closeModal(modalHistory);
+            });
+
+            // 键盘快捷键: Ctrl+Enter 提交
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    if (!submitted) handleSubmit();
+                }
+            });
+        }
+
+        // 页面加载后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+</body>
+</html>

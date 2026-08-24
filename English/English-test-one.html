@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>英语动词 · 专项挑战</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== 全局重置 & 主题 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            background: #0b0e1a;
+            color: #e8edf5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(ellipse at 20% 50%, #1a2744 0%, #0b0e1a 80%);
+        }
+        .app-container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(18, 26, 45, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 32px 36px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 100, 0.08);
+            border: 1px solid rgba(255, 215, 100, 0.12);
+            transition: all 0.3s ease;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 215, 100, 0.15);
+            margin-bottom: 28px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .brand-icon {
+            font-size: 2.2rem;
+            color: #f5c842;
+            filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.3));
+        }
+        .brand h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #f5d97a, #f5b842);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .brand small {
+            display: block;
+            font-size: 0.75rem;
+            color: #9aaac9;
+            letter-spacing: 2px;
+            font-weight: 300;
+            -webkit-text-fill-color: #9aaac9;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 215, 100, 0.08);
+        }
+        .nav-tabs button {
+            background: transparent;
+            border: none;
+            color: #a0b3d9;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.3px;
+        }
+        .nav-tabs button i {
+            font-size: 1rem;
+        }
+        .nav-tabs button:hover {
+            color: #d6e2ff;
+            background: rgba(255, 215, 100, 0.06);
+        }
+        .nav-tabs button.active {
+            background: linear-gradient(135deg, #f5c842, #e0a82b);
+            color: #0b0e1a;
+            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.25);
+        }
+        .view {
+            display: none;
+            animation: fadeUp 0.5s ease;
+        }
+        .view.active {
+            display: block;
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero {
+            text-align: center;
+            padding: 40px 10px 30px;
+        }
+        .hero .big-icon {
+            font-size: 5rem;
+            color: #f5c842;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 30px rgba(245, 200, 66, 0.15));
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f5e08a, #f5b842);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            color: #b6c9f0;
+            font-size: 1.15rem;
+            max-width: 520px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        .hero .btn-start {
+            background: linear-gradient(135deg, #f5c842, #e0a82b);
+            border: none;
+            padding: 18px 58px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0b0e1a;
+            cursor: pointer;
+            box-shadow: 0 8px 35px rgba(245, 200, 66, 0.3);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .hero .btn-start:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 50px rgba(245, 200, 66, 0.45);
+        }
+        .hero .btn-start i {
+            font-size: 1.4rem;
+        }
+        .stats-mini {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .stats-mini .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 28px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 215, 100, 0.06);
+        }
+        .stats-mini .stat-item .num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f5c842;
+        }
+        .stats-mini .stat-item .label {
+            color: #9aaac9;
+            font-size: 0.85rem;
+            margin-left: 6px;
+        }
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .exam-progress {
+            flex: 1;
+            min-width: 160px;
+        }
+        .exam-progress .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .exam-progress .progress-bar .fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f5c842, #f5a623);
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+        .exam-progress .info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #b6c9f0;
+        }
+        .exam-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .exam-actions button {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 215, 100, 0.12);
+            color: #d6e2ff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .exam-actions button:hover {
+            background: rgba(255, 215, 100, 0.12);
+            border-color: #f5c842;
+        }
+        .exam-actions button.primary {
+            background: linear-gradient(135deg, #f5c842, #e0a82b);
+            border-color: #f5c842;
+            color: #0b0e1a;
+        }
+        .exam-actions button.primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.25);
+        }
+        .question-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 32px;
+            padding: 30px 34px;
+            border: 1px solid rgba(255, 215, 100, 0.06);
+            margin-bottom: 22px;
+            transition: 0.25s;
+        }
+        .question-card .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .question-card .q-number {
+            font-weight: 700;
+            color: #f5c842;
+            font-size: 1rem;
+            background: rgba(245, 200, 66, 0.1);
+            padding: 4px 16px;
+            border-radius: 40px;
+        }
+        .question-card .q-type {
+            font-size: 0.8rem;
+            color: #9aaac9;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 14px;
+            border-radius: 40px;
+        }
+        .question-card .q-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 18px;
+            color: #e8edf5;
+        }
+        .question-card .q-text .highlight {
+            color: #f5c842;
+            font-weight: 600;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .options .opt {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options .opt:hover {
+            background: rgba(255, 215, 100, 0.05);
+            border-color: rgba(255, 215, 100, 0.15);
+        }
+        .options .opt input[type="radio"] {
+            accent-color: #f5c842;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .options .opt label {
+            cursor: pointer;
+            font-size: 1rem;
+            color: #d6e2ff;
+            flex: 1;
+        }
+        .fill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 24px;
+            align-items: center;
+            margin-top: 6px;
+        }
+        .fill-group label {
+            color: #b6c9f0;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .fill-group input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 100, 0.12);
+            border-radius: 16px;
+            padding: 12px 20px;
+            color: #e8edf5;
+            font-size: 1rem;
+            min-width: 180px;
+            transition: 0.25s;
+            outline: none;
+            font-family: inherit;
+        }
+        .fill-group input:focus {
+            border-color: #f5c842;
+            box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.15);
+            background: rgba(255, 255, 255, 0.07);
+        }
+        .fill-group input::placeholder {
+            color: #5a6f96;
+        }
+        .error-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 24px;
+            align-items: center;
+            margin-top: 6px;
+        }
+        .error-group .err-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .error-group .err-item label {
+            color: #b6c9f0;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .error-group .err-item input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 100, 0.12);
+            border-radius: 14px;
+            padding: 10px 16px;
+            color: #e8edf5;
+            font-size: 0.95rem;
+            min-width: 140px;
+            transition: 0.25s;
+            outline: none;
+            font-family: inherit;
+        }
+        .error-group .err-item input:focus {
+            border-color: #f5c842;
+            box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.12);
+            background: rgba(255, 255, 255, 0.07);
+        }
+        .question-card.correct {
+            border-left: 6px solid #4cd9a0;
+            background: rgba(76, 217, 160, 0.05);
+        }
+        .question-card.wrong {
+            border-left: 6px solid #f56b6b;
+            background: rgba(245, 107, 107, 0.05);
+        }
+        .question-card .explanation {
+            margin-top: 16px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border-left: 4px solid #f5c842;
+            color: #c6d6f5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: none;
+        }
+        .question-card .explanation.show {
+            display: block;
+        }
+        .question-card .explanation strong {
+            color: #f5c842;
+        }
+        .question-card .result-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        .question-card .result-badge.correct {
+            background: rgba(76, 217, 160, 0.2);
+            color: #4cd9a0;
+        }
+        .question-card .result-badge.wrong {
+            background: rgba(245, 107, 107, 0.2);
+            color: #f56b6b;
+        }
+        .result-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+            padding: 30px 34px;
+            border: 1px solid rgba(255, 215, 100, 0.08);
+            margin-top: 24px;
+            text-align: center;
+        }
+        .result-panel .score-big {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #f5c842;
+            line-height: 1;
+        }
+        .result-panel .score-label {
+            color: #9aaac9;
+            font-size: 1rem;
+            margin-top: 6px;
+        }
+        .result-panel .compare {
+            margin-top: 16px;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .result-panel .compare .up {
+            color: #4cd9a0;
+        }
+        .result-panel .compare .down {
+            color: #f56b6b;
+        }
+        .result-panel .compare .equal {
+            color: #f5c842;
+        }
+        .result-panel .advice {
+            margin-top: 18px;
+            padding: 16px 24px;
+            background: rgba(255, 215, 100, 0.06);
+            border-radius: 20px;
+            color: #d6e2ff;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 215, 100, 0.06);
+        }
+        .bank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .bank-header input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 100, 0.1);
+            border-radius: 40px;
+            padding: 12px 24px;
+            color: #e8edf5;
+            font-size: 0.95rem;
+            min-width: 220px;
+            outline: none;
+            font-family: inherit;
+            transition: 0.25s;
+        }
+        .bank-header input:focus {
+            border-color: #f5c842;
+            box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.08);
+        }
+        .bank-header input::placeholder {
+            color: #5a6f96;
+        }
+        .bank-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .bank-filter button {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #a0b3d9;
+            padding: 6px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .bank-filter button:hover,
+        .bank-filter button.active {
+            background: rgba(245, 200, 66, 0.12);
+            border-color: #f5c842;
+            color: #f5c842;
+        }
+        .bank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+        .bank-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .bank-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        .bank-list::-webkit-scrollbar-thumb {
+            background: rgba(245, 200, 66, 0.2);
+            border-radius: 10px;
+        }
+        .bank-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 18px;
+            padding: 16px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .bank-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 215, 100, 0.08);
+        }
+        .bank-item .b-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .bank-item .b-head .b-id {
+            color: #f5c842;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .bank-item .b-head .b-type {
+            font-size: 0.75rem;
+            color: #9aaac9;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 14px;
+            border-radius: 40px;
+        }
+        .bank-item .b-q {
+            margin: 6px 0 4px;
+            color: #d6e2ff;
+        }
+        .bank-item .b-ans {
+            font-size: 0.9rem;
+            color: #4cd9a0;
+        }
+        .bank-item .b-exp {
+            font-size: 0.85rem;
+            color: #9aaac9;
+            margin-top: 6px;
+            display: none;
+        }
+        .bank-item .b-exp.show {
+            display: block;
+        }
+        @media (max-width: 780px) {
+            .app-container {
+                padding: 20px 18px;
+                border-radius: 28px;
+            }
+            .brand h1 {
+                font-size: 1.4rem;
+            }
+            .nav-tabs button {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            .nav-tabs button i {
+                display: none;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero .btn-start {
+                padding: 14px 34px;
+                font-size: 1.05rem;
+            }
+            .question-card {
+                padding: 20px 18px;
+            }
+            .fill-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .fill-group input {
+                min-width: unset;
+                width: 100%;
+            }
+            .error-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .error-group .err-item {
+                flex-wrap: wrap;
+            }
+            .error-group .err-item input {
+                min-width: unset;
+                width: 100%;
+            }
+            .exam-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .exam-actions {
+                justify-content: center;
+            }
+            .result-panel .score-big {
+                font-size: 3rem;
+            }
+            .stats-mini {
+                gap: 16px;
+            }
+            .bank-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .bank-header input {
+                min-width: unset;
+            }
+        }
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 12px 10px;
+            }
+            .brand h1 {
+                font-size: 1.1rem;
+            }
+            .brand-icon {
+                font-size: 1.6rem;
+            }
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            .question-card .q-text {
+                font-size: 0.95rem;
+            }
+            .options .opt {
+                padding: 10px 14px;
+            }
+            .options .opt label {
+                font-size: 0.9rem;
+            }
+        }
+        .text-gold {
+            color: #f5c842;
+        }
+        .text-muted {
+            color: #7a8fb0;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-16 {
+            gap: 16px;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 215, 100, 0.2);
+            color: #d6e2ff;
+            padding: 10px 28px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.25s;
+            font-size: 0.95rem;
+        }
+        .btn-outline:hover {
+            background: rgba(255, 215, 100, 0.06);
+            border-color: #f5c842;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #f5c842, #e0a82b);
+            border: none;
+            color: #0b0e1a;
+            padding: 10px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2);
+        }
+        .btn-gold:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 30px rgba(245, 200, 66, 0.35);
+        }
+        .btn-gold:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="app">
+        <header class="header">
+            <div class="brand">
+                <i class="fas fa-feather-alt brand-icon"></i>
+                <div>
+                    <h1>Verb·Master</h1>
+                    <small>ENGLISH GRAMMAR CHALLENGE</small>
+                </div>
+            </div>
+            <div class="nav-tabs" id="navTabs">
+                <button class="active" data-view="home"><i class="fas fa-home"></i> 主页</button>
+                <button data-view="exam"><i class="fas fa-pencil-alt"></i> 考试</button>
+                <button data-view="bank"><i class="fas fa-book-open"></i> 题库</button>
+            </div>
+        </header>
+
+        <div class="view active" id="viewHome">
+            <div class="hero">
+                <div class="big-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h2>动词专项 · 200 题</h2>
+                <p>随机抽取 <strong>30</strong> 道精选题，涵盖 <strong>选择 · 填空 · 改错</strong>，检验你的动词功底。</p>
+                <button class="btn-start" id="startExamBtn">
+                    <i class="fas fa-play"></i> 开始考试
+                </button>
+                <div class="stats-mini">
+                    <div class="stat-item"><span class="num" id="totalQStat">200</span><span class="label">总题</span></div>
+                    <div class="stat-item"><span class="num" id="randomQStat">30</span><span class="label">随机抽题</span></div>
+                    <div class="stat-item"><span class="num" id="historyScoreStat">--</span><span class="label">历史最高</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view" id="viewExam">
+            <div class="exam-header">
+                <div class="exam-progress">
+                    <div class="info">
+                        <span id="progressText">第 1 / 30 题</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+                </div>
+                <div class="exam-actions">
+                    <button id="resetExamBtn"><i class="fas fa-sync-alt"></i> 重新抽题</button>
+                    <button id="submitExamBtn" class="primary"><i class="fas fa-check-circle"></i> 提交</button>
+                </div>
+            </div>
+            <div id="examQuestions"></div>
+            <div id="resultPanel" class="result-panel hidden">
+                <div class="score-big" id="finalScore">0%</div>
+                <div class="score-label">正确率</div>
+                <div class="compare" id="compareInfo">
+                    <span>📊 历史最高：<span id="historyBest">--</span></span>
+                    <span id="trendBadge">—</span>
+                </div>
+                <div class="advice" id="adviceText">继续加油，多练习动词用法！</div>
+            </div>
+        </div>
+
+        <div class="view" id="viewBank">
+            <div class="bank-header">
+                <input type="text" id="bankSearch" placeholder="🔍 搜索题目..." />
+                <div class="bank-filter">
+                    <button class="active" data-filter="all">全部</button>
+                    <button data-filter="choice">选择</button>
+                    <button data-filter="fill">填空</button>
+                    <button data-filter="error">改错</button>
+                </div>
+            </div>
+            <div class="bank-list" id="bankList"></div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // 1. 数据：全部 200 道题（紧凑格式）
+        // ================================================================
+        const ALL_QUESTIONS = [];
+
+        // ---------- 选择题 1-80 ----------
+        const choiceData = [
+            { id: 1, q: 'I ______ a student. My parents ______ both teachers.', o: ['A. am; are', 'B. is; are', 'C. am; is',
+                    'D. are; am'
+                ], a: 'A', e: 'I 用 am，parents 复数用 are。' },
+            { id: 2, q: 'She ______ very beautiful today.', o: ['A. looks', 'B. look', 'C. looked', 'D. looking'], a: 'A',
+                e: 'looks 作系动词，主语 She 三单用 looks。' },
+            { id: 3, q: 'The food ______ delicious. I want more.', o: ['A. tastes', 'B. taste', 'C. is tasting',
+                    'D. have tasted'
+                ], a: 'A', e: 'tastes 作系动词，food 单数。' },
+            { id: 4, q: 'He ______ to school every day.', o: ['A. go', 'B. goes', 'C. going', 'D. went'], a: 'B',
+                e: 'He 三单，一般现在时用 goes。' },
+            { id: 5, q: 'They ______ playing football when I saw them.', o: ['A. are', 'B. were', 'C. was', 'D. is'],
+                a: 'B', e: 'when 引导过去时间，过去进行时，They 复数用 were。' },
+            { id: 6, q: 'I ______ you yesterday, but you weren\'t at home.', o: ['A. call', 'B. called', 'C. have called',
+                    'D. was calling'
+                ], a: 'B', e: 'yesterday 用一般过去时 called。' },
+            { id: 7, q: 'She ______ English for five years.', o: ['A. learn', 'B. learns', 'C. has learned',
+                    'D. learned'
+                ], a: 'C', e: 'for five years 用现在完成时 has learned。' },
+            { id: 8, q: 'The window ______ by the boy just now.', o: ['A. break', 'B. broke', 'C. was broken',
+                    'D. has broken'
+                ], a: 'C', e: 'just now 过去时间，被动语态 was broken。' },
+            { id: 9, q: 'He ______ to the park every Sunday.', o: ['A. go', 'B. goes', 'C. going', 'D. went'], a: 'B',
+                e: 'every Sunday 一般现在时，He 用 goes。' },
+            { id: 10, q: 'My mother ______ dinner when I got home.', o: ['A. cook', 'B. cooks', 'C. was cooking',
+                    'D. has cooked'
+                ], a: 'C', e: 'when I got home 过去时间点，过去进行时 was cooking。' },
+            { id: 11, q: '—______ you like swimming? —Yes, I do.', o: ['A. Are', 'B. Do', 'C. Does', 'D. Is'], a: 'B',
+                e: 'like 实义动词，疑问句用 Do。' },
+            { id: 12, q: 'The book ______ interesting. I love it.', o: ['A. is', 'B. are', 'C. am', 'D. be'], a: 'A',
+                e: 'book 单数用 is。' },
+            { id: 13, q: 'They ______ a new hospital in our city next year.', o: ['A. build', 'B. built', 'C. will build',
+                    'D. have built'
+                ], a: 'C', e: 'next year 将来时 will build。' },
+            { id: 14, q: 'She ______ to the party if she is free.', o: ['A. come', 'B. comes', 'C. will come',
+                    'D. came'
+                ], a: 'C', e: 'if 条件句，主句用一般将来时 will come。' },
+            { id: 15, q: 'He ______ his homework already.', o: ['A. finish', 'B. finished', 'C. has finished',
+                    'D. finishes'
+                ], a: 'C', e: 'already 用现在完成时 has finished。' },
+            { id: 16, q: 'The earth ______ around the sun.', o: ['A. moves', 'B. move', 'C. moved', 'D. has moved'],
+                a: 'A', e: '客观事实用一般现在时，earth 单数用 moves。' },
+            { id: 17, q: 'I ______ a letter when you called.', o: ['A. write', 'B. wrote', 'C. was writing',
+                    'D. have written'
+                ], a: 'C', e: 'when you called 过去时间点，过去进行时 was writing。' },
+            { id: 18, q: 'This problem ______ by the students yesterday.', o: ['A. solve', 'B. solved', 'C. was solved',
+                    'D. has solved'
+                ], a: 'C', e: 'yesterday 过去被动，was solved。' },
+            { id: 19, q: 'She ______ a doctor in the future.', o: ['A. is', 'B. was', 'C. will be', 'D. has been'],
+                a: 'C', e: 'in the future 将来时 will be。' },
+            { id: 20, q: 'We ______ each other since primary school.', o: ['A. know', 'B. knew', 'C. have known',
+                    'D. had known'
+                ], a: 'C', e: 'since primary school 用现在完成时 have known。' },
+            { id: 21, q: 'Everyone ______ these problems in their life.', o: ['A. experience', 'B. experiences',
+                    'C. experiencing', 'D. have experienced'
+                ], a: 'B', e: 'everyone 单数，experience 及物动词用 experiences。' },
+            { id: 22, q: 'The problem ______ by a little boy.', o: ['A. solved', 'B. was solved', 'C. is solving',
+                    'D. solve'
+                ], a: 'B', e: '被动语态，过去时 was solved。' },
+            { id: 23, q: 'She ______ at the airport yesterday.', o: ['A. happened to see', 'B. happened to saw',
+                    'C. happen to see', 'D. happening to see'
+                ], a: 'A', e: 'happen to do 固定搭配，yesterday 用过去式。' },
+            { id: 24, q: 'It ______ to me that I forgot to lock the door.', o: ['A. occurred', 'B. was occurred',
+                    'C. occur', 'D. has occurred'
+                ], a: 'A', e: 'It occurred to sb that... 固定句型，occur 不及物动词用主动。' },
+            { id: 25, q: 'He ______ a new job last month.', o: ['A. started', 'B. start', 'C. has started',
+                    'D. was starting'
+                ], a: 'A', e: 'last month 用一般过去时 started。' },
+            { id: 26, q: 'It is time for us ______ now.', o: ['A. start', 'B. to start', 'C. starting', 'D. started'],
+                a: 'B', e: 'It is time for sb to do sth 固定句型。' },
+            { id: 27, q: 'This charity aims ______ people learn to make a living.', o: ['A. help', 'B. to help',
+                    'C. helping', 'D. helped'
+                ], a: 'B', e: 'aims to do 固定搭配。' },
+            { id: 28, q: 'I would have accomplished nothing if you ______ helped.', o: ['A. don\'t', 'B. didn\'t',
+                    'C. hadn\'t', 'D. haven\'t'
+                ], a: 'C', e: '虚拟语气，与过去事实相反用 hadn\'t。' },
+            { id: 29, q: 'He ______ to school on foot every day.', o: ['A. go', 'B. goes', 'C. going', 'D. went'],
+                a: 'B', e: 'every day 一般现在时，He 用 goes。' },
+            { id: 30, q: 'She ______ the piano very well.', o: ['A. play', 'B. plays', 'C. playing', 'D. have played'],
+                a: 'B', e: 'She 三单用 plays。' },
+            { id: 31, q: 'The teacher ______ the students carefully.', o: ['A. listens', 'B. listens to', 'C. hear',
+                    'D. hears to'
+                ], a: 'B', e: 'listen 不及物动词，接宾语用 listen to。' },
+            { id: 32, q: 'They ______ the meeting because of the bad weather.', o: ['A. cancelled', 'B. cancelled with',
+                    'C. cancelled for', 'D. cancelled about'
+                ], a: 'A', e: 'cancel 及物动词，直接接宾语。' },
+            { id: 33, q: 'He ______ his father very much.', o: ['A. looks like', 'B. looks', 'C. is looking',
+                    'D. look like'
+                ], a: 'A', e: 'looks like 表示"看起来像"，like 为介词。' },
+            { id: 34, q: 'The accident ______ at the corner.', o: ['A. happened', 'B. was happened', 'C. happen',
+                    'D. has been happened'
+                ], a: 'A', e: 'happen 不及物动词，无被动语态。' },
+            { id: 35, q: 'She ______ me a beautiful gift.', o: ['A. gave', 'B. gave to', 'C. give', 'D. given'],
+                a: 'A', e: 'give 及物动词，双宾语结构。' },
+            { id: 36, q: 'You ______ park your car here. It\'s forbidden.', o: ['A. mustn\'t', 'B. needn\'t',
+                    'C. may not', 'D. don\'t have to'
+                ], a: 'A', e: 'mustn\'t 表示"禁止"。' },
+            { id: 37, q: '—Must I finish the work today? —No, you ______.', o: ['A. mustn\'t', 'B. needn\'t',
+                    'C. can\'t', 'D. don\'t'
+                ], a: 'B', e: 'Must 的否定回答用 needn\'t（不必）。' },
+            { id: 38, q: 'He ______ be at home because the light is on.', o: ['A. must', 'B. can', 'C. may', 'D. could'],
+                a: 'A', e: '灯亮着，推测"一定在家"用 must。' },
+            { id: 39, q: 'She ______ speak three languages when she was five.', o: ['A. can', 'B. could', 'C. may',
+                    'D. might'
+                ], a: 'B', e: '五岁时"能够"用 could。' },
+            { id: 40, q: '______ I use your phone? I need to make a call.', o: ['A. Must', 'B. Should', 'C. May',
+                    'D. Will'
+                ], a: 'C', e: '表示请求许可用 May。' },
+            { id: 41, q: 'You ______ respect your elders.', o: ['A. should', 'B. would', 'C. may', 'D. could'], a: 'A',
+                e: '表示"应该"用 should。' },
+            { id: 42, q: 'She ______ not tell the secret.', o: ['A. dare', 'B. dares', 'C. dared', 'D. daring'],
+                a: 'A', e: 'dare 作情态动词，否定 dare not do。' },
+            { id: 43, q: 'He ______ to tell us the truth.', o: ['A. need', 'B. needs', 'C. dared', 'D. dare'], a: 'B',
+                e: 'need 作实义动词，三单用 needs to do。' },
+            { id: 44, q: 'If you ______ help me, I will be grateful.', o: ['A. will', 'B. would', 'C. shall', 'D. should'],
+                a: 'A', e: 'if 条件句中用 will 表示"愿意"。' },
+            { id: 45, q: 'We ______ leave now. It\'s getting dark.', o: ['A. had better', 'B. would rather', 'C. may',
+                    'D. could'
+                ], a: 'A', e: 'had better 表示"最好"，后接动词原形。' },
+            { id: 46, q: 'He ______ have read this book; he knows the characters well.', o: ['A. must', 'B. can',
+                    'C. may', 'D. might'
+                ], a: 'A', e: '对过去肯定推测用 must have done。' },
+            { id: 47, q: 'You ______ have told me earlier. Now it\'s too late.', o: ['A. should', 'B. must', 'C. may',
+                    'D. could'
+                ], a: 'A', e: '本该做而未做用 should have done。' },
+            { id: 48, q: 'The plan ______ have been refused by the committee.', o: ['A. may', 'B. must', 'C. can',
+                    'D. will'
+                ], a: 'A', e: '对过去可能性的推测用 may have done。' },
+            { id: 49, q: 'We ______ have done it better in those circumstances.', o: ['A. could', 'B. must', 'C. should',
+                    'D. may'
+                ], a: 'A', e: '本能做而未做用 could have done。' },
+            { id: 50, q: 'You ______ have watered those roses. It rained just now.', o: ['A. needn\'t', 'B. mustn\'t',
+                    'C. couldn\'t', 'D. shouldn\'t'
+                ], a: 'A', e: '本不必做而做了用 needn\'t have done。' },
+            { id: 51, q: 'She ______ have left home. I saw her just now.', o: ['A. can\'t', 'B. mustn\'t', 'C. needn\'t',
+                    'D. may not'
+                ], a: 'A', e: '对过去否定推测用 can\'t have done。' },
+            { id: 52, q: 'You ______ not make private phone calls in work time.', o: ['A. ought to', 'B. ought',
+                    'C. should', 'D. would'
+                ], a: 'A', e: 'ought to 表示客观义务，否定为 ought not to。' },
+            { id: 53, q: 'He ______ be punished for his mistake.', o: ['A. shall', 'B. will', 'C. may', 'D. can'],
+                a: 'A', e: 'shall 用于三三人称表示"命令、警告"。' },
+            { id: 54, q: 'I ______ rather stay at home than go out.', o: ['A. had', 'B. would', 'C. should', 'D. could'],
+                a: 'B', e: 'would rather do 为固定搭配。' },
+            { id: 55, q: 'They ______ able to escape from the fire in time.', o: ['A. were', 'B. was', 'C. are',
+                    'D. is'
+                ], a: 'A', e: 'be able to 过去式用 were able to。' },
+            { id: 56, q: 'Little boys ______ be annoying sometimes.', o: ['A. can', 'B. must', 'C. should', 'D. will'],
+                a: 'A', e: 'can 表示客观可能性"有时会"。' },
+            { id: 57, q: '—______ you tell me your name? —Sure.', o: ['A. Will', 'B. Would', 'C. Shall', 'D. Must'],
+                a: 'B', e: 'Would you... 表示礼貌请求。' },
+            { id: 58, q: 'If you must go, at least wait ______ the storm is over.', o: ['A. until', 'B. after',
+                    'C. before', 'D. when'
+                ], a: 'A', e: 'until 表示"直到"。' },
+            { id: 59, q: 'You ______ not to have left home without telling me.', o: ['A. should', 'B. ought', 'C. may',
+                    'D. must'
+                ], a: 'B', e: 'ought to have done 本该做而未做。' },
+            { id: 60, q: 'She ______ do it by herself; she is old enough.', o: ['A. needn\'t', 'B. mustn\'t',
+                    'C. can\'t', 'D. may not'
+                ], a: 'A', e: 'needn\'t 表示"不必"。' },
+            { id: 61, q: 'She ______ work here, does she?', o: ['A. doesn\'t', 'B. don\'t', 'C. isn\'t', 'D. aren\'t'],
+                a: 'A', e: '反意疑问句，前面否定用 doesn\'t。' },
+            { id: 62, q: '______ waste your time and energy on that.', o: ['A. No', 'B. Not', 'C. Don\'t', 'D. Doesn\'t'],
+                a: 'C', e: '祈使句否定用 Don\'t。' },
+            { id: 63, q: '______ you find it difficult to learn English?', o: ['A. Are', 'B. Do', 'C. Does', 'D. Is'],
+                a: 'B', e: 'find 实义动词，疑问句用 Do。' },
+            { id: 64, q: 'Matter ______ constantly moving and changing.', o: ['A. is', 'B. are', 'C. was', 'D. were'],
+                a: 'A', e: 'is + moving 现在进行时被动概念。' },
+            { id: 65, q: 'I\'m sure that you ______ soon make many friends here.', o: ['A. will', 'B. shall', 'C. would',
+                    'D. should'
+                ], a: 'A', e: '将来时用 will。' },
+            { id: 66, q: 'The topic ______ discussed in detail during the meeting.', o: ['A. is', 'B. was', 'C. were',
+                    'D. has'
+                ], a: 'B', e: '过去时被动用 was。' },
+            { id: 67, q: 'The contest ______ held tomorrow.', o: ['A. will be', 'B. will', 'C. is', 'D. was'], a: 'A',
+                e: '将来时被动用 will be。' },
+            { id: 68, q: 'You ______ look very nice today. (表示强调)', o: ['A. do', 'B. does', 'C. did', 'D. are'],
+                a: 'A', e: 'do 强调谓语动词。' },
+            { id: 69, q: '______ be afraid of making mistakes.', o: ['A. No', 'B. Not', 'C. Don\'t', 'D. Doesn\'t'],
+                a: 'C', e: '祈使句否定用 Don\'t。' },
+            { id: 70, q: 'If you had not hurried, you ______ have missed the train.', o: ['A. will', 'B. would',
+                    'C. shall', 'D. should'
+                ], a: 'B', e: '虚拟语气主句用 would have done。' },
+            { id: 71, q: 'He ______ been studying English for three years.', o: ['A. have', 'B. has', 'C. is', 'D. was'],
+                a: 'B', e: 'He 单数，现在完成时用 has。' },
+            { id: 72, q: 'The children ______ playing in the garden now.', o: ['A. is', 'B. are', 'C. was', 'D. were'],
+                a: 'B', e: 'children 复数，现在进行时用 are。' },
+            { id: 73, q: 'She ______ already finished her homework.', o: ['A. have', 'B. has', 'C. had', 'D. was'],
+                a: 'B', e: 'She 单数，现在完成时用 has。' },
+            { id: 74, q: 'They ______ not come to the party yesterday.', o: ['A. do', 'B. does', 'C. did', 'D. are'],
+                a: 'C', e: 'yesterday 过去时，否定用 did not。' },
+            { id: 75, q: '______ you like some coffee?', o: ['A. Are', 'B. Do', 'C. Would', 'D. Will'], a: 'C',
+                e: 'Would you like... 表邀请。' },
+            { id: 76, q: 'The car ______ repaired by the mechanic now.', o: ['A. is being', 'B. is', 'C. was', 'D. has'],
+                a: 'A', e: 'now 现在进行时被动用 is being repaired。' },
+            { id: 77, q: 'We ______ have a meeting next Monday.', o: ['A. will', 'B. shall', 'C. are', 'D. were'],
+                a: 'A', e: '将来时用 will。' },
+            { id: 78, q: 'She ______ not know the answer, does she?', o: ['A. do', 'B. does', 'C. did', 'D. is'],
+                a: 'B', e: '主句否定，反意疑问句用 does。' },
+            { id: 79, q: 'The building ______ built in 1990.', o: ['A. is', 'B. was', 'C. were', 'D. has'], a: 'B',
+                e: '过去时间，被动用 was built。' },
+            { id: 80, q: 'I ______ told you many times to be careful.', o: ['A. have', 'B. has', 'C. am', 'D. was'],
+                a: 'A', e: '现在完成时，I 用 have。' }
+        ];
+        choiceData.forEach(d => { d.type = 'choice';
+            d.answer = d.a; });
+        ALL_QUESTIONS.push(...choiceData);
+
+        // ---------- 填空题 81-140 ----------
+        const fillData = [
+            { id: 81, q: 'He ______ (go) to school by bike every day.', a: 'goes',
+            e: 'He 三单，一般现在时用 goes。' },
+            { id: 82, q: 'She ______ (be) a teacher for ten years.', a: 'has been',
+                e: 'for ten years 用现在完成时 has been。' },
+            { id: 83, q: 'I ______ (read) a book when he came in.', a: 'was reading',
+                e: 'when 引导过去时间，过去进行时 was reading。' },
+            { id: 84, q: 'The work ______ (finish) by them yesterday.', a: 'was finished',
+                e: 'yesterday 过去被动 was finished。' },
+            { id: 85, q: 'He ______ (visit) his grandparents next week.', a: 'will visit',
+                e: 'next week 将来时 will visit。' },
+            { id: 86, q: 'The sun ______ (rise) in the east.', a: 'rises', e: '客观事实用一般现在时 rises。' },
+            { id: 87, q: 'They ______ (play) basketball on the playground now.', a: 'are playing',
+                e: 'now 现在进行时 are playing。' },
+            { id: 88, q: 'She ______ (not finish) her homework yet.', a: 'hasn\'t finished',
+                e: 'yet 用现在完成时否定 hasn\'t finished。' },
+            { id: 89, q: 'I ______ (never see) such a beautiful sunset.', a: 'have never seen',
+                e: 'never 用现在完成时 have never seen。' },
+            { id: 90, q: 'He ______ (wait) for you at the gate at 8 o\'clock tomorrow.', a: 'will be waiting',
+                e: '将来进行时 will be waiting。' },
+            { id: 91, q: 'The old man ______ (live) here since 2000.', a: 'has lived',
+                e: 'since 2000 用现在完成时 has lived。' },
+            { id: 92, q: 'We ______ (have) a party when the power went out.', a: 'were having',
+                e: 'when 引导过去时间，过去进行时 were having。' },
+            { id: 93, q: 'The letter ______ (send) to the wrong address.', a: 'was sent',
+                e: '被动语态，过去时 was sent。' },
+            { id: 94, q: 'She ______ (can speak) English fluently.', a: 'can speak', e: '情态动词+动词原形。' },
+            { id: 95, q: 'You ______ (must not play) with fire. It\'s dangerous.', a: 'must not play',
+                e: 'mustn\'t + 动词原形。' },
+            { id: 96, q: 'He ______ (may come) to the party, but he\'s not sure yet.', a: 'may come',
+                e: 'may + 动词原形。' },
+            { id: 97, q: 'I ______ (would rather stay) at home tonight.', a: 'would rather stay',
+                e: 'would rather + 动词原形。' },
+            { id: 98, q: 'You ______ (had better take) an umbrella; it might rain.', a: 'had better take',
+                e: 'had better + 动词原形。' },
+            { id: 99, q: 'She ______ (need not go) to work tomorrow.', a: 'needn\'t go', e: 'needn\'t + 动词原形。' },
+            { id: 100, q: 'He ______ (dare not tell) his parents the truth.', a: 'dare not tell',
+                e: 'dare 作情态动词 + 动词原形。' },
+            { id: 101, q: 'The meeting ______ (hold) at 3 p.m. tomorrow.', a: 'will be held',
+                e: '将来时被动 will be held。' },
+            { id: 102, q: 'She ______ (work) on this project for two months.', a: 'has worked',
+                e: 'for two months 用现在完成时 has worked。' },
+            { id: 103, q: 'When I was young, I ______ (can swim) across the river.', a: 'could swim',
+                e: 'could + 动词原形。' },
+            { id: 104, q: 'You ______ (should not leave) without saying goodbye.', a: 'should not have left',
+                e: '本该做而未做用 should not have left。' },
+            { id: 105, q: 'He ______ (must read) this book because he knows all the details.', a: 'must have read',
+                e: '对过去肯定推测用 must have read。' },
+            { id: 106, q: 'We ______ (could complete) the task earlier if we had tried harder.', a: 'could have completed',
+                e: '本能做而未做用 could have completed。' },
+            { id: 107, q: 'She ______ (ought not to say) that to her mother.', a: 'ought not to have said',
+                e: '本不该做而做了用 ought not to have said。' },
+            { id: 108, q: 'You ______ (needn\'t bring) your own food; we have plenty.', a: 'needn\'t have brought',
+                e: '本不必做而做了用 needn\'t have brought。' },
+            { id: 109, q: 'The plan ______ (may reject) by the board.', a: 'may have been rejected',
+                e: '对过去可能性推测被动 may have been rejected。' },
+            { id: 110, q: 'The children ______ (be) very quiet. They must be up to something.', a: 'are',
+                e: '一般现在时 are。' },
+            { id: 111, q: 'She ______ (feel) happy when she heard the news.', a: 'felt', e: '过去时 felt。' },
+            { id: 112, q: 'He ______ (become) a famous writer when he grows up.', a: 'will become',
+                e: '将来时 will become。' },
+            { id: 113, q: 'The soup ______ (taste) a bit too salty.', a: 'tastes', e: '系动词，一般现在时 tastes。' },
+            { id: 114, q: 'They ______ (appear to be) very tired after the long journey.', a: 'appeared to be',
+                e: '过去时 appeared to be。' },
+            { id: 115, q: 'This problem ______ (prove to be) more difficult than expected.', a: 'proved to be',
+                e: '过去时 proved to be。' },
+            { id: 116, q: 'It ______ (occur) to me that I had left my keys at home.', a: 'occurred',
+                e: '过去时 occurred。' },
+            { id: 117, q: 'He ______ (happen to meet) an old friend at the airport.', a: 'happened to meet',
+                e: '过去时 happened to meet。' },
+            { id: 118, q: 'She ______ (not dare to go) out alone at night.', a: 'doesn\'t dare to go',
+                e: 'dare 作实义动词，否定用 doesn\'t dare to go。' },
+            { id: 119, q: 'We ______ (look forward to) hearing from you.', a: 'are looking forward to',
+                e: '现在进行时 are looking forward to。' },
+            { id: 120, q: 'He ______ (be used to) getting up early.', a: 'is used to', e: 'be used to doing 习惯于。' },
+            { id: 121, q: 'The children ______ (enjoy) playing in the park.', a: 'enjoy', e: '一般现在时 enjoy。' },
+            { id: 122, q: 'She ______ (be) very beautiful when she was young.', a: 'was', e: '过去时 was。' },
+            { id: 123, q: 'They ______ (have) a great time at the party last night.', a: 'had', e: 'last night 用过去时 had。' },
+            { id: 124, q: 'I ______ (not know) the answer to this question.', a: 'don\'t know', e: '一般现在时否定 don\'t know。' },
+            { id: 125, q: 'He ______ (start) learning English when he was six.', a: 'started', e: '过去时 started。' },
+            { id: 126, q: 'The car ______ (break) down on the way home.', a: 'broke', e: '过去时 broke。' },
+            { id: 127, q: 'She ______ (forget) to lock the door again.', a: 'forgot', e: '过去时 forgot。' },
+            { id: 128, q: 'We ______ (already see) this movie.', a: 'have already seen', e: 'already 用现在完成时。' },
+            { id: 129, q: 'He ______ (not come) to school yesterday because he was ill.', a: 'didn\'t come',
+                e: 'yesterday 用过去时否定 didn\'t come。' },
+            { id: 130, q: 'They ______ (live) in this city for over twenty years.', a: 'have lived',
+                e: 'for over twenty years 用现在完成时。' },
+            { id: 131, q: 'She ______ (read) the newspaper while I was cooking.', a: 'was reading',
+                e: '过去进行时 was reading。' },
+            { id: 132, q: 'The concert ______ (begin) at 8 o\'clock.', a: 'begins', e: '一般现在时 begins。' },
+            { id: 133, q: 'He ______ (always complain) about the weather.', a: 'always complains',
+                e: '一般现在时 always complains。' },
+            { id: 134, q: 'I ______ (call) you as soon as I arrive.', a: 'will call', e: 'as soon as 主将从现，主句用 will call。' },
+            { id: 135, q: 'The building ______ (destroy) in the earthquake.', a: 'was destroyed',
+                e: '过去时被动 was destroyed。' },
+            { id: 136, q: 'She ______ (write) a letter to her parents every month.', a: 'writes',
+                e: 'every month 一般现在时 writes。' },
+            { id: 137, q: 'They ______ (build) a new bridge over the river.', a: 'are building',
+                e: '现在进行时 are building。' },
+            { id: 138, q: 'He ______ (finish) his homework before dinner.', a: 'had finished',
+                e: '过去完成时 had finished。' },
+            { id: 139, q: 'I ______ (never be) to a foreign country.', a: 'have never been', e: 'never 用现在完成时。' },
+            { id: 140, q: 'The teacher ______ (explain) the problem to us now.', a: 'is explaining',
+                e: 'now 现在进行时 is explaining。' }
+        ];
+        fillData.forEach(d => { d.type = 'fill';
+            d.answer = d.a; });
+        ALL_QUESTIONS.push(...fillData);
+
+        // ---------- 改错题 141-200 ----------
+        const errorData = [
+            { id: 141, q: 'He go to school on foot every day.', w: 'go', c: 'goes',
+            e: 'He 三单，一般现在时用 goes。' },
+            { id: 142, q: 'She doesn\'t works in a big company.', w: 'works', c: 'work',
+                e: 'doesn\'t 后接动词原形 work。' },
+            { id: 143, q: 'They was playing football when I saw them.', w: 'was', c: 'were',
+                e: 'They 复数用 were playing。' },
+            { id: 144, q: 'I have saw this movie before.', w: 'saw', c: 'seen', e: '现在完成时 have 后接过去分词 seen。' },
+            { id: 145, q: 'The homework was do by the students.', w: 'do', c: 'done', e: '被动语态 was 后接过去分词 done。' },
+            { id: 146, q: 'He must to finish the work today.', w: 'to', c: '', e: '情态动词 must 后接动词原形 finish。' },
+            { id: 147, q: 'You needn\'t to worry about me.', w: 'to', c: '', e: 'needn\'t 为情态动词，后接动词原形 worry。' },
+            { id: 148, q: 'She dare not to go out alone.', w: 'to', c: '', e: 'dare 作情态动词，后接动词原形 go。' },
+            { id: 149, q: 'Would you like to come? Yes, I would rather.', w: 'would rather', c: 'would like to',
+                e: 'Would you like 的肯定回答为 Yes, I\'d like to。' },
+            { id: 150, q: 'He had better to stay at home.', w: 'to', c: '', e: 'had better 后接动词原形 stay。' },
+            { id: 151, q: 'She doesn\'t know the answer, isn\'t she?', w: 'isn\'t', c: 'does',
+                e: '主句 doesn\'t know，反意疑问句用 does she。' },
+            { id: 152, q: 'The book is interested. I enjoy reading it.', w: 'interested', c: 'interesting',
+                e: '修饰物用 interesting（令人感兴趣的）。' },
+            { id: 153, q: 'He is looking forward to see his parents.', w: 'see', c: 'seeing',
+                e: 'look forward to 中 to 为介词，后接动名词 seeing。' },
+            { id: 154, q: 'She is used to get up early.', w: 'get', c: 'getting', e: 'be used to doing 表示"习惯于"。' },
+            { id: 155, q: 'The meeting will hold tomorrow.', w: 'hold', c: 'be held',
+                e: '会议与"举行"为被动关系 will be held。' },
+            { id: 156, q: 'He has been worked here for five years.', w: 'been worked', c: 'worked',
+                e: 'has worked 主动语态，表示"工作"。' },
+            { id: 157, q: 'I would have accomplish nothing if you hadn\'t helped.', w: 'accomplish', c: 'accomplished',
+                e: 'would have 后接过去分词 accomplished。' },
+            { id: 158, q: 'She happened see him at the airport.', w: 'see', c: 'to see', e: 'happen to do 固定搭配。' },
+            { id: 159, q: 'It occurred to me that I forget to lock the door.', w: 'forget', c: 'had forgotten',
+                e: '"忘记"发生在"想起"之前，用过去完成时。' },
+            { id: 160, q: 'Everyone experience these problems in their life.', w: 'experience', c: 'experiences',
+                e: 'everyone 单数用 experiences。' },
+            { id: 161, q: 'The problem was solve by the boy.', w: 'solve', c: 'solved', e: '被动语态 was 后接过去分词 solved。' },
+            { id: 162, q: 'He started a new job, didn\'t he? Yes, he started.', w: 'started', c: 'did',
+                e: '简短回答用助动词 did 代替 started。' },
+            { id: 163, q: 'It is time for us starting now.', w: 'starting', c: 'to start',
+                e: 'It is time for sb to do sth 固定句型。' },
+            { id: 164, q: 'This charity aims help people learn to make a living.', w: 'help', c: 'to help',
+                e: 'aims to do 固定搭配。' },
+            { id: 165, q: 'She doesn\'t dare telling the secret.', w: 'telling', c: 'tell',
+                e: 'dare 作实义动词用 dare to tell，作情态动词用 dare tell。' },
+            { id: 166, q: 'You mustn\'t to park your car here.', w: 'to', c: '', e: 'mustn\'t 后接动词原形 park。' },
+            { id: 167, q: '—Must I finish it now? —No, you mustn\'t.', w: 'mustn\'t', c: 'needn\'t',
+                e: 'Must 的否定回答为 needn\'t。' },
+            { id: 168, q: 'He can be at home because the light is on.', w: 'can', c: 'must',
+                e: '灯亮着表示"一定在家"用 must。' },
+            { id: 169, q: 'She could swam across the river when she was young.', w: 'swam', c: 'swim',
+                e: 'could 后接动词原形 swim。' },
+            { id: 170, q: 'You ought not to have left home, didn\'t you?', w: 'didn\'t', c: 'oughtn\'t',
+                e: '反意疑问句应与主句助动词一致。' },
+            { id: 171, q: 'The plan may have refused by them.', w: 'refused', c: 'been refused',
+                e: 'plan 与 refuse 被动关系，用 may have been refused。' },
+            { id: 172, q: 'We could have did it better.', w: 'did', c: 'done', e: 'could have 后接过去分词 done。' },
+            { id: 173, q: 'You shouldn\'t have to left so early.', w: 'to left', c: 'left',
+                e: 'shouldn\'t have 后接过去分词 left。' },
+            { id: 174, q: 'She needs tell us the truth.', w: 'tell', c: 'to tell',
+                e: 'need 作实义动词，三单用 needs to do。' },
+            { id: 175, q: 'He dare not to tell his father the news.', w: 'to', c: '',
+            e: 'dare 作情态动词，后接动词原形 tell。' },
+            { id: 176, q: 'If you will help me, I will go with you.', w: 'will help', c: 'help',
+                e: '条件句中常用一般现在时，will 表"愿意"也可，建议改为 help。' },
+            { id: 177, q: 'He shall be punished, shall he?', w: 'shall', c: 'shan\'t',
+                e: '反意疑问句前肯后否，用 shan\'t he。' },
+            { id: 178, q: 'I would rather to stay at home.', w: 'to', c: '', e: 'would rather 后接动词原形 stay。' },
+            { id: 179, q: 'She doesn\'t work here, doesn\'t she?', w: 'doesn\'t', c: 'does',
+                e: '前面否定，反意疑问句用肯定 does she。' },
+            { id: 180, q: 'Don\'t waste your time and energy on the thing, will you?', w: 'will', c: 'will',
+                e: '否定祈使句反意疑问句用 will you（正确，无需改）。' },
+            { id: 181, q: 'Do you find it difficult to learning a new language?', w: 'learning', c: 'learn',
+                e: 'to 后接动词原形 learn。' },
+            { id: 182, q: 'Matter is constantly moved and changing.', w: 'moved', c: 'moving',
+                e: 'is constantly moving 表示"不断运动"。' },
+            { id: 183, q: 'I\'m sure that you will soon make many friends here, won\'t you?', w: 'won\'t', c: 'will',
+                e: '主句为 I\'m sure that...，反意疑问句与 that 从句一致用 will you。' },
+            { id: 184, q: 'The topic was discussed in detail during the meeting, wasn\'t it?', w: 'wasn\'t', c: 'wasn\'t',
+                e: '正确（无需改）。' },
+            { id: 185, q: 'The contest will be held tomorrow, isn\'t it?', w: 'isn\'t', c: 'won\'t',
+                e: '将来时被动 will be held，反意疑问句用 won\'t it。' },
+            { id: 186, q: 'You do look very nice today, don\'t you?', w: 'don\'t', c: 'don\'t', e: '正确（无需改）。' },
+            { id: 187, q: 'Don\'t be afraid of make mistakes.', w: 'make', c: 'making',
+                e: '介词 of 后接动名词 making。' },
+            { id: 188, q: 'If you had not hurried, you would have miss the train.', w: 'miss', c: 'missed',
+                e: 'would have 后接过去分词 missed。' },
+            { id: 189, q: 'How can you be so careless, can you?', w: 'can', c: 'can\'t',
+                e: '前肯后否，用 can\'t you。' },
+            { id: 190, q: 'May I know your name? Yes, you may.', w: 'you may', c: 'please / sure',
+                e: 'May I... 的回答通常为 Yes, please. / Sure. / Certainly.' },
+            { id: 191, q: 'Would you tell me your name? Yes, I would.', w: 'I would', c: 'I will',
+                e: 'Would you... 的回答常用 Yes, I will / I\'d love to。' },
+            { id: 192, q: 'We should respect each other, shouldn\'t we?', w: 'shouldn\'t', c: 'shouldn\'t',
+                e: '正确（无需改）。' },
+            { id: 193, q: 'You ought not make private phone calls in work time.', w: 'make', c: 'to make',
+                e: 'ought to 的否定为 ought not to。' },
+            { id: 194, q: 'He shall be punished, doesn\'t he?', w: 'doesn\'t', c: 'shan\'t',
+                e: 'shall 的反意疑问句为 shan\'t he。' },
+            { id: 195, q: 'She needs to telling us the secret.', w: 'telling', c: 'tell',
+                e: 'needs to 后接动词原形 tell。' },
+            { id: 196, q: 'They were able to escaped from the fire.', w: 'escaped', c: 'escape',
+                e: 'be able to 后接动词原形 escape。' },
+            { id: 197, q: 'It can not be true, can\'t it?', w: 'can\'t', c: 'can',
+                e: 'It can not be true 为否定句，反意疑问句用 can it。' },
+            { id: 198, q: 'Little boys can be annoying sometimes, can\'t they?', w: 'can\'t', c: 'can\'t',
+                e: '正确（无需改）。' },
+            { id: 199, q: 'He must have read this book because he knows the characters in the book, mustn\'t he?',
+                w: 'mustn\'t', c: 'hasn\'t / didn\'t',
+                e: 'must have done 推测，反意疑问句根据具体情况用 hasn\'t/didn\'t。' },
+            { id: 200, q: 'You needn\'t have watered those roses, needn\'t you?', w: 'needn\'t', c: 'need',
+                e: '前肯后否，needn\'t have 为否定，反意疑问句用 need you。' }
+        ];
+        errorData.forEach(d => { d.type = 'error';
+            d.answer = d.w + '|' + d.c; });
+        ALL_QUESTIONS.push(...errorData);
+
+        // ================================================================
+        // 2. 应用状态
+        // ================================================================
+        const state = {
+            allQuestions: ALL_QUESTIONS,
+            examQuestions: [], // 当前考试30题
+            userAnswers: [], // 用户答案
+            submitted: false,
+            score: null,
+            historyBest: parseInt(localStorage.getItem('verbMaster_best')) || 0,
+        };
+
+        // DOM 引用
+        const $ = s => document.querySelector(s);
+        const $$ = s => document.querySelectorAll(s);
+
+        const viewHome = $('#viewHome');
+        const viewExam = $('#viewExam');
+        const viewBank = $('#viewBank');
+        const navBtns = $$('#navTabs button');
+        const startBtn = $('#startExamBtn');
+        const resetBtn = $('#resetExamBtn');
+        const submitBtn = $('#submitExamBtn');
+        const examContainer = $('#examQuestions');
+        const resultPanel = $('#resultPanel');
+        const finalScore = $('#finalScore');
+        const historyBestEl = $('#historyBest');
+        const trendBadge = $('#trendBadge');
+        const adviceText = $('#adviceText');
+        const progressText = $('#progressText');
+        const progressPercent = $('#progressPercent');
+        const progressFill = $('#progressFill');
+        const totalQStat = $('#totalQStat');
+        const randomQStat = $('#randomQStat');
+        const historyScoreStat = $('#historyScoreStat');
+        const bankList = $('#bankList');
+        const bankSearch = $('#bankSearch');
+        const bankFilterBtns = $$('#viewBank .bank-filter button');
+
+        // ================================================================
+        // 3. 核心逻辑
+        // ================================================================
+
+        // 随机抽取 n 道（不重复）
+        function pickRandom(arr, n) {
+            const shuffled = [...arr];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled.slice(0, n);
+        }
+
+        // 初始化考试
+        function initExam() {
+            state.examQuestions = pickRandom(state.allQuestions, 30);
+            state.userAnswers = state.examQuestions.map(() => ({}));
+            state.submitted = false;
+            state.score = null;
+            resultPanel.classList.add('hidden');
+            renderExam();
+            updateProgress();
+            submitBtn.disabled = false;
+            submitBtn.textContent = '📝 提交';
+            viewExam.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 渲染考试题目
+        function renderExam() {
+            const qs = state.examQuestions;
+            let html = '';
+            qs.forEach((q, idx) => {
+                const ans = state.userAnswers[idx] || {};
+                let inner = '';
+                const qNum = idx + 1;
+
+                if (q.type === 'choice') {
+                    inner = `<div class="options">`;
+                    q.o.forEach((opt, oi) => {
+                        const letter = String.fromCharCode(65 + oi);
+                        const checked = ans.value === letter ? 'checked' : '';
+                        inner += `
+                            <div class="opt" onclick="this.querySelector('input').click()">
+                                <input type="radio" name="q${idx}" value="${letter}" id="q${idx}_${letter}" ${checked} />
+                                <label for="q${idx}_${letter}">${opt}</label>
+                            </div>
+                        `;
+                    });
+                    inner += `</div>`;
+                } else if (q.type === 'fill') {
+                    const val = ans.value || '';
+                    inner = `
+                        <div class="fill-group">
+                            <label>答案：</label>
+                            <input type="text" class="fill-input" data-idx="${idx}" placeholder="填写单词..." value="${val}" />
+                        </div>
+                    `;
+                } else if (q.type === 'error') {
+                    const parts = ans.value ? ans.value.split('|') : ['', ''];
+                    inner = `
+                        <div class="error-group">
+                            <div class="err-item">
+                                <label>❌ 错误：</label>
+                                <input type="text" class="err-wrong" data-idx="${idx}" placeholder="错误部分" value="${parts[0] || ''}" />
+                            </div>
+                            <div class="err-item">
+                                <label>✅ 正确：</label>
+                                <input type="text" class="err-correct" data-idx="${idx}" placeholder="正确部分" value="${parts[1] || ''}" />
+                            </div>
+                        </div>
+                    `;
+                }
+
+                let resultBadge = '';
+                let expHtml = '';
+                if (state.submitted) {
+                    const isCorrect = state.userAnswers[idx] && state.userAnswers[idx].isCorrect;
+                    const badgeClass = isCorrect ? 'correct' : 'wrong';
+                    const badgeText = isCorrect ? '✅ 正确' : '❌ 错误';
+                    resultBadge = `<div class="result-badge ${badgeClass}">${badgeText}</div>`;
+                    const cardClass = isCorrect ? 'correct' : 'wrong';
+                    const exp = q.explanation || '无解析';
+                    const correctAns = q.answer || '';
+                    let showAns = correctAns;
+                    if (q.type === 'error') {
+                        const parts = correctAns.split('|');
+                        showAns = `错误: ${parts[0] || '—'} → 正确: ${parts[1] || '—'}`;
+                    }
+                    expHtml = `
+                        <div class="explanation show">
+                            <strong>📖 解析：</strong> ${exp}<br />
+                            <span style="color:#f5c842;">✔ 正确答案：${showAns}</span>
+                        </div>
+                    `;
+                    html += `<div class="question-card ${cardClass}" id="qcard_${idx}">`;
+                } else {
+                    html += `<div class="question-card" id="qcard_${idx}">`;
+                }
+
+                const typeMap = { choice: '选择题', fill: '语法填空', error: '改错题' };
+                html += `
+                    <div class="q-header">
+                        <span class="q-number">#${qNum}</span>
+                        <span class="q-type">${typeMap[q.type] || q.type}</span>
+                    </div>
+                    <div class="q-text">${q.q}</div>
+                    ${inner}
+                    ${resultBadge}
+                    ${expHtml}
+                `;
+                html += `</div>`;
+            });
+            examContainer.innerHTML = html;
+
+            if (!state.submitted) {
+                document.querySelectorAll('.fill-input').forEach(inp => {
+                    inp.addEventListener('input', function() {
+                        const idx = parseInt(this.dataset.idx);
+                        state.userAnswers[idx].value = this.value;
+                        updateProgress();
+                    });
+                });
+                document.querySelectorAll('.err-wrong').forEach(inp => {
+                    inp.addEventListener('input', function() {
+                        const idx = parseInt(this.dataset.idx);
+                        const correct = document.querySelector(`.err-correct[data-idx="${idx}"]`);
+                        state.userAnswers[idx].value = (this.value || '') + '|' + (correct ? correct.value : '');
+                        updateProgress();
+                    });
+                });
+                document.querySelectorAll('.err-correct').forEach(inp => {
+                    inp.addEventListener('input', function() {
+                        const idx = parseInt(this.dataset.idx);
+                        const wrong = document.querySelector(`.err-wrong[data-idx="${idx}"]`);
+                        state.userAnswers[idx].value = (wrong ? wrong.value : '') + '|' + (this.value || '');
+                        updateProgress();
+                    });
+                });
+                document.querySelectorAll('.options input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        const name = this.name;
+                        const idx = parseInt(name.replace('q', ''));
+                        state.userAnswers[idx].value = this.value;
+                        updateProgress();
+                    });
+                });
+            }
+        }
+
+        // 更新进度
+        function updateProgress() {
+            const total = state.examQuestions.length;
+            const answered = state.userAnswers.filter(a => a.value && a.value.trim() !== '').length;
+            const pct = total ? Math.round((answered / total) * 100) : 0;
+            progressText.textContent = `第 ${Math.min(answered + 1, total)} / ${total} 题 (已答 ${answered})`;
+            progressPercent.textContent = `${pct}%`;
+            progressFill.style.width = `${pct}%`;
+        }
+
+        // 提交考试
+        function submitExam() {
+            if (state.submitted) return;
+            const total = state.examQuestions.length;
+            const answered = state.userAnswers.filter(a => a.value && a.value.trim() !== '').length;
+            if (answered < total) {
+                if (!confirm(`还有 ${total - answered} 道题未作答，确定提交吗？`)) return;
+            }
+
+            let correctCount = 0;
+            state.examQuestions.forEach((q, idx) => {
+                const ans = state.userAnswers[idx];
+                if (!ans || !ans.value) { ans.isCorrect = false; return; }
+                const userVal = ans.value.trim();
+                const correctVal = q.answer ? q.answer.trim() : '';
+                let isCorrect = false;
+                if (q.type === 'choice') {
+                    isCorrect = userVal === correctVal;
+                } else if (q.type === 'fill') {
+                    isCorrect = userVal.toLowerCase() === correctVal.toLowerCase();
+                } else if (q.type === 'error') {
+                    const parts = userVal.split('|');
+                    const correctParts = correctVal.split('|');
+                    const userWrong = (parts[0] || '').trim().toLowerCase();
+                    const userCorrect = (parts[1] || '').trim().toLowerCase();
+                    const cWrong = (correctParts[0] || '').trim().toLowerCase();
+                    const cCorrect = (correctParts[1] || '').trim().toLowerCase();
+                    isCorrect = (userWrong === cWrong && userCorrect === cCorrect) ||
+                        (userWrong === '' && userCorrect === '' && cWrong === '' && cCorrect === '') ? false : false;
+                    if (correctParts[1] === '' && userCorrect === '' && userWrong === cWrong) isCorrect = true;
+                    if (correctParts[0] === '' && userWrong === '' && userCorrect === cCorrect) isCorrect = true;
+                }
+                ans.isCorrect = isCorrect;
+                if (isCorrect) correctCount++;
+            });
+
+            state.submitted = true;
+            state.score = Math.round((correctCount / total) * 100);
+
+            if (state.score > state.historyBest) {
+                state.historyBest = state.score;
+                localStorage.setItem('verbMaster_best', String(state.score));
+            }
+
+            renderExam();
+            updateProgress();
+            submitBtn.disabled = true;
+            submitBtn.textContent = '✅ 已提交';
+
+            resultPanel.classList.remove('hidden');
+            finalScore.textContent = `${state.score}%`;
+            historyBestEl.textContent = `${state.historyBest}%`;
+
+            const diff = state.score - state.historyBest;
+            let trendHtml = '';
+            if (diff > 0) {
+                trendHtml = `<span class="up">📈 上升 ${diff}%</span>`;
+            } else if (diff < 0) {
+                trendHtml = `<span class="down">📉 下降 ${Math.abs(diff)}%</span>`;
+            } else {
+                trendHtml = `<span class="equal">➖ 持平</span>`;
+            }
+            trendBadge.innerHTML = trendHtml;
+
+            if (state.score >= 90) adviceText.textContent = '🌟 卓越！你对动词的掌握非常扎实，继续保持！';
+            else if (state.score >= 70) adviceText.textContent = '💪 良好！建议回顾错题，巩固时态和情态动词。';
+            else if (state.score >= 50) adviceText.textContent = '📖 还需努力！重点复习动词时态、语态和情态动词用法。';
+            else adviceText.textContent = '🔥 别灰心！从基础开始，逐项攻克动词知识点，你一定能进步！';
+
+            historyScoreStat.textContent = `${state.historyBest}%`;
+        }
+
+        // ================================================================
+        // 4. 题库视图
+        // ================================================================
+        function renderBank(filter = 'all', keyword = '') {
+            let items = state.allQuestions;
+            if (filter !== 'all') items = items.filter(q => q.type === filter);
+            if (keyword.trim()) {
+                const kw = keyword.trim().toLowerCase();
+                items = items.filter(q => q.q.toLowerCase().includes(kw) ||
+                    (q.answer && q.answer.toLowerCase().includes(kw)));
+            }
+            items.sort((a, b) => a.id - b.id);
+
+            let html = '';
+            const typeMap = { choice: '选择题', fill: '语法填空', error: '改错题' };
+            items.forEach(q => {
+                let ansDisplay = q.answer || '';
+                if (q.type === 'error') {
+                    const parts = ansDisplay.split('|');
+                    ansDisplay = `❌ ${parts[0] || '—'} → ✅ ${parts[1] || '—'}`;
+                }
+                html += `
+                    <div class="bank-item">
+                        <div class="b-head">
+                            <span class="b-id">#${q.id}</span>
+                            <span class="b-type">${typeMap[q.type] || q.type}</span>
+                        </div>
+                        <div class="b-q">${q.q}</div>
+                        <div class="b-ans">✔ 答案：${ansDisplay}</div>
+                        <div class="b-exp" style="display:none;">📖 ${q.explanation || '无解析'}</div>
+                        <button class="btn-outline" style="margin-top:8px;padding:4px 16px;font-size:0.8rem;" onclick="this.previousElementSibling.style.display=this.previousElementSibling.style.display==='none'?'block':'none'">查看解析</button>
+                    </div>
+                `;
+            });
+            bankList.innerHTML = html || '<p class="text-muted" style="text-align:center;padding:40px;">没有找到匹配的题目</p>';
+        }
+
+        // ================================================================
+        // 5. 导航 & 事件绑定
+        // ================================================================
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view' + viewId.charAt(0).toUpperCase() + viewId.slice(1)).classList.add('active');
+            navBtns.forEach(b => {
+                b.classList.toggle('active', b.dataset.view === viewId);
+            });
+            if (viewId === 'bank') renderBank();
+            if (viewId === 'home') {
+                historyScoreStat.textContent = `${state.historyBest}%`;
+                randomQStat.textContent = '30';
+                totalQStat.textContent = state.allQuestions.length;
+            }
+        }
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                switchView(this.dataset.view);
+            });
+        });
+
+        startBtn.addEventListener('click', function() {
+            switchView('exam');
+            initExam();
+        });
+
+        resetBtn.addEventListener('click', function() {
+            if (state.submitted) {
+                if (!confirm('重新抽题将清空当前进度，确定吗？')) return;
+            }
+            initExam();
+        });
+
+        submitBtn.addEventListener('click', submitExam);
+
+        bankSearch.addEventListener('input', function() {
+            const activeFilter = document.querySelector('#viewBank .bank-filter .active');
+            const filter = activeFilter ? activeFilter.dataset.filter : 'all';
+            renderBank(filter, this.value);
+        });
+        bankFilterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                bankFilterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderBank(this.dataset.filter, bankSearch.value);
+            });
+        });
+
+        // ================================================================
+        // 6. 初始化
+        // ================================================================
+
+        historyScoreStat.textContent = `${state.historyBest}%`;
+        totalQStat.textContent = state.allQuestions.length;
+        randomQStat.textContent = '30';
+
+        switchView('home');
+
+        console.log('✅ Verb·Master 已加载！总题数：', state.allQuestions.length);
+        console.log('📊 历史最高分：', state.historyBest + '%');
+    </script>
+</body>
+</html>

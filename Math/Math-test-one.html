@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>河南专升本 · 数学随机测试</title>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        :root {
+            --bg: #0a0f2e;
+            --card: rgba(255, 255, 255, 0.06);
+            --gold: #f0c75e;
+            --blue: #4a9eff;
+            --red: #ff6b6b;
+            --green: #51cf66;
+            --text: #f0f0f5;
+            --border: rgba(255, 255, 255, 0.15);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: radial-gradient(circle at 20% 20%, #16224a, var(--bg));
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '∑ ∫ π √ ∞';
+            position: absolute;
+            font-size: 180px;
+            color: rgba(255, 255, 255, 0.02);
+            top: 20px;
+            left: 0;
+            letter-spacing: 30px;
+            pointer-events: none;
+            width: 100%;
+            text-align: center;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        h1, h2, h3 { font-weight: 600; letter-spacing: 1px; }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--gold), #fff7d6, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        .header .sub {
+            color: var(--blue);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--gold), #ffdd7e);
+            color: #1a1a2e;
+            box-shadow: 0 4px 15px rgba(240, 199, 94, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(240, 199, 94, 0.55); }
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+        .btn.secondary:hover { background: rgba(255, 255, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .btn.danger {
+            background: linear-gradient(135deg, var(--red), #ff8787);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        .home-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.25);
+            padding: 12px 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .progress-bar {
+            flex: 1;
+            min-width: 150px;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+            border-radius: 10px;
+            transition: width 0.4s;
+        }
+        .question-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+        .option-item:hover { background: rgba(74, 158, 255, 0.1); border-color: var(--blue); }
+        .option-item.selected {
+            background: rgba(74, 158, 255, 0.2);
+            border-color: var(--blue);
+            box-shadow: 0 0 15px rgba(74, 158, 255, 0.3);
+        }
+        .option-item input[type="radio"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; position: relative; }
+        .option-item input[type="radio"]:checked { border-color: var(--gold); background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .question-nav-dots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            color: #ccc;
+        }
+        .dot.active { background: var(--gold); color: #1a1a2e; border-color: var(--gold); box-shadow: 0 0 12px rgba(240,199,94,0.6); }
+        .dot.answered { background: rgba(74,158,255,0.3); border-color: var(--blue); }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal.open { display: flex; }
+        .modal-content {
+            background: #1a1f3d;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .close-btn { background: none; border: none; color: var(--text); font-size: 2rem; cursor: pointer; line-height: 1; }
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 4px solid var(--gold);
+        }
+        .wrong-item {
+            background: rgba(255,107,107,0.08);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,107,107,0.2);
+        }
+        .correct-answer { color: var(--green); font-weight: 600; }
+        .wrong-answer { color: var(--red); font-weight: 600; }
+        .explanation {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        .topic-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .topic-filter .btn {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            border-radius: 20px;
+        }
+        .hidden { display: none !important; }
+        @media (max-width: 600px) {
+            .app-container { padding: 15px; }
+            .question-text { font-size: 1rem; }
+            .option-item { font-size: 0.95rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="app">
+        <!-- 首页 -->
+        <div id="homePage">
+            <div class="header">
+                <h1>河南专升本 · 数学</h1>
+                <div class="sub">随机抽题 · 智能解析 · 历史对比</div>
+            </div>
+            <div class="stats-bar" id="historyBar">
+                <span>📊 历史最高：<strong id="bestScore">--</strong></span>
+                <span>📈 上次：<strong id="lastScore">--</strong></span>
+                <span>📚 总题数：<strong>300</strong></span>
+            </div>
+            <div class="home-actions">
+                <button class="btn" id="startBtn">🎯 开始随机测试（30题）</button>
+                <button class="btn secondary" id="showBankBtn">📖 显示题库</button>
+                <button class="btn secondary" id="resetHistoryBtn">🗑️ 清空历史记录</button>
+            </div>
+        </div>
+
+        <!-- 测试页 -->
+        <div id="testPage" class="hidden">
+            <div class="stats-bar">
+                <span>📝 进度：<strong id="progressText">1 / 30</strong></span>
+                <div class="progress-bar"><div class="fill" id="progressFill" style="width:2%"></div></div>
+                <button class="btn secondary" id="reRandomBtn">🔄 重新随机</button>
+                <button class="btn secondary" id="showBankBtn2">📖 题库</button>
+                <button class="btn danger" id="submitBtn">✅ 提交</button>
+            </div>
+            <div id="questionArea"></div>
+            <div class="nav-buttons">
+                <button class="btn secondary" id="prevBtn">◀ 上一题</button>
+                <button class="btn secondary" id="nextBtn">下一题 ▶</button>
+            </div>
+            <div class="question-nav-dots" id="dotsContainer"></div>
+        </div>
+
+        <!-- 结果页 -->
+        <div id="resultPage" class="hidden">
+            <div class="header">
+                <h2>📋 测试结果</h2>
+            </div>
+            <div id="resultSummary"></div>
+            <div id="resultComparison"></div>
+            <div id="resultWrong"></div>
+            <div class="home-actions" style="margin-top:20px;">
+                <button class="btn" id="backHomeBtn">🏠 返回首页</button>
+                <button class="btn secondary" id="retakeBtn">🔄 重新测试</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 题库模态框 -->
+    <div class="modal" id="bankModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📚 题库浏览</h3>
+                <button class="close-btn" id="closeBankBtn">&times;</button>
+            </div>
+            <div class="topic-filter" id="topicFilter"></div>
+            <div id="bankContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 题库数据（300题） ==========
+        const TOPICS = ['定义域','奇偶性','表达式','反函数','数列极限','函数极限','渐近线','已知极限求参数','无穷大','无穷小','无穷小比阶','连续与间断'];
+        const Q = [
+            // 专题1 定义域 25题
+            [1, `函数 \\(f(x)=\\ln(2x-4)\\) 的定义域是（ ）`, `\\((2,+\\infty)\\)`, `\\([2,+\\infty)\\)`, `\\((-\\infty,2)\\)`, `\\((0,+\\infty)\\)`, 0, `\\(2x-4>0\\Rightarrow x>2\\)`],
+            [1, `函数 \\(f(x)=\\frac{\\sqrt{3-x}}{x+1}\\) 的定义域是（ ）`, `\\(x\\le3\\) 且 \\(x\\ne-1\\)`, `\\(x<3\\) 且 \\(x\\ne-1\\)`, `\\(x\\ge3\\) 且 \\(x\\ne-1\\)`, `\\(x\\le3\\) 且 \\(x\\ne1\\)`, 0, `\\(3-x\\ge0\\) 且 \\(x+1\\ne0\\)`],
+            [1, `\\(f(x)=\\frac{1}{\\sqrt{x^2-9}}\\) 的定义域是（ ）`, `\\((-3,3)\\)`, `\\([-3,3]\\)`, `\\((-\\infty,-3)\\cup(3,+\\infty)\\)`, `\\((-\\infty,-3]\\cup[3,+\\infty)\\)`, 2, `\\(x^2-9>0\\)`],
+            [1, `\\(f(x)=\\arcsin(x-2)\\) 的定义域是（ ）`, `\\([0,2]\\)`, `\\([1,3]\\)`, `\\([2,4]\\)`, `\\([-1,1]\\)`, 1, `\\(-1\\le x-2\\le1\\Rightarrow 1\\le x\\le3\\)`],
+            [1, `\\(f(x)=\\ln(4-x^2)\\) 的定义域是（ ）`, `\\((-2,2)\\)`, `\\([-2,2]\\)`, `\\((-\\infty,-2)\\cup(2,+\\infty)\\)`, `\\((0,4)\\)`, 0, `\\(4-x^2>0\\)`],
+            [1, `\\(f(x)=\\sqrt{2x-1}+\\frac{1}{x-3}\\) 的定义域是（ ）`, `\\([\\frac12,3)\\cup(3,+\\infty)\\)`, `\\((\\frac12,3)\\)`, `\\([\\frac12,+\\infty)\\)`, `\\([\\frac12,3]\\)`, 0, `\\(2x-1\\ge0\\) 且 \\(x\\ne3\\)`],
+            [1, `\\(f(x)=\\frac{\\ln(x-1)}{\\sqrt{4-x}}\\) 的定义域是（ ）`, `\\((1,4)\\)`, `\\([1,4]\\)`, `\\((1,4]\\)`, `\\([1,4)\\)`, 0, `\\(x-1>0\\) 且 \\(4-x>0\\)`],
+            [1, `\\(f(x)=\\frac{1}{\\ln x}\\) 的定义域是（ ）`, `\\((0,+\\infty)\\)`, `\\((0,1)\\cup(1,+\\infty)\\)`, `\\([1,+\\infty)\\)`, `\\((1,+\\infty)\\)`, 1, `\\(x>0\\) 且 \\(\\ln x\\ne0\\)`],
+            [1, `\\(f(x)=\\sqrt{x^2-5x+6}\\) 的定义域是（ ）`, `\\([2,3]\\)`, `\\((-\\infty,2]\\cup[3,+\\infty)\\)`, `\\((2,3)\\)`, `\\((-\\infty,2)\\cup(3,+\\infty)\\)`, 1, `\\(x^2-5x+6\\ge0\\)`],
+            [1, `\\(f(x)=\\arcsin\\frac{x-1}{3}\\) 的定义域是（ ）`, `\\([-2,4]\\)`, `\\([-1,3]\\)`, `\\([0,3]\\)`, `\\([-4,2]\\)`, 0, `\\(-1\\le\\frac{x-1}{3}\\le1\\Rightarrow -2\\le x\\le4\\)`],
+            [1, `\\(f(x)=\\ln(3+x)+\\sqrt{2-x}\\) 的定义域是（ ）`, `\\([-3,2]\\)`, `\\((-3,2]\\)`, `\\((-3,2)\\)`, `\\([-3,2)\\)`, 1, `\\(3+x>0\\) 且 \\(2-x\\ge0\\)`],
+            [1, `\\(f(x)=\\sqrt{1-|x|}\\) 的定义域是（ ）`, `\\([-1,1]\\)`, `\\((-1,1)\\)`, `\\([0,1]\\)`, `\\((-\\infty,1]\\)`, 0, `\\(1-|x|\\ge0\\)`],
+            [1, `\\(f(x)=\\frac{1}{x^2-4x+3}\\) 的定义域是（ ）`, `\\(x\\ne1\\) 且 \\(x\\ne3\\)`, `\\(x\\ne1\\)`, `\\(x\\ne3\\)`, `\\((1,3)\\)`, 0, `\\(x^2-4x+3\\ne0\\)`],
+            [1, `\\(f(x)=\\sqrt{\\ln x}\\) 的定义域是（ ）`, `\\((0,1)\\)`, `\\((0,1]\\)`, `\\([1,+\\infty)\\)`, `\\((1,+\\infty)\\)`, 2, `\\(\\ln x\\ge0\\) 且 \\(x>0\\)`],
+            [1, `\\(f(x)=\\ln(\\ln x)\\) 的定义域是（ ）`, `\\((0,+\\infty)\\)`, `\\((1,+\\infty)\\)`, `\\([1,+\\infty)\\)`, `\\((e,+\\infty)\\)`, 1, `\\(\\ln x>0\\Rightarrow x>1\\)`],
+            [1, `\\(f(x)=\\arccos(2x-1)\\) 的定义域是（ ）`, `\\([-1,1]\\)`, `\\([0,1]\\)`, `\\([\\frac12,1]\\)`, `\\([0,2]\\)`, 1, `\\(-1\\le2x-1\\le1\\Rightarrow 0\\le x\\le1\\)`],
+            [1, `\\(f(x)=\\frac{\\sqrt{4-x^2}}{\\ln(x+1)}\\) 的定义域是（ ）`, `\\((-1,0)\\cup(0,2]\\)`, `\\([-2,2]\\)`, `\\((-1,2)\\)`, `\\((-1,0)\\cup(0,2)\\)`, 0, `\\(4-x^2\\ge0\\)，\\(x+1>0\\) 且 \\(\\ln(x+1)\\ne0\\)`],
+            [1, `\\(f(x)=\\frac{1}{\\sqrt{1-x^2}}\\) 的定义域是（ ）`, `\\((-1,1)\\)`, `\\([-1,1]\\)`, `\\((-\\infty,-1)\\cup(1,+\\infty)\\)`, `\\((0,1)\\)`, 0, `\\(1-x^2>0\\)`],
+            [1, `\\(f(x)=\\ln\\frac{x-2}{x+1}\\) 的定义域是（ ）`, `\\((-1,2)\\)`, `\\((-\\infty,-1)\\cup(2,+\\infty)\\)`, `\\((2,+\\infty)\\)`, `\\((-\\infty,-1)\\)`, 1, `\\(\\frac{x-2}{x+1}>0\\)`],
+            [1, `\\(f(x)=\\frac{\\sqrt{x^2-1}}{x-2}\\) 的定义域是（ ）`, `\\(|x|\\ge1\\) 且 \\(x\\ne2\\)`, `\\(|x|>1\\) 且 \\(x\\ne2\\)`, `\\(x\\ge1\\) 且 \\(x\\ne2\\)`, `\\(x\\le-1\\) 或 \\(x\\ge1\\)`, 0, `\\(x^2-1\\ge0\\) 且 \\(x\\ne2\\)`],
+            [1, `\\(f(x)=e^{1/x}\\) 的定义域是（ ）`, `\\((0,+\\infty)\\)`, `\\((-\\infty,0)\\cup(0,+\\infty)\\)`, `\\([0,+\\infty)\\)`, `\\((-\\infty,0)\\)`, 1, `\\(x\\ne0\\)`],
+            [1, `\\(f(x)=\\ln|x-2|\\) 的定义域是（ ）`, `\\(x>2\\)`, `\\(x<2\\)`, `\\(x\\ne2\\)`, `\\(x\\ge2\\)`, 2, `\\(|x-2|>0\\)`],
+            [1, `\\(f(x)=\\sqrt{2x-x^2}\\) 的定义域是（ ）`, `\\([0,2]\\)`, `\\((0,2)\\)`, `\\([-2,0]\\)`, `\\([0,+\\infty)\\)`, 0, `\\(2x-x^2\\ge0\\)`],
+            [1, `\\(f(x)=\\arcsin(\\ln x)\\) 的定义域是（ ）`, `\\([\\frac1e,e]\\)`, `\\((0,e)\\)`, `\\([1,e]\\)`, `\\((\\frac1e,e)\\)`, 0, `\\(-1\\le\\ln x\\le1\\)`],
+            [1, `\\(f(x)=\\frac{\\sqrt{4-x}}{\\ln(3-x)}\\) 的定义域是（ ）`, `\\((-\\infty,2)\\cup(2,3)\\)`, `\\((-\\infty,3)\\)`, `\\((-\\infty,2)\\cup(2,3]\\)`, `\\((-\\infty,3]\\)`, 0, `\\(4-x\\ge0\\)，\\(3-x>0\\) 且 \\(\\ln(3-x)\\ne0\\)`],
+
+            // 专题2 奇偶性 25题
+            [2, `函数 \\(f(x)=x^3+\\sin x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-x^3-\\sin x=-f(x)\\)`],
+            [2, `\\(f(x)=x^2+\\cos x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(f(-x)=x^2+\\cos x=f(x)\\)`],
+            [2, `\\(f(x)=x^2+x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `既是奇又是偶`, 2, `\\(f(-x)=x^2-x\\)`],
+            [2, `\\(f(x)=\\ln\\frac{1-x}{1+x}\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `\\(f(x)=x(e^x+e^{-x})\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `偶函数乘x得奇函数`],
+            [2, `\\(f(x)=e^x-e^{-x}\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `\\(f(x)=e^x+e^{-x}\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(f(-x)=f(x)\\)`],
+            [2, `\\(f(x)=|x|\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(|-x|=|x|\\)`],
+            [2, `\\(f(x)=x|x|\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `\\(f(x)=\\sin x+\\cos x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 2, `\\(f(-x)=-\\sin x+\\cos x\\)`],
+            [2, `\\(f(x)=\\ln(x+\\sqrt{1+x^2})\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `\\(f(x)=x^2\\sin x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `偶乘奇得奇`],
+            [2, `\\(f(x)=x^3\\cos x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `奇乘偶得奇`],
+            [2, `\\(f(x)=\\frac{1}{1+x^2}\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(f(-x)=f(x)\\)`],
+            [2, `\\(f(x)=\\frac{x}{1+x^2}\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `\\(f(x)=x^4+1\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(f(-x)=f(x)\\)`],
+            [2, `若 \\(f(x)\\) 为奇函数，且 \\(f(1)=2\\)，则 \\(f(-1)=\\)（ ）`, `2`, `-2`, `0`, `1`, 1, `\\(f(-1)=-f(1)=-2\\)`],
+            [2, `若 \\(f(x)\\) 为偶函数，且 \\(f(-2)=3\\)，则 \\(f(2)=\\)（ ）`, `-3`, `3`, `0`, `无法确定`, 1, `\\(f(2)=f(-2)=3\\)`],
+            [2, `设 \\(f(x)\\) 是奇函数，且 \\(x>0\\) 时 \\(f(x)=x^2+1\\)，则 \\(f(-1)=\\)（ ）`, `2`, `-2`, `1`, `-1`, 1, `\\(f(1)=2\\)，故 \\(f(-1)=-2\\)`],
+            [2, `设 \\(f(x)\\) 是偶函数，\\(x>0\\) 时 \\(f(x)=x^3\\)，则 \\(f(-2)=\\)（ ）`, `-8`, `8`, `-4`, `4`, 1, `\\(f(-2)=f(2)=8\\)`],
+            [2, `\\(f(x)=\\ln(1+x)-\\ln(1-x)\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `\\(f(x)=\\cos(x^3)\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(\\cos((-x)^3)=\\cos(x^3)\\)`],
+            [2, `\\(f(x)=\\sin(x^2)\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 1, `\\(\\sin((-x)^2)=\\sin(x^2)\\)`],
+            [2, `\\(f(x)=x+\\sin x\\) 是（ ）`, `奇函数`, `偶函数`, `非奇非偶`, `无法确定`, 0, `\\(f(-x)=-f(x)\\)`],
+            [2, `下列函数中是偶函数的是（ ）`, `\\(y=x^3\\)`, `\\(y=\\sin x\\)`, `\\(y=\\cos x\\)`, `\\(y=\\frac1x\\)`, 2, `\\(\\cos(-x)=\\cos x\\)`],
+
+            // 专题3 表达式 25题
+            [3, `设 \\(f(x)=x^2-1\\)，则 \\(f(x+1)=\\)（ ）`, `\\(x^2\\)`, `\\(x^2+2x\\)`, `\\(x^2+2x-1\\)`, `\\(x^2-2x\\)`, 1, `\\(f(x+1)=(x+1)^2-1=x^2+2x\\)`],
+            [3, `设 \\(f(x-1)=x^2\\)，则 \\(f(x)=\\)（ ）`, `\\(x^2\\)`, `\\((x+1)^2\\)`, `\\((x-1)^2\\)`, `\\(x^2+1\\)`, 1, `令 \\(t=x-1\\)，则 \\(f(t)=(t+1)^2\\)`],
+            [3, `设 \\(f(x)=2x+1\\)，\\(g(x)=x^2\\)，则 \\(f(g(x))=\\)（ ）`, `\\(2x^2+1\\)`, `\\(2x^2\\)`, `\\((2x+1)^2\\)`, `\\(4x^2+1\\)`, 0, `\\(f(g(x))=2x^2+1\\)`],
+            [3, `设 \\(f(x)=\\frac1x\\)，则 \\(f(f(x))=\\)（ ）`, `\\(x\\)`, `\\(\\frac1x\\)`, `\\(x^2\\)`, `\\(\\frac1{x^2}\\)`, 0, `\\(f(f(x))=\\frac1{1/x}=x\\)`],
+            [3, `设 \\(f(x)=\\frac{x}{x-1}\\)，则 \\(f(f(x))=\\)（ ）`, `\\(\\frac1x\\)`, `\\(x\\)`, `\\(\\frac{x-1}{x}\\)`, `\\(\\frac{x}{x-1}\\)`, 1, `代入化简得 \\(x\\)`],
+            [3, `设 \\(f(x)=x^2\\)，\\(g(x)=\\ln x\\)，则 \\(g(f(e))=\\)（ ）`, `1`, `2`, `\\(e\\)`, `\\(e^2\\)`, 1, `\\(f(e)=e^2\\)，\\(g(e^2)=2\\)`],
+            [3, `设 \\(f(x)=\\begin{cases}x+1,&x\\ge0\\\\-x,&x<0\\end{cases}\\)，则 \\(f(-2)+f(1)=\\)（ ）`, `2`, `3`, `4`, `5`, 2, `\\(f(-2)=2\\)，\\(f(1)=2\\)`],
+            [3, `设 \\(f(x)=\\begin{cases}x^2,&x\\le1\\\\2x,&x>1\\end{cases}\\)，则 \\(f(2)=\\)（ ）`, `2`, `4`, `1`, `8`, 1, `\\(2>1\\)，故 \\(f(2)=4\\)`],
+            [3, `已知 \\(f\\left(x+\\frac1x\\right)=x^2+\\frac1{x^2}\\)，则 \\(f(x)=\\)（ ）`, `\\(x^2+2\\)`, `\\(x^2-2\\)`, `\\(x^2\\)`, `\\(x^2+1\\)`, 1, `\\(x^2+\\frac1{x^2}=(x+\\frac1x)^2-2\\)`],
+            [3, `设 \\(f(x)=e^x\\)，则 \\(f(2x)=\\)（ ）`, `\\(e^x\\)`, `\\(2e^x\\)`, `\\((e^x)^2\\)`, `\\(e^{x+2}\\)`, 2, `\\(f(2x)=e^{2x}=(e^x)^2\\)`],
+            [3, `设 \\(f(x)=\\ln x\\)，则 \\(f(e^2)=\\)（ ）`, `1`, `2`, `\\(e\\)`, `\\(e^2\\)`, 1, `\\(\\ln e^2=2\\)`],
+            [3, `设 \\(f(x)=\\sqrt{x}+1\\)，则 \\(f(4)=\\)（ ）`, `2`, `3`, `4`, `5`, 1, `\\(\\sqrt4+1=3\\)`],
+            [3, `设 \\(f(x)=ax+b\\)，且 \\(f(0)=1\\)，\\(f(1)=3\\)，则 \\(f(x)=\\)（ ）`, `\\(x+1\\)`, `\\(2x+1\\)`, `\\(3x+1\\)`, `\\(x+2\\)`, 1, `\\(b=1\\)，\\(a+b=3\\Rightarrow a=2\\)`],
+            [3, `设 \\(f(x)=\\frac{1}{1-x}\\)，则 \\(f(f(f(x)))=\\)（ ）`, `\\(x\\)`, `\\(\\frac1x\\)`, `\\(1-x\\)`, `\\(-x\\)`, 0, `迭代三次后回到 \\(x\\)`],
+            [3, `设 \\(f(x)=x^2+1\\)，\\(g(x)=\\sin x\\)，则 \\(f(g(0))=\\)（ ）`, `0`, `1`, `2`, `\\(\\sin1\\)`, 1, `\\(g(0)=0\\)，\\(f(0)=1\\)`],
+            [3, `设 \\(f(x+2)=x^2+4x+5\\)，则 \\(f(x)=\\)（ ）`, `\\(x^2+1\\)`, `\\(x^2+2x+1\\)`, `\\(x^2-1\\)`, `\\(x^2+5\\)`, 0, `\\(x^2+4x+5=(x+2)^2+1\\)`],
+            [3, `设 \\(f(x)=2^x\\)，则 \\(f(-x)f(x)=\\)（ ）`, `0`, `1`, `2`, `4`, 1, `\\(2^{-x}\\cdot2^x=1\\)`],
+            [3, `设 \\(f(x)=\\begin{cases}1,&x>0\\\\0,&x=0\\\\-1,&x<0\\end{cases}\\)，则 \\(f(-3)+f(0)+f(2)=\\)（ ）`, `-1`, `0`, `1`, `2`, 1, `\\(-1+0+1=0\\)`],
+            [3, `设 \\(f(x)=x^3\\)，\\(g(x)=\\sqrt[3]{x}\\)，则 \\(f(g(8))=\\)（ ）`, `2`, `4`, `8`, `64`, 2, `\\(g(8)=2\\)，\\(f(2)=8\\)`],
+            [3, `设 \\(f(2x)=x^2\\)，则 \\(f(x)=\\)（ ）`, `\\(\\frac{x^2}{4}\\)`, `\\(\\frac{x^2}{2}\\)`, `\\(2x^2\\)`, `\\(4x^2\\)`, 0, `令 \\(t=2x\\)，则 \\(f(t)=(t/2)^2\\)`],
+            [3, `设 \\(f(x)=\\frac1x\\)，则 \\(f(x+h)-f(x)=\\)（ ）`, `\\(-\\frac{h}{x(x+h)}\\)`, `\\(\\frac{h}{x(x+h)}\\)`, `\\(-\\frac{h}{x^2}\\)`, `\\(\\frac{h}{x^2}\\)`, 0, `\\(\\frac1{x+h}-\\frac1x=-\\frac{h}{x(x+h)}\\)`],
+            [3, `设 \\(f(x)=x^2-3x+2\\)，则 \\(f(1)=\\)（ ）`, `0`, `1`, `-1`, `2`, 0, `\\(1-3+2=0\\)`],
+            [3, `设 \\(f(x)=\\frac{x}{x^2+1}\\)，则 \\(f\\left(\\frac1x\\right)=\\)（ ）`, `\\(\\frac{x}{x^2+1}\\)`, `\\(\\frac{1}{x^2+1}\\)`, `\\(\\frac{x^2}{x^2+1}\\)`, `\\(\\frac{x^2+1}{x}\\)`, 0, `\\(f(1/x)=x/(x^2+1)\\)`],
+            [3, `设 \\(f(x)=\\ln\\frac{1+x}{1-x}\\)，则 \\(f(0)=\\)（ ）`, `0`, `1`, `-1`, `不存在`, 0, `\\(\\ln1=0\\)`],
+            [3, `设 \\(f(x)=x^2+2x\\)，则 \\(f(-1)=\\)（ ）`, `-1`, `0`, `1`, `-3`, 0, `\\(1-2=-1\\)`],
+
+            // 专题4 反函数 25题
+            [4, `函数 \\(y=2x+3\\) 的反函数是（ ）`, `\\(y=\\frac{x-3}{2}\\)`, `\\(y=2x-3\\)`, `\\(y=\\frac{x+3}{2}\\)`, `\\(y=\\frac x2-3\\)`, 0, `由 \\(y=2x+3\\) 解得 \\(x=\\frac{y-3}{2}\\)`],
+            [4, `函数 \\(y=3x-1\\) 的反函数是（ ）`, `\\(y=\\frac{x+1}{3}\\)`, `\\(y=3x+1\\)`, `\\(y=\\frac{x-1}{3}\\)`, `\\(y=\\frac x3+1\\)`, 0, `\\(x=\\frac{y+1}{3}\\)`],
+            [4, `函数 \\(y=\\frac1x\\) 的反函数是（ ）`, `\\(y=x\\)`, `\\(y=\\frac1x\\)`, `\\(y=-\\frac1x\\)`, `\\(y=x^2\\)`, 1, `\\(y=\\frac1x\\) 关于 \\(y=x\\) 对称`],
+            [4, `函数 \\(y=x^3\\) 的反函数是（ ）`, `\\(y=\\sqrt[3]{x}\\)`, `\\(y=x^2\\)`, `\\(y=\\frac1{x^3}\\)`, `\\(y=\\sqrt{x}\\)`, 0, `\\(x=\\sqrt[3]{y}\\)`],
+            [4, `函数 \\(y=\\ln(x+2)\\) 的反函数是（ ）`, `\\(y=e^x+2\\)`, `\\(y=e^x-2\\)`, `\\(y=\\ln(x-2)\\)`, `\\(y=e^{x-2}\\)`, 1, `\\(x+2=e^y\\Rightarrow x=e^y-2\\)`],
+            [4, `函数 \\(y=e^{3x}\\) 的反函数是（ ）`, `\\(y=\\frac{\\ln x}{3}\\)`, `\\(y=3\\ln x\\)`, `\\(y=\\ln(3x)\\)`, `\\(y=e^{x/3}\\)`, 0, `\\(3x=\\ln y\\Rightarrow x=\\frac{\\ln y}{3}\\)`],
+            [4, `函数 \\(y=\\sqrt{x-1}\\ (x\\ge1)\\) 的反函数是（ ）`, `\\(y=x^2+1\\ (x\\ge0)\\)`, `\\(y=x^2-1\\)`, `\\(y=\\sqrt{x+1}\\)`, `\\(y=x^2+1\\ (x\\in\\mathbb R)\\)`, 0, `\\(y^2=x-1\\Rightarrow x=y^2+1\\)`],
+            [4, `函数 \\(y=2^x\\) 的反函数是（ ）`, `\\(y=\\log_2x\\)`, `\\(y=\\log_x2\\)`, `\\(y=2^{-x}\\)`, `\\(y=x^2\\)`, 0, `指数与对数互为反函数`],
+            [4, `函数 \\(y=3^{x-1}\\) 的反函数是（ ）`, `\\(y=1+\\log_3x\\)`, `\\(y=\\log_3x-1\\)`, `\\(y=\\log_3(x-1)\\)`, `\\(y=3^{x+1}\\)`, 0, `\\(x-1=\\log_3y\\)`],
+            [4, `函数 \\(y=\\frac{2x+1}{x-1}\\) 的反函数是（ ）`, `\\(y=\\frac{x+1}{x-2}\\)`, `\\(y=\\frac{x-1}{x+2}\\)`, `\\(y=\\frac{2x-1}{x+1}\\)`, `\\(y=\\frac{x+2}{x-1}\\)`, 0, `解 \\(y(x-1)=2x+1\\) 得 \\(x=\\frac{y+1}{y-2}\\)`],
+            [4, `函数 \\(y=1+\\ln(2x)\\) 的反函数是（ ）`, `\\(y=\\frac{e^{x-1}}2\\)`, `\\(y=\\frac{e^x}2-1\\)`, `\\(y=2e^{x-1}\\)`, `\\(y=\\frac{e^x}2\\)`, 0, `\\(\\ln(2x)=y-1\\Rightarrow 2x=e^{y-1}\\)`],
+            [4, `函数 \\(y=\\arcsin\\frac x2\\) 的反函数是（ ）`, `\\(y=2\\sin x\\)`, `\\(y=\\sin\\frac x2\\)`, `\\(y=\\sin2x\\)`, `\\(y=2\\arcsin x\\)`, 0, `\\(\\frac x2=\\sin y\\Rightarrow x=2\\sin y\\)`],
+            [4, `函数 \\(y=\\tan x,\\ x\\in(-\\frac\\pi2,\\frac\\pi2)\\) 的反函数是（ ）`, `\\(y=\\arctan x\\)`, `\\(y=\\cot x\\)`, `\\(y=\\tan x\\)`, `\\(y=\\frac1{\\tan x}\\)`, 0, `正切对应反正切`],
+            [4, `函数 \\(y=\\cos x,\\ x\\in[0,\\pi]\\) 的反函数是（ ）`, `\\(y=\\arccos x\\)`, `\\(y=\\arcsin x\\)`, `\\(y=\\cos x\\)`, `\\(y=-\\arccos x\\)`, 0, `余弦对应反余弦`],
+            [4, `函数 \\(y=\\sqrt[3]{x}+1\\) 的反函数是（ ）`, `\\(y=(x-1)^3\\)`, `\\(y=x^3-1\\)`, `\\(y=(x+1)^3\\)`, `\\(y=x^3+1\\)`, 0, `\\(\\sqrt[3]{x}=y-1\\Rightarrow x=(y-1)^3\\)`],
+            [4, `函数 \\(y=\\frac{2}{x+1}\\) 的反函数是（ ）`, `\\(y=\\frac2x-1\\)`, `\\(y=\\frac2x+1\\)`, `\\(y=\\frac{2-x}{x}\\)`, `\\(y=\\frac{2}{x-1}\\)`, 0, `\\(x+1=\\frac2y\\Rightarrow x=\\frac2y-1\\)`],
+            [4, `函数 \\(y=\\log_2(x+3)\\) 的反函数是（ ）`, `\\(y=2^x-3\\)`, `\\(y=2^x+3\\)`, `\\(y=\\log_2x-3\\)`, `\\(y=2^{x-3}\\)`, 0, `\\(x+3=2^y\\Rightarrow x=2^y-3\\)`],
+            [4, `函数 \\(y=\\frac{x-1}{x+2}\\) 的反函数是（ ）`, `\\(y=\\frac{1+2x}{1-x}\\)`, `\\(y=\\frac{1-2x}{1+x}\\)`, `\\(y=\\frac{x+2}{x-1}\\)`, `\\(y=\\frac{2x+1}{x-1}\\)`, 0, `解 \\(y(x+2)=x-1\\) 得 \\(x=\\frac{1+2y}{1-y}\\)`],
+            [4, `函数 \\(y=5^{2x-1}\\) 的反函数是（ ）`, `\\(y=\\frac{1+\\log_5x}{2}\\)`, `\\(y=2\\log_5x+1\\)`, `\\(y=\\frac{\\log_5x-1}{2}\\)`, `\\(y=5^{(x+1)/2}\\)`, 0, `\\(2x-1=\\log_5y\\)`],
+            [4, `函数 \\(y=\\frac1{x^2}\\ (x>0)\\) 的反函数是（ ）`, `\\(y=\\frac1{\\sqrt{x}}\\)`, `\\(y=\\sqrt{\\frac1x}\\)`, `\\(y=\\frac1x\\)`, `\\(y=x^2\\)`, 0, `\\(x^2=\\frac1y\\Rightarrow x=\\frac1{\\sqrt y}\\)`],
+            [4, `函数 \\(y=\\ln\\sqrt{x+1}\\) 的反函数是（ ）`, `\\(y=e^{2x}-1\\)`, `\\(y=e^x-1\\)`, `\\(y=2e^x-1\\)`, `\\(y=e^{x/2}-1\\)`, 0, `\\(\\sqrt{x+1}=e^y\\Rightarrow x=e^{2y}-1\\)`],
+            [4, `函数 \\(y=2-3x\\) 的反函数是（ ）`, `\\(y=\\frac{2-x}{3}\\)`, `\\(y=\\frac{x-2}{3}\\)`, `\\(y=2-3x\\)`, `\\(y=\\frac{2+x}{3}\\)`, 0, `\\(3x=2-y\\)`],
+            [4, `函数 \\(y=\\sin(3x),\\ x\\in[-\\frac\\pi6,\\frac\\pi6]\\) 的反函数是（ ）`, `\\(y=\\frac13\\arcsin x\\)`, `\\(y=3\\arcsin x\\)`, `\\(y=\\arcsin\\frac x3\\)`, `\\(y=\\sin\\frac x3\\)`, 0, `\\(3x=\\arcsin y\\Rightarrow x=\\frac13\\arcsin y\\)`],
+            [4, `函数 \\(y=1+2^x\\) 的反函数是（ ）`, `\\(y=\\log_2(x-1)\\)`, `\\(y=\\log_2x-1\\)`, `\\(y=\\log_2(x+1)\\)`, `\\(y=2^{x-1}\\)`, 0, `\\(2^x=y-1\\Rightarrow x=\\log_2(y-1)\\)`],
+            [4, `函数 \\(y=\\frac{3x-2}{2x+1}\\) 的反函数是（ ）`, `\\(y=\\frac{x+2}{3-2x}\\)`, `\\(y=\\frac{x-2}{3+2x}\\)`, `\\(y=\\frac{2x+1}{3x-2}\\)`, `\\(y=\\frac{3x+2}{2x-1}\\)`, 0, `解 \\(y(2x+1)=3x-2\\) 得 \\(x=\\frac{y+2}{3-2y}\\)`],
+
+            // 专题5 数列极限 25题
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1+\\frac1n\\right)^n=\\)（ ）`, `\\(e\\)`, `1`, `0`, `\\(\\infty\\)`, 0, `重要极限`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1+\\frac2n\\right)^n=\\)（ ）`, `\\(e\\)`, `\\(e^2\\)`, `\\(2e\\)`, `1`, 1, `\\(=\\left[\\left(1+\\frac2n\\right)^{n/2}\\right]^2\\to e^2\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1-\\frac1n\\right)^n=\\)（ ）`, `\\(e\\)`, `\\(-e\\)`, `\\(e^{-1}\\)`, `1`, 2, `\\(\\left(1-\\frac1n\\right)^n\\to e^{-1}\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac n{n+1}=\\)（ ）`, `0`, `1`, `\\(\\infty\\)`, `-1`, 1, `分子分母同除以n`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac{2n+1}{3n-2}=\\)（ ）`, `\\(\\frac23\\)`, `\\(\\frac32\\)`, `1`, `0`, 0, `最高次系数比`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac{n^2+1}{2n^2-n}=\\)（ ）`, `\\(\\frac12\\)`, `1`, `2`, `0`, 0, `最高次系数比`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}(\\sqrt{n^2+n}-n)=\\)（ ）`, `0`, `\\(\\frac12\\)`, `1`, `\\(\\infty\\)`, 1, `有理化后极限为1/2`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}(\\sqrt{n+1}-\\sqrt n)=\\)（ ）`, `1`, `0`, `\\(\\infty\\)`, `\\(\\frac12\\)`, 1, `有理化后趋于0`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac1{n^2}=\\)（ ）`, `0`, `1`, `-1`, `\\(\\infty\\)`, 0, `分母趋于无穷`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1+\\frac1n\\right)^{2n}=\\)（ ）`, `\\(e\\)`, `\\(e^2\\)`, `\\(2e\\)`, `\\(e^{1/2}\\)`, 1, `\\(=\\left[\\left(1+\\frac1n\\right)^n\\right]^2\\to e^2\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1+\\frac3n\\right)^{n/3}=\\)（ ）`, `\\(e\\)`, `\\(e^3\\)`, `1`, `\\(e^{1/3}\\)`, 0, `重要极限`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1-\\frac1n\\right)^{2n}=\\)（ ）`, `\\(e^{-2}\\)`, `\\(e^2\\)`, `\\(e^{-1}\\)`, `1`, 0, `\\(=\\left[\\left(1-\\frac1n\\right)^n\\right]^2\\to e^{-2}\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(\\frac n{n+2}\\right)^n=\\)（ ）`, `\\(e^{-2}\\)`, `\\(e^2\\)`, `\\(e^{-1}\\)`, `0`, 0, `\\(\\frac n{n+2}=1-\\frac2{n+2}\\)，极限 \\(e^{-2}\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1+\\frac1{2n}\\right)^n=\\)（ ）`, `\\(e^{1/2}\\)`, `\\(e\\)`, `\\(e^2\\)`, `1`, 0, `指数n与分母2n相比，极限 \\(e^{1/2}\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1+\\frac1n\\right)^{n+2}=\\)（ ）`, `\\(e\\)`, `\\(e^2\\)`, `\\(e+2\\)`, `1`, 0, `\\(=\\left(1+\\frac1n\\right)^n\\left(1+\\frac1n\\right)^2\\to e\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac{2^n}{n!}=\\)（ ）`, `0`, `1`, `2`, `\\(\\infty\\)`, 0, `阶乘增长快于指数`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac{3n^3+2n}{n^3+1}=\\)（ ）`, `3`, `2`, `1`, `0`, 0, `最高次系数比`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac{n+(-1)^n}{n}=\\)（ ）`, `0`, `1`, `-1`, `不存在`, 1, `\\(1+\\frac{(-1)^n}{n}\\to1\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac1n\\sin n=\\)（ ）`, `0`, `1`, `不存在`, `\\(\\sin1\\)`, 0, `有界量乘无穷小`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}n\\sin\\frac1n=\\)（ ）`, `0`, `1`, `\\(n\\)`, `不存在`, 1, `\\(\\sin\\frac1n\\sim\\frac1n\\)`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left[\\left(1+\\frac1n\\right)^n+\\frac1n\\right]=\\)（ ）`, `\\(e\\)`, `\\(e+1\\)`, `1`, `0`, 0, `后项趋于0`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\frac{n^2+n}{2n^2+3}=\\)（ ）`, `\\(\\frac12\\)`, `1`, `2`, `0`, 0, `最高次系数比`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}(\\sqrt{n^2+2n}-n)=\\)（ ）`, `0`, `1`, `2`, `\\(\\frac12\\)`, 1, `有理化后极限为1`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}(2^n+3^n)^{1/n}=\\)（ ）`, `2`, `3`, `1`, `\\(\\infty\\)`, 1, `提取 \\(3^n\\) 后极限为3`],
+            [5, `\\(\\lim\\limits_{n\\to\\infty}\\left(1-\\frac2n\\right)^n=\\)（ ）`, `\\(e^{-2}\\)`, `\\(e^2\\)`, `\\(e^{-1}\\)`, `1`, 0, `\\(\\left(1-\\frac2n\\right)^n\\to e^{-2}\\)`],
+
+            // 专题6 函数极限 25题
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\sin x}{x}=\\)（ ）`, `0`, `1`, `\\(\\infty\\)`, `不存在`, 1, `重要极限`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{1-\\cos x}{x^2}=\\)（ ）`, `0`, `1`, `\\(\\frac12\\)`, `2`, 2, `\\(1-\\cos x\\sim\\frac12x^2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\tan x}{x}=\\)（ ）`, `0`, `1`, `\\(\\infty\\)`, `-1`, 1, `\\(\\tan x\\sim x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{e^x-1}{x}=\\)（ ）`, `0`, `1`, `\\(e\\)`, `\\(\\infty\\)`, 1, `\\(e^x-1\\sim x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\ln(1+x)}{x}=\\)（ ）`, `0`, `1`, `\\(e\\)`, `\\(\\infty\\)`, 1, `\\(\\ln(1+x)\\sim x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to\\infty}\\left(1+\\frac1x\\right)^x=\\)（ ）`, `\\(e\\)`, `1`, `0`, `\\(\\infty\\)`, 0, `重要极限`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\sin2x}{x}=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `0`, 1, `\\(\\sin2x\\sim2x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{1-\\cos2x}{x^2}=\\)（ ）`, `1`, `2`, `4`, `\\(\\frac12\\)`, 1, `\\(1-\\cos2x\\sim2x^2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{e^{2x}-1}{x}=\\)（ ）`, `1`, `2`, `\\(e\\)`, `0`, 1, `\\(e^{2x}-1\\sim2x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\ln(1+3x)}{x}=\\)（ ）`, `3`, `1`, `\\(\\frac13\\)`, `0`, 0, `\\(\\ln(1+3x)\\sim3x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to1}\\frac{x^2-1}{x-1}=\\)（ ）`, `0`, `1`, `2`, `不存在`, 2, `\\(=\\frac{(x-1)(x+1)}{x-1}=x+1\\to2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to2}\\frac{x^2-4}{x-2}=\\)（ ）`, `2`, `4`, `0`, `不存在`, 1, `约分后 \\(x+2\\to4\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}(1+x)^{1/x}=\\)（ ）`, `\\(e\\)`, `1`, `0`, `\\(\\infty\\)`, 0, `重要极限`],
+            [6, `\\(\\lim\\limits_{x\\to\\infty}\\left(1+\\frac2x\\right)^x=\\)（ ）`, `\\(e\\)`, `\\(e^2\\)`, `1`, `0`, 1, `\\(=\\left[\\left(1+\\frac2x\\right)^{x/2}\\right]^2\\to e^2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\sin3x}{\\sin2x}=\\)（ ）`, `1`, `\\(\\frac32\\)`, `\\(\\frac23\\)`, `0`, 1, `\\(\\sin3x\\sim3x,\\ \\sin2x\\sim2x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\tan2x}{x}=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `0`, 1, `\\(\\tan2x\\sim2x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\arcsin x}{x}=\\)（ ）`, `0`, `1`, `\\(\\infty\\)`, `-1`, 1, `等价无穷小`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\arctan x}{x}=\\)（ ）`, `0`, `1`, `\\(\\frac\\pi2\\)`, `\\(\\infty\\)`, 1, `等价无穷小`],
+            [6, `\\(\\lim\\limits_{x\\to\\infty}\\frac{2x^2+1}{3x^2-2}=\\)（ ）`, `\\(\\frac23\\)`, `\\(\\frac32\\)`, `1`, `\\(\\infty\\)`, 0, `最高次系数比`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\cos x-1}{x}=\\)（ ）`, `0`, `1`, `-1`, `\\(\\infty\\)`, 0, `\\(\\cos x-1\\sim-\\frac{x^2}2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}x\\sin\\frac1x=\\)（ ）`, `0`, `1`, `不存在`, `\\(\\infty\\)`, 0, `无穷小乘有界量`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{1-\\cos x}{x}=\\)（ ）`, `0`, `\\(\\frac12\\)`, `1`, `\\(\\infty\\)`, 0, `\\(1-\\cos x\\sim\\frac{x^2}2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{e^x-e^{-x}}{x}=\\)（ ）`, `0`, `1`, `2`, `\\(\\infty\\)`, 2, `等价于 \\(\\frac{x-(-x)}x=2\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\ln(1+2x)}{\\sin x}=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `0`, 1, `\\(\\ln(1+2x)\\sim2x,\\ \\sin x\\sim x\\)`],
+            [6, `\\(\\lim\\limits_{x\\to0}\\frac{\\sqrt{1+x}-1}{x}=\\)（ ）`, `0`, `1`, `\\(\\frac12\\)`, `2`, 2, `\\(\\sqrt{1+x}-1\\sim\\frac x2\\)`],
+
+            // 专题7 渐近线 25题
+            [7, `曲线 \\(y=\\frac1{x-1}\\) 的垂直渐近线是（ ）`, `\\(x=0\\)`, `\\(x=1\\)`, `\\(y=0\\)`, `\\(y=1\\)`, 1, `\\(x\\to1\\) 时分母趋于0`],
+            [7, `曲线 \\(y=\\frac1{x-1}\\) 的水平渐近线是（ ）`, `\\(x=1\\)`, `\\(x=0\\)`, `\\(y=0\\)`, `\\(y=1\\)`, 2, `\\(x\\to\\infty\\) 时 \\(y\\to0\\)`],
+            [7, `曲线 \\(y=\\frac{2x+1}{x-3}\\) 的水平渐近线是（ ）`, `\\(y=2\\)`, `\\(y=3\\)`, `\\(x=2\\)`, `\\(x=3\\)`, 0, `\\(x\\to\\infty\\) 时 \\(y\\to2\\)`],
+            [7, `曲线 \\(y=\\frac{2x+1}{x-3}\\) 的垂直渐近线是（ ）`, `\\(x=2\\)`, `\\(x=3\\)`, `\\(y=2\\)`, `\\(y=3\\)`, 1, `\\(x\\to3\\) 时分母为0`],
+            [7, `曲线 \\(y=\\ln x\\) 的垂直渐近线是（ ）`, `\\(x=1\\)`, `\\(x=0\\)`, `\\(y=0\\)`, `\\(y=1\\)`, 1, `\\(x\\to0^+\\) 时 \\(\\ln x\\to-\\infty\\)`],
+            [7, `曲线 \\(y=e^{-x}\\) 的水平渐近线是（ ）`, `\\(x=0\\)`, `\\(y=0\\)`, `\\(y=1\\)`, `\\(x=1\\)`, 1, `\\(x\\to+\\infty\\) 时 \\(e^{-x}\\to0\\)`],
+            [7, `曲线 \\(y=e^x\\) 的水平渐近线是（ ）`, `\\(y=0\\)`, `\\(y=1\\)`, `\\(x=0\\)`, `\\(x=1\\)`, 0, `\\(x\\to-\\infty\\) 时 \\(e^x\\to0\\)`],
+            [7, `曲线 \\(y=\\arctan x\\) 的水平渐近线是（ ）`, `\\(y=0\\)`, `\\(y=\\frac\\pi2\\) 和 \\(y=-\\frac\\pi2\\)`, `\\(x=\\frac\\pi2\\)`, `无`, 1, `\\(x\\to\\pm\\infty\\) 时分别趋于 \\(\\pm\\frac\\pi2\\)`],
+            [7, `曲线 \\(y=\\frac{x^2+1}{x-1}\\) 的斜渐近线是（ ）`, `\\(y=x+1\\)`, `\\(y=x-1\\)`, `\\(y=x\\)`, `\\(y=2x\\)`, 0, `\\(=\\frac{x^2+1}{x-1}=x+1+\\frac2{x-1}\\)`],
+            [7, `曲线 \\(y=\\frac{x^2}{x+1}\\) 的斜渐近线是（ ）`, `\\(y=x-1\\)`, `\\(y=x+1\\)`, `\\(y=x\\)`, `\\(y=1-x\\)`, 0, `\\(=\\frac{x^2}{x+1}=x-1+\\frac1{x+1}\\)`],
+            [7, `曲线 \\(y=\\tan x\\) 的垂直渐近线是（ ）`, `\\(x=k\\pi\\)`, `\\(x=\\frac\\pi2+k\\pi\\)`, `\\(x=\\pi+k\\pi\\)`, `\\(x=\\frac{k\\pi}2\\)`, 1, `\\(\\tan x\\) 在 \\(\\frac\\pi2+k\\pi\\) 处趋于无穷`],
+            [7, `曲线 \\(y=\\frac1{x^2-1}\\) 的垂直渐近线是（ ）`, `\\(x=1\\)`, `\\(x=-1\\)`, `\\(x=\\pm1\\)`, `\\(x=0\\)`, 2, `分母为零处`],
+            [7, `曲线 \\(y=\\ln(1+x)\\) 的垂直渐近线是（ ）`, `\\(x=0\\)`, `\\(x=-1\\)`, `\\(x=1\\)`, `\\(y=0\\)`, 1, `\\(x\\to-1^+\\) 时趋于 \\(-\\infty\\)`],
+            [7, `曲线 \\(y=e^{1/x}\\) 的水平渐近线是（ ）`, `\\(y=0\\)`, `\\(y=1\\)`, `\\(x=0\\)`, `\\(y=e\\)`, 1, `\\(x\\to\\infty\\) 时 \\(e^{1/x}\\to1\\)`],
+            [7, `曲线 \\(y=\\frac{x+1}{x^2-4}\\) 的水平渐近线是（ ）`, `\\(y=0\\)`, `\\(y=1\\)`, `\\(y=\\frac12\\)`, `\\(y=\\infty\\)`, 0, `分母次数高于分子`],
+            [7, `曲线 \\(y=\\frac{x+1}{x^2-4}\\) 的垂直渐近线是（ ）`, `\\(x=2\\)`, `\\(x=-2\\)`, `\\(x=\\pm2\\)`, `\\(x=4\\)`, 2, `分母为零处`],
+            [7, `曲线 \\(y=3+e^{-x}\\) 的水平渐近线是（ ）`, `\\(y=3\\)`, `\\(y=0\\)`, `\\(y=-3\\)`, `\\(x=3\\)`, 0, `\\(x\\to+\\infty\\) 时 \\(e^{-x}\\to0\\)`],
+            [7, `曲线 \\(y=\\frac{2x}{x+1}\\) 的垂直渐近线是（ ）`, `\\(x=2\\)`, `\\(x=-1\\)`, `\\(x=1\\)`, `\\(y=2\\)`, 1, `\\(x\\to-1\\) 时分母为0`],
+            [7, `曲线 \\(y=\\frac{2x}{x+1}\\) 的水平渐近线是（ ）`, `\\(y=0\\)`, `\\(y=1\\)`, `\\(y=2\\)`, `\\(x=2\\)`, 2, `\\(x\\to\\infty\\) 时 \\(y\\to2\\)`],
+            [7, `曲线 \\(y=\\frac{x^2+2x}{x-2}\\) 的斜渐近线是（ ）`, `\\(y=x+4\\)`, `\\(y=x-4\\)`, `\\(y=x+2\\)`, `\\(y=2x\\)`, 0, `\\(=\\frac{x^2+2x}{x-2}=x+4+\\frac8{x-2}\\)`],
+            [7, `曲线 \\(y=\\frac1{x^2}\\) 的垂直渐近线是（ ）`, `\\(x=0\\)`, `\\(x=1\\)`, `\\(y=0\\)`, `\\(y=1\\)`, 0, `\\(x\\to0\\) 时趋于无穷`],
+            [7, `曲线 \\(y=\\arctan\\frac1x\\) 的水平渐近线是（ ）`, `\\(y=0\\)`, `\\(y=\\frac\\pi2\\)`, `\\(y=-\\frac\\pi2\\)`, `\\(y=\\pm\\frac\\pi2\\)`, 0, `\\(x\\to\\infty\\) 时 \\(\\frac1x\\to0\\)，\\(\\arctan0=0\\)`],
+            [7, `曲线 \\(y=x+\\frac1x\\) 的斜渐近线是（ ）`, `\\(y=x\\)`, `\\(y=1\\)`, `\\(x=0\\)`, `\\(y=x+1\\)`, 0, `\\(x\\to\\infty\\) 时 \\(\\frac1x\\to0\\)`],
+            [7, `曲线 \\(y=\\frac1{e^x-1}\\) 的垂直渐近线是（ ）`, `\\(x=0\\)`, `\\(x=1\\)`, `\\(y=0\\)`, `\\(y=1\\)`, 0, `\\(x\\to0\\) 时分母趋于0`],
+            [7, `曲线 \\(y=\\sqrt{x^2+1}\\) 在 \\(x\\to+\\infty\\) 时的斜渐近线是（ ）`, `\\(y=x\\)`, `\\(y=-x\\)`, `\\(y=1\\)`, `\\(y=x+1\\)`, 0, `\\(\\frac{\\sqrt{x^2+1}}x\\to1\\)，且 \\(\\sqrt{x^2+1}-x\\to0\\)`],
+
+            // 专题8 已知极限求参数 25题
+            [8, `若 \\(\\lim\\limits_{x\\to1}\\frac{x^2+ax+b}{x-1}=3\\)，则 \\(a=\\)（ ）`, `1`, `-1`, `2`, `-2`, 0, `洛必达得 \\(2+a=3\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to1}\\frac{x^2+ax+b}{x-1}=3\\)，且 \\(a=1\\)，则 \\(b=\\)（ ）`, `1`, `-1`, `-2`, `2`, 2, `\\(1+a+b=0\\Rightarrow b=-2\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to2}\\frac{x^2+ax-2}{x-2}\\) 存在，则 \\(a=\\)（ ）`, `1`, `-1`, `2`, `-2`, 1, `\\(4+2a-2=0\\Rightarrow a=-1\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\sin(ax)}x=3\\)，则 \\(a=\\)（ ）`, `1`, `2`, `3`, `\\(\\frac13\\)`, 2, `\\(\\sin(ax)\\sim ax\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{e^{ax}-1}x=2\\)，则 \\(a=\\)（ ）`, `2`, `1`, `\\(\\frac12\\)`, `0`, 0, `\\(e^{ax}-1\\sim ax\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\left(1+\\frac ax\\right)^x=e^2\\)，则 \\(a=\\)（ ）`, `1`, `2`, `\\(e\\)`, `\\(e^2\\)`, 1, `极限为 \\(e^a\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\left(\\frac{x+a}{x-a}\\right)^x=e^2\\)，则 \\(a=\\)（ ）`, `1`, `2`, `4`, `\\(\\frac12\\)`, 0, `\\(=\\left(1+\\frac{2a}{x-a}\\right)^x\\to e^{2a}\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to1}\\frac{x^3-1}{x-1}=a\\)，则 \\(a=\\)（ ）`, `1`, `2`, `3`, `0`, 2, `\\(=\\frac{x^3-1}{x-1}=x^2+x+1\\to3\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\tan(ax)}{\\sin x}=2\\)，则 \\(a=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `4`, 1, `\\(\\tan(ax)\\sim ax,\\ \\sin x\\sim x\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\ln(1+ax)}x=5\\)，则 \\(a=\\)（ ）`, `1`, `5`, `\\(\\frac15\\)`, `\\(e\\)`, 1, `\\(\\ln(1+ax)\\sim ax\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\left(\\frac{x+3}{x-1}\\right)^x=e^a\\)，则 \\(a=\\)（ ）`, `3`, `4`, `1`, `2`, 1, `\\(=\\left(1+\\frac4{x-1}\\right)^x\\to e^4\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\sin3x}{kx}=1\\)，则 \\(k=\\)（ ）`, `1`, `3`, `\\(\\frac13\\)`, `0`, 1, `\\(\\sin3x\\sim3x\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to1}\\frac{x^2+kx-2}{x-1}=3\\)，则 \\(k=\\)（ ）`, `1`, `-1`, `2`, `3`, 0, `洛必达得 \\(2+k=3\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\frac{ax^3+2x}{x^3+bx^2}=2\\)，则 \\(a=\\)（ ）`, `2`, `1`, `3`, `0`, 0, `最高次系数比`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{1-\\cos(ax)}{x^2}=2\\)，则 \\(a^2=\\)（ ）`, `1`, `2`, `4`, `8`, 2, `\\(1-\\cos(ax)\\sim\\frac{a^2x^2}2\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\sqrt{1+ax}-1}x=1\\)，则 \\(a=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `4`, 1, `\\(\\sqrt{1+ax}-1\\sim\\frac{ax}2\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to2}\\frac{x^2+ax+b}{x-2}=5\\)，则 \\(a+b=\\)（ ）`, `-5`, `-6`, `1`, `-7`, 0, `\\(4+2a+b=0\\)，\\(4+a=5\\Rightarrow a=1,b=-6\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\left(\\frac{2x+1}{x+1}-a\\right)=0\\)，则 \\(a=\\)（ ）`, `1`, `2`, `3`, `0`, 1, `\\(\\frac{2x+1}{x+1}\\to2\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\sin(ax)}{\\tan(bx)}=2\\)，且 \\(b=1\\)，则 \\(a=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `4`, 1, `\\(\\frac ab=2\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{e^{ax}-e^{-ax}}x=4\\)，则 \\(a=\\)（ ）`, `1`, `2`, `4`, `\\(\\frac12\\)`, 1, `等价于 \\(2a=4\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to1}\\frac{x^2+ax+b}{x-1}=0\\)，则 \\(a+b=\\)（ ）`, `-1`, `1`, `-2`, `0`, 0, `\\(2+a=0\\Rightarrow a=-2\\)，\\(1+a+b=0\\Rightarrow b=1\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\left(\\frac{x+1}{x}\\right)^{bx}=e^3\\)，则 \\(b=\\)（ ）`, `1`, `2`, `3`, `\\(e\\)`, 2, `极限为 \\(e^b\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\ln(1+3x)}{kx}=1\\)，则 \\(k=\\)（ ）`, `1`, `3`, `\\(\\frac13\\)`, `0`, 1, `\\(\\ln(1+3x)\\sim3x\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to0}\\frac{\\sin2x}{x\\cos x}=a\\)，则 \\(a=\\)（ ）`, `1`, `2`, `\\(\\frac12\\)`, `0`, 1, `\\(\\cos x\\to1\\)，\\(\\sin2x\\sim2x\\)`],
+            [8, `若 \\(\\lim\\limits_{x\\to\\infty}\\left(1+\\frac ax\\right)^{2x}=e^6\\)，则 \\(a=\\)（ ）`, `2`, `3`, `6`, `\\(\\frac13\\)`, 1, `极限为 \\(e^{2a}\\)，故 \\(2a=6\\)`],
+
+            // 专题9 无穷大 25题
+            [9, `当 \\(x\\to0\\) 时，下列变量为无穷大的是（ ）`, `\\(\\frac1x\\)`, `\\(\\sin x\\)`, `\\(x^2\\)`, `\\(e^x\\)`, 0, `\\(\\frac1x\\to\\infty\\)`],
+            [9, `当 \\(x\\to\\infty\\) 时，下列变量为无穷大的是（ ）`, `\\(\\frac1x\\)`, `\\(e^{-x}\\)`, `\\(\\ln x\\)`, `\\(\\sin x\\)`, 2, `\\(\\ln x\\to\\infty\\)`],
+            [9, `当 \\(x\\to0^+\\) 时，下列变量为无穷大的是（ ）`, `\\(\\ln x\\)`, `\\(e^x\\)`, `\\(x^2\\)`, `\\(\\sin x\\)`, 0, `\\(\\ln x\\to-\\infty\\)`],
+            [9, `当 \\(x\\to1\\) 时，下列变量为无穷大的是（ ）`, `\\(\\frac1{x-1}\\)`, `\\(x-1\\)`, `\\(\\ln x\\)`, `\\(e^{x-1}\\)`, 0, `分母趋于0`],
+            [9, `当 \\(x\\to0\\) 时，\\(x\\sin\\frac1x\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `不存在`, 1, `无穷小乘有界量`],
+            [9, `当 \\(x\\to\\infty\\) 时，\\(x\\sin\\frac1x\\) 的极限是（ ）`, `0`, `1`, `\\(\\infty\\)`, `不存在`, 1, `\\(\\sin\\frac1x\\sim\\frac1x\\)`],
+            [9, `当 \\(x\\to\\infty\\) 时，下列变量为无穷大的是（ ）`, `\\(e^x\\)`, `\\(e^{-x}\\)`, `\\(\\sin x\\)`, `\\(\\frac1x\\)`, 0, `\\(e^x\\to\\infty\\)`],
+            [9, `当 \\(x\\to-\\infty\\) 时，\\(e^x\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `不存在`, 1, `\\(e^x\\to0\\)`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\frac1{x^2}\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `有界量`, 0, `分母趋于0`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\cot x\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `0`, 0, `\\(\\cot x=\\frac{\\cos x}{\\sin x}\\)`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\csc x\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `0`, 0, `\\(\\csc x=\\frac1{\\sin x}\\)`],
+            [9, `当 \\(x\\to\\frac\\pi2\\) 时，\\(\\tan x\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `0`, 0, `\\(\\tan x\\to\\infty\\)`],
+            [9, `当 \\(x\\to0^+\\) 时，\\(\\ln x\\) 是（ ）`, `正无穷大`, `负无穷大`, `0`, `1`, 1, `趋于 \\(-\\infty\\)`],
+            [9, `当 \\(x\\to\\infty\\) 时，\\(x^2-x\\) 是（ ）`, `无穷大`, `无穷小`, `有界量`, `1`, 0, `最高次项趋于无穷`],
+            [9, `当 \\(x\\to0^+\\) 时，\\(e^{1/x}\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `0`, 0, `\\(1/x\\to+\\infty\\)`],
+            [9, `当 \\(x\\to1\\) 时，\\(\\frac1{(x-1)^2}\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `0`, 0, `分母趋于0`],
+            [9, `当 \\(n\\to\\infty\\) 时，\\(n^2\\) 是（ ）`, `无穷大`, `无穷小`, `有界量`, `1`, 0, `趋于无穷`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\frac1{x\\sin x}\\) 是（ ）`, `无穷大`, `无穷小`, `有界量`, `1`, 0, `\\(x\\sin x\\to0\\)`],
+            [9, `当 \\(x\\to\\infty\\) 时，\\(x+\\sin x\\) 是（ ）`, `无穷大`, `无穷小`, `有界量`, `0`, 0, `\\(x\\to\\infty\\)，\\(\\sin x\\) 有界`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\ln|x|\\) 是（ ）`, `无穷大`, `无穷小`, `0`, `有界量`, 0, `趋于 \\(-\\infty\\)`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\frac1{1-\\cos x}\\) 是（ ）`, `无穷大`, `无穷小`, `有界量`, `1`, 0, `\\(1-\\cos x\\to0\\)`],
+            [9, `当 \\(x\\to\\infty\\) 时，\\((1+\\frac1x)^x\\) 是（ ）`, `无穷大`, `无穷小`, `有界量趋于 \\(e\\)`, `不存在`, 2, `极限为 \\(e\\)`],
+            [9, `当 \\(x\\to0\\) 时，\\(\\frac{x}{\\ln|x|}\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `无界`, 1, `分子趋于0，分母趋于无穷`],
+            [9, `当 \\(x\\to0^+\\) 时，\\(\\frac1{\\sqrt x}\\) 是（ ）`, `无穷大`, `无穷小`, `1`, `0`, 0, `分母趋于0`],
+            [9, `当 \\(x\\to\\infty\\) 时，\\(\\ln(1+x)\\) 是（ ）`, `无穷大`, `无穷小`, `有界量`, `0`, 0, `\\(\\ln(1+x)\\to\\infty\\)`],
+
+            // 专题10 无穷小 25题
+            [10, `当 \\(x\\to0\\) 时，下列变量为无穷小的是（ ）`, `\\(\\sin x\\)`, `\\(\\frac1x\\)`, `\\(e^x\\)`, `\\(\\ln x\\)`, 0, `\\(\\sin x\\to0\\)`],
+            [10, `当 \\(x\\to\\infty\\) 时，下列变量为无穷小的是（ ）`, `\\(\\frac1x\\)`, `\\(\\ln x\\)`, `\\(x\\)`, `\\(e^x\\)`, 0, `\\(\\frac1x\\to0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(x^2\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界非无穷小`, 0, `\\(x^2\\to0\\)`],
+            [10, `当 \\(x\\to1\\) 时，\\(\\ln x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `0`, 0, `\\(\\ln1=0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(1-\\cos x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `0`, 0, `极限为0`],
+            [10, `当 \\(x\\to0\\) 时，\\(e^x-1\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `\\(e\\)`, 0, `极限为0`],
+            [10, `当 \\(x\\to\\infty\\) 时，\\(e^{-x}\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `无界`, 0, `\\(e^{-x}\\to0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(x\\sin\\frac1x\\) 是（ ）`, `无穷小`, `无穷大`, `有界非无穷小`, `不存在`, 0, `无穷小乘有界量`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\tan x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界量`, 0, `\\(\\tan x\\to0\\)`],
+            [10, `当 \\(x\\to1\\) 时，\\(x-1\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界量`, 0, `\\(x-1\\to0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\arcsin x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `\\(\\frac\\pi2\\)`, 0, `\\(\\arcsin x\\to0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\arctan x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `\\(\\frac\\pi2\\)`, 0, `\\(\\arctan x\\to0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\ln(1+x)\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `\\(e\\)`, 0, `\\(\\ln1=0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\sqrt{1+x}-1\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `\\(\\frac12\\)`, 0, `极限为0`],
+            [10, `当 \\(x\\to0\\) 时，\\(x^2+x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界非无穷小`, 0, `极限为0`],
+            [10, `当 \\(x\\to\\infty\\) 时，\\(\\frac1{x^2}\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界量`, 0, `趋于0`],
+            [10, `当 \\(x\\to-\\infty\\) 时，\\(e^x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `无界`, 0, `\\(e^x\\to0\\)`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\frac{\\sin x}x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `不存在`, 2, `极限为1`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\cos x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `0`, 2, `\\(\\cos x\\to1\\)`],
+            [10, `当 \\(x\\to2\\) 时，\\((x-2)^2\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界非无穷小`, 0, `趋于0`],
+            [10, `当 \\(x\\to0\\) 时，\\(x^3\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界量`, 0, `趋于0`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\frac x{1+x}\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界量`, 0, `分子趋于0`],
+            [10, `当 \\(x\\to\\infty\\) 时，\\(\\frac{\\sin x}x\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `不存在`, 0, `有界量除以无穷大`],
+            [10, `当 \\(x\\to0\\) 时，\\(x^2\\sin\\frac1x\\) 是（ ）`, `无穷小`, `无穷大`, `有界非无穷小`, `不存在`, 0, `无穷小乘有界量`],
+            [10, `当 \\(x\\to0\\) 时，\\(\\ln(1-x)\\) 是（ ）`, `无穷小`, `无穷大`, `1`, `有界量`, 0, `\\(\\ln1=0\\)`],
+
+            // 专题11 无穷小比阶 25题
+            [11, `当 \\(x\\to0\\) 时，\\(x^2\\) 是 \\(x\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 0, `\\(\\frac{x^2}x=x\\to0\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\sin x\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{\\sin x}x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(1-\\cos x\\) 是 \\(x^2\\) 的（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 1, `\\(\\frac{1-\\cos x}{x^2}\\to\\frac12\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\tan x\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{\\tan x}x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(e^x-1\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{e^x-1}x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\ln(1+x)\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{\\ln(1+x)}x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\sqrt{1+x}-1\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 1, `\\(\\frac{\\sqrt{1+x}-1}x\\to\\frac12\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(x^2\\) 是 \\(\\sin x\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 0, `\\(\\frac{x^2}{\\sin x}\\sim x\\to0\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(x\\) 是 \\(x^2\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 1, `\\(\\frac x{x^2}=\\frac1x\\to\\infty\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\sin2x\\) 是 \\(x\\) 的（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{\\sin2x}x\\to2\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(1-\\cos x\\) 是 \\(x\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 0, `\\(\\frac{1-\\cos x}x\\sim\\frac x2\\to0\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(x^2\\) 与 \\(\\sin^2x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{x^2}{\\sin^2x}\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\ln(1+2x)\\) 是 \\(x\\) 的（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{\\ln(1+2x)}x\\to2\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(e^{2x}-1\\) 与 \\(x\\) 是（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{e^{2x}-1}x\\to2\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\tan x-\\sin x\\) 是 \\(x\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 0, `\\(\\tan x-\\sin x\\sim\\frac{x^3}2\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(x\\sin x\\) 是 \\(x\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 0, `\\(\\frac{x\\sin x}x=\\sin x\\to0\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\sin(x^2)\\) 是 \\(x\\) 的（ ）`, `高阶无穷小`, `低阶无穷小`, `同阶非等价`, `等价无穷小`, 0, `\\(\\frac{\\sin(x^2)}x\\sim x\\to0\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(x^2\\) 是 \\(1-\\cos x\\) 的（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{x^2}{1-\\cos x}\\to2\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(e^x-1\\) 与 \\(2x\\) 是（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{e^x-1}{2x}\\to\\frac12\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\ln(1-x)\\) 与 \\(x\\) 是（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{\\ln(1-x)}x\\to-1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\sin x\\) 与 \\(\\tan x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{\\sin x}{\\tan x}=\\cos x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\arctan x\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{\\arctan x}x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\arcsin x\\) 与 \\(x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\(\\frac{\\arcsin x}x\\to1\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\((1+x)^2-1\\) 与 \\(2x\\) 是（ ）`, `等价无穷小`, `同阶非等价`, `高阶`, `低阶`, 0, `\\((1+x)^2-1=2x+x^2\\sim2x\\)`],
+            [11, `当 \\(x\\to0\\) 时，\\(\\cos x-1\\) 与 \\(x^2\\) 是（ ）`, `同阶非等价`, `等价无穷小`, `高阶`, `低阶`, 0, `\\(\\frac{\\cos x-1}{x^2}\\to-\\frac12\\)`],
+
+            // 专题12 连续与间断 25题
+            [12, `函数 \\(f(x)=\\frac1x\\) 在 \\(x=0\\) 处是（ ）`, `连续`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 3, `\\(\\frac1x\\to\\infty\\)`],
+            [12, `函数 \\(f(x)=\\frac{\\sin x}x\\) 在 \\(x=0\\) 处是（ ）`, `连续`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 1, `极限为1，但函数未定义`],
+            [12, `函数 \\(f(x)=|x|\\) 在 \\(x=0\\) 处是（ ）`, `连续`, `可去间断`, `跳跃间断`, `第二类间断`, 0, `左右极限均0且等于函数值`],
+            [12, `设 \\(f(x)=\\begin{cases}x^2,&x\\ne0\\\\1,&x=0\\end{cases}\\)，则 \\(x=0\\) 是 \\(f(x)\\) 的（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 1, `极限0，函数值1`],
+            [12, `设 \\(f(x)=\\begin{cases}x,&x<0\\\\x^2+1,&x\\ge0\\end{cases}\\)，则 \\(x=0\\) 是（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 2, `左极限0，右极限1`],
+            [12, `函数 \\(f(x)=e^{1/x}\\) 在 \\(x=0\\) 处是（ ）`, `连续点`, `跳跃间断点`, `无穷间断点`, `可去间断点`, 2, `右极限 \\(\\infty\\)，左极限0`],
+            [12, `函数 \\(f(x)=\\arctan\\frac1x\\) 在 \\(x=0\\) 处是（ ）`, `可去间断点`, `跳跃间断点`, `无穷间断点`, `连续点`, 1, `左极限 \\(-\\frac\\pi2\\)，右极限 \\(\\frac\\pi2\\)`],
+            [12, `函数 \\(f(x)=\\sin\\frac1x\\) 在 \\(x=0\\) 处是（ ）`, `可去间断点`, `跳跃间断点`, `第二类间断点`, `连续点`, 2, `极限不存在且振荡`],
+            [12, `函数 \\(f(x)=\\frac{x^2-1}{x-1}\\) 在 \\(x=1\\) 处是（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 1, `极限为2，但函数未定义`],
+            [12, `函数 \\(f(x)=\\frac1{(x-1)^2}\\) 在 \\(x=1\\) 处是（ ）`, `无穷间断点`, `可去间断点`, `跳跃间断点`, `连续点`, 0, `趋于无穷`],
+            [12, `设 \\(f(x)=\\begin{cases}x^2,&x\\le1\\\\2x,&x>1\\end{cases}\\)，则 \\(x=1\\) 是（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 2, `左极限1，右极限2`],
+            [12, `设 \\(f(x)=\\begin{cases}\\frac{\\sin x}x,&x\\ne0\\\\1,&x=0\\end{cases}\\)，则 \\(x=0\\) 处（ ）`, `连续`, `可去间断`, `跳跃间断`, `无穷间断`, 0, `函数值等于极限1`],
+            [12, `函数 \\(f(x)=[x]\\)（取整函数）在 \\(x=0\\) 处是（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 2, `左极限-1，右极限0`],
+            [12, `函数 \\(f(x)=\\ln|x|\\) 在 \\(x=0\\) 处是（ ）`, `无穷间断点`, `可去间断点`, `跳跃间断点`, `连续点`, 0, `\\(\\ln|x|\\to-\\infty\\)`],
+            [12, `函数 \\(f(x)=\\tan x\\) 在 \\(x=\\frac\\pi2\\) 处是（ ）`, `无穷间断点`, `可去间断点`, `跳跃间断点`, `连续点`, 0, `\\(\\tan x\\to\\infty\\)`],
+            [12, `函数 \\(f(x)=\\frac{x-2}{x^2-4}\\) 在 \\(x=2\\) 处是（ ）`, `可去间断点`, `无穷间断点`, `跳跃间断点`, `连续点`, 0, `约分后 \\(f(x)=\\frac1{x+2}\\)，极限 \\(\\frac14\\)`],
+            [12, `设 \\(f(x)=\\begin{cases}x+1,&x<0\\\\0,&x=0\\\\x-1,&x>0\\end{cases}\\)，则 \\(x=0\\) 是（ ）`, `可去间断点`, `跳跃间断点`, `无穷间断点`, `连续点`, 1, `左极限1，右极限-1`],
+            [12, `函数 \\(f(x)=\\cos\\frac1x\\) 在 \\(x=0\\) 处是（ ）`, `可去间断点`, `跳跃间断点`, `第二类间断点`, `连续点`, 2, `极限不存在`],
+            [12, `设 \\(f(x)=\\begin{cases}e^x,&x<0\\\\1+x,&x\\ge0\\end{cases}\\)，则 \\(x=0\\) 处（ ）`, `连续`, `可去间断`, `跳跃间断`, `无穷间断`, 0, `左右极限均为1，且 \\(f(0)=1\\)`],
+            [12, `设 \\(f(x)=\\begin{cases}\\frac{1-\\cos x}{x^2},&x\\ne0\\\\\\frac12,&x=0\\end{cases}\\)，则 \\(x=0\\) 处（ ）`, `连续`, `可去间断`, `跳跃间断`, `无穷间断`, 0, `极限等于函数值 \\(\\frac12\\)`],
+            [12, `函数 \\(f(x)=\\frac1{e^x-1}\\) 在 \\(x=0\\) 处是（ ）`, `无穷间断点`, `可去间断点`, `跳跃间断点`, `连续点`, 0, `分母趋于0`],
+            [12, `设 \\(f(x)=\\begin{cases}x^2-1,&x<1\\\\0,&x=1\\\\1-x,&x>1\\end{cases}\\)，则 \\(x=1\\) 处（ ）`, `连续`, `可去间断`, `跳跃间断`, `无穷间断`, 0, `左右极限均为0，且 \\(f(1)=0\\)`],
+            [12, `设 \\(f(x)=\\begin{cases}\\frac{\\sin x}x,&x\\ne0\\\\0,&x=0\\end{cases}\\)，则 \\(x=0\\) 处是（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `无穷间断点`, 1, `极限1，函数值0`],
+            [12, `设 \\(f(x)=\\begin{cases}x,&x\\le0\\\\\\frac1x,&x>0\\end{cases}\\)，则 \\(x=0\\) 处是（ ）`, `连续点`, `可去间断点`, `跳跃间断点`, `第二类间断点`, 3, `右极限 \\(\\infty\\)`],
+            [12, `若 \\(f(x)\\) 在 \\(x_0\\) 处连续，则下列成立的是（ ）`, `\\(\\lim\\limits_{x\\to x_0}f(x)=f(x_0)\\)`, `\\(f(x_0)\\) 一定可导`, `\\(f(x_0)=0\\)`, `\\(f(x_0)\\) 无定义`, 0, `连续的定义`]
+        ];
+
+        // ========== 全局状态 ==========
+        let currentQuestions = [];       // 当前测试的50题（已经打乱选项）
+        let currentIndex = 0;
+        let answers = [];               // 每个题的用户选择索引，-1表示未答
+        let originalQuestions = [];     // 记录原始题目的索引
+        let testCount = 30;
+
+        // 历史记录
+        function getHistory() {
+            const raw = localStorage.getItem('math_test_history');
+            if (raw) {
+                try { return JSON.parse(raw); } catch (e) { return []; }
+            }
+            return [];
+        }
+        function saveHistory(record) {
+            const h = getHistory();
+            h.push(record);
+            localStorage.setItem('math_test_history', JSON.stringify(h));
+        }
+        function updateHistoryDisplay() {
+            const h = getHistory();
+            const best = h.length ? Math.max(...h.map(r => r.percentage)) : '--';
+            const last = h.length ? h[h.length-1].percentage : '--';
+            document.getElementById('bestScore').textContent = best;
+            document.getElementById('lastScore').textContent = last + '%';
+        }
+
+        // ========== 工具函数 ==========
+        function shuffleArray(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+        function pickRandomQuestions(count) {
+            const indices = shuffleArray([...Array(Q.length).keys()]);
+            return indices.slice(0, count);
+        }
+        function prepareQuestions(indices) {
+            return indices.map(idx => {
+                const item = Q[idx];
+                const opts = [item[2], item[3], item[4], item[5]];
+                const correct = item[6];
+                const shuffled = shuffleArray([0,1,2,3]);
+                const newOpts = shuffled.map(i => opts[i]);
+                const newCorrect = shuffled.indexOf(correct);
+                return {
+                    topic: item[0],
+                    question: item[1],
+                    options: newOpts,
+                    answer: newCorrect,
+                    explanation: item[7],
+                    originalIdx: idx
+                };
+            });
+        }
+
+        // ========== 渲染MathJax ==========
+        function renderMath(element) {
+            if (window.MathJax && MathJax.typesetPromise) {
+                return MathJax.typesetPromise([element]).catch(() => {});
+            }
+            return Promise.resolve();
+        }
+
+        // ========== 页面切换 ==========
+        function showPage(pageId) {
+            ['homePage','testPage','resultPage'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        // ========== 测试逻辑 ==========
+        function startTest() {
+            const indices = pickRandomQuestions(testCount);
+            originalQuestions = indices;
+            currentQuestions = prepareQuestions(indices);
+            answers = new Array(testCount).fill(-1);
+            currentIndex = 0;
+            showPage('testPage');
+            renderCurrentQuestion();
+            renderDots();
+        }
+
+        function renderCurrentQuestion() {
+            const q = currentQuestions[currentIndex];
+            const area = document.getElementById('questionArea');
+            const optLetters = ['A', 'B', 'C', 'D'];
+            let html = `<div class="question-card"><div class="question-text">第 ${currentIndex+1} 题 · ${TOPICS[q.topic-1]}<br>${q.question}</div><div class="options">`;
+            q.options.forEach((opt, i) => {
+                const selected = (answers[currentIndex] === i) ? 'selected' : '';
+                const checked = (answers[currentIndex] === i) ? 'checked' : '';
+                html += `<label class="option-item ${selected}"><input type="radio" name="option" value="${i}" ${checked}><span>${optLetters[i]}. ${opt}</span></label>`;
+            });
+            html += `</div></div>`;
+            area.innerHTML = html;
+            document.querySelectorAll('input[name="option"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    answers[currentIndex] = parseInt(e.target.value);
+                    renderDots();
+                    // 重新渲染当前题以更新选中样式（或直接修改class）
+                    const labels = document.querySelectorAll('.option-item');
+                    labels.forEach((lab, idx) => {
+                        lab.classList.toggle('selected', idx === answers[currentIndex]);
+                    });
+                });
+            });
+            document.getElementById('progressText').textContent = `${currentIndex+1} / ${testCount}`;
+            document.getElementById('progressFill').style.width = `${((currentIndex+1)/testCount)*100}%`;
+            renderMath(area);
+        }
+
+        function renderDots() {
+            const container = document.getElementById('dotsContainer');
+            let html = '';
+            for (let i = 0; i < testCount; i++) {
+                const answered = answers[i] !== -1 ? 'answered' : '';
+                const active = i === currentIndex ? 'active' : '';
+                html += `<div class="dot ${active} ${answered}" data-index="${i}">${i+1}</div>`;
+            }
+            container.innerHTML = html;
+            container.querySelectorAll('.dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.dataset.index);
+                    renderCurrentQuestion();
+                    renderDots();
+                });
+            });
+        }
+
+        function goPrev() {
+            if (currentIndex > 0) { currentIndex--; renderCurrentQuestion(); renderDots(); }
+        }
+        function goNext() {
+            if (currentIndex < testCount - 1) { currentIndex++; renderCurrentQuestion(); renderDots(); }
+        }
+
+        function reRandom() {
+            if (confirm('确定要重新随机选题吗？当前进度将丢失。')) {
+                startTest();
+            }
+        }
+
+        function submitTest() {
+            const unanswered = answers.filter(a => a === -1).length;
+            if (unanswered > 0) {
+                if (!confirm(`还有 ${unanswered} 题未作答，确定提交吗？`)) return;
+            }
+            let correctCount = 0;
+            const wrongList = [];
+            currentQuestions.forEach((q, i) => {
+                const userAns = answers[i];
+                if (userAns === q.answer) {
+                    correctCount++;
+                } else {
+                    wrongList.push({ index: i, userAns, q });
+                }
+            });
+            const percentage = Math.round((correctCount / testCount) * 100);
+            const record = { date: new Date().toLocaleString(), correct: correctCount, total: testCount, percentage };
+            saveHistory(record);
+            updateHistoryDisplay();
+            showResultPage(record, wrongList);
+        }
+
+        function showResultPage(record, wrongList) {
+            showPage('resultPage');
+            const summary = document.getElementById('resultSummary');
+            const comparison = document.getElementById('resultComparison');
+            const wrongDiv = document.getElementById('resultWrong');
+            summary.innerHTML = `<div class="result-card"><h3>📊 本次成绩</h3><p>正确率：<strong style="color:var(--gold);font-size:1.5rem;">${record.percentage}%</strong>（答对 ${record.correct} / ${record.total} 题）</p></div>`;
+            const h = getHistory();
+            let cmpText = '';
+            if (h.length >= 2) {
+                const prev = h[h.length - 2];
+                const diff = record.percentage - prev.percentage;
+                if (diff > 0) cmpText = `📈 与上一次（${prev.percentage}%）相比：上升了 ${diff}%`;
+                else if (diff < 0) cmpText = `📉 与上一次（${prev.percentage}%）相比：下降了 ${-diff}%`;
+                else cmpText = `➡️ 与上一次（${prev.percentage}%）相比：持平`;
+            } else {
+                cmpText = `🎯 首次测试记录`;
+            }
+            comparison.innerHTML = `<div class="result-card"><h4>历史对比</h4><p>${cmpText}</p><p>历史最高：<strong>${Math.max(...h.map(r=>r.percentage))}%</strong></p></div>`;
+            let advice = '';
+            if (record.percentage >= 90) advice = '🌟 优秀！你对这些知识掌握得非常好，继续保持！';
+            else if (record.percentage >= 80) advice = '👍 良好！少量知识点需要巩固，查漏补缺即可。';
+            else if (record.percentage >= 60) advice = '📖 及格，但建议系统复习错题涉及的知识点。';
+            else advice = '💪 需要加强基础，建议从定义域、极限等基础概念重新梳理。';
+            let wrongHtml = `<div class="result-card"><h4>💬 建议</h4><p>${advice}</p></div>`;
+            if (wrongList.length > 0) {
+                wrongHtml += `<div class="result-card"><h4>❌ 错题解析（${wrongList.length}题）</h4>`;
+                const letters = ['A','B','C','D'];
+                wrongList.forEach((w, idx) => {
+                    const q = w.q;
+                    const userStr = w.userAns === -1 ? '未作答' : `${letters[w.userAns]}. ${q.options[w.userAns]}`;
+                    const correctStr = `${letters[q.answer]}. ${q.options[q.answer]}`;
+                    wrongHtml += `<div class="wrong-item"><p><strong>第 ${w.index+1} 题</strong>（${TOPICS[q.topic-1]}）</p><p>${q.question}</p><p>你的答案：<span class="wrong-answer">${userStr}</span></p><p>正确答案：<span class="correct-answer">${correctStr}</span></p><div class="explanation">📘 解析：${q.explanation}</div></div>`;
+                });
+                wrongHtml += `</div>`;
+            } else {
+                wrongHtml += `<div class="result-card"><h4>🎉 全对！太棒了！</h4></div>`;
+            }
+            wrongDiv.innerHTML = wrongHtml;
+            renderMath(resultPage);
+        }
+
+        // ========== 题库模态框 ==========
+        function openBank() {
+            const modal = document.getElementById('bankModal');
+            modal.classList.add('open');
+            renderTopicFilter();
+            renderBankContent(1);
+            renderMath(document.getElementById('bankContent'));
+        }
+        function closeBank() {
+            document.getElementById('bankModal').classList.remove('open');
+        }
+        function renderTopicFilter() {
+            const filter = document.getElementById('topicFilter');
+            let html = '<button class="btn secondary" data-topic="all">全部</button>';
+            TOPICS.forEach((t, i) => {
+                html += `<button class="btn secondary" data-topic="${i+1}">${t}</button>`;
+            });
+            filter.innerHTML = html;
+            filter.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const topic = btn.dataset.topic;
+                    renderBankContent(topic === 'all' ? 'all' : parseInt(topic));
+                });
+            });
+        }
+        function renderBankContent(topic) {
+            const content = document.getElementById('bankContent');
+            const letters = ['A','B','C','D'];
+            let filtered = Q;
+            if (topic !== 'all') {
+                filtered = Q.filter(item => item[0] === topic);
+            }
+            let html = '';
+            filtered.forEach((item, idx) => {
+                const topicName = TOPICS[item[0]-1];
+                const correctIdx = item[6];
+                html += `<div class="question-card"><p><strong>${idx+1}. [${topicName}]</strong> ${item[1]}</p><div class="options">`;
+                [item[2], item[3], item[4], item[5]].forEach((opt, oi) => {
+                    const cls = (oi === correctIdx) ? 'style="color:var(--green);font-weight:600;"' : '';
+                    html += `<span ${cls}>${letters[oi]}. ${opt}</span><br>`;
+                });
+                html += `</div><p class="correct-answer">✅ 答案：${letters[correctIdx]}</p><div class="explanation">📘 解析：${item[7]}</div></div>`;
+            });
+            content.innerHTML = html;
+            renderMath(content);
+        }
+
+        // ========== 事件绑定 ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHistoryDisplay();
+            document.getElementById('startBtn').addEventListener('click', startTest);
+            document.getElementById('showBankBtn').addEventListener('click', openBank);
+            document.getElementById('showBankBtn2').addEventListener('click', openBank);
+            document.getElementById('closeBankBtn').addEventListener('click', closeBank);
+            document.getElementById('reRandomBtn').addEventListener('click', reRandom);
+            document.getElementById('prevBtn').addEventListener('click', goPrev);
+            document.getElementById('nextBtn').addEventListener('click', goNext);
+            document.getElementById('submitBtn').addEventListener('click', submitTest);
+            document.getElementById('backHomeBtn').addEventListener('click', () => { showPage('homePage'); updateHistoryDisplay(); });
+            document.getElementById('retakeBtn').addEventListener('click', startTest);
+            document.getElementById('resetHistoryBtn').addEventListener('click', () => {
+                if (confirm('确定清空所有历史记录吗？')) {
+                    localStorage.removeItem('math_test_history');
+                    updateHistoryDisplay();
+                }
+            });
+            // 关闭模态框点击背景
+            document.getElementById('bankModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('bankModal')) closeBank();
+            });
+        });
+
+        // 初始渲染公式（如果有）
+        window.addEventListener('load', () => {
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([document.body]).catch(() => {});
+            }
+        });
+    </script>
+</body>
+</html>

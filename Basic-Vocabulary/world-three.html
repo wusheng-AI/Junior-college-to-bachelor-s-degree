@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 词汇宝典 · 第三册</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #f3f9ff 0%, #e0edfc 100%);
+            min-height: 100vh;
+            padding: 24px 16px;
+            color: #1a2639;
+        }
+
+        .app {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 60px;
+            padding: 32px 30px 44px;
+            box-shadow: 0 30px 70px -20px rgba(26, 38, 57, 0.25),
+                        0 8px 28px rgba(0, 20, 50, 0.06),
+                        inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(74, 144, 217, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3a5c;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            background: linear-gradient(135deg, #2b7be4, #8a4caf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo .icon {
+            font-size: 36px;
+            -webkit-text-fill-color: initial;
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 8px 22px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            color: #1a3a5c;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-btn:hover {
+            background: white;
+            box-shadow: 0 8px 24px rgba(43, 123, 228, 0.15);
+            transform: translateY(-2px);
+            border-color: #2b7be4;
+        }
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #2b7be4, #5f72f0);
+            color: white;
+            border: none;
+            box-shadow: 0 6px 18px rgba(43, 123, 228, 0.30);
+        }
+        .nav-btn.primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(43, 123, 228, 0.40);
+        }
+        .nav-btn.gold {
+            background: linear-gradient(135deg, #f5b042, #f7a81b);
+            color: white;
+            border: none;
+            box-shadow: 0 6px 18px rgba(245, 176, 66, 0.35);
+        }
+        .nav-btn.gold:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(245, 176, 66, 0.45);
+        }
+        .nav-btn.purple {
+            background: linear-gradient(135deg, #8a4caf, #b06ad0);
+            color: white;
+            border: none;
+            box-shadow: 0 6px 18px rgba(138, 76, 175, 0.30);
+        }
+        .nav-btn.purple:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(138, 76, 175, 0.40);
+        }
+
+        .page {
+            display: none;
+            animation: fadeSlide 0.45s ease forwards;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-hero {
+            text-align: center;
+            padding: 44px 20px 30px;
+        }
+        .welcome-hero .big-icon {
+            font-size: 84px;
+            margin-bottom: 12px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+        .welcome-hero h1 {
+            font-size: 46px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a3a5c, #6f4caf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        .welcome-hero p {
+            font-size: 19px;
+            color: #3d5670;
+            max-width: 500px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+        .welcome-hero .sub {
+            font-size: 15px;
+            color: #6f8aa8;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 6px 24px;
+            border-radius: 40px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .welcome-actions {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        .welcome-actions .nav-btn {
+            font-size: 18px;
+            padding: 14px 44px;
+            border-radius: 60px;
+        }
+
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .practice-header .info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #1a3a5c;
+        }
+        .practice-header .info .badge {
+            background: linear-gradient(135deg, #2b7be4, #5f72f0);
+            color: white;
+            padding: 4px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+        }
+        .practice-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .question-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 20px 0 24px;
+            max-height: 560px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+        .question-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .question-grid::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.02);
+            border-radius: 10px;
+        }
+        .question-grid::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2b7be4, #8a4caf);
+            border-radius: 10px;
+        }
+
+        .q-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+            padding: 12px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: 0.2s;
+        }
+        .q-item:hover {
+            background: white;
+            box-shadow: 0 4px 16px rgba(43, 123, 228, 0.06);
+            border-color: rgba(43, 123, 228, 0.12);
+        }
+        .q-index {
+            font-weight: 700;
+            color: #2b7be4;
+            font-size: 15px;
+            min-width: 38px;
+            text-align: center;
+        }
+        .q-chinese {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a2a44;
+            min-width: 80px;
+            flex: 1;
+        }
+        .q-input {
+            flex: 1;
+            min-width: 140px;
+            padding: 10px 16px;
+            border: 2px solid rgba(43, 123, 228, 0.15);
+            border-radius: 16px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            outline: none;
+            color: #1a2639;
+        }
+        .q-input:focus {
+            border-color: #2b7be4;
+            box-shadow: 0 0 0 4px rgba(43, 123, 228, 0.10);
+            background: white;
+        }
+        .q-input.correct {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.06);
+        }
+        .q-input.wrong {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.06);
+        }
+        .q-input:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        .q-status {
+            font-size: 22px;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .result-summary {
+            background: linear-gradient(135deg, #f0f7ff, #e8f0fe);
+            border-radius: 32px;
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .result-score {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+        .result-score .number {
+            font-size: 52px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a3a5c, #6f4caf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .result-score .label {
+            font-size: 18px;
+            color: #3d5670;
+        }
+        .result-suggestion {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 8px 28px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .result-suggestion.good { color: #27ae60; }
+        .result-suggestion.ok { color: #f39c12; }
+        .result-suggestion.poor { color: #e74c3c; }
+
+        .result-compare {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 16px;
+            color: #1a3a5c;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 6px 22px 6px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .result-compare .arrow-up { color: #27ae60; font-weight: 700; }
+        .result-compare .arrow-down { color: #e74c3c; font-weight: 700; }
+        .result-compare .arrow-eq { color: #f39c12; font-weight: 700; }
+
+        .error-item {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 14px 20px;
+            border-radius: 20px;
+            border-left: 6px solid #e74c3c;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            margin-bottom: 10px;
+        }
+        .error-item .word-info {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .error-item .en {
+            font-weight: 700;
+            font-size: 20px;
+            color: #1a3a5c;
+        }
+        .error-item .pos {
+            font-size: 14px;
+            color: #6f8aa8;
+            background: rgba(0,0,0,0.04);
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .error-item .zh {
+            font-size: 16px;
+            color: #3d5670;
+        }
+        .error-item .wrong-answer {
+            background: rgba(231, 76, 60, 0.10);
+            padding: 4px 16px;
+            border-radius: 14px;
+            color: #c0392b;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .error-item .wrong-answer::before {
+            content: "✖ 你的答案: ";
+            font-weight: 400;
+            color: #a94442;
+        }
+        .error-item .correct-answer {
+            background: rgba(46, 204, 113, 0.10);
+            padding: 4px 16px;
+            border-radius: 14px;
+            color: #27ae60;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .error-item .correct-answer::before {
+            content: "✔ 正确: ";
+            font-weight: 400;
+            color: #2e7d32;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(74, 144, 217, 0.10);
+        }
+
+        .library-search {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .library-search input {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 22px;
+            border: 2px solid rgba(43, 123, 228, 0.12);
+            border-radius: 40px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.6);
+            outline: none;
+            transition: 0.2s;
+        }
+        .library-search input:focus {
+            border-color: #2b7be4;
+            box-shadow: 0 0 0 4px rgba(43, 123, 228, 0.08);
+            background: white;
+        }
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 10px;
+            max-height: 460px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .library-grid::-webkit-scrollbar {
+            width: 5px;
+        }
+        .library-grid::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2b7be4, #8a4caf);
+            border-radius: 10px;
+        }
+        .lib-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 16px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: 0.15s;
+            font-size: 15px;
+            gap: 8px;
+        }
+        .lib-item:hover {
+            background: white;
+            border-color: rgba(43, 123, 228, 0.15);
+            transform: scale(1.01);
+        }
+        .lib-item .en { font-weight: 600; color: #1a3a5c; }
+        .lib-item .pos { font-size: 12px; color: #6f8aa8; background: rgba(0,0,0,0.03); padding: 0 10px; border-radius: 10px; }
+        .lib-item .zh { color: #4f6a88; font-size: 14px; }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 460px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .history-item {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 14px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .history-item.latest {
+            border: 2px solid #2b7be4;
+            background: rgba(43, 123, 228, 0.05);
+        }
+        .history-item .score {
+            font-weight: 700;
+            font-size: 20px;
+            color: #1a3a5c;
+        }
+        .history-item .detail {
+            color: #3d5670;
+            font-size: 15px;
+        }
+        .history-item .date {
+            color: #6f8aa8;
+            font-size: 14px;
+        }
+        .history-item .badge {
+            background: #2b7be4;
+            color: white;
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .btn-sm {
+            padding: 6px 18px;
+            font-size: 13px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .btn-sm:hover {
+            background: white;
+            transform: translateY(-1px);
+        }
+        .btn-sm.primary {
+            background: linear-gradient(135deg, #2b7be4, #5f72f0);
+            color: white;
+            border: none;
+        }
+        .btn-sm.primary:hover {
+            box-shadow: 0 6px 16px rgba(43, 123, 228, 0.30);
+        }
+        .btn-sm.gold {
+            background: linear-gradient(135deg, #f5b042, #f7a81b);
+            color: white;
+            border: none;
+        }
+        .btn-sm.gold:hover {
+            box-shadow: 0 6px 16px rgba(245, 176, 66, 0.35);
+        }
+        .btn-sm.success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+        }
+        .btn-sm.success:hover {
+            box-shadow: 0 6px 16px rgba(46, 204, 113, 0.30);
+        }
+        .btn-sm.purple {
+            background: linear-gradient(135deg, #8a4caf, #b06ad0);
+            color: white;
+            border: none;
+        }
+        .btn-sm.purple:hover {
+            box-shadow: 0 6px 16px rgba(138, 76, 175, 0.30);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6f8aa8;
+            font-size: 16px;
+        }
+
+        .mt-12 { margin-top: 12px; }
+        .text-center { text-align: center; }
+
+        @media (max-width: 700px) {
+            .app { padding: 20px 14px; border-radius: 32px; }
+            .logo { font-size: 22px; }
+            .welcome-hero h1 { font-size: 30px; }
+            .welcome-hero .big-icon { font-size: 56px; }
+            .q-item { flex-wrap: wrap; gap: 8px 12px; padding: 12px 14px; }
+            .q-chinese { min-width: 60px; font-size: 16px; flex: 0 0 auto; }
+            .q-input { min-width: 100px; flex: 1 1 120px; }
+            .q-index { min-width: 28px; font-size: 13px; }
+            .result-summary { flex-direction: column; align-items: stretch; gap: 16px; padding: 20px; }
+            .result-score .number { font-size: 38px; }
+            .result-compare { justify-content: center; }
+            .library-grid { grid-template-columns: 1fr 1fr; }
+            .nav-btn { font-size: 13px; padding: 6px 14px; }
+            .welcome-actions .nav-btn { font-size: 16px; padding: 12px 28px; }
+            .error-item { flex-direction: column; align-items: stretch; gap: 8px; }
+        }
+        @media (max-width: 450px) {
+            .library-grid { grid-template-columns: 1fr; }
+            .header { flex-direction: column; align-items: stretch; gap: 10px; }
+            .nav-btns { justify-content: center; }
+            .practice-header { flex-direction: column; align-items: stretch; gap: 10px; }
+            .practice-actions { justify-content: center; }
+            .q-item { padding: 10px 12px; }
+            .q-chinese { font-size: 15px; min-width: 50px; }
+            .q-input { font-size: 15px; padding: 8px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app" id="app">
+    <header class="header">
+        <div class="logo">
+            <span class="icon">📚</span>
+            <span>听写 · <span>Spark Ⅲ</span></span>
+        </div>
+        <div class="nav-btns">
+            <button class="nav-btn" onclick="showPage('welcome')">🏠 首页</button>
+            <button class="nav-btn primary" onclick="startPractice()">✍️ 练习</button>
+            <button class="nav-btn purple" onclick="showPage('library'); renderLibrary();">📖 题库</button>
+            <button class="nav-btn gold" onclick="showPage('history'); renderHistory();">📊 历史</button>
+        </div>
+    </header>
+
+    <!-- WELCOME -->
+    <div class="page active" id="page-welcome">
+        <div class="welcome-hero">
+            <span class="big-icon">🌟</span>
+            <h1>词汇宝典 · 第三册</h1>
+            <p>从 <strong>58</strong> 个核心词汇中随机抽取 <strong>30</strong> 题，检验你的拼写功力。<br>提交后智能判错，展示完整词条，追踪最高分。</p>
+            <div class="sub">🎯 每次随机 · 不重复 · 实时反馈</div>
+            <div class="welcome-actions">
+                <button class="nav-btn primary" onclick="startPractice()" style="font-size:20px;padding:16px 48px;">🚀 开始练习</button>
+                <button class="nav-btn purple" onclick="showPage('library'); renderLibrary();" style="font-size:18px;padding:16px 40px;">📖 浏览题库</button>
+            </div>
+            <div style="margin-top:32px;font-size:14px;color:#6f8aa8;">
+                💡 共 <strong>58</strong> 个单词 · 每次随机 <strong>30</strong> 题
+            </div>
+        </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div class="page" id="page-practice">
+        <div class="practice-header">
+            <div class="info">
+                <span>📝 听写练习</span>
+                <span class="badge" id="progressBadge">0 / 30</span>
+            </div>
+            <div class="practice-actions">
+                <button class="btn-sm gold" onclick="reshuffle()">🔄 重新随机</button>
+                <button class="btn-sm primary" onclick="submitAnswers()" id="submitBtn">✅ 提交答案</button>
+            </div>
+        </div>
+        <div class="question-grid" id="questionGrid"></div>
+        <div style="text-align:center;padding-top:8px;font-size:14px;color:#6f8aa8;">
+            ✏️ 输入英文单词，全部填完后点击「提交答案」
+        </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="page" id="page-result">
+        <div class="result-summary" id="resultSummary"></div>
+        <div id="errorList" style="margin: 16px 0 20px;"></div>
+        <div class="result-actions">
+            <button class="btn-sm gold" onclick="reshuffle()">🔄 重新随机</button>
+            <button class="btn-sm success" onclick="startPractice()">🏁 新的一轮</button>
+            <button class="btn-sm" onclick="showPage('welcome')">🏠 首页</button>
+        </div>
+    </div>
+
+    <!-- LIBRARY -->
+    <div class="page" id="page-library">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+            <h2 style="font-size:24px;color:#1a3a5c;">📖 完整题库</h2>
+            <span style="font-size:14px;color:#6f8aa8;">共 <strong id="libCount">58</strong> 个词汇</span>
+        </div>
+        <div class="library-search">
+            <input type="text" id="libSearch" placeholder="🔍 搜索中文、英文或词性..." oninput="renderLibrary()">
+            <button class="btn-sm" onclick="document.getElementById('libSearch').value='';renderLibrary();">✕ 清除</button>
+        </div>
+        <div class="library-grid" id="libraryGrid"></div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="page" id="page-history">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+            <h2 style="font-size:24px;color:#1a3a5c;">📊 历史成绩</h2>
+            <button class="btn-sm" onclick="showPage('welcome')">🏠 返回</button>
+        </div>
+        <div id="historyContent"></div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    //  词汇数据（第三册）
+    // ============================================================
+    const WORDS = [
+        { en: "state", zh: "州；状态", pos: "n." },
+        { en: "the", zh: "这（那）个", pos: "art." },
+        { en: "American", zh: "美国的；美国人", pos: "adj./n." },
+        { en: "dragon", zh: "龙", pos: "n." },
+        { en: "any", zh: "任何", pos: "adj./pron." },
+        { en: "other", zh: "其他的", pos: "adj./pron." },
+        { en: "cut", zh: "切；割", pos: "v." },
+        { en: "down", zh: "向下；沿着", pos: "adv./prep." },
+        { en: "kill", zh: "杀死", pos: "v." },
+        { en: "ivory", zh: "象牙", pos: "n." },
+        { en: "over", zh: "在…上方；超过", pos: "prep." },
+        { en: "newspaper", zh: "报纸", pos: "n." },
+        { en: "read", zh: "阅读", pos: "v." },
+        { en: "use", zh: "使用", pos: "v." },
+        { en: "soup", zh: "汤", pos: "n." },
+        { en: "just", zh: "仅仅；刚才", pos: "adv." },
+        { en: "house", zh: "房子", pos: "n." },
+        { en: "drink", zh: "喝；饮料", pos: "v./n." },
+        { en: "tea", zh: "茶", pos: "n." },
+        { en: "kind", zh: "种类；善良的", pos: "n./adj." },
+        { en: "Australia", zh: "澳大利亚", pos: "n." },
+        { en: "south", zh: "南方", pos: "n." },
+        { en: "Africa", zh: "非洲", pos: "n." },
+        { en: "pet", zh: "宠物", pos: "n." },
+        { en: "leg", zh: "腿", pos: "n." },
+        { en: "sleep", zh: "睡觉", pos: "v./n." },
+        { en: "shy", zh: "害羞的", pos: "adj." },
+        { en: "save", zh: "拯救；节省", pos: "v." },
+        { en: "flag", zh: "旗帜", pos: "n." },
+        { en: "get", zh: "得到；到达", pos: "v." },
+        { en: "place", zh: "地方；放置", pos: "n./v." },
+        { en: "water", zh: "水；浇水", pos: "n./v." },
+        { en: "hair", zh: "头发", pos: "n." },
+        { en: "learn", zh: "学习", pos: "v." },
+        { en: "panda", zh: "熊猫", pos: "n." },
+        { en: "zoo", zh: "动物园", pos: "n." },
+        { en: "elephant", zh: "大象", pos: "n." },
+        { en: "tree", zh: "树", pos: "n." },
+        { en: "koala", zh: "考拉", pos: "n." },
+        { en: "giraffe", zh: "长颈鹿", pos: "n." },
+        { en: "animal", zh: "动物", pos: "n." },
+        { en: "cute", zh: "可爱的", pos: "adj." },
+        { en: "lazy", zh: "懒惰的", pos: "adj." },
+        { en: "smart", zh: "聪明的；时髦的", pos: "adj." },
+        { en: "scary", zh: "吓人的", pos: "adj." },
+        { en: "make", zh: "制作；使", pos: "v." },
+        { en: "dirty", zh: "脏的", pos: "adj." },
+        { en: "kitchen", zh: "厨房", pos: "n." },
+        { en: "more", zh: "更多的；更", pos: "adj./adv." },
+        { en: "noisy", zh: "吵闹的", pos: "adj." },
+        { en: "relax", zh: "放松", pos: "v." },
+        { en: "terrible", zh: "糟糕的；可怕的", pos: "adj." },
+        { en: "feel", zh: "感觉", pos: "v." },
+        { en: "strict", zh: "严格的", pos: "adj." },
+        { en: "be", zh: "是（原形）", pos: "v." },
+        { en: "follow", zh: "跟随；遵守", pos: "v." },
+        { en: "luck", zh: "运气", pos: "n." },
+        { en: "keep", zh: "保持；保留", pos: "v." }
+    ];
+
+    // ============================================================
+    //  状态
+    // ============================================================
+    let currentQuestions = [];
+    let userAnswers = {};
+    let results = {};
+    let submitted = false;
+
+    const STORAGE_KEY = 'vocab3_history';
+
+    // ============================================================
+    //  工具
+    // ============================================================
+    function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    function pickRandom(arr, n) {
+        const shuffled = shuffle(arr);
+        return shuffled.slice(0, n);
+    }
+
+    function normalize(s) {
+        return s.trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function loadHistory() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) return JSON.parse(raw);
+        } catch {}
+        return [];
+    }
+
+    function saveHistory(entry) {
+        let history = loadHistory();
+        history.push(entry);
+        if (history.length > 50) history = history.slice(-50);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    }
+
+    function getHighestScore() {
+        const history = loadHistory();
+        if (history.length === 0) return null;
+        return Math.max(...history.map(h => h.score));
+    }
+
+    function getLatestScore() {
+        const history = loadHistory();
+        if (history.length === 0) return null;
+        return history[history.length - 1].score;
+    }
+
+    // ============================================================
+    //  页面切换
+    // ============================================================
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+        const target = document.getElementById('page-' + pageId);
+        if (target) target.classList.add('active');
+        if (pageId === 'library') renderLibrary();
+        if (pageId === 'history') renderHistory();
+    }
+
+    // ============================================================
+    //  练习
+    // ============================================================
+    function generateQuestions() {
+        const picked = pickRandom(WORDS, 30);
+        currentQuestions = picked.map((w, i) => ({ ...w, index: WORDS.indexOf(w) }));
+        userAnswers = {};
+        results = {};
+        submitted = false;
+        renderPractice();
+        document.getElementById('progressBadge').textContent = '0 / 30';
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').textContent = '✅ 提交答案';
+    }
+
+    function startPractice() {
+        showPage('practice');
+        generateQuestions();
+    }
+
+    function reshuffle() {
+        if (document.getElementById('page-practice').classList.contains('active')) {
+            generateQuestions();
+        } else {
+            startPractice();
+        }
+    }
+
+    function renderPractice() {
+        const grid = document.getElementById('questionGrid');
+        grid.innerHTML = '';
+        currentQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'q-item';
+            div.dataset.idx = q.index;
+            div.innerHTML = `
+                <span class="q-index">${idx + 1}</span>
+                <span class="q-chinese">${q.zh}</span>
+                <input class="q-input" type="text" id="input-${q.index}" 
+                       placeholder="输入英文..." autocomplete="off"
+                       data-idx="${q.index}"
+                       oninput="onInputChange(${q.index}, this.value)">
+                <span class="q-status" id="status-${q.index}"></span>
+            `;
+            grid.appendChild(div);
+            if (userAnswers[q.index] !== undefined) {
+                const inp = document.getElementById(`input-${q.index}`);
+                if (inp) inp.value = userAnswers[q.index];
+            }
+        });
+        updateProgress();
+    }
+
+    function onInputChange(idx, val) {
+        userAnswers[idx] = val;
+        updateProgress();
+        const inp = document.getElementById(`input-${idx}`);
+        if (inp) {
+            inp.classList.remove('correct', 'wrong');
+        }
+        const status = document.getElementById(`status-${idx}`);
+        if (status) status.textContent = '';
+    }
+
+    function updateProgress() {
+        const filled = currentQuestions.filter(q => userAnswers[q.index] && userAnswers[q.index].trim() !== '').length;
+        document.getElementById('progressBadge').textContent = `${filled} / 30`;
+    }
+
+    // ============================================================
+    //  提交答案
+    // ============================================================
+    function submitAnswers() {
+        if (submitted) return;
+        const allFilled = currentQuestions.every(q => {
+            const val = userAnswers[q.index] || '';
+            return val.trim() !== '';
+        });
+        if (!allFilled) {
+            alert('📢 还有题目未填写，请完成所有空格再提交！');
+            return;
+        }
+
+        submitted = true;
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').textContent = '⏳ 批改中...';
+
+        let correctCount = 0;
+        currentQuestions.forEach(q => {
+            const userAns = (userAnswers[q.index] || '').trim();
+            const isCorrect = normalize(userAns) === normalize(q.en);
+            results[q.index] = { correct: isCorrect, userAns: userAns };
+            if (isCorrect) correctCount++;
+
+            const inp = document.getElementById(`input-${q.index}`);
+            const status = document.getElementById(`status-${q.index}`);
+            if (inp) {
+                inp.classList.add(isCorrect ? 'correct' : 'wrong');
+                inp.disabled = true;
+            }
+            if (status) {
+                status.textContent = isCorrect ? '✅' : '❌';
+            }
+        });
+
+        const score = Math.round((correctCount / 30) * 100);
+        document.getElementById('submitBtn').textContent = `📊 正确率 ${score}%`;
+
+        // 保存分数
+        saveHistory({ score: score, correct: correctCount, total: 30, timestamp: new Date().toISOString() });
+
+        showResultPage(score, correctCount);
+    }
+
+    // ============================================================
+    //  结果页
+    // ============================================================
+    function showResultPage(score, correctCount) {
+        showPage('result');
+        renderResult(score, correctCount);
+    }
+
+    function renderResult(score, correctCount) {
+        const total = currentQuestions.length;
+
+        let suggestionText, suggestionClass;
+        if (score >= 90) { suggestionText = '🌟 卓越！继续保持！'; suggestionClass = 'good'; }
+        else if (score >= 70) { suggestionText = '💪 不错！加强易错词复习。'; suggestionClass = 'ok'; }
+        else if (score >= 50) { suggestionText = '📖 需要多背记，加油！'; suggestionClass = 'ok'; }
+        else { suggestionText = '🔥 别灰心，从错题开始突破！'; suggestionClass = 'poor'; }
+
+        const highest = getHighestScore();
+        let compareHTML = '';
+        if (highest !== null) {
+            const diff = score - highest;
+            let arrow, cls, text;
+            if (diff > 0) { arrow = '📈'; cls = 'arrow-up'; text = `超越最高分 ${diff} 分 🎉`; }
+            else if (diff < 0) { arrow = '📉'; cls = 'arrow-down'; text = `低于最高分 ${Math.abs(diff)} 分`; }
+            else { arrow = '➡️'; cls = 'arrow-eq'; text = '追平最高分！' }
+            compareHTML = `
+                <div class="result-compare">
+                    <span>🏆 最高分 ${highest}%</span>
+                    <span class="${cls}">${arrow} ${text}</span>
+                </div>
+            `;
+        } else {
+            compareHTML = `<div class="result-compare">🏆 首次练习，最高分待创造</div>`;
+        }
+
+        const summary = document.getElementById('resultSummary');
+        summary.innerHTML = `
+            <div class="result-score">
+                <span class="number">${score}%</span>
+                <span class="label">正确率 (${correctCount}/${total})</span>
+            </div>
+            <div class="result-suggestion ${suggestionClass}">${suggestionText}</div>
+            ${compareHTML}
+        `;
+
+        // 错题展示
+        const errors = currentQuestions.filter(q => results[q.index] && !results[q.index].correct);
+        const errorContainer = document.getElementById('errorList');
+        if (errors.length === 0) {
+            errorContainer.innerHTML = `<div style="text-align:center;padding:20px;font-size:18px;color:#27ae60;">🎉 全部正确！太棒了！</div>`;
+        } else {
+            let html = `<div style="font-weight:600;font-size:18px;color:#1a3a5c;margin-bottom:12px;">❌ 错题回顾（共 ${errors.length} 题）</div>`;
+            errors.forEach(q => {
+                const wrongAns = results[q.index].userAns || '(未填)';
+                html += `
+                    <div class="error-item">
+                        <div class="word-info">
+                            <span class="en">${q.en}</span>
+                            <span class="pos">${q.pos}</span>
+                            <span class="zh">${q.zh}</span>
+                        </div>
+                        <span class="wrong-answer">${wrongAns}</span>
+                        <span class="correct-answer">${q.en}</span>
+                    </div>
+                `;
+            });
+            errorContainer.innerHTML = html;
+        }
+    }
+
+    // ============================================================
+    //  题库
+    // ============================================================
+    function renderLibrary() {
+        const search = document.getElementById('libSearch').value.trim().toLowerCase();
+        const grid = document.getElementById('libraryGrid');
+        let filtered = WORDS;
+        if (search) {
+            filtered = WORDS.filter(w =>
+                w.zh.includes(search) ||
+                w.en.toLowerCase().includes(search) ||
+                w.pos.toLowerCase().includes(search)
+            );
+        }
+        document.getElementById('libCount').textContent = filtered.length;
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="empty-state">🔍 没有找到匹配的单词</div>`;
+            return;
+        }
+        grid.innerHTML = filtered.map(w => `
+            <div class="lib-item">
+                <span class="en">${w.en}</span>
+                <span class="pos">${w.pos}</span>
+                <span class="zh">${w.zh}</span>
+            </div>
+        `).join('');
+    }
+
+    // ============================================================
+    //  历史
+    // ============================================================
+    function renderHistory() {
+        const history = loadHistory();
+        const container = document.getElementById('historyContent');
+        if (history.length === 0) {
+            container.innerHTML = `<div class="empty-state" style="padding:60px 20px;">📭 还没有练习记录，快去开始听写吧！</div>`;
+            return;
+        }
+        const reversed = [...history].reverse();
+        const highest = getHighestScore();
+        let html = `<div class="history-list">`;
+        reversed.forEach((entry, idx) => {
+            const date = new Date(entry.timestamp);
+            const dateStr = date.toLocaleString('zh-CN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            const isLatest = idx === 0;
+            const isHighest = entry.score === highest && history.filter(h => h.score === highest).length === 1;
+            let badge = '';
+            if (isLatest) badge += '<span class="badge" style="background:#2b7be4;">最新</span> ';
+            if (isHighest) badge += '<span class="badge" style="background:#f7a81b;">🏆 最高</span>';
+            html += `
+                <div class="history-item ${isLatest ? 'latest' : ''}">
+                    <span class="score">${entry.score}%</span>
+                    <span class="detail">${entry.correct}/${entry.total} 正确</span>
+                    <span class="date">${dateStr}</span>
+                    <span>${badge}</span>
+                </div>
+            `;
+        });
+        html += `</div>`;
+        container.innerHTML = html;
+    }
+
+    // ============================================================
+    //  初始化
+    // ============================================================
+    showPage('welcome');
+    console.log(`📚 词汇宝典第三册加载完成，共 ${WORDS.length} 个词汇。`);
+</script>
+</body>
+</html>
