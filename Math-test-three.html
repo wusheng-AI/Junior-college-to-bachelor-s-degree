@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>河南专升本高数 - 智能练习系统</title>
+    <!-- MathJax 配置与加载 -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <style>
+        :root {
+            --primary: #1e6f9f;
+            --secondary: #f0a500;
+            --accent: #2a9d8f;
+            --bg: #f9f7f3;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --correct: #27ae60;
+            --wrong: #e74c3c;
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            --radius: 20px;
+            --font: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(135deg, #e8f0fe 0%, #fdfcfb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 数学几何装饰 */
+        .math-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(46, 134, 171, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(240, 165, 0, 0.08) 0%, transparent 50%);
+        }
+        .math-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.04"><path d="M0 50 Q25 20 50 50 T100 50" fill="none" stroke="%231e6f9f" stroke-width="0.5"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23f0a500" stroke-width="0.3"/><path d="M30 20 L70 80" stroke="%232a9d8f" stroke-width="0.3"/></svg>');
+            background-size: 200px 200px;
+            animation: floatBg 30s linear infinite;
+        }
+
+        @keyframes floatBg {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 860px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px 35px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 12px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: inline-block;
+            text-align: center;
+            user-select: none;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-secondary {
+            background: var(--secondary);
+            color: #fff;
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-danger {
+            background: var(--wrong);
+            color: white;
+        }
+        .btn-sm {
+            padding: 10px 18px;
+            font-size: 0.95rem;
+        }
+        .btn-lg {
+            padding: 16px 40px;
+            font-size: 1.3rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        /* 题目样式 */
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            color: var(--text);
+            background: #f0f4f8;
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+        .question-number {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .question-timer {
+            color: #888;
+        }
+        .question-text {
+            font-size: 1.35rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: var(--text);
+            background: #fafafa;
+            padding: 15px 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--secondary);
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            background: #f7f9fc;
+            border: 2px solid #dde3ea;
+            border-radius: 15px;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+        .option:hover {
+            border-color: var(--primary);
+            background: #eef4fa;
+            transform: translateX(5px);
+        }
+        .option.selected {
+            border-color: var(--primary);
+            background: #e3eef9;
+            box-shadow: 0 0 0 3px rgba(30,111,159,0.2);
+        }
+        .option input {
+            display: none;
+        }
+        .option-label {
+            font-weight: 700;
+            margin-right: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .option.selected .option-label {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* 结果页 */
+        .result-summary {
+            text-align: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #eef7ff, #fff9e6);
+            border-radius: 20px;
+        }
+        .score {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .score-label {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .score-advice {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: var(--text);
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .wrong-list {
+            margin-top: 30px;
+        }
+        .wrong-item {
+            background: #fff;
+            border-left: 5px solid var(--wrong);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .wrong-item .q-text {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .wrong-item .your-answer, .wrong-item .correct-answer, .wrong-item .explanation {
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+        .your-answer { color: var(--wrong); }
+        .correct-answer { color: var(--correct); }
+        .explanation {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* 题库样式 */
+        .bank-container {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .bank-item {
+            background: #f8fafc;
+            border: 1px solid #e0e6ed;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        .bank-item .options-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .bank-item .correct-highlight {
+            color: var(--correct);
+            font-weight: 700;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            .question-text { font-size: 1.1rem; }
+            .option { font-size: 1rem; padding: 10px 14px; }
+            .btn-lg { font-size: 1.1rem; padding: 14px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="math-bg"></div>
+    <div class="container">
+        <!-- 主页 -->
+        <div id="homePage" class="page active">
+            <h1>📐 河南专升本高数<br>智能练习系统</h1>
+            <p style="text-align:center; color:#555; margin-bottom:30px; font-size:1.1rem;">
+                覆盖罗尔定理、拉格朗日中值定理、函数单调性、零点定理、最值、介值定理、<br>
+                积分中值定理、凹凸性、极值与拐点等核心考点
+            </p>
+            <div class="btn-group">
+                <button class="btn btn-primary btn-lg" onclick="startQuiz()">🎯 开始随机测试（30题）</button>
+                <button class="btn btn-secondary btn-lg" onclick="showBank()">📚 查看完整题库</button>
+            </div>
+            <div style="text-align:center; margin-top:20px; color:#888;" id="lastScoreInfo">
+                <!-- 显示最近一次分数 -->
+            </div>
+        </div>
+
+        <!-- 测试页 -->
+        <div id="quizPage" class="page">
+            <div class="question-header">
+                <span class="question-number" id="qNum">1/30</span>
+                <span class="question-timer">⏱️ 不限时</span>
+                <button class="btn btn-sm btn-outline" onclick="resetQuiz()">🔄 重新随机</button>
+            </div>
+            <div class="question-text" id="qText"></div>
+            <div class="options" id="qOptions"></div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevQuestion()" id="prevBtn" style="display:none;">⬅️ 上一题</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">下一题 ➡️</button>
+                <button class="btn btn-danger" onclick="submitQuiz()" id="submitBtn">📝 提交答卷</button>
+            </div>
+        </div>
+
+        <!-- 结果页 -->
+        <div id="resultPage" class="page">
+            <h2>📊 测试结果</h2>
+            <div class="result-summary">
+                <div class="score-label">正确率</div>
+                <div class="score" id="scoreDisplay">0%</div>
+                <div id="scoreCompare" style="margin-top:10px; font-size:1.2rem;"></div>
+                <div class="score-advice" id="adviceText"></div>
+            </div>
+            <div class="wrong-list" id="wrongList"></div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="startQuiz()">🔄 再来一组</button>
+                <button class="btn btn-secondary" onclick="showBank()">📚 查看题库</button>
+                <button class="btn btn-outline" onclick="goHome()">🏠 返回主页</button>
+            </div>
+        </div>
+
+        <!-- 题库页 -->
+        <div id="bankPage" class="page">
+            <h2>📚 完整题库（含答案与解析）</h2>
+            <div class="bank-container" id="bankContainer"></div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="goHome()">🏠 返回主页</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 题库数据 ====================
+        // 注意：这里仅提供部分题目示例（共30题），完整题库需要300题。
+        // 请按照相同格式继续添加，字段：id, question, options(数组), answer(索引0-3), explanation(解析)
+        const questionBank = [
+            {
+                id: 1,
+                question: "罗尔定理要求函数在闭区间 \\([a,b]\\) 上（ ）",
+                options: ["可导", "连续", "单调", "有界"],
+                answer: 1,
+                explanation: "罗尔定理条件之一是在闭区间上连续。"
+            },
+            {
+                id: 2,
+                question: "罗尔定理要求函数在开区间 \\((a,b)\\) 内（ ）",
+                options: ["连续", "可导", "有界", "单调"],
+                answer: 1,
+                explanation: "罗尔定理要求在开区间内可导。"
+            },
+            {
+                id: 3,
+                question: "罗尔定理中关于端点函数值的要求是（ ）",
+                options: ["\\(f(a)=f(b)\\)", "\\(f(a)=-f(b)\\)", "\\(f(a)>f(b)\\)", "\\(f(a)<f(b)\\)"],
+                answer: 0,
+                explanation: "端点函数值相等，即 \\(f(a)=f(b)\\)。"
+            },
+            {
+                id: 4,
+                question: "函数 \\(y=|x|\\) 在 \\([-1,1]\\) 上不满足罗尔定理条件，是因为（ ）",
+                options: ["不连续", "在 \\(x=0\\) 处不可导", "\\(f(-1)\\ne f(1)\\)", "无界"],
+                answer: 1,
+                explanation: "\\(|x|\\) 在 \\(x=0\\) 处不可导。"
+            },
+            {
+                id: 5,
+                question: "下列函数在 \\([-1,1]\\) 上满足罗尔定理条件的是（ ）",
+                options: ["\\(y=x^3\\)", "\\(y=|x|\\)", "\\(y=1/x\\)", "\\(y=\\ln(1+x^2)\\)"],
+                answer: 3,
+                explanation: "选项D在区间连续可导且 \\(f(-1)=f(1)\\)。"
+            },
+            {
+                id: 6,
+                question: "函数 \\(f(x)=x^2-4x+3\\) 在 \\([1,3]\\) 上满足罗尔定理，则 \\(\\xi=\\)（ ）",
+                options: ["1", "2", "3", "4"],
+                answer: 1,
+                explanation: "\\(f(1)=f(3)=0\\)，\\(f'(x)=2x-4=0\\) 得 \\(x=2\\)。"
+            },
+            {
+                id: 7,
+                question: "函数 \\(f(x)=x^3-x\\) 在 \\([-1,1]\\) 上满足罗尔定理，则 \\(\\xi\\) 可为（ ）",
+                options: ["0", "1", "\\(-1\\)", "\\(\\pm 1/\\sqrt{3}\\)"],
+                answer: 3,
+                explanation: "\\(f'(x)=3x^2-1=0\\)，得 \\(x=\\pm 1/\\sqrt{3}\\)。"
+            },
+            {
+                id: 8,
+                question: "函数 \\(f(x)=\\sin x\\) 在 \\([0,\\pi]\\) 上满足罗尔定理，则 \\(\\xi=\\)（ ）",
+                options: ["0", "\\(\\pi/2\\)", "\\(\\pi\\)", "\\(2\\pi\\)"],
+                answer: 1,
+                explanation: "\\(f'(x)=\\cos x=0\\)，在 \\((0,\\pi)\\) 内 \\(x=\\pi/2\\)。"
+            },
+            {
+                id: 9,
+                question: "函数 \\(f(x)=x^2-2x\\) 在 \\([0,2]\\) 上满足罗尔定理，则 \\(\\xi=\\)（ ）",
+                options: ["0", "1", "2", "3"],
+                answer: 1,
+                explanation: "\\(f'(x)=2x-2=0\\)，得 \\(x=1\\)。"
+            },
+            {
+                id: 10,
+                question: "罗尔定理的结论是存在 \\(\\xi\\in(a,b)\\)，使得（ ）",
+                options: ["\\(f(\\xi)=0\\)", "\\(f'(\\xi)=0\\)", "\\(f''(\\xi)=0\\)", "\\(f'(\\xi)=1\\)"],
+                answer: 1,
+                explanation: "罗尔定理结论为 \\(f'(\\xi)=0\\)。"
+            },
+            {
+                id: 11,
+                question: "拉格朗日中值定理要求函数在 \\([a,b]\\) 上（ ）",
+                options: ["可导", "连续", "单调", "有界"],
+                answer: 1,
+                explanation: "闭区间上连续。"
+            },
+            {
+                id: 12,
+                question: "拉格朗日中值定理要求函数在 \\((a,b)\\) 内（ ）",
+                options: ["连续", "可导", "有界", "单调"],
+                answer: 1,
+                explanation: "开区间内可导。"
+            },
+            {
+                id: 13,
+                question: "拉格朗日中值定理结论为存在 \\(\\xi\\in(a,b)\\)，使（ ）",
+                options: ["\\(f'(\\xi)=\\frac{f(b)-f(a)}{b-a}\\)", "\\(f'(\\xi)=f(b)-f(a)\\)", "\\(f(\\xi)=0\\)", "\\(f''(\\xi)=0\\)"],
+                answer: 0,
+                explanation: "拉格朗日中值公式。"
+            },
+            {
+                id: 14,
+                question: "函数 \\(f(x)=x^2\\) 在 \\([1,3]\\) 上满足拉格朗日定理，则 \\(\\xi=\\)（ ）",
+                options: ["1", "2", "3", "4"],
+                answer: 1,
+                explanation: "\\(f'=2x\\)，平均变化率 \\((9-1)/2=4\\)，得 \\(2x=4\\)，\\(x=2\\)。"
+            },
+            {
+                id: 15,
+                question: "函数 \\(f(x)=\\ln x\\) 在 \\([1,e]\\) 上满足拉格朗日定理，则 \\(\\xi=\\)（ ）",
+                options: ["\\(e\\)", "\\(e-1\\)", "1", "\\(e+1\\)"],
+                answer: 1,
+                explanation: "\\(f'=1/x\\)，平均变化率 \\(1/(e-1)\\)，得 \\(1/\\xi=1/(e-1)\\)，\\(\\xi=e-1\\)。"
+            },
+            {
+                id: 16,
+                question: "函数 \\(f(x)=x^3\\) 在 \\([0,2]\\) 上满足拉格朗日定理，则 \\(\\xi=\\)（ ）",
+                options: ["\\(2/\\sqrt{3}\\)", "\\(\\sqrt{3}/2\\)", "1", "\\(2\\sqrt{3}/3\\)"],
+                answer: 3,
+                explanation: "平均变化率 \\(8/2=4\\)，\\(3\\xi^2=4\\)，\\(\\xi=2/\\sqrt{3}=2\\sqrt{3}/3\\)。"
+            },
+            {
+                id: 17,
+                question: "函数 \\(f(x)=x^3-3x\\) 的单调递增区间是（ ）",
+                options: ["\\((-1,1)\\)", "\\((-\\infty,-1)\\cup(1,+\\infty)\\)", "\\((-\\infty,0)\\)", "\\((0,+\\infty)\\)"],
+                answer: 1,
+                explanation: "\\(f'=3x^2-3>0\\)，得 \\(x<-1\\) 或 \\(x>1\\)。"
+            },
+            {
+                id: 18,
+                question: "函数 \\(f(x)=x^3-3x\\) 的单调递减区间是（ ）",
+                options: ["\\((-1,1)\\)", "\\((-\\infty,-1)\\)", "\\((1,+\\infty)\\)", "\\((-\\infty,+\\infty)\\)"],
+                answer: 0,
+                explanation: "\\(f'<0\\) 得 \\(-1<x<1\\)。"
+            },
+            {
+                id: 19,
+                question: "零点定理要求函数在闭区间 \\([a,b]\\) 上（ ）",
+                options: ["连续", "可导", "单调", "有界"],
+                answer: 0,
+                explanation: "零点定理条件为闭区间连续。"
+            },
+            {
+                id: 20,
+                question: "设 \\(f(x)\\) 在 \\([a,b]\\) 连续，且 \\(f(a)f(b)<0\\)，则（ ）",
+                options: ["至少存在 \\(\\xi\\in(a,b)\\) 使 \\(f(\\xi)=0\\)", "\\(f(x)=0\\) 无根", "\\(f(x)\\) 恒正", "\\(f(x)\\) 恒负"],
+                answer: 0,
+                explanation: "零点定理。"
+            },
+            {
+                id: 21,
+                question: "积分中值定理要求函数 \\(f(x)\\) 在 \\([a,b]\\) 上（ ）",
+                options: ["连续", "可导", "单调", "有界"],
+                answer: 0,
+                explanation: "闭区间连续。"
+            },
+            {
+                id: 22,
+                question: "积分中值定理结论：\\(\\int_a^b f(x)dx=\\)（ ）",
+                options: ["\\(f(\\xi)(b-a)\\)", "\\(f'(\\xi)(b-a)\\)", "\\(f(b)-f(a)\\)", "\\(f(\\xi)/(b-a)\\)"],
+                answer: 0,
+                explanation: "积分中值公式。"
+            },
+            {
+                id: 23,
+                question: "函数 \\(f(x)=x\\) 在 \\([0,1]\\) 上积分中值定理中的 \\(\\xi=\\)（ ）",
+                options: ["0", "\\(1/2\\)", "1", "2"],
+                answer: 1,
+                explanation: "积分值 \\(1/2\\)，平均值 \\(1/2\\)，\\(\\xi=1/2\\)。"
+            },
+            {
+                id: 24,
+                question: "若在区间 \\(I\\) 上 \\(f''(x)>0\\)，则曲线 \\(y=f(x)\\) 在 \\(I\\) 上是（ ）",
+                options: ["凹的", "凸的", "直线", "拐点"],
+                answer: 0,
+                explanation: "二阶导数正，曲线凹。"
+            },
+            {
+                id: 25,
+                question: "若在区间 \\(I\\) 上 \\(f''(x)<0\\)，则曲线 \\(y=f(x)\\) 在 \\(I\\) 上是（ ）",
+                options: ["凹的", "凸的", "直线", "拐点"],
+                answer: 1,
+                explanation: "二阶导数负，曲线凸。"
+            },
+            {
+                id: 26,
+                question: "曲线 \\(y=x^2\\) 的凹凸性是（ ）",
+                options: ["凹", "凸", "既有凹又有凸", "直线"],
+                answer: 0,
+                explanation: "\\(y''=2>0\\)。"
+            },
+            {
+                id: 27,
+                question: "曲线 \\(y=x^3\\) 的拐点是（ ）",
+                options: ["\\((0,0)\\)", "\\((1,1)\\)", "\\((-1,-1)\\)", "无拐点"],
+                answer: 0,
+                explanation: "\\(y''=6x\\)，在 \\(x=0\\) 两侧异号。"
+            },
+            {
+                id: 28,
+                question: "函数 \\(y=x^2\\) 在 \\(x=0\\) 处（ ）",
+                options: ["极大值", "极小值", "拐点", "不可导"],
+                answer: 1,
+                explanation: "\\(x=0\\) 处极小值。"
+            },
+            {
+                id: 29,
+                question: "函数 \\(y=-x^2\\) 在 \\(x=0\\) 处（ ）",
+                options: ["极大值", "极小值", "拐点", "不可导"],
+                answer: 0,
+                explanation: "\\(x=0\\) 处极大值。"
+            },
+            {
+                id: 30,
+                question: "函数 \\(y=x^3\\) 在 \\(x=0\\) 处（ ）",
+                options: ["极大值", "极小值", "拐点", "不可导"],
+                answer: 2,
+                explanation: "无极值，是拐点。"
+            }
+        ];
+
+        // ==================== 全局状态 ====================
+        let currentQuiz = [];          // 当前随机选的题目对象数组
+        let currentIndex = 0;          // 当前题目索引
+        let userAnswers = new Array(30).fill(null); // 用户答案索引
+
+        // ==================== 页面切换 ====================
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function goHome() {
+            showPage('homePage');
+            updateLastScoreInfo();
+        }
+
+        // ==================== 随机选题 ====================
+        function selectRandomQuestions(count = 30) {
+            const shuffled = [...questionBank];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled.slice(0, count);
+        }
+
+        function startQuiz() {
+            if (questionBank.length < 30) {
+                alert('题库题目数量不足30题，请先扩充题库！');
+                return;
+            }
+            currentQuiz = selectRandomQuestions(30);
+            currentIndex = 0;
+            userAnswers = new Array(30).fill(null);
+            showPage('quizPage');
+            renderQuestion();
+        }
+
+        function resetQuiz() {
+            if (confirm('确定要重新随机选题吗？当前作答将丢失。')) {
+                startQuiz();
+            }
+        }
+
+        // ==================== 渲染当前题目 ====================
+        function renderQuestion() {
+            const quiz = currentQuiz[currentIndex];
+            document.getElementById('qNum').textContent = `${currentIndex+1}/${currentQuiz.length}`;
+            document.getElementById('qText').innerHTML = quiz.question;
+            
+            const optionsDiv = document.getElementById('qOptions');
+            optionsDiv.innerHTML = '';
+            quiz.options.forEach((opt, idx) => {
+                const label = String.fromCharCode(65 + idx); // A, B, C, D
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                if (userAnswers[currentIndex] === idx) {
+                    optionDiv.classList.add('selected');
+                }
+                optionDiv.innerHTML = `
+                    <span class="option-label">${label}</span>
+                    <span>${opt}</span>
+                `;
+                optionDiv.addEventListener('click', () => {
+                    userAnswers[currentIndex] = idx;
+                    renderQuestion();
+                });
+                optionsDiv.appendChild(optionDiv);
+            });
+
+            // 显示/隐藏上一题按钮
+            document.getElementById('prevBtn').style.display = currentIndex > 0 ? 'inline-block' : 'none';
+            // 显示下一题/提交按钮
+            if (currentIndex === currentQuiz.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitBtn').style.display = 'inline-block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('submitBtn').style.display = 'none';
+            }
+
+            // MathJax重新渲染
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([document.getElementById('qText'), document.getElementById('qOptions')]).catch(()=>{});
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex < currentQuiz.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            }
+        }
+
+        // ==================== 提交与评分 ====================
+        function submitQuiz() {
+            let correctCount = 0;
+            let wrongItems = [];
+            currentQuiz.forEach((quiz, idx) => {
+                const userAns = userAnswers[idx];
+                if (userAns === null) {
+                    // 未作答视为错误
+                    wrongItems.push({
+                        question: quiz.question,
+                        yourAnswer: '未作答',
+                        correctAnswer: quiz.options[quiz.answer],
+                        explanation: quiz.explanation
+                    });
+                } else if (userAns === quiz.answer) {
+                    correctCount++;
+                } else {
+                    wrongItems.push({
+                        question: quiz.question,
+                        yourAnswer: quiz.options[userAns],
+                        correctAnswer: quiz.options[quiz.answer],
+                        explanation: quiz.explanation
+                    });
+                }
+            });
+
+            const total = currentQuiz.length;
+            const percentage = Math.round((correctCount / total) * 100);
+            
+            // 显示结果
+            document.getElementById('scoreDisplay').textContent = percentage + '%';
+            
+            // 历史分数对比
+            const history = JSON.parse(localStorage.getItem('mathQuizHistory') || '[]');
+            let compareText = '';
+            if (history.length > 0) {
+                const lastScore = history[history.length - 1].score;
+                if (percentage > lastScore) {
+                    compareText = `📈 比上次（${lastScore}%）上升了 ${percentage - lastScore} 个百分点，继续加油！`;
+                } else if (percentage < lastScore) {
+                    compareText = `📉 比上次（${lastScore}%）下降了 ${lastScore - percentage} 个百分点，需要巩固复习哦！`;
+                } else {
+                    compareText = `📊 与上次（${lastScore}%）持平，保持稳定！`;
+                }
+            } else {
+                compareText = '🎯 这是你的第一次测试，建立基准！';
+            }
+            document.getElementById('scoreCompare').textContent = compareText;
+
+            // 保存分数
+            history.push({ score: percentage, date: new Date().toLocaleString() });
+            localStorage.setItem('mathQuizHistory', JSON.stringify(history));
+
+            // 建议
+            let advice = '';
+            if (percentage >= 90) advice = '🌟 太棒了！你对这些知识掌握得非常好，继续保持！';
+            else if (percentage >= 75) advice = '👍 不错！大部分知识点已经掌握，建议对错题进行针对性复习。';
+            else if (percentage >= 60) advice = '📖 还需要加强，建议重新梳理相关定理和性质，多做题巩固。';
+            else advice = '📚 基础有待提高，建议从基本概念开始复习，逐步深入。';
+            document.getElementById('adviceText').textContent = advice;
+
+            // 错误列表
+            const wrongListDiv = document.getElementById('wrongList');
+            if (wrongItems.length === 0) {
+                wrongListDiv.innerHTML = '<p style="text-align:center; color:green; font-size:1.2rem;">🎉 全部答对，没有错题！</p>';
+            } else {
+                let html = '<h3>❌ 错题回顾</h3>';
+                wrongItems.forEach(item => {
+                    html += `
+                        <div class="wrong-item">
+                            <div class="q-text">${item.question}</div>
+                            <div class="your-answer">你的答案：${item.yourAnswer}</div>
+                            <div class="correct-answer">正确答案：${item.correctAnswer}</div>
+                            <div class="explanation">📝 解析：${item.explanation}</div>
+                        </div>
+                    `;
+                });
+                wrongListDiv.innerHTML = html;
+            }
+
+            showPage('resultPage');
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([document.getElementById('wrongList'), document.getElementById('scoreCompare')]).catch(()=>{});
+            }
+        }
+
+        // ==================== 显示题库 ====================
+        function showBank() {
+            const container = document.getElementById('bankContainer');
+            let html = '';
+            questionBank.forEach(q => {
+                html += `
+                    <div class="bank-item">
+                        <strong>${q.id}. ${q.question}</strong>
+                        <div class="options-list">
+                            ${q.options.map((opt, idx) => {
+                                const isCorrect = idx === q.answer;
+                                return `<div class="${isCorrect ? 'correct-highlight' : ''}">${String.fromCharCode(65+idx)}. ${opt} ${isCorrect ? '✅' : ''}</div>`;
+                            }).join('')}
+                        </div>
+                        <div class="explanation">📝 ${q.explanation}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            showPage('bankPage');
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([container]).catch(()=>{});
+            }
+        }
+
+        // ==================== 更新主页最近分数 ====================
+        function updateLastScoreInfo() {
+            const history = JSON.parse(localStorage.getItem('mathQuizHistory') || '[]');
+            const infoDiv = document.getElementById('lastScoreInfo');
+            if (history.length > 0) {
+                const last = history[history.length - 1];
+                infoDiv.textContent = `最近测试成绩：${last.score}%（${last.date}）`;
+            } else {
+                infoDiv.textContent = '暂无测试记录，快来开始吧！';
+            }
+        }
+
+        // ==================== 初始化 ====================
+        window.addEventListener('load', () => {
+            updateLastScoreInfo();
+            // 预渲染MathJax样式
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
