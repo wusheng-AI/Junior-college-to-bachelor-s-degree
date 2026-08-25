@@ -376,18 +376,6 @@
                 <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">下一题 ➡️</button>
                 <button class="btn btn-danger" onclick="submitQuiz()" id="submitBtn">📝 提交答卷</button>
             </div>
-            <!-- 在 homePage 容器内，按钮组之后添加 -->
-<div style="margin-top:30px; background:#f0f4f8; border-radius:15px; padding:20px;">
-  <h3 style="margin-bottom:10px; color:#1e6f9f;">🔣 LaTeX 公式转换器</h3>
-  <div style="display:flex; gap:10px; flex-wrap:wrap;">
-    <input type="text" id="latexInput" placeholder="输入 LaTeX 代码，如 \frac{a}{b}" 
-           style="flex:1; min-width:200px; padding:12px; border:2px solid #dde3ea; border-radius:10px; font-size:1rem;">
-    <button class="btn btn-primary btn-sm" onclick="convertLatex()">转换</button>
-  </div>
-  <div id="latexOutput" style="margin-top:15px; font-size:1.5rem; text-align:center; background:#fff; padding:15px; border-radius:10px; border:1px dashed #ccc;">
-    预览区
-  </div>
-</div>
         </div>
 
         <!-- 结果页 -->
@@ -418,18 +406,6 @@
     </div>
 
     <script>
-        function convertLatex() {
-  const input = document.getElementById('latexInput').value.trim();
-  const output = document.getElementById('latexOutput');
-  if (!input) {
-    output.innerHTML = '⚠️ 请输入 LaTeX 代码';
-    return;
-  }
-  output.innerHTML = '\\(' + input + '\\)';
-  if (window.MathJax && MathJax.typesetPromise) {
-    MathJax.typesetPromise([output]).catch(() => {});
-  }
-        }
         // ==================== 题库数据（300题完整版） ====================
         const questionBank = [
             // ===== 第一部分：不定积分基本性质与原函数（1-30） =====
