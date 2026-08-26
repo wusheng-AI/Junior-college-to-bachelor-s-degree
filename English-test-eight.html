@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数词与冠词专项训练 · English Grammar Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --gold:#d4a017; --gold-light:#f0c75e; --gold-deep:#b8860b;
+  --royal:#4a3f8c; --royal-light:#6b5fb0; --royal-deep:#2d2360;
+  --cream:#fffbf0; --warm-white:#fdf8ee; --parchment:#faf3e0;
+  --ink:#2a1a0a; --ink-soft:#5a4a2a;
+  --correct:#1a8a3a; --correct-bg:#e6f7ed;
+  --wrong:#c43a3a; --wrong-bg:#fdf4f4;
+  --shadow:0 8px 32px rgba(74,63,140,.15);
+  --shadow-lg:0 12px 48px rgba(74,63,140,.22);
+}
+body {
+  font-family:'Open Sans','Noto Serif SC',serif;
+  background:linear-gradient(135deg,#fffbf0 0%,#f5ecd9 30%,#e8dff0 70%,#ddd6f0 100%);
+  min-height:100vh; color:var(--ink); overflow-x:hidden;
+}
+body::before {
+  content:''; position:fixed; top:0; left:0; right:0; bottom:0;
+  background-image:
+    radial-gradient(ellipse at 10% 20%, rgba(212,160,23,.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(74,63,140,.08) 0%, transparent 50%);
+  pointer-events:none; z-index:0;
+}
+.header {
+  position:relative; z-index:10;
+  background:linear-gradient(135deg,var(--royal) 0%,var(--royal-light) 50%,var(--royal-deep) 100%);
+  padding:18px 30px; box-shadow:0 4px 24px rgba(45,35,96,.3);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.header-left { display:flex; align-items:center; gap:14px; }
+.logo-badge {
+  width:54px; height:54px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:22px; font-weight:900; color:var(--royal-deep);
+  box-shadow:0 4px 12px rgba(212,160,23,.4); flex-shrink:0;
+}
+.header-title {
+  font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:#fff;
+  text-shadow:0 2px 4px rgba(0,0,0,.2); line-height:1.2;
+}
+.header-sub { font-size:13px; color:rgba(255,255,255,.7); margin-top:2px; }
+.header-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.header-btn {
+  background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25);
+  color:#fff; padding:8px 18px; border-radius:30px; cursor:pointer;
+  font-size:14px; font-weight:600; transition:all .25s; white-space:nowrap;
+}
+.header-btn:hover { background:rgba(255,255,255,.28); transform:translateY(-2px); }
+.header-btn.gold { background:linear-gradient(135deg,var(--gold-light),var(--gold)); border-color:var(--gold); color:var(--royal-deep); }
+.header-btn.gold:hover { background:linear-gradient(135deg,var(--gold),var(--gold-deep)); }
+.container { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:24px 20px 60px; }
+.quiz-card {
+  background:#fff; border-radius:24px; box-shadow:var(--shadow-lg);
+  overflow:hidden; min-height:480px; position:relative;
+  border:1px solid rgba(212,160,23,.2);
+}
+.quiz-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:6px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--royal-light),var(--gold-light),var(--gold));
+}
+.card-inner { padding:36px 40px; }
+.progress-bar { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+.progress-track { flex:1; height:10px; background:#f0ead6; border-radius:10px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--royal-light)); border-radius:10px; transition:width .4s ease; width:0%; }
+.progress-text { font-size:14px; font-weight:700; color:var(--royal-deep); white-space:nowrap; }
+.progress-badge { display:inline-flex; align-items:center; gap:6px; background:var(--parchment); border:1px solid var(--gold); border-radius:20px; padding:4px 14px; font-size:13px; color:var(--ink-soft); font-weight:600; }
+.q-type-tag { display:inline-block; background:linear-gradient(135deg,var(--royal),var(--royal-light)); color:#fff; padding:5px 16px; border-radius:20px; font-size:13px; font-weight:600; margin-bottom:16px; }
+.q-cat-tag { display:inline-block; background:var(--parchment); color:var(--gold-deep); border:1px solid var(--gold-light); padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600; margin-left:8px; }
+.q-number { font-family:'Playfair Display',serif; font-size:14px; color:var(--gold-deep); font-weight:700; margin-bottom:8px; letter-spacing:1px; }
+.q-text { font-family:'Noto Serif SC',serif; font-size:22px; line-height:1.7; color:var(--ink); margin-bottom:28px; font-weight:500; }
+.q-text .blank { display:inline-block; min-width:80px; border-bottom:3px solid var(--gold); margin:0 4px; }
+.options-list { display:flex; flex-direction:column; gap:12px; }
+.option-btn {
+  display:flex; align-items:center; gap:14px; padding:16px 22px;
+  border:2px solid #e8e0d0; border-radius:16px; cursor:pointer;
+  font-size:17px; transition:all .25s; background:#fffdf8; text-align:left;
+  font-family:'Open Sans',sans-serif;
+}
+.option-btn:hover { border-color:var(--gold); background:var(--warm-white); transform:translateX(4px); }
+.option-btn.selected { border-color:var(--royal); background:#f5f0ff; box-shadow:0 4px 16px rgba(74,63,140,.15); }
+.option-letter {
+  width:36px; height:36px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:16px; background:#f0ead6; color:var(--royal-deep); transition:all .25s;
+}
+.option-btn.selected .option-letter { background:var(--royal); color:#fff; }
+.option-text { flex:1; }
+.fill-input {
+  width:100%; padding:14px 20px; font-size:18px; border:2px solid #e8e0d0;
+  border-radius:14px; background:#fffdf8; font-family:'Open Sans',sans-serif;
+  transition:all .25s; color:var(--ink);
+}
+.fill-input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 4px rgba(212,160,23,.15); }
+.fill-label { font-size:14px; color:var(--ink-soft); margin-bottom:6px; font-weight:600; }
+.fill-group { margin-bottom:20px; }
+.correct-box { display:flex; gap:16px; margin-bottom:20px; }
+.correct-field { flex:1; }
+.correct-field .fill-label { display:flex; align-items:center; gap:6px; }
+.correct-field .fill-label .icon { font-size:16px; }
+.correct-field.wrong-field .fill-label { color:var(--wrong); }
+.correct-field.right-field .fill-label { color:var(--correct); }
+.nav-row { display:flex; justify-content:space-between; align-items:center; margin-top:32px; gap:12px; flex-wrap:wrap; }
+.nav-btn {
+  padding:12px 28px; border-radius:30px; font-size:16px; font-weight:700; cursor:pointer;
+  transition:all .25s; border:none; display:flex; align-items:center; gap:8px;
+}
+.nav-btn.primary { background:linear-gradient(135deg,var(--royal),var(--royal-light)); color:#fff; box-shadow:0 4px 16px rgba(74,63,140,.3); }
+.nav-btn.primary:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(74,63,140,.4); }
+.nav-btn.secondary { background:var(--parchment); color:var(--royal-deep); border:1px solid var(--gold); }
+.nav-btn.secondary:hover { background:var(--warm-white); }
+.nav-btn.gold { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--royal-deep); }
+.nav-btn.gold:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(212,160,23,.4); }
+.nav-btn:disabled { opacity:.4; cursor:not-allowed; transform:none !important; }
+.nav-mid { display:flex; gap:10px; }
+.q-nav-section { margin-top:28px; padding:20px; border-radius:16px; background:var(--parchment); border:1px solid rgba(212,160,23,.25); }
+.q-nav-title { font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:12px; text-align:center; }
+.q-nav-grid { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.q-nav-cell {
+  width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; border:2px solid #e0d8c0;
+  background:#fff; color:var(--ink-soft);
+}
+.q-nav-cell:hover { border-color:var(--gold); background:var(--warm-white); transform:scale(1.1); }
+.q-nav-cell.current { background:linear-gradient(135deg,var(--royal),var(--royal-light)); color:#fff; border-color:var(--royal); transform:scale(1.15); }
+.q-nav-cell.answered { background:linear-gradient(135deg,var(--correct),#2aa85a); color:#fff; border-color:var(--correct); }
+.result-panel {
+  background:#fff; border-radius:24px; box-shadow:var(--shadow-lg);
+  overflow:hidden; padding:40px; border:1px solid rgba(212,160,23,.2); display:none;
+}
+.result-panel.show { display:block; animation:fadeUp .4s ease; }
+@keyframes fadeUp { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+.result-header { text-align:center; margin-bottom:30px; }
+.result-title { font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--royal-deep); }
+.result-score-big {
+  font-family:'Playfair Display',serif; font-size:64px; font-weight:900;
+  background:linear-gradient(135deg,var(--gold),var(--royal));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin:16px 0 8px; line-height:1;
+}
+.result-score-label { font-size:16px; color:var(--ink-soft); }
+.result-compare { display:flex; justify-content:center; align-items:center; gap:12px; margin:20px 0; font-size:18px; font-weight:600; }
+.result-compare .up { color:var(--correct); }
+.result-compare .down { color:var(--wrong); }
+.result-compare .same { color:var(--ink-soft); }
+.result-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0; }
+.stat-card { text-align:center; padding:20px 12px; border-radius:16px; background:var(--warm-white); border:1px solid #e8e0d0; }
+.stat-num { font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--royal); }
+.stat-label { font-size:13px; color:var(--ink-soft); margin-top:4px; }
+.result-suggestion { background:var(--parchment); border-radius:16px; padding:24px; border-left:5px solid var(--gold); margin-top:24px; }
+.result-suggestion h3 { font-size:18px; color:var(--royal-deep); margin-bottom:12px; }
+.result-suggestion ul { list-style:none; }
+.result-suggestion li { padding:6px 0; font-size:15px; color:var(--ink-soft); line-height:1.6; }
+.result-suggestion li::before { content:'▸ '; color:var(--gold); font-weight:700; }
+.result-actions { display:flex; justify-content:center; gap:14px; margin-top:30px; flex-wrap:wrap; }
+.bank-panel {
+  position:fixed; top:0; right:-100%; width:min(640px,90vw); height:100vh;
+  background:#fff; box-shadow:-8px 0 48px rgba(0,0,0,.15); z-index:100; transition:right .35s ease; overflow-y:auto;
+}
+.bank-panel.show { right:0; }
+.bank-header { position:sticky; top:0; background:linear-gradient(135deg,var(--royal),var(--royal-deep)); padding:20px 24px; display:flex; justify-content:space-between; align-items:center; z-index:5; }
+.bank-header h2 { color:#fff; font-family:'Playfair Display',serif; font-size:22px; }
+.bank-close { background:rgba(255,255,255,.2); border:none; color:#fff; width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:18px; transition:all .2s; }
+.bank-close:hover { background:rgba(255,255,255,.35); }
+.bank-search { padding:16px 24px; position:sticky; top:72px; background:#fff; border-bottom:1px solid #eee; z-index:4; }
+.bank-search input { width:100%; padding:10px 18px; font-size:15px; border:2px solid #e8e0d0; border-radius:30px; background:var(--warm-white); font-family:'Open Sans',sans-serif; }
+.bank-search input:focus { outline:none; border-color:var(--gold); }
+.bank-list { padding:0 0 40px; }
+.bank-item { padding:20px 24px; border-bottom:1px solid #f0ead6; transition:background .2s; }
+.bank-item:hover { background:var(--warm-white); }
+.bank-item-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.bank-item-id { font-weight:700; color:var(--royal); font-size:14px; }
+.bank-item-type { font-size:12px; padding:2px 10px; border-radius:20px; font-weight:600; }
+.bank-item-type.choice { background:#e8f4ff; color:#1a5a8a; }
+.bank-item-type.fill { background:#fff3e0; color:#b86800; }
+.bank-item-type.correct { background:#f0e8ff; color:#5a3f8c; }
+.bank-item-cat { font-size:12px; color:var(--ink-soft); }
+.bank-item-q { font-size:16px; line-height:1.7; margin-bottom:12px; color:var(--ink); }
+.bank-opts { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+.bank-opt { display:flex; align-items:center; gap:10px; padding:8px 14px; border-radius:10px; background:#f8f5ee; font-size:14px; border:1px solid #e8e0d0; }
+.bank-opt.is-correct { background:var(--correct-bg); border-color:var(--correct); }
+.bank-opt-letter { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; background:#e0d8c0; color:var(--royal-deep); flex-shrink:0; }
+.bank-opt.is-correct .bank-opt-letter { background:var(--correct); color:#fff; }
+.bank-opt-tag { font-size:12px; color:var(--correct); font-weight:600; margin-left:auto; }
+.bank-answer { display:inline-block; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; background:var(--correct-bg); color:var(--correct); border:1px solid var(--correct); margin-bottom:8px; }
+.bank-exp { background:var(--parchment); border-radius:10px; padding:10px 16px; font-size:13px; color:var(--ink-soft); line-height:1.6; border-left:3px solid var(--gold); }
+.overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.3); z-index:99; opacity:0; pointer-events:none; transition:opacity .3s; }
+.overlay.show { opacity:1; pointer-events:auto; }
+.history-bar { display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.history-chip { display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600; background:var(--parchment); border:1px solid var(--gold-light); color:var(--ink-soft); }
+.history-chip.latest { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--royal-deep); border-color:var(--gold); }
+@media (max-width:640px) {
+  .card-inner { padding:24px 20px; }
+  .q-text { font-size:18px; }
+  .header-title { font-size:18px; }
+  .result-score-big { font-size:48px; }
+  .result-stats { grid-template-columns:1fr; }
+  .correct-box { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo-badge">#</div>
+    <div>
+      <div class="header-title">数词 &amp; 冠词 专项训练</div>
+      <div class="header-sub">Numerals &amp; Articles · 100 Questions · Random 30 per round</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="header-btn" id="bankBtn">📖 题库</button>
+    <button class="header-btn gold" id="reshuffleBtn">🎲 重新随机</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="history-bar" id="historyBar"></div>
+  <div class="quiz-card" id="quizCard"><div class="card-inner" id="cardInner"></div></div>
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <div class="result-title">🎯 练习完成</div>
+      <div class="result-score-big" id="scoreBig">0</div>
+      <div class="result-score-label">分 / 共 30 题</div>
+      <div class="result-compare" id="resultCompare"></div>
+    </div>
+    <div class="result-stats" id="resultStats"></div>
+    <div class="result-suggestion" id="resultSuggestion"></div>
+    <div class="result-actions">
+      <button class="nav-btn gold" id="againBtn">🔄 再来一轮</button>
+      <button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="bank-panel" id="bankPanel">
+  <div class="bank-header"><h2>📖 题库一览</h2><button class="bank-close" id="bankClose">✕</button></div>
+  <div class="bank-search"><input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类..."></div>
+  <div class="bank-list" id="bankList"></div>
+</div>
+
+<script>
+const ALL_Q = [
+// ===== 选择题 1-40 =====
+{id:1,t:'choice',c:'数词-冠词',q:'Lisa likes playing ____ Chinese chess, so his father plays with her ____.',o:['A. a; every third day','B. the; every three day','C. /; every third day','D. /; every three days'],a:'D',e:'棋类运动前不加冠词；every+基数词+复数名词表示"每隔"。'},
+{id:2,t:'choice',c:'数词-冠词',q:'____ of the store owners in this commercial street think the rent is not fair.',o:['A. Two fifth','B. Two fifths','C. Two-fifth','D. Two-fives'],a:'B',e:'分子基数词，分母序数词，分子>1分母加s。'},
+{id:3,t:'choice',c:'数词-冠词',q:'My hometown is becoming more and more beautiful. ____ visitors come here last week.',o:['A. Hundreds of','B. Hundreds','C. Hundred of','D. Hundred'],a:'A',e:'hundreds of表示"数百的"，前面无具体数字。'},
+{id:4,t:'choice',c:'数词-冠词',q:"It took us quite a long time to get to the park. That was a ____ journey.",o:["A. three hour's","B. three-hours","C. three-hour","D. three hours"],a:'C',e:'复合形容词"数词-名词单数"作定语。'},
+{id:5,t:'choice',c:'数词-冠词',q:'The number of the students in our school is about four ____, ____ of whom are girls.',o:['A. thousand; two thirds','B. thousands; two third','C. thousands; two thirds','D. thousand; two third'],a:'A',e:'具体数字后hundred/thousand不加s；分子>1分母加s。'},
+{id:6,t:'choice',c:'数词-冠词',q:'There are ____ students in the school, and ____ them are from the countryside.',o:['A. two thousand; two hundreds of','B. two thousands; two hundred','C. two thousand; two hundred of','D. two thousands of; two hundred'],a:'C',e:'two thousand无s；two hundred of them范围限定。'},
+{id:7,t:'choice',c:'数词-冠词',q:'The building was built in ____.',o:['A. 1980s','B. the 1980','C. the 1980s',"D. 1980's"],a:'C',e:'表示年代用in the+年份复数。'},
+{id:8,t:'choice',c:'数词-冠词',q:"My uncle is in his ____, but he looks like a young man.",o:['A. forty','B. forties','C. fortieth','D. fortieths'],a:'B',e:"in one's+整十复数（in his forties）表示在某人四十多岁时。"},
+{id:9,t:'choice',c:'数词-冠词',q:'He has been working hard, so he will have a ____ holiday next week.',o:['A. two days','B. two-day','C. two-days',"D. two day's"],a:'B',e:'复合形容词作定语two-day。'},
+{id:10,t:'choice',c:'数词-冠词',q:'Jenny is ____ university student, and she is ____ honest girl.',o:['A. a; a','B. an; an','C. a; an','D. an; a'],a:'C',e:'university辅音/j/开头用a；honest元音开头用an。'},
+{id:11,t:'choice',c:'数词-冠词',q:'It takes us ____ hour to get to the top of the mountain by ____ bus.',o:['A. a; /','B. an; a','C. an; /','D. a; the'],a:'C',e:'hour元音开头用an；by bus不加冠词。'},
+{id:12,t:'choice',c:'数词-冠词',q:'He is ____ European, but he lives in ____ Asian country.',o:['A. a; an','B. an; a','C. a; a','D. an; an'],a:'A',e:'European辅音/j/开头用a；Asian元音开头用an。'},
+{id:13,t:'choice',c:'数词-冠词',q:'The boy asked his mother whether France is ____ European country.',o:['A. an','B. /','C. a','D. the'],a:'C',e:'European辅音/j/开头用a。'},
+{id:14,t:'choice',c:'数词-冠词',q:'We often have ____ lunch at school, but yesterday we had ____ big lunch at the restaurant.',o:['A. /; a','B. a; /','C. the; a','D. /; /'],a:'A',e:'三餐前不加冠词；有形容词修饰时加不定冠词。'},
+{id:15,t:'choice',c:'数词-冠词',q:'Look! Two ____ students are watching a football match on the playground.',o:['A. hundreds','B. hundreds of','C. hundred','D. hundred of'],a:'C',e:'具体数字后hundred不加s。'},
+{id:16,t:'choice',c:'数词-冠词',q:'The Great Wall attracted ____ of tourists on China Tourist Day last year.',o:['A. thousand','B. thousands','C. two thousand','D. two thousands'],a:'B',e:'thousands of表示"成千上万"。'},
+{id:17,t:'choice',c:'数词-冠词',q:'____ of the work has been finished by volunteers so far.',o:['A. Seven twelve','B. Seven twelfths','C. Seven twelfth','D. Seven twelf'],a:'B',e:'7/12英文表达seven twelfths，分子>1分母加s。'},
+{id:18,t:'choice',c:'数词-冠词',q:'China has played ____ important role in fighting against COVID-19 all over the world.',o:['A. a','B. an','C. the','D. /'],a:'B',e:'important元音开头用an。'},
+{id:19,t:'choice',c:'数词-冠词',q:'He is the ____ to come to the meeting.',o:['A. first','B. one','C. two','D. twoth'],a:'A',e:'序数词表达顺序the first。'},
+{id:20,t:'choice',c:'数词-冠词',q:'I have two sisters and ____ of them are teachers.',o:['A. both','B. all','C. three','D. every'],a:'A',e:'两者用both。'},
+{id:21,t:'choice',c:'数词-冠词',q:'The Yellow River is ____ longest river in China.',o:['A. a','B. an','C. the','D. /'],a:'C',e:'形容词最高级前用the。'},
+{id:22,t:'choice',c:'数词-冠词',q:'We should look after ____ old and ____ poor.',o:['A. /; /','B. the; the','C. a; a','D. an; an'],a:'B',e:'the+形容词表示一类人。'},
+{id:23,t:'choice',c:'数词-冠词',q:'The Whites went out to eat. ____ Whites are very friendly.',o:['A. A','B. An','C. The','D. /'],a:'C',e:'the+姓氏复数表示一家人。'},
+{id:24,t:'choice',c:'数词-冠词',q:'He plays ____ piano very well, but he doesn\'t like playing ____ football.',o:['A. the; the','B. the; /','C. /; the','D. /; /'],a:'B',e:'乐器前用the；球类运动前不加冠词。'},
+{id:25,t:'choice',c:'数词-冠词',q:'____ sun rises in ____ east.',o:['A. The; the','B. A; an','C. The; /','D. /; /'],a:'A',e:'世界上独一无二的事物和方位名词前用the。'},
+{id:26,t:'choice',c:'数词-冠词',q:'Do you know ____ man standing under the tree? He is my teacher.',o:['A. a','B. an','C. the','D. /'],a:'C',e:'特指站在树下的那个人用the。'},
+{id:27,t:'choice',c:'数词-冠词',q:'He lives on ____ second floor.',o:['A. a','B. an','C. the','D. /'],a:'C',e:'序数词前用the。'},
+{id:28,t:'choice',c:'数词-冠词',q:'After the exam, we will have ____ holiday.',o:['A. two weeks','B. two-week','C. a two-week',"D. two week's"],a:'C',e:'a two-week holiday复合形容词。'},
+{id:29,t:'choice',c:'数词-冠词',q:'Please remember to take your medicine ____.',o:['A. every three days','B. every a day','C. every third days','D. every three day'],a:'A',e:'"每隔三天"every three days。'},
+{id:30,t:'choice',c:'数词-冠词',q:'I bought a new bike yesterday. ____ bike is in my room now.',o:['A. A','B. An','C. The','D. /'],a:'C',e:'上文提到过，特指用the。'},
+{id:31,t:'choice',c:'数词-冠词',q:'There is ____ "u" and ____ "s" in the word "us".',o:['A. a; an','B. an; a','C. a; a','D. an; an'],a:'A',e:'u读音/ju:/辅音开头用a；s读音/es/元音开头用an。'},
+{id:32,t:'choice',c:'数词-冠词',q:'Mr. Thomson is waiting for you in ____ yard.',o:['A. a','B. an','C. the','D. /'],a:'C',e:'特指那个院子用the。'},
+{id:33,t:'choice',c:'数词-冠词',q:'He is ____ honest boy, so we all trust him.',o:['A. a','B. an','C. the','D. /'],a:'B',e:'honest的h不发音，元音开头用an。'},
+{id:34,t:'choice',c:'数词-冠词',q:'I usually go to school by ____ bike, but my father goes to work by ____ car.',o:['A. /; /','B. a; a','C. the; the','D. /; the'],a:'A',e:'by+交通工具不加冠词。'},
+{id:35,t:'choice',c:'数词-冠词',q:'In ____ 1970s, many people lived in small houses.',o:['A. a','B. an','C. the','D. /'],a:'C',e:'in the 1970s固定搭配。'},
+{id:36,t:'choice',c:'数词-冠词',q:'He made a lot of mistakes in his ____.',o:['A. twenty','B. twenties','C. twentieth','D. twentieths'],a:'B',e:"in one's twenties二十多岁。"},
+{id:37,t:'choice',c:'数词-冠词',q:"It's ____ useful book for English learners.",o:['A. a','B. an','C. the','D. /'],a:'A',e:'useful读音/j/开头用a。'},
+{id:38,t:'choice',c:'数词-冠词',q:'Jack is ____ university student, and his sister is ____ airline pilot.',o:['A. a; an','B. an; a','C. a; a','D. an; an'],a:'A',e:'university辅音开头用a；airline元音开头用an。'},
+{id:39,t:'choice',c:'数词-冠词',q:"Don't make ____ same mistake again.",o:['A. a','B. an','C. the','D. /'],a:'C',e:'the same固定搭配。'},
+{id:40,t:'choice',c:'数词-冠词',q:'We have classes from Monday to Friday. We have classes ____.',o:['A. every weekday','B. every day','C. the every day','D. every days'],a:'A',e:'从周一到周五即每个工作日every weekday。'},
+// ===== 填空题 41-70 =====
+{id:41,t:'fill',c:'语法填空',q:"Tom published a novel in his ____ (twenty).",a:'twenties',e:"in one's twenties二十多岁。"},
+{id:42,t:'fill',c:'语法填空',q:'The building was built in the ____ (1980).',a:'1980s',e:'the 1980s表示年代。'},
+{id:43,t:'fill',c:'语法填空',q:'Mary is in ____ (three) grade in primary school.',a:'third',e:'序数词表示第几。'},
+{id:44,t:'fill',c:'语法填空',q:'He is ____ honest man and we all respect him.',a:'an',e:'honest元音开头用an。'},
+{id:45,t:'fill',c:'语法填空',q:'____ number of students in our class is fifty.',a:'The',e:'The number of谓语用单数。'},
+{id:46,t:'fill',c:'语法填空',q:'We should have ____ breakfast at 7:00 every morning.',a:'/',e:'三餐前不加冠词。答案为不填。'},
+{id:47,t:'fill',c:'语法填空',q:'She is ____ only one who can help me.',a:'the',e:'特指唯一的一个用the。'},
+{id:48,t:'fill',c:'语法填空',q:'This is ____ most interesting book I have ever read.',a:'the',e:'最高级前用the。'},
+{id:49,t:'fill',c:'语法填空',q:'She plays ____ violin very well.',a:'the',e:'乐器前用the。'},
+{id:50,t:'fill',c:'语法填空',q:'He went to the park ____ (two) a week.',a:'twice',e:'twice a week一周两次。'},
+{id:51,t:'fill',c:'语法填空',q:'He was born in ____ summer of 2005.',a:'the',e:'特指2005年的夏天用the。'},
+{id:52,t:'fill',c:'语法填空',q:'There are ____ (hundred) of birds in the sky.',a:'hundreds',e:'hundreds of表示"数百的"。'},
+{id:53,t:'fill',c:'语法填空',q:'____ (five) of the students in our class are girls.',a:'Two fifths',e:'分数表达，分子>1分母加s。（如五分之二）'},
+{id:54,t:'fill',c:'语法填空',q:"It's ____ unusual experience for me.",a:'an',e:'unusual元音开头用an。'},
+{id:55,t:'fill',c:'语法填空',q:'He works in ____ European country.',a:'a',e:'European辅音/j/开头用a。'},
+{id:56,t:'fill',c:'语法填空',q:'The ____ (one) thing I want to do is to sleep.',a:'first',e:'序数词表示第一。'},
+{id:57,t:'fill',c:'语法填空',q:'Please give me ____ apple and ____ banana.',a:'an; a',e:'apple元音用an；banana辅音用a。'},
+{id:58,t:'fill',c:'语法填空',q:"My brother is in his ____ (thirty).",a:'thirties',e:"in one's thirties三十多岁。"},
+{id:59,t:'fill',c:'语法填空',q:'My father will have a ____ (two-day) holiday next week.',a:'two-day',e:'复合形容词作定语。'},
+{id:60,t:'fill',c:'语法填空',q:'He is ____ tallest boy in his class.',a:'the',e:'最高级前用the。'},
+{id:61,t:'fill',c:'语法填空',q:'I have to see the doctor ____ every two days. (填一个介词)',a:'in',e:'in every two days表示间隔。'},
+{id:62,t:'fill',c:'语法填空',q:'We went to the Great Wall, ____ Great Wall is very famous.',a:'the',e:'再次提到用the特指。'},
+{id:63,t:'fill',c:'语法填空',q:'Lisa is ____ university student who won the prize.',a:'a',e:'university辅音开头用a。'},
+{id:64,t:'fill',c:'语法填空',q:'She has a beautiful hat; ____ hat is on the desk.',a:'the',e:'特指那顶帽子用the。'},
+{id:65,t:'fill',c:'语法填空',q:'____ old man was walking across the road.',a:'The',e:'特指那位老人用the。'},
+{id:66,t:'fill',c:'语法填空',q:"Don't make noise in ____ class.",a:'/',e:'in class上课时，不加冠词。答案为不填。'},
+{id:67,t:'fill',c:'语法填空',q:'The sun is shining brightly in ____ sky.',a:'the',e:'天空前用the。'},
+{id:68,t:'fill',c:'语法填空',q:'The farmer keeps ____ cows and sheep. (用复数或适当形式)',a:'some',e:'some表示"一些"。'},
+{id:69,t:'fill',c:'语法填空',q:'My grandmother was born in ____ 1930s.',a:'the',e:'年代前用the。'},
+{id:70,t:'fill',c:'语法填空',q:'He is ____ "x" in the word "x-ray".',a:'an',e:'字母x读音/eks/元音开头用an。'},
+// ===== 改错题 71-100 =====
+{id:71,t:'correct',c:'改错题',q:'I have two hundreds books on my desk.',w:'two hundreds',r:'two hundred',e:'具体数字后hundred不加s。'},
+{id:72,t:'correct',c:'改错题',q:'Look! The teacher is an university student.',w:'an',r:'a',e:'university首音为辅音/j/用a。'},
+{id:73,t:'correct',c:'改错题',q:'I have breakfast at school, and I play the football after school.',w:'the',r:'/',e:'play football球类前不加the。'},
+{id:74,t:'correct',c:'改错题',q:'Jenny is an honest girl, and she is an European.',w:'an',r:'a',e:'European首音为辅音/j/用a。'},
+{id:75,t:'correct',c:'改错题',q:'Two thirds of the earth are covered with water.',w:'are',r:'is',e:'earth不可数名词，谓语用单数。'},
+{id:76,t:'correct',c:'改错题',q:'The building was built in 1980s, so it is very old.',w:'in 1980s',r:'in the 1980s',e:'年代前加the。'},
+{id:77,t:'correct',c:'改错题',q:'He is in his twenty, so he is very young.',w:'twenty',r:'twenties',e:"in one's twenties用复数。"},
+{id:78,t:'correct',c:'改错题',q:'There are thousands of people, and two thousands of them are workers.',w:'two thousands',r:'two thousand',e:'具体数字后thousand不加s不加of。'},
+{id:79,t:'correct',c:'改错题',q:'He is the first to come, so he is a best student.',w:'a best',r:'the best',e:'最高级前用the。'},
+{id:80,t:'correct',c:'改错题',q:'Tom plays the chess very well, and he likes playing the basketball.',w:'the chess',r:'chess',e:'棋类前不加the（basketball同理）。'},
+{id:81,t:'correct',c:'改错题',q:'He is an friend of mine.',w:'an',r:'a',e:'friend辅音开头用a。'},
+{id:82,t:'correct',c:'改错题',q:'There are seven twelve of the work finished.',w:'seven twelve',r:'seven twelfths',e:'7/12英文为seven twelfths。'},
+{id:83,t:'correct',c:'改错题',q:'The sun rises in east and sets in west.',w:'in east',r:'in the east',e:'方位名词前加the（west同理）。'},
+{id:84,t:'correct',c:'改错题',q:'He has a uncle and an aunt.',w:'a uncle',r:'an uncle',e:'uncle元音开头用an。'},
+{id:85,t:'correct',c:'改错题',q:'Mr. and Mrs. Smith went to the school to see their son yesterday.',w:'the school',r:'school',e:'go to school上学，不用the。'},
+{id:86,t:'correct',c:'改错题',q:'The number of the students are growing fast.',w:'are',r:'is',e:'The number of谓语用单数。'},
+{id:87,t:'correct',c:'改错题',q:'It is an useful tool for everyone.',w:'an',r:'a',e:'useful辅音/j/开头用a。'},
+{id:88,t:'correct',c:'改错题',q:'She has a "h" in her name and it\'s silent.',w:'a',r:'an',e:'字母h读音/eɪtʃ/元音开头用an。'},
+{id:89,t:'correct',c:'改错题',q:'I have watched the movie for the third time yesterday.',w:'the third time',r:'a third time',e:'表"又一次"用a third time。'},
+{id:90,t:'correct',c:'改错题',q:'She likes to play the piano and the football.',w:'the football',r:'football',e:'球类前不加the。'},
+{id:91,t:'correct',c:'改错题',q:'Three hundreds students went to the museum yesterday.',w:'hundreds',r:'hundred',e:'具体数字后hundred不加s。'},
+{id:92,t:'correct',c:'改错题',q:'The Spring Festival usually comes in a February or March.',w:'a',r:'/',e:'月份前不加冠词。'},
+{id:93,t:'correct',c:'改错题',q:'The poor is looked down upon in old society.',w:'is',r:'are',e:'the poor指穷人们，谓语用复数。'},
+{id:94,t:'correct',c:'改错题',q:'He usually drives his car to work; sometimes he takes a taxi.',w:'无错误',r:'无错误',e:'此句表达正确，take a taxi为固定搭配。'},
+{id:95,t:'correct',c:'改错题',q:'There is a "u" in the word "umbrella".',w:'无错误',r:'无错误',e:'字母u读音/ju:/辅音开头用a，此句正确。'},
+{id:96,t:'correct',c:'改错题',q:'He was born in the 1990s, so he is 30 years old this year.',w:'无错误',r:'无错误',e:'in the 1990s结构正确，此句无错误。'},
+{id:97,t:'correct',c:'改错题',q:'He is an honest and useful man.',w:'无错误',r:'无错误',e:'an修饰honest（元音），useful并列不需要单独冠词，此句正确。'},
+{id:98,t:'correct',c:'改错题',q:'Every two days he goes swimming, and every three day he goes shopping.',w:'three day',r:'three days',e:'every three days每隔三天，用复数。'},
+{id:99,t:'correct',c:'改错题',q:"We usually have a lunch at twelve o'clock.",w:'a',r:'/',e:'三餐前不加冠词。'},
+{id:100,t:'correct',c:'改错题',q:'This is the most interesting movie, so it is second time I have seen it.',w:'second time',r:'the second time',e:'序数词前加the，the second time。'}
+];
+
+// ====== State ======
+let currentRound=[], currentIndex=0, userAnswers=[];
+let selectedOption=null, fillValue='', correctWrong='', correctRight='';
+const cardInner=document.getElementById('cardInner');
+const resultPanel=document.getElementById('resultPanel');
+const quizCard=document.getElementById('quizCard');
+const bankPanel=document.getElementById('bankPanel');
+const overlay=document.getElementById('overlay');
+const historyBar=document.getElementById('historyBar');
+
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pickRandom(n){return shuffle(ALL_Q).slice(0,n);}
+function getHistory(){try{return JSON.parse(localStorage.getItem('num_art_scores')||'[]');}catch(e){return[];}}
+function saveScore(s,t,c,w,u){const h=getHistory();h.push({score:s,total:t,correct:c,wrong:w,unanswered:u,date:new Date().toLocaleString('zh-CN')});localStorage.setItem('num_art_scores',JSON.stringify(h));}
+function getLatest(){const h=getHistory();return h.length>0?h[h.length-1]:null;}
+function renderHistory(){const h=getHistory();if(!h.length){historyBar.innerHTML='';return;}let html='<span style="font-size:13px;color:#5a4a2a;font-weight:600;">📊 历史成绩：</span>';h.slice(-5).forEach((r,i)=>{const l=i===h.slice(-5).length-1;html+=`<span class="history-chip${l?' latest':''}">${r.score}分${l?' (最新)':''}</span>`;});historyBar.innerHTML=html;}
+
+function initRound(){
+  currentRound=pickRandom(30);currentIndex=0;userAnswers=[];
+  selectedOption=null;fillValue='';correctWrong='';correctRight='';
+  resultPanel.classList.remove('show');quizCard.style.display='block';
+  restoreAnswer();renderQuestion();
+}
+
+function renderQuestion(){
+  const q=currentRound[currentIndex];
+  const progress=((currentIndex+1)/currentRound.length*100).toFixed(0);
+  let typeLabel=q.t==='choice'?'选择题':q.t==='fill'?'语法填空':'改错题';
+  let html=`<div class="progress-bar"><div class="progress-track"><div class="progress-fill" style="width:${progress}%"></div></div><span class="progress-text">${currentIndex+1} / ${currentRound.length}</span><span class="progress-badge">✅ 已答 ${userAnswers.length}</span></div><span class="q-type-tag">${typeLabel}</span><span class="q-cat-tag">${q.c}</span><div class="q-number">Question #${q.id}</div><div class="q-text">${formatQ(q)}</div>`;
+
+  if(q.t==='choice'){
+    const L=['A','B','C','D'];
+    html+='<div class="options-list">';
+    q.o.forEach((opt,i)=>{
+      let cls='option-btn';
+      if(selectedOption===L[i])cls+=' selected';
+      const c=opt.replace(/^[A-D]\.\s*/,'');
+      html+=`<div class="${cls}" data-value="${L[i]}" onclick="onOptionClick(this,'${L[i]}')"><div class="option-letter">${L[i]}</div><div class="option-text">${c}</div></div>`;
+    });
+    html+='</div>';
+  } else if(q.t==='fill'){
+    html+=`<div class="fill-group"><div class="fill-label">请填写答案</div><input type="text" class="fill-input" id="fillInput" placeholder="输入你的答案..." value="${fillValue}" oninput="onFillInput(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();goNext();}"></div>`;
+  } else if(q.t==='correct'){
+    html+=`<div class="correct-box"><div class="correct-field wrong-field"><div class="fill-label"><span class="icon">❌</span> 错误部分</div><input type="text" class="fill-input" id="correctWrongInput" placeholder="写出错误的词语" value="${correctWrong}" oninput="onCorrectInput('wrong',this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('correctRightInput').focus();}"></div><div class="correct-field right-field"><div class="fill-label"><span class="icon">✅</span> 正确形式</div><input type="text" class="fill-input" id="correctRightInput" placeholder="写出正确的形式" value="${correctRight}" oninput="onCorrectInput('right',this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();goNext();}"></div></div>`;
+  }
+
+  html+=`<div class="nav-row"><button class="nav-btn secondary" onclick="prevQuestion()" ${currentIndex===0?'disabled':''}>⬅ 上一题</button><div class="nav-mid"><button class="nav-btn gold" onclick="submitQuiz()">📥 提交</button></div><button class="nav-btn primary" onclick="goNext()">${currentIndex===currentRound.length-1?'📊 查看结果':'下一题 ➡'}</button></div>`;
+
+  html+=`<div class="q-nav-section"><div class="q-nav-title">📋 题号导航 — 点击跳转</div><div class="q-nav-grid">`;
+  for(let i=0;i<currentRound.length;i++){
+    let c='q-nav-cell';
+    if(i===currentIndex)c+=' current';
+    if(userAnswers.find(a=>a.index===i))c+=' answered';
+    html+=`<div class="${c}" onclick="jumpToQuestion(${i})">${i+1}</div>`;
+  }
+  html+=`</div></div>`;
+  cardInner.innerHTML=html;
+  setTimeout(()=>{const fi=document.getElementById('fillInput');if(fi)fi.focus();const cwi=document.getElementById('correctWrongInput');if(cwi)cwi.focus();},100);
+}
+
+function formatQ(q){return q.q.replace(/______/g,'<span class="blank"></span>').replace(/_____/g,'<span class="blank"></span>').replace(/____/g,'<span class="blank"></span>').replace(/___/g,'<span class="blank"></span>');}
+
+function saveOrUpdate(index,type,answer){
+  const i=userAnswers.findIndex(a=>a.index===index);
+  if(i>=0)userAnswers[i]={index,type,answer};
+  else userAnswers.push({index,type,answer});
+}
+function onOptionClick(btn,letter){selectedOption=letter;saveOrUpdate(currentIndex,'choice',letter);renderQuestion();}
+function onFillInput(v){fillValue=v;if(v.trim())saveOrUpdate(currentIndex,'fill',v.trim());else{const i=userAnswers.findIndex(a=>a.index===currentIndex);if(i>=0)userAnswers.splice(i,1);}}
+function onCorrectInput(f,v){if(f==='wrong')correctWrong=v;else correctRight=v;if(correctWrong.trim())saveOrUpdate(currentIndex,'correct',correctWrong.trim());else{const i=userAnswers.findIndex(a=>a.index===currentIndex);if(i>=0)userAnswers.splice(i,1);}}
+function goNext(){if(currentIndex<currentRound.length-1){currentIndex++;restoreAnswer();renderQuestion();}else{submitQuiz();}}
+function jumpToQuestion(i){if(i<0||i>=currentRound.length)return;currentIndex=i;restoreAnswer();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function prevQuestion(){if(currentIndex>0){currentIndex--;restoreAnswer();renderQuestion();}}
+function restoreAnswer(){selectedOption=null;fillValue='';correctWrong='';correctRight='';const a=userAnswers.find(x=>x.index===currentIndex);if(a){if(a.type==='choice')selectedOption=a.answer;if(a.type==='fill')fillValue=a.answer;if(a.type==='correct')correctWrong=a.answer;}}
+
+function submitQuiz(){
+  let correct=0,wrong=0,unanswered=0;
+  currentRound.forEach((q,i)=>{
+    const ans=userAnswers.find(a=>a.index===i);
+    if(!ans){unanswered++;return;}
+    let ok=false;
+    if(q.t==='choice')ok=ans.answer===q.a;
+    else if(q.t==='fill'){const acc=q.a.split(';').map(s=>s.trim().toLowerCase());ok=acc.includes(ans.answer.trim().toLowerCase())||ans.answer.trim()==='/'&&q.a.trim()==='/'||ans.answer.trim()==='不填'&&q.a.trim()==='/';}
+    else if(q.t==='correct'){const a=ans.answer.trim().toLowerCase();const t=q.r.trim().toLowerCase();ok=a===t||['无错误','无','正确','没错'].includes(a)&&['无错误','无','正确','没错'].includes(t);}
+    if(ok)correct++;else wrong++;
+  });
+  const score=Math.round(correct/currentRound.length*100);
+  const latest=getLatest();
+  saveScore(score,currentRound.length,correct,wrong,unanswered);
+  quizCard.style.display='none';resultPanel.classList.add('show');
+  document.getElementById('scoreBig').textContent=score;
+  const ce=document.getElementById('resultCompare');
+  if(latest&&latest.score!==undefined){const d=score-latest.score;if(d>0)ce.innerHTML=`<span class="up">📈 较上次 ${latest.score} 分上升了 ${d} 分！</span>`;else if(d<0)ce.innerHTML=`<span class="down">📉 较上次 ${latest.score} 分下降了 ${Math.abs(d)} 分</span>`;else ce.innerHTML=`<span class="same">➡ 与上次 ${latest.score} 分持平</span>`;}
+  else ce.innerHTML='<span class="same">🎉 首次答题，继续加油！</span>';
+  document.getElementById('resultStats').innerHTML=`<div class="stat-card"><div class="stat-num" style="color:var(--correct)">${correct}</div><div class="stat-label">正确</div></div><div class="stat-card"><div class="stat-num" style="color:var(--wrong)">${wrong}</div><div class="stat-label">错误</div></div><div class="stat-card"><div class="stat-num" style="color:#999">${unanswered}</div><div class="stat-label">未答</div></div>`;
+  let sugg=[];
+  if(score>=90)sugg.push('表现优异！数词冠词掌握扎实，可以挑战更高难度的语法题。');
+  else if(score>=70)sugg.push('基础不错，建议重点复习错题中涉及的语法点。');
+  else if(score>=50)sugg.push('需要加强练习，建议重点复习冠词用法和数词表达。');
+  else sugg.push('基础薄弱，建议系统学习数词与冠词的用法后再来练习。');
+  const wt={};currentRound.forEach((q,i)=>{const a=userAnswers.find(x=>x.index===i);if(!a)return;let ok=false;if(q.t==='choice')ok=a.answer===q.a;else if(q.t==='fill'){const acc=q.a.split(';').map(s=>s.trim().toLowerCase());ok=acc.includes(a.answer.trim().toLowerCase());}else if(q.t==='correct')ok=a.answer.trim().toLowerCase()===q.r.trim().toLowerCase();if(!ok)wt[q.c]=(wt[q.c]||0)+1;});
+  const so=Object.entries(wt).sort((a,b)=>b[1]-a[1]);
+  if(so.length)sugg.push('薄弱环节：'+so.map(s=>`${s[0]}(${s[1]}题错)`).join('、'));
+  if(unanswered>0)sugg.push(`有 ${unanswered} 题未作答，建议合理分配时间。`);
+  document.getElementById('resultSuggestion').innerHTML=`<h3>💡 学习建议</h3><ul>${sugg.map(s=>`<li>${s}</li>`).join('')}</ul>`;
+  renderHistory();
+}
+
+function renderBank(filter=''){
+  const f=filter.trim().toLowerCase();
+  const filtered=f===''?ALL_Q:ALL_Q.filter(q=>q.q.toLowerCase().includes(f)||(q.c||'').toLowerCase().includes(f)||String(q.id).includes(f));
+  let html='';
+  filtered.forEach(q=>{
+    const tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    const tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    let ah='';
+    if(q.t==='choice'){const L=['A','B','C','D'];ah='<div class="bank-opts">';q.o.forEach((o,i)=>{const co=o.replace(/^[A-D]\.\s*/,'');const ic=L[i]===q.a;ah+=`<div class="bank-opt${ic?' is-correct':''}"><span class="bank-opt-letter">${L[i]}</span><span>${co}</span>${ic?'<span class="bank-opt-tag">✓ 正确</span>':''}</div>`;});ah+='</div>';}
+    else if(q.t==='fill')ah=`<div class="bank-answer">答案：${q.a}</div>`;
+    else ah=`<div class="bank-answer">错误：${q.w} → 正确：${q.r}</div>`;
+    html+=`<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#${q.id}</span><span class="bank-item-type ${tc}">${tl}</span><span class="bank-item-cat">${q.c}</span></div><div class="bank-item-q">${q.q}</div>${ah}<div class="bank-exp">📖 ${q.e}</div></div>`;
+  });
+  document.getElementById('bankList').innerHTML=html||'<div style="padding:40px;text-align:center;color:#999;">未找到匹配题目</div>';
+}
+
+document.getElementById('reshuffleBtn').addEventListener('click',initRound);
+document.getElementById('bankBtn').addEventListener('click',()=>{bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('bankClose').addEventListener('click',()=>{bankPanel.classList.remove('show');overlay.classList.remove('show');});
+overlay.addEventListener('click',()=>{bankPanel.classList.remove('show');overlay.classList.remove('show');});
+document.getElementById('bankSearch').addEventListener('input',e=>renderBank(e.target.value));
+document.getElementById('againBtn').addEventListener('click',initRound);
+document.getElementById('reviewBtn').addEventListener('click',()=>{bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.addEventListener('keydown',e=>{
+  if(bankPanel.classList.contains('show'))return;
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft')prevQuestion();
+  if(e.key==='ArrowRight')goNext();
+  if(['a','A'].includes(e.key)){const b=document.querySelector('.option-btn[data-value="A"]');if(b)onOptionClick(b,'A');}
+  if(['b','B'].includes(e.key)){const b=document.querySelector('.option-btn[data-value="B"]');if(b)onOptionClick(b,'B');}
+  if(['c','C'].includes(e.key)){const b=document.querySelector('.option-btn[data-value="C"]');if(b)onOptionClick(b,'C');}
+  if(['d','D'].includes(e.key)){const b=document.querySelector('.option-btn[data-value="D"]');if(b)onOptionClick(b,'D');}
+});
+renderHistory();initRound();
+</script>
+</body>
+</html>
