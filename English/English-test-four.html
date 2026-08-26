@@ -1,1512 +1,386 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
-    <title>📘 名词专项 · 200题（单题模式）</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #f5faff 0%, #e3f0fa 100%);
-            padding: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .container {
-            max-width: 780px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(6px);
-            border-radius: 32px;
-            box-shadow: 0 20px 40px rgba(0, 20, 40, 0.10), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-            padding: 20px 22px 32px;
-            transition: all 0.2s;
-        }
-
-        .header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-            border-bottom: 3px dashed #b3d4f0;
-            padding-bottom: 12px;
-            gap: 10px;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #2a6b9e, #4a90d9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.3px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .header h1 span {
-            font-size: 1.6rem;
-            -webkit-text-fill-color: initial;
-            color: #f5b041;
-        }
-
-        .header h1 .subtag {
-            font-size: 0.7rem;
-            background: #dce8f5;
-            padding: 0 14px;
-            border-radius: 40px;
-            -webkit-text-fill-color: #1e3b5a;
-            font-weight: 600;
-        }
-
-        .toolbar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 6px 16px;
-            border: none;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            cursor: pointer;
-            transition: 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: #1e3b5a;
-            border: 1px solid #d4e3f0;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: #4a90d9;
-            color: white;
-            border: none;
-            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.30);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 144, 217, 0.40);
-        }
-
-        .btn-secondary {
-            background: #f0f7ff;
-            border-color: #c3d9ed;
-        }
-        .btn-secondary:hover {
-            background: #dce8f5;
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: #27ae60;
-            color: white;
-            border: none;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.28);
-        }
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.36);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #b3d4f0;
-        }
-        .btn-outline:hover {
-            background: #f0f7ff;
-        }
-
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 20px;
-            background: rgba(235, 245, 255, 0.7);
-            padding: 8px 18px;
-            border-radius: 60px;
-            margin-bottom: 16px;
-            justify-content: center;
-            border: 1px solid #cde0f0;
-            font-size: 0.85rem;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            color: #1e3b5a;
-        }
-
-        .stat-item .badge {
-            background: #2a6b9e;
-            color: white;
-            border-radius: 40px;
-            padding: 0 12px;
-            font-size: 0.75rem;
-            line-height: 24px;
-            font-weight: 600;
-        }
-        .stat-item .badge.green {
-            background: #27ae60;
-        }
-        .stat-item .badge.gold {
-            background: #f5b041;
-        }
-        .stat-item .badge.orange {
-            background: #e67e22;
-        }
-
-        /* ---- 单题卡片 ---- */
-        .single-card-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 8px 0 16px;
-        }
-
-        .question-card {
-            background: white;
-            border-radius: 24px;
-            padding: 20px 24px 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e3eef9;
-            width: 100%;
-            max-width: 600px;
-            transition: 0.2s;
-        }
-
-        .q-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .q-number {
-            font-weight: 700;
-            color: #2a6b9e;
-            background: #e3eef9;
-            padding: 0 14px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            line-height: 26px;
-        }
-
-        .q-type {
-            font-size: 0.7rem;
-            color: #6f8faa;
-            background: #edf4fa;
-            padding: 0 16px;
-            border-radius: 30px;
-            line-height: 24px;
-        }
-
-        .q-text {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: #1a2f44;
-            margin: 8px 0 16px;
-            line-height: 1.6;
-        }
-
-        .q-options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin: 6px 0 12px;
-        }
-
-        .q-options label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 12px;
-            transition: 0.1s;
-            border: 1px solid transparent;
-        }
-        .q-options label:hover {
-            background: #f0f7ff;
-            border-color: #d4e3f0;
-        }
-
-        .q-options input[type="radio"] {
-            accent-color: #4a90d9;
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-        }
-
-        .q-input {
-            border: 2px solid #d4e3f0;
-            border-radius: 60px;
-            padding: 8px 18px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.2s;
-            background: #f9fcff;
-            width: 100%;
-            margin-bottom: 6px;
-        }
-        .q-input:focus {
-            border-color: #4a90d9;
-            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.12);
-            background: white;
-        }
-
-        .q-error-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .q-error-group .q-input {
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .q-result {
-            margin-top: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            min-height: 28px;
-            padding: 6px 12px;
-            border-radius: 12px;
-            background: #f8fafc;
-        }
-        .q-result .correct-answer {
-            color: #27ae60;
-        }
-        .q-result .wrong-answer {
-            color: #e74c3c;
-        }
-        .q-result .info {
-            color: #2a6b9e;
-        }
-
-        /* 导航 */
-        .nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 16px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .nav-bar .progress {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #1e3b5a;
-        }
-
-        .nav-bar .btn-group {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* 结果面板 */
-        .result-panel {
-            margin-top: 22px;
-            background: white;
-            border-radius: 28px;
-            padding: 20px 24px 24px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e3eef9;
-            display: none;
-        }
-        .result-panel.visible {
-            display: block;
-            animation: fadeUp 0.4s ease;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1a2f44;
-            margin-bottom: 4px;
-        }
-
-        .result-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            background: #f5faff;
-            padding: 10px 18px;
-            border-radius: 60px;
-            margin: 8px 0 14px;
-            font-size: 0.9rem;
-        }
-
-        .result-stats .stat strong {
-            font-size: 1.2rem;
-            color: #2a6b9e;
-        }
-        .result-stats .stat .trend {
-            font-size: 1rem;
-            margin-left: 4px;
-        }
-        .result-stats .stat .trend.up {
-            color: #27ae60;
-        }
-        .result-stats .stat .trend.down {
-            color: #e74c3c;
-        }
-
-        .suggestion {
-            background: #fef9e7;
-            border-radius: 40px;
-            padding: 8px 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            border: 1px solid #f5dbaa;
-        }
-
-        .wrong-list {
-            margin-top: 14px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 10px;
-        }
-
-        .wrong-item {
-            background: #fdedec;
-            border-radius: 14px;
-            padding: 10px 14px;
-            border-left: 4px solid #e74c3c;
-            font-size: 0.85rem;
-        }
-        .wrong-item .q-original {
-            font-weight: 600;
-            color: #1a2f44;
-        }
-        .wrong-item .q-answer {
-            color: #27ae60;
-            font-weight: 500;
-        }
-        .wrong-item .q-user {
-            color: #e74c3c;
-            font-size: 0.8rem;
-        }
-
-        /* ---- 模态框 ---- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            padding: 16px;
-        }
-        .modal-overlay.open {
-            display: flex;
-            animation: fadeIn 0.2s;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .modal-box {
-            background: #fff;
-            border-radius: 32px;
-            max-width: 780px;
-            width: 100%;
-            padding: 24px 28px 30px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 1px solid #e3eef9;
-        }
-
-        .modal-box h2 {
-            font-size: 1.4rem;
-            color: #1a2f44;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .modal-box .close-btn {
-            float: right;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #8aa9c9;
-            transition: 0.2s;
-            line-height: 1;
-        }
-        .modal-box .close-btn:hover {
-            color: #2a6b9e;
-            transform: rotate(90deg);
-        }
-
-        .bank-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-            margin-top: 10px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .bank-item {
-            background: #f5faff;
-            border-radius: 12px;
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            display: flex;
-            flex-direction: column;
-            border-bottom: 1px solid #e3eef9;
-            gap: 4px;
-        }
-        .bank-item .b-q {
-            font-weight: 500;
-            color: #1a2f44;
-        }
-        .bank-item .b-answer {
-            color: #27ae60;
-            font-weight: 500;
-            font-size: 0.8rem;
-            padding-left: 12px;
-            border-left: 3px solid #27ae60;
-        }
-        .bank-item .b-type {
-            color: #6f8faa;
-            font-size: 0.7rem;
-            background: #e3eef9;
-            padding: 0 12px;
-            border-radius: 30px;
-            line-height: 20px;
-            display: inline-block;
-            align-self: flex-start;
-        }
-
-        .history-list {
-            list-style: none;
-            padding: 0;
-        }
-        .history-list li {
-            padding: 6px 10px;
-            border-bottom: 1px solid #e3eef9;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-        }
-        .history-list li:last-child {
-            border: none;
-        }
-        .history-list .score-high {
-            font-weight: 700;
-            color: #2a6b9e;
-        }
-
-        /* 滚动条 */
-        .bank-grid::-webkit-scrollbar,
-        .modal-box::-webkit-scrollbar {
-            width: 5px;
-        }
-        .bank-grid::-webkit-scrollbar-track,
-        .modal-box::-webkit-scrollbar-track {
-            background: #e3eef9;
-            border-radius: 10px;
-        }
-        .bank-grid::-webkit-scrollbar-thumb,
-        .modal-box::-webkit-scrollbar-thumb {
-            background: #4a90d9;
-            border-radius: 10px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 12px 14px 22px;
-            }
-            .header h1 {
-                font-size: 1.2rem;
-            }
-            .question-card {
-                padding: 16px 16px 20px;
-            }
-            .q-text {
-                font-size: 0.95rem;
-            }
-            .q-options label {
-                font-size: 0.85rem;
-            }
-            .q-input {
-                font-size: 0.85rem;
-                padding: 6px 14px;
-            }
-            .stats {
-                font-size: 0.75rem;
-                padding: 6px 14px;
-            }
-            .nav-bar {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-            }
-            .nav-bar .btn-group {
-                justify-content: center;
-            }
-            .modal-box {
-                padding: 16px 14px 20px;
-            }
-            .bank-item {
-                font-size: 0.8rem;
-                padding: 6px 10px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>名词201题专项训练 · English Grammar Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#d4a017;--gold-light:#f0c75e;--gold-deep:#b8860b;--royal:#4a3f8c;--royal-light:#6b5fb0;--royal-deep:#2d2360;--cream:#fffbf0;--warm-white:#fdf8ee;--parchment:#faf3e0;--ink:#2a1a0a;--ink-soft:#5a4a2a;--correct:#1a8a3a;--correct-bg:#e6f7ed;--wrong:#c43a3a;--wrong-bg:#fdf4f4;--shadow:0 8px 32px rgba(74,63,140,.15);--shadow-lg:0 12px 48px rgba(74,63,140,.22)}
+body{font-family:'Open Sans','Noto Serif SC',serif;background:linear-gradient(135deg,#fffbf0 0%,#f5ecd9 30%,#e8dff0 70%,#ddd6f0 100%);min-height:100vh;color:var(--ink);overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(ellipse at 10% 20%,rgba(212,160,23,.08) 0%,transparent 50%),radial-gradient(ellipse at 90% 80%,rgba(74,63,140,.08) 0%,transparent 50%);pointer-events:none;z-index:0}
+.header{position:relative;z-index:10;background:linear-gradient(135deg,var(--royal) 0%,var(--royal-light) 50%,var(--royal-deep) 100%);padding:18px 30px;box-shadow:0 4px 24px rgba(45,35,96,.3);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo-badge{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--royal-deep);box-shadow:0 4px 12px rgba(212,160,23,.4);flex-shrink:0}
+.header-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.2);line-height:1.2}
+.header-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:8px 18px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s;white-space:nowrap}
+.header-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+.header-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--royal-deep)}
+.header-btn.gold:hover{background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+.container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.quiz-card{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;min-height:480px;position:relative;border:1px solid rgba(212,160,23,.2)}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--royal-light),var(--gold-light),var(--gold))}
+.card-inner{padding:36px 40px}
+.progress-bar{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.progress-track{flex:1;height:10px;background:#f0ead6;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--royal-light));border-radius:10px;transition:width .4s ease;width:0%}
+.progress-text{font-size:14px;font-weight:700;color:var(--royal-deep);white-space:nowrap}
+.progress-badge{display:inline-flex;align-items:center;gap:6px;background:var(--parchment);border:1px solid var(--gold);border-radius:20px;padding:4px 14px;font-size:13px;color:var(--ink-soft);font-weight:600}
+.q-type-tag{display:inline-block;background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;padding:5px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:16px}
+.q-cat-tag{display:inline-block;background:var(--parchment);color:var(--gold-deep);border:1px solid var(--gold-light);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-left:8px}
+.q-number{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-deep);font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.q-text{font-family:'Noto Serif SC',serif;font-size:22px;line-height:1.7;color:var(--ink);margin-bottom:28px;font-weight:500}
+.q-text .blank{display:inline-block;min-width:80px;border-bottom:3px solid var(--gold);margin:0 4px}
+.options-list{display:flex;flex-direction:column;gap:12px}
+.option-btn{display:flex;align-items:center;gap:14px;padding:16px 22px;border:2px solid #e8e0d0;border-radius:16px;cursor:pointer;font-size:17px;transition:all .25s;background:#fffdf8;text-align:left;font-family:'Open Sans',sans-serif}
+.option-btn:hover{border-color:var(--gold);background:var(--warm-white);transform:translateX(4px)}
+.option-btn.selected{border-color:var(--royal);background:#f5f0ff;box-shadow:0 4px 16px rgba(74,63,140,.15)}
+.option-letter{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;background:#f0ead6;color:var(--royal-deep);transition:all .25s}
+.option-btn.selected .option-letter{background:var(--royal);color:#fff}
+.option-text{flex:1}
+.fill-input{width:100%;padding:14px 20px;font-size:18px;border:2px solid #e8e0d0;border-radius:14px;background:#fffdf8;font-family:'Open Sans',sans-serif;transition:all .25s;color:var(--ink)}
+.fill-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,160,23,.15)}
+.fill-label{font-size:14px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.fill-group{margin-bottom:20px}
+.correct-box{display:flex;gap:16px;margin-bottom:20px}
+.correct-field{flex:1}
+.correct-field .fill-label{display:flex;align-items:center;gap:6px}
+.correct-field .fill-label .icon{font-size:16px}
+.correct-field.wrong-field .fill-label{color:var(--wrong)}
+.correct-field.right-field .fill-label{color:var(--correct)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:12px;flex-wrap:wrap}
+.nav-btn{padding:12px 28px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;border:none;display:flex;align-items:center;gap:8px}
+.nav-btn.primary{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;box-shadow:0 4px 16px rgba(74,63,140,.3)}
+.nav-btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,63,140,.4)}
+.nav-btn.secondary{background:var(--parchment);color:var(--royal-deep);border:1px solid var(--gold)}
+.nav-btn.secondary:hover{background:var(--warm-white)}
+.nav-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep)}
+.nav-btn.gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4)}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.nav-mid{display:flex;gap:10px}
+.q-nav-section{margin-top:28px;padding:20px;border-radius:16px;background:var(--parchment);border:1px solid rgba(212,160,23,.25)}
+.q-nav-title{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:12px;text-align:center}
+.q-nav-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.q-nav-cell{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;border:2px solid #e0d8c0;background:#fff;color:var(--ink-soft)}
+.q-nav-cell:hover{border-color:var(--gold);background:var(--warm-white);transform:scale(1.1)}
+.q-nav-cell.current{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;border-color:var(--royal);transform:scale(1.15)}
+.q-nav-cell.answered{background:linear-gradient(135deg,var(--correct),#2aa85a);color:#fff;border-color:var(--correct)}
+.result-panel{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;padding:40px;border:1px solid rgba(212,160,23,.2);display:none}
+.result-panel.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.result-header{text-align:center;margin-bottom:30px}
+.result-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal-deep)}
+.result-score-big{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--royal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:16px 0 8px;line-height:1}
+.result-score-label{font-size:16px;color:var(--ink-soft)}
+.result-compare{display:flex;justify-content:center;align-items:center;gap:12px;margin:20px 0;font-size:18px;font-weight:600}
+.result-compare .up{color:var(--correct)}
+.result-compare .down{color:var(--wrong)}
+.result-compare .same{color:var(--ink-soft)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.stat-card{text-align:center;padding:20px 12px;border-radius:16px;background:var(--warm-white);border:1px solid #e8e0d0}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal)}
+.stat-label{font-size:13px;color:var(--ink-soft);margin-top:4px}
+.result-suggestion{background:var(--parchment);border-radius:16px;padding:24px;border-left:5px solid var(--gold);margin-top:24px}
+.result-suggestion h3{font-size:18px;color:var(--royal-deep);margin-bottom:12px}
+.result-suggestion ul{list-style:none}
+.result-suggestion li{padding:6px 0;font-size:15px;color:var(--ink-soft);line-height:1.6}
+.result-suggestion li::before{content:'▸ ';color:var(--gold);font-weight:700}
+.result-actions{display:flex;justify-content:center;gap:14px;margin-top:30px;flex-wrap:wrap}
+.bank-panel{position:fixed;top:0;right:-100%;width:min(640px,90vw);height:100vh;background:#fff;box-shadow:-8px 0 48px rgba(0,0,0,.15);z-index:100;transition:right .35s ease;overflow-y:auto}
+.bank-panel.show{right:0}
+.bank-header{position:sticky;top:0;background:linear-gradient(135deg,var(--royal),var(--royal-deep));padding:20px 24px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.bank-header h2{color:#fff;font-family:'Playfair Display',serif;font-size:22px}
+.bank-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;transition:all .2s}
+.bank-close:hover{background:rgba(255,255,255,.35)}
+.bank-search{padding:16px 24px;position:sticky;top:72px;background:#fff;border-bottom:1px solid #eee;z-index:4}
+.bank-search input{width:100%;padding:10px 18px;font-size:15px;border:2px solid #e8e0d0;border-radius:30px;background:var(--warm-white);font-family:'Open Sans',sans-serif}
+.bank-search input:focus{outline:none;border-color:var(--gold)}
+.bank-list{padding:0 0 40px}
+.bank-item{padding:20px 24px;border-bottom:1px solid #f0ead6;transition:background .2s}
+.bank-item:hover{background:var(--warm-white)}
+.bank-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.bank-item-id{font-weight:700;color:var(--royal);font-size:14px}
+.bank-item-type{font-size:12px;padding:2px 10px;border-radius:20px;font-weight:600}
+.bank-item-type.choice{background:#e8f4ff;color:#1a5a8a}
+.bank-item-type.fill{background:#fff3e0;color:#b86800}
+.bank-item-type.correct{background:#f0e8ff;color:#5a3f8c}
+.bank-item-cat{font-size:12px;color:var(--ink-soft)}
+.bank-item-q{font-size:16px;line-height:1.7;margin-bottom:12px;color:var(--ink)}
+.bank-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.bank-opt{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;background:#f8f5ee;font-size:14px;border:1px solid #e8e0d0}
+.bank-opt.is-correct{background:var(--correct-bg);border-color:var(--correct)}
+.bank-opt-letter{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#e0d8c0;color:var(--royal-deep);flex-shrink:0}
+.bank-opt.is-correct .bank-opt-letter{background:var(--correct);color:#fff}
+.bank-opt-tag{font-size:12px;color:var(--correct);font-weight:600;margin-left:auto}
+.bank-answer{display:inline-block;padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;background:var(--correct-bg);color:var(--correct);border:1px solid var(--correct);margin-bottom:8px}
+.bank-exp{background:var(--parchment);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--ink-soft);line-height:1.6;border-left:3px solid var(--gold)}
+.wrong-user{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--wrong-bg);border:1px solid var(--wrong);margin-bottom:6px;font-size:14px}
+.wrong-user .tag{font-size:12px;font-weight:700;color:var(--wrong);white-space:nowrap}
+.wrong-correct{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--correct-bg);border:1px solid var(--correct);margin-bottom:10px;font-size:14px}
+.wrong-correct .tag{font-size:12px;font-weight:700;color:var(--correct);white-space:nowrap}
+.wrong-skipped{padding:8px 14px;border-radius:10px;background:#f5f5f5;border:1px solid #ddd;margin-bottom:6px;font-size:14px;color:#999}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.show{opacity:1;pointer-events:auto}
+.history-bar{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.history-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600;background:var(--parchment);border:1px solid var(--gold-light);color:var(--ink-soft)}
+.history-chip.latest{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep);border-color:var(--gold)}
+@media(max-width:640px){.card-inner{padding:24px 20px}.q-text{font-size:18px}.header-title{font-size:18px}.result-score-big{font-size:48px}.result-stats{grid-template-columns:1fr}.correct-box{flex-direction:column}}
+</style>
 </head>
 <body>
-    <div class="container" id="app">
-        <div class="header">
-            <h1>
-                <span>📘</span> 名词专项 · 200题
-                <span class="subtag">单题模式</span>
-            </h1>
-            <div class="toolbar">
-                <button class="btn btn-primary" id="randomBtn">🎲 重随机</button>
-                <button class="btn btn-secondary" id="showBankBtn">📖 题库（含答案）</button>
-                <button class="btn btn-secondary" id="showHistoryBtn">🏆 历史</button>
-            </div>
-        </div>
+<div class="header">
+  <div class="header-left"><div class="logo-badge">Nn</div><div><div class="header-title">名词201题 专项训练</div><div class="header-sub">Nouns · 201 Questions · Random 30 per round</div></div></div>
+  <div class="header-right"><button class="header-btn" id="bankBtn">📖 题库</button><button class="header-btn gold" id="reshuffleBtn">🎲 重新随机</button></div>
+</div>
+<div class="container">
+  <div class="history-bar" id="historyBar"></div>
+  <div class="quiz-card" id="quizCard"><div class="card-inner" id="cardInner"></div></div>
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header"><div class="result-title">🎯 练习完成</div><div class="result-score-big" id="scoreBig">0</div><div class="result-score-label">分 / 共 30 题</div><div class="result-compare" id="resultCompare"></div></div>
+    <div class="result-stats" id="resultStats"></div>
+    <div class="result-suggestion" id="resultSuggestion"></div>
+    <div class="result-actions"><button class="nav-btn gold" id="againBtn">🔄 再来一轮</button><button class="nav-btn primary" id="wrongBtn">🔍 查看错题</button><button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button></div>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="bank-panel" id="bankPanel"><div class="bank-header"><h2>📖 题库一览</h2><button class="bank-close" id="bankClose">✕</button></div><div class="bank-search"><input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类..."></div><div class="bank-list" id="bankList"></div></div>
+<div class="bank-panel" id="wrongPanel"><div class="bank-header"><h2>🔍 错题回顾</h2><button class="bank-close" id="wrongClose">✕</button></div><div class="bank-search"><div id="wrongSummary" style="padding:4px 8px;font-size:14px;color:var(--ink-soft);font-weight:600;"></div></div><div class="bank-list" id="wrongList"></div></div>
+<script>
+var ALL_Q=[{"id":1,"t":"choice","c":"名词专项","q":"I saw some ______ and ______ dancing in the street yesterday.","o":["A. Germen; Englishmen","B. Germans; Englishmans","C. Germans; Englishmen","D. German; Englishmans"],"a":"C","e":""},{"id":2,"t":"choice","c":"名词专项","q":"—How can I get some ______ about the 2016 Olympic Games? —Why not search the Internet?","o":["A. information","B. experience","C. practice","D. advice"],"a":"A","e":""},{"id":3,"t":"choice","c":"名词专项","q":"______ the teachers in their school is about 200 and one fourth of them are ______ teachers.","o":["A. A number of; women","B. A number of; woman","C. The number of; women","D. The number of; woman"],"a":"C","e":""},{"id":4,"t":"choice","c":"名词专项","q":"He is a success as a leader but he hasn’t ______ in teaching.","o":["A. many experiences","B. much experience","C. many experience","D. much experiences"],"a":"B","e":""},{"id":5,"t":"choice","c":"名词专项","q":"Mr. Black, a good friend of ______, likes drawing horses.","o":["A. me","B. my","C. mine","D. I"],"a":"C","e":""},{"id":6,"t":"choice","c":"名词专项","q":"The ______ of the book is very interesting.","o":["A. cover","B. covers","C. cover's","D. covers'"],"a":"A","e":""},{"id":7,"t":"choice","c":"名词专项","q":"There are two ______ and three ______ in the room.","o":["A. woman doctors; man teachers","B. women doctors; men teachers","C. woman doctor; man teacher","D. women doctor; men teacher"],"a":"B","e":""},{"id":8,"t":"choice","c":"名词专项","q":"—How many ______ are there in your class? —Thirty.","o":["A. boy student","B. boys student","C. boy students","D. boys students"],"a":"C","e":""},{"id":9,"t":"choice","c":"名词专项","q":"The ______ office is on the second floor.","o":["A. teacher","B. teachers'","C. teacher's","D. teachers's"],"a":"B","e":""},{"id":10,"t":"choice","c":"名词专项","q":"It's about ten ______ walk from my home to school.","o":["A. minute","B. minutes","C. minute's","D. minutes'"],"a":"D","e":""},{"id":11,"t":"choice","c":"名词专项","q":"The ______ of the river is very clean.","o":["A. water","B. waters","C. a water","D. the water"],"a":"A","e":""},{"id":12,"t":"choice","c":"名词专项","q":"I have a lot of ______ to do today.","o":["A. works","B. work","C. job","D. jobs"],"a":"B","e":""},{"id":13,"t":"choice","c":"名词专项","q":"The ______ are playing football on the playground.","o":["A. child","B. childs","C. children","D. childrens"],"a":"C","e":""},{"id":14,"t":"choice","c":"名词专项","q":"She bought two ______ in the supermarket.","o":["A. knifes","B. knives","C. knife","D. knifves"],"a":"B","e":""},{"id":15,"t":"choice","c":"名词专项","q":"The ______ of the house is made of wood.","o":["A. roof","B. roofs","C. rooves","D. roofes"],"a":"B","e":""},{"id":16,"t":"choice","c":"名词专项","q":"There are many ______ in the river.","o":["A. fish","B. fishes","C. a fish","D. the fish"],"a":"A","e":""},{"id":17,"t":"choice","c":"名词专项","q":"I need some ______ for my new dress.","o":["A. cloth","B. cloths","C. clothes","D. clothing"],"a":"C","e":""},{"id":18,"t":"choice","c":"名词专项","q":"The ______ of the story is very moving.","o":["A. end","B. ends","C. ending","D. endings"],"a":"C","e":""},{"id":19,"t":"choice","c":"名词专项","q":"He has two ______.","o":["A. sister-in-law","B. sisters-in-law","C. sister-in-laws","D. sisters-in-laws"],"a":"B","e":""},{"id":20,"t":"choice","c":"名词专项","q":"The ______ are going to visit the museum.","o":["A. lookers-on","B. looker-ons","C. looker-on","D. lookers-ons"],"a":"A","e":""},{"id":21,"t":"choice","c":"名词专项","q":"The ______ is made of glass.","o":["A. window","B. windows","C. a window","D. the window"],"a":"A","e":""},{"id":22,"t":"choice","c":"名词专项","q":"We have got plenty of ______.","o":["A. time","B. times","C. a time","D. the time"],"a":"A","e":""},{"id":23,"t":"choice","c":"名词专项","q":"The ______ of the cinema are very comfortable.","o":["A. seat","B. seats","C. sit","D. sits"],"a":"B","e":""},{"id":24,"t":"choice","c":"名词专项","q":"I'd like some ______ and ______.","o":["A. tomato; potato","B. tomatoes; potatoes","C. tomatos; potatos","D. tomato; potatoes"],"a":"B","e":""},{"id":25,"t":"choice","c":"名词专项","q":"The ______ of the factory are all very kind.","o":["A. workers","B. work","C. working","D. worked"],"a":"A","e":""},{"id":26,"t":"choice","c":"名词专项","q":"There are about five ______ people in the city.","o":["A. million","B. millions","C. million of","D. millions of"],"a":"A","e":""},{"id":27,"t":"choice","c":"名词专项","q":"The ______ is very high.","o":["A. price","B. prices","C. a price","D. the price"],"a":"A","e":""},{"id":28,"t":"choice","c":"名词专项","q":"She has much ______ in teaching English.","o":["A. experience","B. experiences","C. an experience","D. the experience"],"a":"A","e":""},{"id":29,"t":"choice","c":"名词专项","q":"The ______ of this book are very useful.","o":["A. advice","B. advices","C. a advice","D. the advices"],"a":"A","e":""},{"id":30,"t":"choice","c":"名词专项","q":"—Would you like some ______? —Yes, please.","o":["A. bread","B. breads","C. a bread","D. the bread"],"a":"A","e":""},{"id":31,"t":"choice","c":"名词专项","q":"The ______ of the mountain is covered with snow.","o":["A. top","B. tops","C. a top","D. the top"],"a":"A","e":""},{"id":32,"t":"choice","c":"名词专项","q":"He gave me a piece of ______.","o":["A. paper","B. papers","C. a paper","D. the paper"],"a":"A","e":""},{"id":33,"t":"choice","c":"名词专项","q":"Many ______ are working in the hospital.","o":["A. woman doctor","B. women doctors","C. woman doctors","D. women doctor"],"a":"B","e":""},{"id":34,"t":"choice","c":"名词专项","q":"The ______ of the house are both tall.","o":["A. door","B. doors","C. a door","D. the door"],"a":"B","e":""},{"id":35,"t":"choice","c":"名词专项","q":"I have some ______ for you.","o":["A. news","B. new","C. a news","D. the news"],"a":"A","e":""},{"id":36,"t":"choice","c":"名词专项","q":"The ______ in this restaurant are delicious.","o":["A. dish","B. dishes","C. a dish","D. the dish"],"a":"B","e":""},{"id":37,"t":"choice","c":"名词专项","q":"There is a ______ near the river.","o":["A. bridge","B. bridges","C. a bridge","D. the bridge"],"a":"A","e":""},{"id":38,"t":"choice","c":"名词专项","q":"He has a good ______ of humor.","o":["A. sense","B. senses","C. a sense","D. the sense"],"a":"A","e":""},{"id":39,"t":"choice","c":"名词专项","q":"The ______ of the meeting is very important.","o":["A. conclusion","B. conclusions","C. a conclusion","D. the conclusion"],"a":"A","e":""},{"id":40,"t":"choice","c":"名词专项","q":"She bought two ______ of shoes.","o":["A. pair","B. pairs","C. a pair","D. the pair"],"a":"B","e":""},{"id":41,"t":"choice","c":"名词专项","q":"The ______ of the team are all very young.","o":["A. members","B. member","C. a member","D. the member"],"a":"A","e":""},{"id":42,"t":"choice","c":"名词专项","q":"I need some ______ about the city.","o":["A. information","B. informations","C. an information","D. the information"],"a":"A","e":""},{"id":43,"t":"choice","c":"名词专项","q":"The ______ of the forest are very tall.","o":["A. tree","B. trees","C. a tree","D. the tree"],"a":"B","e":""},{"id":44,"t":"choice","c":"名词专项","q":"He has a lot of ______ in his house.","o":["A. furniture","B. furnitures","C. a furniture","D. the furniture"],"a":"A","e":""},{"id":45,"t":"choice","c":"名词专项","q":"The ______ of the road is very wide.","o":["A. width","B. widths","C. a width","D. the width"],"a":"A","e":""},{"id":46,"t":"choice","c":"名词专项","q":"There are two ______ in the bag.","o":["A. apple","B. apples","C. an apple","D. the apple"],"a":"B","e":""},{"id":47,"t":"choice","c":"名词专项","q":"The ______ of the party is very interesting.","o":["A. activity","B. activities","C. an activity","D. the activity"],"a":"A","e":""},{"id":48,"t":"choice","c":"名词专项","q":"I have a great ______ of books.","o":["A. number","B. numbers","C. a number","D. the number"],"a":"A","e":""},{"id":49,"t":"choice","c":"名词专项","q":"The ______ of the mountain is about 3000 meters.","o":["A. height","B. heights","C. a height","D. the height"],"a":"A","e":""},{"id":50,"t":"choice","c":"名词专项","q":"She gave me some ______.","o":["A. advice","B. advices","C. an advice","D. the advice"],"a":"A","e":""},{"id":51,"t":"choice","c":"名词专项","q":"The ______ of the lake are very beautiful.","o":["A. view","B. views","C. a view","D. the view"],"a":"B","e":""},{"id":52,"t":"choice","c":"名词专项","q":"I need a ______ of gloves.","o":["A. pair","B. pairs","C. a pair","D. the pair"],"a":"A","e":""},{"id":53,"t":"choice","c":"名词专项","q":"The ______ of the school are very friendly.","o":["A. teacher","B. teachers","C. a teacher","D. the teacher"],"a":"B","e":""},{"id":54,"t":"choice","c":"名词专项","q":"She has a lot of ______.","o":["A. homework","B. homeworks","C. a homework","D. the homework"],"a":"A","e":""},{"id":55,"t":"choice","c":"名词专项","q":"The ______ of the car is very fast.","o":["A. speed","B. speeds","C. a speed","D. the speed"],"a":"A","e":""},{"id":56,"t":"choice","c":"名词专项","q":"There are many ______ in the zoo.","o":["A. deer","B. deers","C. a deer","D. the deer"],"a":"A","e":""},{"id":57,"t":"choice","c":"名词专项","q":"The ______ of the book are very exciting.","o":["A. story","B. stories","C. a story","D. the story"],"a":"B","e":""},{"id":58,"t":"choice","c":"名词专项","q":"He has two ______.","o":["A. sheep","B. sheeps","C. a sheep","D. the sheep"],"a":"A","e":""},{"id":59,"t":"choice","c":"名词专项","q":"The ______ of the city are very crowded.","o":["A. street","B. streets","C. a street","D. the street"],"a":"B","e":""},{"id":60,"t":"choice","c":"名词专项","q":"I have a lot of ______ in my room.","o":["A. baggage","B. baggages","C. a baggage","D. the baggage"],"a":"A","e":""},{"id":61,"t":"choice","c":"名词专项","q":"The ______ of the movie is very good.","o":["A. music","B. musics","C. a music","D. the music"],"a":"A","e":""},{"id":62,"t":"choice","c":"名词专项","q":"She has two ______.","o":["A. watch","B. watches","C. a watch","D. the watch"],"a":"B","e":""},{"id":63,"t":"choice","c":"名词专项","q":"The ______ of the river is very long.","o":["A. length","B. lengths","C. a length","D. the length"],"a":"A","e":""},{"id":64,"t":"choice","c":"名词专项","q":"I need some ______ for my coffee.","o":["A. sugar","B. sugars","C. a sugar","D. the sugar"],"a":"A","e":""},{"id":65,"t":"choice","c":"名词专项","q":"The ______ of the team are very hard-working.","o":["A. player","B. players","C. a player","D. the player"],"a":"B","e":""},{"id":66,"t":"choice","c":"名词专项","q":"There are a lot of ______ in the forest.","o":["A. leaf","B. leaves","C. a leaf","D. the leaf"],"a":"B","e":""},{"id":67,"t":"choice","c":"名词专项","q":"The ______ of the house is very large.","o":["A. room","B. rooms","C. a room","D. the room"],"a":"A","e":""},{"id":68,"t":"choice","c":"名词专项","q":"She has two ______.","o":["A. child","B. children","C. a child","D. the child"],"a":"B","e":""},{"id":69,"t":"choice","c":"名词专项","q":"The ______ of the factory are very tall.","o":["A. chimney","B. chimneys","C. a chimney","D. the chimney"],"a":"B","e":""},{"id":70,"t":"choice","c":"名词专项","q":"I need some ______ to write on.","o":["A. paper","B. papers","C. a paper","D. the paper"],"a":"A","e":""},{"id":71,"t":"choice","c":"名词专项","q":"The ______ of the team are all very tall.","o":["A. member","B. members","C. a member","D. the member"],"a":"B","e":""},{"id":72,"t":"choice","c":"名词专项","q":"She has a lot of ______.","o":["A. money","B. moneys","C. a money","D. the money"],"a":"A","e":""},{"id":73,"t":"choice","c":"名词专项","q":"The ______ of the building are very strong.","o":["A. wall","B. walls","C. a wall","D. the wall"],"a":"B","e":""},{"id":74,"t":"choice","c":"名词专项","q":"There are many ______ in the garden.","o":["A. flower","B. flowers","C. a flower","D. the flower"],"a":"B","e":""},{"id":75,"t":"choice","c":"名词专项","q":"The ______ of the story is very sad.","o":["A. end","B. ends","C. an end","D. the end"],"a":"A","e":""},{"id":76,"t":"choice","c":"名词专项","q":"I have two ______ of socks.","o":["A. pair","B. pairs","C. a pair","D. the pair"],"a":"B","e":""},{"id":77,"t":"choice","c":"名词专项","q":"The ______ of the class is very noisy.","o":["A. student","B. students","C. a student","D. the student"],"a":"B","e":""},{"id":78,"t":"choice","c":"名词专项","q":"She needs some ______.","o":["A. bread","B. breads","C. a bread","D. the bread"],"a":"A","e":""},{"id":79,"t":"choice","c":"名词专项","q":"The ______ of the city is very modern.","o":["A. architecture","B. architectures","C. an architecture","D. the architecture"],"a":"A","e":""},{"id":80,"t":"choice","c":"名词专项","q":"There are a lot of ______ in the sky.","o":["A. cloud","B. clouds","C. a cloud","D. the cloud"],"a":"B","e":""},{"id":81,"t":"fill","c":"语法填空","q":"The ______ (child) are playing in the park.","a":"children","e":""},{"id":82,"t":"fill","c":"语法填空","q":"There are many ______ (deer) in the forest.","a":"deer","e":""},{"id":83,"t":"fill","c":"语法填空","q":"I have two ______ (tooth) problems.","a":"teeth","e":""},{"id":84,"t":"fill","c":"语法填空","q":"The ______ (man) over there are my teachers.","a":"men","e":""},{"id":85,"t":"fill","c":"语法填空","q":"She bought three ______ (tomato) for dinner.","a":"tomatoes","e":""},{"id":86,"t":"fill","c":"语法填空","q":"The ______ (roof) of the houses are all red.","a":"roofs","e":""},{"id":87,"t":"fill","c":"语法填空","q":"He gave me some ______ (advice) on how to learn English.","a":"advice","e":""},{"id":88,"t":"fill","c":"语法填空","q":"I need a piece of ______ (paper) to write a letter.","a":"paper","e":""},{"id":89,"t":"fill","c":"语法填空","q":"The ______ (photo) of the trip are very beautiful.","a":"photos","e":""},{"id":90,"t":"fill","c":"语法填空","q":"There are two ______ (potato) in the basket.","a":"potatoes","e":""},{"id":91,"t":"fill","c":"语法填空","q":"She has a lot of ______ (furniture) in her new house.","a":"furniture","e":""},{"id":92,"t":"fill","c":"语法填空","q":"The ______ (information) you gave me is very useful.","a":"information","e":""},{"id":93,"t":"fill","c":"语法填空","q":"I have a great number of ______ (book) in my study.","a":"books","e":""},{"id":94,"t":"fill","c":"语法填空","q":"The ______ (fish) in the river are very small.","a":"fish","e":""},{"id":95,"t":"fill","c":"语法填空","q":"He has a lot of ______ (work) to do today.","a":"work","e":""},{"id":96,"t":"fill","c":"语法填空","q":"The ______ (sheep) are eating grass on the hill.","a":"sheep","e":""},{"id":97,"t":"fill","c":"语法填空","q":"She bought two ______ (pair) of shoes.","a":"pairs","e":""},{"id":98,"t":"fill","c":"语法填空","q":"The ______ (child) mother is a doctor.","a":"child's","e":""},{"id":99,"t":"fill","c":"语法填空","q":"The ______ (teacher) office is on the third floor.","a":"teachers'","e":""},{"id":100,"t":"fill","c":"语法填空","q":"It's about ten ______ (minute) walk from here.","a":"minutes'","e":""},{"id":101,"t":"fill","c":"语法填空","q":"The ______ (cover) of the book is very beautiful.","a":"cover","e":""},{"id":102,"t":"fill","c":"语法填空","q":"I have a lot of ______ (homework) to do.","a":"homework","e":""},{"id":103,"t":"fill","c":"语法填空","q":"The ______ (team) are all very excited.","a":"team","e":""},{"id":104,"t":"fill","c":"语法填空","q":"She has two ______ (brother-in-law).","a":"brothers-in-law","e":""},{"id":105,"t":"fill","c":"语法填空","q":"The ______ (looker-on) were shocked by the accident.","a":"lookers-on","e":""},{"id":106,"t":"fill","c":"语法填空","q":"There are many ______ (woman) doctors in the hospital.","a":"women","e":""},{"id":107,"t":"fill","c":"语法填空","q":"The ______ (boy) toys are on the floor.","a":"boy's","e":""},{"id":108,"t":"fill","c":"语法填空","q":"I need some ______ (information) about the city.","a":"information","e":""},{"id":109,"t":"fill","c":"语法填空","q":"The ______ (water) in the glass is very clean.","a":"water","e":""},{"id":110,"t":"fill","c":"语法填空","q":"He has a lot of ______ (experience) in teaching.","a":"experience","e":""},{"id":111,"t":"fill","c":"语法填空","q":"The ______ (news) is very good today.","a":"news","e":""},{"id":112,"t":"fill","c":"语法填空","q":"There are several ______ (sheep) on the farm.","a":"sheep","e":""},{"id":113,"t":"fill","c":"语法填空","q":"The ______ (policeman) are standing at the gate.","a":"policemen","e":""},{"id":114,"t":"fill","c":"语法填空","q":"She bought two ______ (loaf) of bread.","a":"loaves","e":""},{"id":115,"t":"fill","c":"语法填空","q":"The ______ (leaf) on the tree are turning yellow.","a":"leaves","e":""},{"id":116,"t":"fill","c":"语法填空","q":"I have a lot of ______ (baggage) to carry.","a":"baggage","e":""},{"id":117,"t":"fill","c":"语法填空","q":"The ______ (house) windows are all closed.","a":"house","e":""},{"id":118,"t":"fill","c":"语法填空","q":"There are many ______ (mouse) in the old house.","a":"mice","e":""},{"id":119,"t":"fill","c":"语法填空","q":"The ______ (student) books are on the desk.","a":"students'","e":""},{"id":120,"t":"fill","c":"语法填空","q":"She needs some ______ (milk) for her coffee.","a":"milk","e":""},{"id":121,"t":"fill","c":"语法填空","q":"The ______ (man) car is parked outside.","a":"man's","e":""},{"id":122,"t":"fill","c":"语法填空","q":"I have two ______ (watch) for sale.","a":"watches","e":""},{"id":123,"t":"fill","c":"语法填空","q":"The ______ (class) are all having a break.","a":"classes","e":""},{"id":124,"t":"fill","c":"语法填空","q":"There are a lot of ______ (people) in the square.","a":"people","e":""},{"id":125,"t":"fill","c":"语法填空","q":"He has a good ______ (knowledge) of history.","a":"knowledge","e":""},{"id":126,"t":"fill","c":"语法填空","q":"The ______ (factory) workers are on strike.","a":"factory","e":""},{"id":127,"t":"fill","c":"语法填空","q":"She gave me a ______ (glass) of water.","a":"glass","e":""},{"id":128,"t":"fill","c":"语法填空","q":"I need some ______ (wood) to make a fire.","a":"wood","e":""},{"id":129,"t":"fill","c":"语法填空","q":"The ______ (child) playground is very large.","a":"children's","e":""},{"id":130,"t":"fill","c":"语法填空","q":"There are two ______ (bus) at the stop.","a":"buses","e":""},{"id":131,"t":"fill","c":"语法填空","q":"The ______ (city) streets are very clean.","a":"city","e":""},{"id":132,"t":"fill","c":"语法填空","q":"She has a lot of ______ (money) in her bank.","a":"money","e":""},{"id":133,"t":"fill","c":"语法填空","q":"The ______ (story) in this book are very interesting.","a":"stories","e":""},{"id":134,"t":"fill","c":"语法填空","q":"He bought two ______ (knife) from the shop.","a":"knives","e":""},{"id":135,"t":"fill","c":"语法填空","q":"The ______ (wife) of the men are all very kind.","a":"wives","e":""},{"id":136,"t":"fill","c":"语法填空","q":"There are many ______ (goose) on the lake.","a":"geese","e":""},{"id":137,"t":"fill","c":"语法填空","q":"The ______ (tooth) of the lion are very sharp.","a":"teeth","e":""},{"id":138,"t":"fill","c":"语法填空","q":"I have a lot of ______ (furniture) to move.","a":"furniture","e":""},{"id":139,"t":"fill","c":"语法填空","q":"The ______ (traffic) in the city is very heavy.","a":"traffic","e":""},{"id":140,"t":"fill","c":"语法填空","q":"She needs some ______ (bread) for breakfast.","a":"bread","e":""},{"id":141,"t":"correct","c":"改错题","q":"A house built of brick lasts longer than the one that is made of woods.","w":"woods","r":"wood","e":""},{"id":142,"t":"correct","c":"改错题","q":"The fire quickly spread to the first floor where it destroyed all the equipments in the language lab.","w":"equipments","r":"equipment","e":""},{"id":143,"t":"correct","c":"改错题","q":"There are a good news for you today.","w":"are","r":"is","e":""},{"id":144,"t":"correct","c":"改错题","q":"I have many homework to do.","w":"many","r":"much","e":""},{"id":145,"t":"correct","c":"改错题","q":"She gave me some advices on how to learn English.","w":"advices","r":"advice","e":""},{"id":146,"t":"correct","c":"改错题","q":"The number of the students are 500.","w":"are","r":"is","e":""},{"id":147,"t":"correct","c":"改错题","q":"A number of the teachers is going to attend the meeting.","w":"is","r":"are","e":""},{"id":148,"t":"correct","c":"改错题","q":"I need a information about the exam.","w":"a","r":"some","e":""},{"id":149,"t":"correct","c":"改错题","q":"He has two grown-ups children.","w":"grown-ups","r":"grown-up","e":""},{"id":150,"t":"correct","c":"改错题","q":"The man who is standing there are my teacher.","w":"are","r":"is","e":""},{"id":151,"t":"correct","c":"改错题","q":"She bought two loaves of breads.","w":"breads","r":"bread","e":""},{"id":152,"t":"correct","c":"改错题","q":"The childs are playing in the garden.","w":"childs","r":"children","e":""},{"id":153,"t":"correct","c":"改错题","q":"I saw some Germen and Englishmen in the street.","w":"Germen","r":"Germans","e":""},{"id":154,"t":"correct","c":"改错题","q":"The cover of the book are very beautiful.","w":"are","r":"is","e":""},{"id":155,"t":"correct","c":"改错题","q":"It is a ten-minutes walk from my home to school.","w":"ten-minutes","r":"ten-minute","e":""},{"id":156,"t":"correct","c":"改错题","q":"This is a friend of me.","w":"me","r":"mine","e":""},{"id":157,"t":"correct","c":"改错题","q":"The teacher office is on the second floor.","w":"teacher","r":"teachers'","e":""},{"id":158,"t":"correct","c":"改错题","q":"There are many furnitures in the room.","w":"furnitures","r":"furniture","e":""},{"id":159,"t":"correct","c":"改错题","q":"I have a lot of homeworks to do.","w":"homeworks","r":"homework","e":""},{"id":160,"t":"correct","c":"改错题","q":"They are woman teachers in our school.","w":"woman","r":"women","e":""},{"id":161,"t":"correct","c":"改错题","q":"The police is looking for the thief.","w":"is","r":"are","e":""},{"id":162,"t":"correct","c":"改错题","q":"I need some new informations.","w":"informations","r":"information","e":""},{"id":163,"t":"correct","c":"改错题","q":"The water in the rivers is clean.","w":"rivers","r":"river","e":""},{"id":164,"t":"correct","c":"改错题","q":"He has much experiences in teaching.","w":"experiences","r":"experience","e":""},{"id":165,"t":"correct","c":"改错题","q":"There is two pair of shoes on the floor.","w":"is","r":"are","e":""},{"id":166,"t":"correct","c":"改错题","q":"The news are very good.","w":"are","r":"is","e":""},{"id":167,"t":"correct","c":"改错题","q":"I have many milk in the fridge.","w":"many","r":"much","e":""},{"id":168,"t":"correct","c":"改错题","q":"The family is all very kind.","w":"is","r":"are","e":""},{"id":169,"t":"correct","c":"改错题","q":"I would like some fruits for dessert.","w":"fruits","r":"fruit","e":""},{"id":170,"t":"correct","c":"改错题","q":"The glass are on the table.","w":"are","r":"is","e":""},{"id":171,"t":"correct","c":"改错题","q":"I need a pair of glove.","w":"glove","r":"gloves","e":""},{"id":172,"t":"correct","c":"改错题","q":"The children is playing happily.","w":"is","r":"are","e":""},{"id":173,"t":"correct","c":"改错题","q":"She bought two fish in the market.","w":"fish","r":"fishes","e":""},{"id":174,"t":"correct","c":"改错题","q":"There are many deer in the forest.","w":"deer","r":"deers","e":""},{"id":175,"t":"correct","c":"改错题","q":"The man and woman are teachers.","w":"woman","r":"women","e":""},{"id":176,"t":"correct","c":"改错题","q":"I have many sheeps on the farm.","w":"sheeps","r":"sheep","e":""},{"id":177,"t":"correct","c":"改错题","q":"The tomato in the basket are fresh.","w":"are","r":"is","e":""},{"id":178,"t":"correct","c":"改错题","q":"She is a friend of my sister.","w":"sister","r":"sister's","e":""},{"id":179,"t":"correct","c":"改错题","q":"The teachers' office are on the first floor.","w":"are","r":"is","e":""},{"id":180,"t":"correct","c":"改错题","q":"It is a two-hours journey.","w":"two-hours","r":"two-hour","e":""},{"id":181,"t":"correct","c":"改错题","q":"I have a lot of baggages.","w":"baggages","r":"baggage","e":""},{"id":182,"t":"correct","c":"改错题","q":"The information you gave me are useful.","w":"are","r":"is","e":""},{"id":183,"t":"correct","c":"改错题","q":"He has much furnitures in his room.","w":"furnitures","r":"furniture","e":""},{"id":184,"t":"correct","c":"改错题","q":"There are many policeman in the street.","w":"policeman","r":"policemen","e":""},{"id":185,"t":"correct","c":"改错题","q":"She bought two potatos and three tomatoes.","w":"potatos","r":"potatoes","e":""},{"id":186,"t":"correct","c":"改错题","q":"The child mother is very kind.","w":"child","r":"child's","e":""},{"id":187,"t":"correct","c":"改错题","q":"I need some breads for breakfast.","w":"breads","r":"bread","e":""},{"id":188,"t":"correct","c":"改错题","q":"The number of people are increasing.","w":"are","r":"is","e":""},{"id":189,"t":"correct","c":"改错题","q":"A number of students is waiting outside.","w":"is","r":"are","e":""},{"id":190,"t":"correct","c":"改错题","q":"The house of my parents is very big.","w":"parents","r":"parents'","e":""},{"id":191,"t":"correct","c":"改错题","q":"He is a good friend of my.","w":"my","r":"mine","e":""},{"id":192,"t":"correct","c":"改错题","q":"The city streets is very clean.","w":"is","r":"are","e":""},{"id":193,"t":"correct","c":"改错题","q":"She enjoys eating many fruits.","w":"fruits","r":"fruit","e":""},{"id":194,"t":"correct","c":"改错题","q":"I have two watchs.","w":"watchs","r":"watches","e":""},{"id":195,"t":"correct","c":"改错题","q":"The class are having a break.","w":"are","r":"is","e":""},{"id":196,"t":"correct","c":"改错题","q":"There are much water in the glass.","w":"much","r":"many","e":""},{"id":197,"t":"correct","c":"改错题","q":"He has a good knowledge of history.","w":"knowledge","r":"knowledge","e":""},{"id":198,"t":"correct","c":"改错题","q":"I need some informations about the exam.","w":"informations","r":"information","e":""},{"id":199,"t":"correct","c":"改错题","q":"The woman doctors are very kind.","w":"woman","r":"women","e":""},{"id":200,"t":"correct","c":"改错题","q":"She has two childs.","w":"childs","r":"children","e":""},{"id":201,"t":"correct","c":"改错题","q":"The roofs of the house is red.","w":"is","r":"are","e":""}];
 
-        <div class="stats">
-            <div class="stat-item">📝 总题 <span class="badge" id="totalCount">30</span></div>
-            <div class="stat-item">✅ 已答 <span class="badge green" id="answeredCount">0</span></div>
-            <div class="stat-item">📊 当前得分 <span class="badge gold" id="liveScore">0</span></div>
-            <div class="stat-item">📌 最新 <span class="badge orange" id="latestScore">--</span></div>
-        </div>
+var currentRound=[],currentIndex=0,userAnswers=[];
+var selectedOption=null,fillValue='',correctWrong='',correctRight='';
+var cardInner=document.getElementById('cardInner');
+var resultPanel=document.getElementById('resultPanel');
+var quizCard=document.getElementById('quizCard');
+var bankPanel=document.getElementById('bankPanel');
+var overlay=document.getElementById('overlay');
+var historyBar=document.getElementById('historyBar');
 
-        <!-- 单题卡片区域 -->
-        <div class="single-card-wrap">
-            <div id="questionCard" class="question-card">
-                <!-- 由 js 动态渲染 -->
-            </div>
+function shuffle(a){a=[...a];for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pickRandom(n){return shuffle(ALL_Q).slice(0,n);}
+function getHistory(){try{return JSON.parse(localStorage.getItem('noun_201_scores')||'[]');}catch(e){return[];}}
+function saveScore(s,t,c,w,u){var h=getHistory();h.push({score:s,total:t,correct:c,wrong:w,unanswered:u,date:new Date().toLocaleString('zh-CN')});localStorage.setItem('noun_201_scores',JSON.stringify(h));}
+function getLatest(){var h=getHistory();return h.length>0?h[h.length-1]:null;}
+function renderHistory(){var h=getHistory();if(!h.length){historyBar.innerHTML='';return;}var html='<span style="font-size:13px;color:#5a4a2a;font-weight:600;">历史成绩：</span>';h.slice(-5).forEach(function(r,i){var l=i===h.slice(-5).length-1;html+='<span class="history-chip'+(l?' latest':'')+'">'+r.score+'分'+(l?' (最新)':'')+'</span>';});historyBar.innerHTML=html;}
 
-            <div class="nav-bar">
-                <div class="progress" id="progressDisplay">第 1 / 30 题</div>
-                <div class="btn-group">
-                    <button class="btn btn-outline" id="prevBtn" disabled>◀ 上一题</button>
-                    <button class="btn btn-success" id="submitBtn">✅ 提交本题</button>
-                    <button class="btn btn-outline" id="nextBtn">下一题 ▶</button>
-                </div>
-            </div>
-        </div>
+function initRound(){currentRound=pickRandom(30);currentIndex=0;userAnswers=[];selectedOption=null;fillValue='';correctWrong='';correctRight='';resultPanel.classList.remove('show');quizCard.style.display='block';restoreAnswer();renderQuestion();}
 
-        <!-- 结果面板（全部完成后显示） -->
-        <div class="result-panel" id="resultPanel">
-            <div class="result-title">📊 练习结果</div>
-            <div class="result-stats" id="resultStats">
-                <div class="stat">正确率 <strong id="accuracy">0%</strong></div>
-                <div class="stat">得分 <strong id="scoreNum">0</strong> / 30</div>
-                <div class="stat">趋势 <span class="trend" id="trendIcon">—</span> <span id="trendText"></span></div>
-            </div>
-            <div class="suggestion" id="suggestionText">继续加油！</div>
-            <div style="margin-top:14px; font-weight:600; color:#1a2f44; font-size:0.9rem;">❌ 错题回顾</div>
-            <div class="wrong-list" id="wrongList"></div>
-        </div>
-    </div>
+function renderQuestion(){
+  var q=currentRound[currentIndex];
+  var progress=((currentIndex+1)/currentRound.length*100).toFixed(0);
+  var typeLabel=q.t==='choice'?'选择题':q.t==='fill'?'语法填空':'改错题';
+  var html='<div class="progress-bar"><div class="progress-track"><div class="progress-fill" style="width:'+progress+'%"></div></div><span class="progress-text">'+(currentIndex+1)+' / '+currentRound.length+'</span><span class="progress-badge">已答 '+userAnswers.length+'</span></div>';
+  html+='<span class="q-type-tag">'+typeLabel+'</span><span class="q-cat-tag">'+q.c+'</span><div class="q-number">Question #'+q.id+'</div><div class="q-text">'+formatQ(q)+'</div>';
+  if(q.t==='choice'){
+    var L=['A','B','C','D'];
+    html+='<div class="options-list">';
+    q.o.forEach(function(opt,i){var cls='option-btn';if(selectedOption===L[i])cls+=' selected';var co=opt.replace(/^[A-D]\.\s*/,'');html+='<div class="'+cls+'" data-value="'+L[i]+'" onclick="onOptionClick(this,\''+L[i]+'\')"><div class="option-letter">'+L[i]+'</div><div class="option-text">'+co+'</div></div>';});
+    html+='</div>';
+  } else if(q.t==='fill'){
+    html+='<div class="fill-group"><div class="fill-label">请填写答案</div><input type="text" class="fill-input" id="fillInput" placeholder="输入你的答案..." value="'+fillValue+'" oninput="onFillInput(this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div>';
+  } else if(q.t==='correct'){
+    html+='<div class="correct-box"><div class="correct-field wrong-field"><div class="fill-label"><span class="icon">✗</span> 错误部分</div><input type="text" class="fill-input" id="correctWrongInput" placeholder="写出错误的词语" value="'+correctWrong+'" oninput="onCorrectInput(\'wrong\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();document.getElementById(\'correctRightInput\').focus();}"></div><div class="correct-field right-field"><div class="fill-label"><span class="icon">✓</span> 正确形式</div><input type="text" class="fill-input" id="correctRightInput" placeholder="写出正确的形式" value="'+correctRight+'" oninput="onCorrectInput(\'right\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div></div>';
+  }
+  html+='<div class="nav-row"><button class="nav-btn secondary" onclick="prevQuestion()" '+(currentIndex===0?'disabled':'')+'>上一题</button><div class="nav-mid"><button class="nav-btn gold" onclick="submitQuiz()">提交</button></div><button class="nav-btn primary" onclick="goNext()">'+(currentIndex===currentRound.length-1?'查看结果':'下一题')+'</button></div>';
+  html+='<div class="q-nav-section"><div class="q-nav-title">题号导航 - 点击跳转</div><div class="q-nav-grid">';
+  for(var i=0;i<currentRound.length;i++){var c='q-nav-cell';if(i===currentIndex)c+=' current';if(userAnswers.find(function(a){return a.index===i;}))c+=' answered';html+='<div class="'+c+'" onclick="jumpToQuestion('+i+')">'+(i+1)+'</div>';}
+  html+='</div></div>';
+  cardInner.innerHTML=html;
+  setTimeout(function(){var fi=document.getElementById('fillInput');if(fi)fi.focus();var cwi=document.getElementById('correctWrongInput');if(cwi)cwi.focus();},100);
+}
 
-    <!-- 题库模态框（含完整答案） -->
-    <div class="modal-overlay" id="bankModal">
-        <div class="modal-box">
-            <button class="close-btn" id="closeBankModal">✕</button>
-            <h2>📖 全部题目（含答案）</h2>
-            <div id="bankContent" class="bank-grid"></div>
-        </div>
-    </div>
+function formatQ(q){return q.q.replace(/______/g,'<span class="blank"></span>').replace(/_____/g,'<span class="blank"></span>').replace(/____/g,'<span class="blank"></span>').replace(/___/g,'<span class="blank"></span>');}
 
-    <!-- 历史模态框 -->
-    <div class="modal-overlay" id="historyModal">
-        <div class="modal-box">
-            <button class="close-btn" id="closeHistoryModal">✕</button>
-            <h2>🏆 历史记录</h2>
-            <div id="historyContent"><p style="color:#6f8faa;">暂无记录</p></div>
-        </div>
-    </div>
+function saveOrUpdate(index,type,answer){var i=userAnswers.findIndex(function(a){return a.index===index;});if(i>=0)userAnswers[i]={index:index,type:type,answer:answer};else userAnswers.push({index:index,type:type,answer:answer});}
+function onOptionClick(btn,letter){selectedOption=letter;saveOrUpdate(currentIndex,'choice',letter);renderQuestion();}
+function onFillInput(v){fillValue=v;if(v.trim())saveOrUpdate(currentIndex,'fill',v.trim());else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}}
+function onCorrectInput(f,v){
+  if(f==='wrong')correctWrong=v;else correctRight=v;
+  var ansObj={wrong:correctWrong.trim(),right:correctRight.trim()};
+  if(ansObj.wrong||ansObj.right)saveOrUpdate(currentIndex,'correct',ansObj);
+  else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}
+}
+function goNext(){if(currentIndex<currentRound.length-1){currentIndex++;restoreAnswer();renderQuestion();}else{submitQuiz();}}
+function jumpToQuestion(i){if(i<0||i>=currentRound.length)return;currentIndex=i;restoreAnswer();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function prevQuestion(){if(currentIndex>0){currentIndex--;restoreAnswer();renderQuestion();}}
+function restoreAnswer(){
+  selectedOption=null;fillValue='';correctWrong='';correctRight='';
+  var a=userAnswers.find(function(x){return x.index===currentIndex;});
+  if(a){
+    if(a.type==='choice')selectedOption=a.answer;
+    if(a.type==='fill')fillValue=a.answer;
+    if(a.type==='correct'){
+      if(typeof a.answer==='object'){correctWrong=a.answer.wrong||'';correctRight=a.answer.right||'';}
+      else{correctWrong=a.answer;correctRight='';}
+    }
+  }
+}
 
-    <script>
-        // ============================================================
-        //  完整题库：选择题 1-79，填空 80-139，改错 140-199
-        //  共 200 题（索引 0~199）
-        // ============================================================
+function checkAnswer(q,ans){
+  if(!ans)return false;
+  if(q.t==='choice')return ans.answer===q.a;
+  if(q.t==='fill'){
+    var acc=q.a.split(';').map(function(s){return s.trim().toLowerCase();});
+    var ua='';
+    if(typeof ans.answer==='string')ua=ans.answer.trim().toLowerCase();
+    return acc.indexOf(ua)>=0;
+  }
+  if(q.t==='correct'){
+    var uw='',ur='';
+    if(typeof ans.answer==='object'){uw=ans.answer.wrong||'';ur=ans.answer.right||'';}
+    else{uw=ans.answer;ur='';}
+    uw=uw.trim().toLowerCase();
+    ur=ur.trim().toLowerCase();
+    var qw=(q.w||'').trim().toLowerCase();
+    var qr=(q.r||'').trim().toLowerCase();
+    var wMatch=uw===qw;
+    var rMatch=ur===qr;
+    return wMatch&&rMatch;
+  }
+  return false;
+}
 
-        // ---------- 选择题 (1-79) ----------
-        const choiceData = [
-            { type: 'choice', question: 'I saw some ______ and ______ dancing in the street yesterday.', options: ['Germen; Englishmen',
-                    'Germans; Englishmans', 'Germans; Englishmen', 'German; Englishmans'
-                ], answer: 2 },
-            { type: 'choice', question: '—How can I get some ______ about the 2016 Olympic Games? —Why not search the Internet?',
-                options: ['information', 'experience', 'practice', 'advice'], answer: 0 },
-            { type: 'choice', question: '______ the teachers in their school is about 200 and one fourth of them are ______ teachers.',
-                options: ['A number of; women', 'A number of; woman', 'The number of; women', 'The number of; woman'],
-                answer: 2 },
-            { type: 'choice', question: 'He is a success as a leader but he hasn’t ______ in teaching.', options: [
-                    'many experiences', 'much experience', 'many experience', 'much experiences'
-                ], answer: 1 },
-            { type: 'choice', question: 'Mr. Black, a good friend of ______, likes drawing horses.', options: ['me',
-                    'my', 'mine', 'I'
-                ], answer: 2 },
-            { type: 'choice', question: 'The ______ of the book is very interesting.', options: ['cover', 'covers',
-                    'cover\'s', 'covers\''
-                ], answer: 0 },
-            { type: 'choice', question: 'There are two ______ and three ______ in the room.', options: [
-                    'woman doctors; man teachers', 'women doctors; men teachers', 'woman doctor; man teacher',
-                    'women doctor; men teacher'
-                ], answer: 1 },
-            { type: 'choice', question: '—How many ______ are there in your class? —Thirty.', options: ['boy student',
-                    'boys student', 'boy students', 'boys students'
-                ], answer: 2 },
-            { type: 'choice', question: 'The ______ office is on the second floor.', options: ['teacher',
-                    'teachers\'', 'teacher\'s', 'teachers\'s'
-                ], answer: 1 },
-            { type: 'choice', question: 'It\'s about ten ______ walk from my home to school.', options: ['minute',
-                    'minutes', 'minute\'s', 'minutes\''
-                ], answer: 3 },
-            { type: 'choice', question: 'The ______ of the river is very clean.', options: ['water', 'waters',
-                    'a water', 'the water'
-                ], answer: 0 },
-            { type: 'choice', question: 'I have a lot of ______ to do today.', options: ['works', 'work', 'job',
-                    'jobs'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ are playing football on the playground.', options: ['child',
-                    'childs', 'children', 'childrens'
-                ], answer: 2 },
-            { type: 'choice', question: 'She bought two ______ in the supermarket.', options: ['knifes', 'knives',
-                    'knife', 'knifves'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the house is made of wood.', options: ['roof', 'roofs',
-                    'rooves', 'roofes'
-                ], answer: 1 },
-            { type: 'choice', question: 'There are many ______ in the river.', options: ['fish', 'fishes', 'a fish',
-                    'the fish'
-                ], answer: 0 },
-            { type: 'choice', question: 'I need some ______ for my new dress.', options: ['cloth', 'cloths',
-                    'clothes', 'clothing'
-                ], answer: 2 },
-            { type: 'choice', question: 'The ______ of the story is very moving.', options: ['end', 'ends', 'ending',
-                    'endings'
-                ], answer: 2 },
-            { type: 'choice', question: 'He has two ______.', options: ['sister-in-law', 'sisters-in-law',
-                    'sister-in-laws', 'sisters-in-laws'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ are going to visit the museum.', options: ['lookers-on',
-                    'looker-ons', 'looker-on', 'lookers-ons'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ is made of glass.', options: ['window', 'windows', 'a window',
-                    'the window'
-                ], answer: 0 },
-            { type: 'choice', question: 'We have got plenty of ______.', options: ['time', 'times', 'a time',
-                    'the time'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the cinema are very comfortable.', options: ['seat', 'seats',
-                    'sit', 'sits'
-                ], answer: 1 },
-            { type: 'choice', question: 'I\'d like some ______ and ______.', options: ['tomato; potato',
-                    'tomatoes; potatoes', 'tomatos; potatos', 'tomato; potatoes'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the factory are all very kind.', options: ['workers', 'work',
-                    'working', 'worked'
-                ], answer: 0 },
-            { type: 'choice', question: 'There are about five ______ people in the city.', options: ['million',
-                    'millions', 'million of', 'millions of'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ is very high.', options: ['price', 'prices', 'a price',
-                    'the price'
-                ], answer: 0 },
-            { type: 'choice', question: 'She has much ______ in teaching English.', options: ['experience',
-                    'experiences', 'an experience', 'the experience'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of this book are very useful.', options: ['advice', 'advices',
-                    'a advice', 'the advices'
-                ], answer: 0 },
-            { type: 'choice', question: '—Would you like some ______? —Yes, please.', options: ['bread', 'breads',
-                    'a bread', 'the bread'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the mountain is covered with snow.', options: ['top', 'tops',
-                    'a top', 'the top'
-                ], answer: 0 },
-            { type: 'choice', question: 'He gave me a piece of ______.', options: ['paper', 'papers', 'a paper',
-                    'the paper'
-                ], answer: 0 },
-            { type: 'choice', question: 'Many ______ are working in the hospital.', options: ['woman doctor',
-                    'women doctors', 'woman doctors', 'women doctor'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the house are both tall.', options: ['door', 'doors',
-                    'a door', 'the door'
-                ], answer: 1 },
-            { type: 'choice', question: 'I have some ______ for you.', options: ['news', 'new', 'a news',
-                    'the news'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ in this restaurant are delicious.', options: ['dish', 'dishes',
-                    'a dish', 'the dish'
-                ], answer: 1 },
-            { type: 'choice', question: 'There is a ______ near the river.', options: ['bridge', 'bridges',
-                    'a bridge', 'the bridge'
-                ], answer: 0 },
-            { type: 'choice', question: 'He has a good ______ of humor.', options: ['sense', 'senses', 'a sense',
-                    'the sense'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the meeting is very important.', options: ['conclusion',
-                    'conclusions', 'a conclusion', 'the conclusion'
-                ], answer: 0 },
-            { type: 'choice', question: 'She bought two ______ of shoes.', options: ['pair', 'pairs', 'a pair',
-                    'the pair'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the team are all very young.', options: ['members', 'member',
-                    'a member', 'the member'
-                ], answer: 0 },
-            { type: 'choice', question: 'I need some ______ about the city.', options: ['information', 'informations',
-                    'an information', 'the information'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the forest are very tall.', options: ['tree', 'trees',
-                    'a tree', 'the tree'
-                ], answer: 1 },
-            { type: 'choice', question: 'He has a lot of ______ in his house.', options: ['furniture', 'furnitures',
-                    'a furniture', 'the furniture'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the road is very wide.', options: ['width', 'widths',
-                    'a width', 'the width'
-                ], answer: 0 },
-            { type: 'choice', question: 'There are two ______ in the bag.', options: ['apple', 'apples', 'an apple',
-                    'the apple'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the party is very interesting.', options: ['activity',
-                    'activities', 'an activity', 'the activity'
-                ], answer: 0 },
-            { type: 'choice', question: 'I have a great ______ of books.', options: ['number', 'numbers',
-                    'a number', 'the number'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the mountain is about 3000 meters.', options: ['height',
-                    'heights', 'a height', 'the height'
-                ], answer: 0 },
-            { type: 'choice', question: 'She gave me some ______.', options: ['advice', 'advices', 'an advice',
-                    'the advice'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the lake are very beautiful.', options: ['view', 'views',
-                    'a view', 'the view'
-                ], answer: 1 },
-            { type: 'choice', question: 'I need a ______ of gloves.', options: ['pair', 'pairs', 'a pair',
-                    'the pair'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the school are very friendly.', options: ['teacher',
-                    'teachers', 'a teacher', 'the teacher'
-                ], answer: 1 },
-            { type: 'choice', question: 'She has a lot of ______.', options: ['homework', 'homeworks', 'a homework',
-                    'the homework'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the car is very fast.', options: ['speed', 'speeds',
-                    'a speed', 'the speed'
-                ], answer: 0 },
-            { type: 'choice', question: 'There are many ______ in the zoo.', options: ['deer', 'deers', 'a deer',
-                    'the deer'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the book are very exciting.', options: ['story', 'stories',
-                    'a story', 'the story'
-                ], answer: 1 },
-            { type: 'choice', question: 'He has two ______.', options: ['sheep', 'sheeps', 'a sheep', 'the sheep'],
-                answer: 0 },
-            { type: 'choice', question: 'The ______ of the city are very crowded.', options: ['street', 'streets',
-                    'a street', 'the street'
-                ], answer: 1 },
-            { type: 'choice', question: 'I have a lot of ______ in my room.', options: ['baggage', 'baggages',
-                    'a baggage', 'the baggage'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the movie is very good.', options: ['music', 'musics',
-                    'a music', 'the music'
-                ], answer: 0 },
-            { type: 'choice', question: 'She has two ______.', options: ['watch', 'watches', 'a watch', 'the watch'],
-                answer: 1 },
-            { type: 'choice', question: 'The ______ of the river is very long.', options: ['length', 'lengths',
-                    'a length', 'the length'
-                ], answer: 0 },
-            { type: 'choice', question: 'I need some ______ for my coffee.', options: ['sugar', 'sugars', 'a sugar',
-                    'the sugar'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the team are very hard-working.', options: ['player',
-                    'players', 'a player', 'the player'
-                ], answer: 1 },
-            { type: 'choice', question: 'There are a lot of ______ in the forest.', options: ['leaf', 'leaves',
-                    'a leaf', 'the leaf'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the house is very large.', options: ['room', 'rooms',
-                    'a room', 'the room'
-                ], answer: 0 },
-            { type: 'choice', question: 'She has two ______.', options: ['child', 'children', 'a child',
-                    'the child'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the factory are very tall.', options: ['chimney', 'chimneys',
-                    'a chimney', 'the chimney'
-                ], answer: 1 },
-            { type: 'choice', question: 'I need some ______ to write on.', options: ['paper', 'papers', 'a paper',
-                    'the paper'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the team are all very tall.', options: ['member', 'members',
-                    'a member', 'the member'
-                ], answer: 1 },
-            { type: 'choice', question: 'She has a lot of ______.', options: ['money', 'moneys', 'a money',
-                    'the money'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the building are very strong.', options: ['wall', 'walls',
-                    'a wall', 'the wall'
-                ], answer: 1 },
-            { type: 'choice', question: 'There are many ______ in the garden.', options: ['flower', 'flowers',
-                    'a flower', 'the flower'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the story is very sad.', options: ['end', 'ends', 'an end',
-                    'the end'
-                ], answer: 0 },
-            { type: 'choice', question: 'I have two ______ of socks.', options: ['pair', 'pairs', 'a pair',
-                    'the pair'
-                ], answer: 1 },
-            { type: 'choice', question: 'The ______ of the class is very noisy.', options: ['student', 'students',
-                    'a student', 'the student'
-                ], answer: 1 },
-            { type: 'choice', question: 'She needs some ______.', options: ['bread', 'breads', 'a bread',
-                    'the bread'
-                ], answer: 0 },
-            { type: 'choice', question: 'The ______ of the city is very modern.', options: ['architecture',
-                    'architectures', 'an architecture', 'the architecture'
-                ], answer: 0 },
-            { type: 'choice', question: 'There are a lot of ______ in the sky.', options: ['cloud', 'clouds',
-                    'a cloud', 'the cloud'
-                ], answer: 1 }
-        ];
+function submitQuiz(){
+  var correct=0,wrong=0,unanswered=0;
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans||ans.answer===''||(typeof ans.answer==='object'&&!ans.answer.wrong&&!ans.answer.right)){unanswered++;return;}
+    if(checkAnswer(q,ans))correct++;else wrong++;
+  });
+  var score=Math.round(correct/currentRound.length*100);
+  var latest=getLatest();
+  saveScore(score,currentRound.length,correct,wrong,unanswered);
+  quizCard.style.display='none';resultPanel.classList.add('show');
+  document.getElementById('scoreBig').textContent=score;
+  var ce=document.getElementById('resultCompare');
+  if(latest&&latest.score!==undefined){var d=score-latest.score;if(d>0)ce.innerHTML='<span class="up">↑ 较上次 '+latest.score+' 分上升了 '+d+' 分！</span>';else if(d<0)ce.innerHTML='<span class="down">↓ 较上次 '+latest.score+' 分下降了 '+Math.abs(d)+' 分</span>';else ce.innerHTML='<span class="same">→ 与上次 '+latest.score+' 分持平</span>';}
+  else ce.innerHTML='<span class="same">首次答题，继续加油！</span>';
+  document.getElementById('resultStats').innerHTML='<div class="stat-card"><div class="stat-num" style="color:var(--correct)">'+correct+'</div><div class="stat-label">正确</div></div><div class="stat-card"><div class="stat-num" style="color:var(--wrong)">'+wrong+'</div><div class="stat-label">错误</div></div><div class="stat-card"><div class="stat-num" style="color:#999">'+unanswered+'</div><div class="stat-label">未答</div></div>';
+  var sugg=[];
+  if(score>=90)sugg.push('表现优异！名词用法掌握扎实，可以挑战更高难度的语法题。');
+  else if(score>=70)sugg.push('基础不错，建议重点复习错题中涉及的名词知识点。');
+  else if(score>=50)sugg.push('需要加强练习，建议重点复习名词的数、格和不可数名词的用法。');
+  else sugg.push('基础薄弱，建议系统学习名词的分类、单复数和所有格后再来练习。');
+  var wt={};
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans||!checkAnswer(q,ans)){
+      var cat=q.c||'未分类';
+      wt[cat]=(wt[cat]||0)+1;
+    }
+  });
+  var so=Object.keys(wt).map(function(k){return[k,wt[k]];}).sort(function(a,b){return b[1]-a[1];});
+  if(so.length)sugg.push('薄弱环节：'+so.map(function(s){return s[0]+'('+s[1]+'题错)';}).join('、'));
+  if(unanswered>0)sugg.push('有 '+unanswered+' 题未作答，建议合理分配时间。');
+  document.getElementById('resultSuggestion').innerHTML='<h3>学习建议</h3><ul>'+sugg.map(function(s){return '<li>'+s+'</li>';}).join('')+'</ul>';
+  renderHistory();
+}
 
-        // ---------- 语法填空 (80-139) ----------
-        const fillData = [
-            { type: 'fill', question: 'The ______ (child) are playing in the park.', answer: 'children' },
-            { type: 'fill', question: 'There are many ______ (deer) in the forest.', answer: 'deer' },
-            { type: 'fill', question: 'I have two ______ (tooth) problems.', answer: 'teeth' },
-            { type: 'fill', question: 'The ______ (man) over there are my teachers.', answer: 'men' },
-            { type: 'fill', question: 'She bought three ______ (tomato) for dinner.', answer: 'tomatoes' },
-            { type: 'fill', question: 'The ______ (roof) of the houses are all red.', answer: 'roofs' },
-            { type: 'fill', question: 'He gave me some ______ (advice) on how to learn English.', answer: 'advice' },
-            { type: 'fill', question: 'I need a piece of ______ (paper) to write a letter.', answer: 'paper' },
-            { type: 'fill', question: 'The ______ (photo) of the trip are very beautiful.', answer: 'photos' },
-            { type: 'fill', question: 'There are two ______ (potato) in the basket.', answer: 'potatoes' },
-            { type: 'fill', question: 'She has a lot of ______ (furniture) in her new house.', answer: 'furniture' },
-            { type: 'fill', question: 'The ______ (information) you gave me is very useful.', answer: 'information' },
-            { type: 'fill', question: 'I have a great number of ______ (book) in my study.', answer: 'books' },
-            { type: 'fill', question: 'The ______ (fish) in the river are very small.', answer: 'fish' },
-            { type: 'fill', question: 'He has a lot of ______ (work) to do today.', answer: 'work' },
-            { type: 'fill', question: 'The ______ (sheep) are eating grass on the hill.', answer: 'sheep' },
-            { type: 'fill', question: 'She bought two ______ (pair) of shoes.', answer: 'pairs' },
-            { type: 'fill', question: 'The ______ (child) mother is a doctor.', answer: 'child\'s' },
-            { type: 'fill', question: 'The ______ (teacher) office is on the third floor.', answer: 'teachers\'' },
-            { type: 'fill', question: 'It\'s about ten ______ (minute) walk from here.', answer: 'minutes\'' },
-            { type: 'fill', question: 'The ______ (cover) of the book is very beautiful.', answer: 'cover' },
-            { type: 'fill', question: 'I have a lot of ______ (homework) to do.', answer: 'homework' },
-            { type: 'fill', question: 'The ______ (team) are all very excited.', answer: 'team' },
-            { type: 'fill', question: 'She has two ______ (brother-in-law).', answer: 'brothers-in-law' },
-            { type: 'fill', question: 'The ______ (looker-on) were shocked by the accident.', answer: 'lookers-on' },
-            { type: 'fill', question: 'There are many ______ (woman) doctors in the hospital.', answer: 'women' },
-            { type: 'fill', question: 'The ______ (boy) toys are on the floor.', answer: 'boy\'s' },
-            { type: 'fill', question: 'I need some ______ (information) about the city.', answer: 'information' },
-            { type: 'fill', question: 'The ______ (water) in the glass is very clean.', answer: 'water' },
-            { type: 'fill', question: 'He has a lot of ______ (experience) in teaching.', answer: 'experience' },
-            { type: 'fill', question: 'The ______ (news) is very good today.', answer: 'news' },
-            { type: 'fill', question: 'There are several ______ (sheep) on the farm.', answer: 'sheep' },
-            { type: 'fill', question: 'The ______ (policeman) are standing at the gate.', answer: 'policemen' },
-            { type: 'fill', question: 'She bought two ______ (loaf) of bread.', answer: 'loaves' },
-            { type: 'fill', question: 'The ______ (leaf) on the tree are turning yellow.', answer: 'leaves' },
-            { type: 'fill', question: 'I have a lot of ______ (baggage) to carry.', answer: 'baggage' },
-            { type: 'fill', question: 'The ______ (house) windows are all closed.', answer: 'house' },
-            { type: 'fill', question: 'There are many ______ (mouse) in the old house.', answer: 'mice' },
-            { type: 'fill', question: 'The ______ (student) books are on the desk.', answer: 'students\'' },
-            { type: 'fill', question: 'She needs some ______ (milk) for her coffee.', answer: 'milk' },
-            { type: 'fill', question: 'The ______ (man) car is parked outside.', answer: 'man\'s' },
-            { type: 'fill', question: 'I have two ______ (watch) for sale.', answer: 'watches' },
-            { type: 'fill', question: 'The ______ (class) are all having a break.', answer: 'classes' },
-            { type: 'fill', question: 'There are a lot of ______ (people) in the square.', answer: 'people' },
-            { type: 'fill', question: 'He has a good ______ (knowledge) of history.', answer: 'knowledge' },
-            { type: 'fill', question: 'The ______ (factory) workers are on strike.', answer: 'factory' },
-            { type: 'fill', question: 'She gave me a ______ (glass) of water.', answer: 'glass' },
-            { type: 'fill', question: 'I need some ______ (wood) to make a fire.', answer: 'wood' },
-            { type: 'fill', question: 'The ______ (child) playground is very large.', answer: 'children\'s' },
-            { type: 'fill', question: 'There are two ______ (bus) at the stop.', answer: 'buses' },
-            { type: 'fill', question: 'The ______ (city) streets are very clean.', answer: 'city' },
-            { type: 'fill', question: 'She has a lot of ______ (money) in her bank.', answer: 'money' },
-            { type: 'fill', question: 'The ______ (story) in this book are very interesting.', answer: 'stories' },
-            { type: 'fill', question: 'He bought two ______ (knife) from the shop.', answer: 'knives' },
-            { type: 'fill', question: 'The ______ (wife) of the men are all very kind.', answer: 'wives' },
-            { type: 'fill', question: 'There are many ______ (goose) on the lake.', answer: 'geese' },
-            { type: 'fill', question: 'The ______ (tooth) of the lion are very sharp.', answer: 'teeth' },
-            { type: 'fill', question: 'I have a lot of ______ (furniture) to move.', answer: 'furniture' },
-            { type: 'fill', question: 'The ______ (traffic) in the city is very heavy.', answer: 'traffic' },
-            { type: 'fill', question: 'She needs some ______ (bread) for breakfast.', answer: 'bread' }
-        ];
+function renderBank(filter){
+  filter=filter||'';
+  var f=filter.trim().toLowerCase();
+  var filtered=f===''?ALL_Q:ALL_Q.filter(function(q){return q.q.toLowerCase().indexOf(f)>=0||(q.c||'').toLowerCase().indexOf(f)>=0||String(q.id).indexOf(f)>=0;});
+  var html='';
+  filtered.forEach(function(q){
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,i){var co=o.replace(/^[A-D]\.\s*/,'');var ic=L[i]===q.a;ah+='<div class="bank-opt'+(ic?' is-correct':'')+'"><span class="bank-opt-letter">'+L[i]+'</span><span>'+co+'</span>'+(ic?'<span class="bank-opt-tag">正确</span>':'')+'</div>';});
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      ah='<div class="bank-answer">答案：'+q.a+'</div>';
+    } else {
+      ah='<div class="bank-answer">错误：'+q.w+' → 正确：'+q.r+'</div>';
+    }
+    var exp=q.e||'';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+exp+'</div></div>';
+  });
+  document.getElementById('bankList').innerHTML=html||'<div style="padding:40px;text-align:center;color:#999;">未找到匹配题目</div>';
+}
 
-        // ---------- 改错 (140-199) ----------
-        const errorDataFull = [
-            { type: 'error', sentence: 'A house built of brick lasts longer than the one that is made of woods.',
-                error: 'woods', correction: 'wood' },
-            { type: 'error', sentence: 'The fire quickly spread to the first floor where it destroyed all the equipments in the language lab.',
-                error: 'equipments', correction: 'equipment' },
-            { type: 'error', sentence: 'There are a good news for you today.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'I have many homework to do.', error: 'many', correction: 'much' },
-            { type: 'error', sentence: 'She gave me some advices on how to learn English.', error: 'advices',
-                correction: 'advice' },
-            { type: 'error', sentence: 'The number of the students are 500.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'A number of the teachers is going to attend the meeting.', error: 'is',
-                correction: 'are' },
-            { type: 'error', sentence: 'I need a information about the exam.', error: 'a', correction: 'some' },
-            { type: 'error', sentence: 'He has two grown-ups children.', error: 'grown-ups', correction: 'grown-up' },
-            { type: 'error', sentence: 'The man who is standing there are my teacher.', error: 'are',
-            correction: 'is' },
-            { type: 'error', sentence: 'She bought two loaves of breads.', error: 'breads', correction: 'bread' },
-            { type: 'error', sentence: 'The childs are playing in the garden.', error: 'childs',
-            correction: 'children' },
-            { type: 'error', sentence: 'I saw some Germen and Englishmen in the street.', error: 'Germen',
-                correction: 'Germans' },
-            { type: 'error', sentence: 'The cover of the book are very beautiful.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'It is a ten-minutes walk from my home to school.', error: 'ten-minutes',
-                correction: 'ten-minute' },
-            { type: 'error', sentence: 'This is a friend of me.', error: 'me', correction: 'mine' },
-            { type: 'error', sentence: 'The teacher office is on the second floor.', error: 'teacher',
-                correction: 'teachers\'' },
-            { type: 'error', sentence: 'There are many furnitures in the room.', error: 'furnitures',
-                correction: 'furniture' },
-            { type: 'error', sentence: 'I have a lot of homeworks to do.', error: 'homeworks',
-            correction: 'homework' },
-            { type: 'error', sentence: 'They are woman teachers in our school.', error: 'woman',
-                correction: 'women' },
-            { type: 'error', sentence: 'The police is looking for the thief.', error: 'is', correction: 'are' },
-            { type: 'error', sentence: 'I need some new informations.', error: 'informations',
-                correction: 'information' },
-            { type: 'error', sentence: 'The water in the rivers is clean.', error: 'rivers', correction: 'river' },
-            { type: 'error', sentence: 'He has much experiences in teaching.', error: 'experiences',
-                correction: 'experience' },
-            { type: 'error', sentence: 'There is two pair of shoes on the floor.', error: 'is', correction: 'are' },
-            { type: 'error', sentence: 'The news are very good.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'I have many milk in the fridge.', error: 'many', correction: 'much' },
-            { type: 'error', sentence: 'The family is all very kind.', error: 'is', correction: 'are' },
-            { type: 'error', sentence: 'I would like some fruits for dessert.', error: 'fruits',
-            correction: 'fruit' },
-            { type: 'error', sentence: 'The glass are on the table.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'I need a pair of glove.', error: 'glove', correction: 'gloves' },
-            { type: 'error', sentence: 'The children is playing happily.', error: 'is', correction: 'are' },
-            { type: 'error', sentence: 'She bought two fish in the market.', error: 'fish', correction: 'fishes' },
-            { type: 'error', sentence: 'There are many deer in the forest.', error: 'deer', correction: 'deers' },
-            { type: 'error', sentence: 'The man and woman are teachers.', error: 'woman', correction: 'women' },
-            { type: 'error', sentence: 'I have many sheeps on the farm.', error: 'sheeps', correction: 'sheep' },
-            { type: 'error', sentence: 'The tomato in the basket are fresh.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'She is a friend of my sister.', error: 'sister', correction: 'sister\'s' },
-            { type: 'error', sentence: 'The teachers\' office are on the first floor.', error: 'are',
-                correction: 'is' },
-            { type: 'error', sentence: 'It is a two-hours journey.', error: 'two-hours', correction: 'two-hour' },
-            { type: 'error', sentence: 'I have a lot of baggages.', error: 'baggages', correction: 'baggage' },
-            { type: 'error', sentence: 'The information you gave me are useful.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'He has much furnitures in his room.', error: 'furnitures',
-                correction: 'furniture' },
-            { type: 'error', sentence: 'There are many policeman in the street.', error: 'policeman',
-                correction: 'policemen' },
-            { type: 'error', sentence: 'She bought two potatos and three tomatoes.', error: 'potatos',
-                correction: 'potatoes' },
-            { type: 'error', sentence: 'The child mother is very kind.', error: 'child', correction: 'child\'s' },
-            { type: 'error', sentence: 'I need some breads for breakfast.', error: 'breads', correction: 'bread' },
-            { type: 'error', sentence: 'The number of people are increasing.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'A number of students is waiting outside.', error: 'is', correction: 'are' },
-            { type: 'error', sentence: 'The house of my parents is very big.', error: 'parents',
-                correction: 'parents\'' },
-            { type: 'error', sentence: 'He is a good friend of my.', error: 'my', correction: 'mine' },
-            { type: 'error', sentence: 'The city streets is very clean.', error: 'is', correction: 'are' },
-            { type: 'error', sentence: 'She enjoys eating many fruits.', error: 'fruits', correction: 'fruit' },
-            { type: 'error', sentence: 'I have two watchs.', error: 'watchs', correction: 'watches' },
-            { type: 'error', sentence: 'The class are having a break.', error: 'are', correction: 'is' },
-            { type: 'error', sentence: 'There are much water in the glass.', error: 'much', correction: 'many' },
-            { type: 'error', sentence: 'He has a good knowledge of history.', error: 'knowledge',
-                correction: 'knowledge' },
-            { type: 'error', sentence: 'I need some informations about the exam.', error: 'informations',
-                correction: 'information' },
-            { type: 'error', sentence: 'The woman doctors are very kind.', error: 'woman', correction: 'women' },
-            { type: 'error', sentence: 'She has two childs.', error: 'childs', correction: 'children' },
-            { type: 'error', sentence: 'The roofs of the house is red.', error: 'is', correction: 'are' }
-        ];
+function showWrongAnswers(){
+  var wrongPanel=document.getElementById('wrongPanel');
+  var wrongList=document.getElementById('wrongList');
+  var wrongSummary=document.getElementById('wrongSummary');
+  var wrongCount=0,skipCount=0;
+  var html='';
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    var isWrong=false,isSkip=false;
+    if(!ans||ans.answer===''||(typeof ans.answer==='object'&&!ans.answer.wrong&&!ans.answer.right)){isSkip=true;skipCount++;}
+    else{if(!checkAnswer(q,ans)){isWrong=true;wrongCount++;}}
+    if(!isWrong&&!isSkip)return;
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,j){
+        var co=o.replace(/^[A-D]\.\s*/,'');
+        var ic=L[j]===q.a;
+        var iu=ans&&typeof ans.answer==='string'&&L[j]===ans.answer;
+        var cls='bank-opt';
+        if(ic)cls+=' is-correct';
+        var tag='';
+        if(ic)tag='<span class="bank-opt-tag">正确</span>';
+        if(iu&&!ic)tag='<span class="bank-opt-tag" style="color:var(--wrong)">你的选择</span>';
+        ah+='<div class="'+cls+'" style="'+(iu&&!ic?'background:var(--wrong-bg);border-color:var(--wrong);':'')+'"><span class="bank-opt-letter" style="'+(iu&&!ic?'background:var(--wrong);color:#fff;':'')+'">'+L[j]+'</span><span>'+co+'</span>'+tag+'</div>';
+      });
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      if(isSkip)ah='<div class="wrong-skipped">未作答</div>';
+      else ah='<div class="wrong-user"><span class="tag">你的答案：</span><span>'+ans.answer+'</span></div>';
+      ah+='<div class="wrong-correct"><span class="tag">正确答案：</span><span>'+q.a+'</span></div>';
+    } else if(q.t==='correct'){
+      if(isSkip){
+        ah='<div class="wrong-skipped">未作答</div>';
+      } else {
+        var uw='',ur='';
+        if(typeof ans.answer==='object'){uw=ans.answer.wrong||'';ur=ans.answer.right||'';}
+        else{uw=ans.answer;ur='';}
+        ah='<div class="wrong-user"><span class="tag">你写的错误部分：</span><span>'+(uw||'(空)')+'</span></div>';
+        ah+='<div class="wrong-correct"><span class="tag">实际错误部分：</span><span>'+q.w+'</span></div>';
+        ah+='<div class="wrong-user"><span class="tag">你写的正确形式：</span><span>'+(ur||'(空)')+'</span></div>';
+        ah+='<div class="wrong-correct"><span class="tag">正确形式：</span><span>'+q.r+'</span></div>';
+      }
+    }
+    var exp=q.e||'';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+exp+'</div></div>';
+  });
+  wrongSummary.textContent='共 '+wrongCount+' 题错误，'+skipCount+' 题未答，'+(currentRound.length-wrongCount-skipCount)+' 题正确';
+  wrongList.innerHTML=html||'<div style="padding:40px;text-align:center;color:var(--correct);font-size:18px;font-weight:700;">全部正确，没有错题！</div>';
+  wrongPanel.classList.add('show');
+  overlay.classList.add('show');
+}
 
-        // ---------- 合并 ----------
-        const allQuestions = [...choiceData, ...fillData, ...errorDataFull];
-        console.log('总题数:', allQuestions.length); // 200
-
-        // ============================================================
-        //  单题模式状态
-        // ============================================================
-        let currentQuestions = []; // 当前随机抽取的30题
-        let currentIndex = 0; // 当前显示索引
-        let results = []; // 每道题的提交状态: { submitted, correct, userAnswer }
-        let allSubmitted = false; // 是否全部提交
-
-        // DOM 引用
-        const cardContainer = document.getElementById('questionCard');
-        const progressDisplay = document.getElementById('progressDisplay');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
-        const randomBtn = document.getElementById('randomBtn');
-        const showBankBtn = document.getElementById('showBankBtn');
-        const showHistoryBtn = document.getElementById('showHistoryBtn');
-
-        const totalSpan = document.getElementById('totalCount');
-        const answeredSpan = document.getElementById('answeredCount');
-        const liveScoreSpan = document.getElementById('liveScore');
-        const latestScoreSpan = document.getElementById('latestScore');
-
-        const resultPanel = document.getElementById('resultPanel');
-        const accuracySpan = document.getElementById('accuracy');
-        const scoreNumSpan = document.getElementById('scoreNum');
-        const trendIcon = document.getElementById('trendIcon');
-        const trendText = document.getElementById('trendText');
-        const suggestionDiv = document.getElementById('suggestionText');
-        const wrongListDiv = document.getElementById('wrongList');
-
-        // ---------- 工具 ----------
-        function shuffle(arr) {
-            const a = [...arr];
-            for (let i = a.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [a[i], a[j]] = [a[j], a[i]];
-            }
-            return a;
-        }
-
-        function pickRandom(arr, n) {
-            const shuffled = shuffle(arr);
-            return shuffled.slice(0, n);
-        }
-
-        // ---------- 历史 ----------
-        const STORAGE_KEY = 'nounPracticeHistory_single';
-
-        function getHistory() {
-            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
-        }
-
-        function saveHistory(record) {
-            const h = getHistory();
-            h.push(record);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
-        }
-
-        function getLatestScore() {
-            const h = getHistory();
-            if (h.length === 0) return null;
-            return h[h.length - 1].score;
-        }
-
-        function updateLatestDisplay() {
-            const latest = getLatestScore();
-            latestScoreSpan.textContent = latest !== null ? `${latest}/30` : '--';
-        }
-
-        // ---------- 统计更新 ----------
-        function updateStats() {
-            const total = currentQuestions.length;
-            const submitted = results.filter(r => r.submitted).length;
-            const correct = results.filter(r => r.submitted && r.correct).length;
-            totalSpan.textContent = total;
-            answeredSpan.textContent = submitted;
-            liveScoreSpan.textContent = correct;
-            // 更新进度
-            progressDisplay.textContent = `第 ${currentIndex+1} / ${total} 题`;
-            // 导航按钮状态
-            prevBtn.disabled = (currentIndex === 0);
-            nextBtn.disabled = (currentIndex === total - 1);
-            // 如果全部提交，显示结果面板
-            if (submitted === total && total > 0) {
-                allSubmitted = true;
-                showFinalResult();
-            } else {
-                allSubmitted = false;
-                resultPanel.classList.remove('visible');
-            }
-        }
-
-        // ---------- 获取当前题目的正确答案文本 ----------
-        function getCorrectAnswerText(q) {
-            if (q.type === 'choice') {
-                return q.options[q.answer];
-            } else if (q.type === 'fill') {
-                return q.answer;
-            } else if (q.type === 'error') {
-                return `错误: ${q.error} → 正确: ${q.correction}`;
-            }
-            return '';
-        }
-
-        // ---------- 渲染当前题目 ----------
-        function renderCurrentQuestion() {
-            if (!currentQuestions.length) return;
-            const q = currentQuestions[currentIndex];
-            const result = results[currentIndex];
-            const isSubmitted = result.submitted;
-
-            let typeLabel = '';
-            if (q.type === 'choice') typeLabel = '选择';
-            else if (q.type === 'fill') typeLabel = '填空';
-            else if (q.type === 'error') typeLabel = '改错';
-
-            let html = `<div class="q-header">
-                            <span class="q-number">#${currentIndex+1}</span>
-                            <span class="q-type">${typeLabel}</span>
-                        </div>`;
-            html += `<div class="q-text">${q.question || q.sentence}</div>`;
-
-            // 输入区域
-            if (q.type === 'choice') {
-                html += `<div class="q-options">`;
-                q.options.forEach((opt, oi) => {
-                    const letter = String.fromCharCode(65 + oi);
-                    const checked = (isSubmitted && result.userAnswer === opt) ? 'checked' : '';
-                    const disabled = isSubmitted ? 'disabled' : '';
-                    html += `<label><input type="radio" name="q" value="${oi}" ${checked} ${disabled}> ${letter}. ${opt}</label>`;
-                });
-                html += `</div>`;
-            } else if (q.type === 'fill') {
-                const val = isSubmitted ? result.userAnswer : '';
-                const disabled = isSubmitted ? 'disabled' : '';
-                html += `<input class="q-input" type="text" placeholder="填写答案..." value="${val}" ${disabled} autocomplete="off">`;
-            } else if (q.type === 'error') {
-                const errVal = isSubmitted ? (result.userAnswer.err || '') : '';
-                const corVal = isSubmitted ? (result.userAnswer.cor || '') : '';
-                const disabled = isSubmitted ? 'disabled' : '';
-                html += `<div class="q-error-group">
-                            <input class="q-input" type="text" placeholder="错误部分" value="${errVal}" ${disabled} autocomplete="off">
-                            <input class="q-input" type="text" placeholder="正确形式" value="${corVal}" ${disabled} autocomplete="off">
-                        </div>`;
-            }
-
-            // 结果显示
-            if (isSubmitted) {
-                const correctText = getCorrectAnswerText(q);
-                const isCorrect = result.correct;
-                const icon = isCorrect ? '✅' : '❌';
-                const cls = isCorrect ? 'correct-answer' : 'wrong-answer';
-                html += `<div class="q-result"><span class="${cls}">${icon} ${isCorrect ? '正确' : '错误'}</span> 正确答案: <span class="correct-answer">${correctText}</span></div>`;
-            } else {
-                html += `<div class="q-result" style="color:#8aa9c9;">请作答后点击“提交本题”</div>`;
-            }
-
-            cardContainer.innerHTML = html;
-
-            // 绑定事件（仅当未提交时）
-            if (!isSubmitted) {
-                const inputs = cardContainer.querySelectorAll('input');
-                inputs.forEach(inp => {
-                    inp.addEventListener('change', () => {
-                        // 实时更新结果（但不提交）
-                    });
-                });
-            }
-
-            updateStats();
-        }
-
-        // ---------- 提交当前题目 ----------
-        function submitCurrent() {
-            if (allSubmitted) {
-                alert('所有题目已提交，点击“重随机”可重新练习。');
-                return;
-            }
-            const q = currentQuestions[currentIndex];
-            const result = results[currentIndex];
-            if (result.submitted) {
-                alert('本题已提交，可点击下一题继续。');
-                return;
-            }
-
-            let userAnswer = '';
-            let isCorrect = false;
-
-            if (q.type === 'choice') {
-                const checked = cardContainer.querySelector('input[type="radio"]:checked');
-                if (!checked) {
-                    alert('请先选择一个选项。');
-                    return;
-                }
-                const val = parseInt(checked.value);
-                userAnswer = q.options[val];
-                isCorrect = (val === q.answer);
-            } else if (q.type === 'fill') {
-                const inp = cardContainer.querySelector('.q-input');
-                if (!inp) return;
-                const val = inp.value.trim();
-                if (val === '') {
-                    alert('请填写答案。');
-                    return;
-                }
-                userAnswer = val;
-                isCorrect = (val.toLowerCase() === q.answer.trim().toLowerCase());
-            } else if (q.type === 'error') {
-                const inputs = cardContainer.querySelectorAll('.q-input');
-                if (inputs.length !== 2) return;
-                const errVal = inputs[0].value.trim();
-                const corVal = inputs[1].value.trim();
-                if (errVal === '' || corVal === '') {
-                    alert('请填写错误部分和正确形式。');
-                    return;
-                }
-                userAnswer = { err: errVal, cor: corVal };
-                const stdErr = q.error.trim().toLowerCase();
-                const stdCor = q.correction.trim().toLowerCase();
-                isCorrect = (errVal.toLowerCase() === stdErr && corVal.toLowerCase() === stdCor);
-            }
-
-            // 记录结果
-            result.submitted = true;
-            result.correct = isCorrect;
-            result.userAnswer = userAnswer;
-
-            // 重新渲染
-            renderCurrentQuestion();
-
-            // 如果全部提交，自动显示结果
-            const submittedCount = results.filter(r => r.submitted).length;
-            if (submittedCount === currentQuestions.length) {
-                allSubmitted = true;
-                showFinalResult();
-            }
-            updateStats();
-
-            // 自动跳到下一题（如果有）
-            if (currentIndex < currentQuestions.length - 1) {
-                setTimeout(() => {
-                    goToNext();
-                }, 600);
-            }
-        }
-
-        // ---------- 导航 ----------
-        function goToPrev() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                renderCurrentQuestion();
-            }
-        }
-
-        function goToNext() {
-            if (currentIndex < currentQuestions.length - 1) {
-                currentIndex++;
-                renderCurrentQuestion();
-            }
-        }
-
-        // ---------- 显示最终结果 ----------
-        function showFinalResult() {
-            const total = currentQuestions.length;
-            const correct = results.filter(r => r.submitted && r.correct).length;
-            const accuracy = (correct / total * 100);
-
-            // 保存历史
-            const record = { score: correct, total, date: new Date().toLocaleString('zh-CN') };
-            saveHistory(record);
-            updateLatestDisplay();
-
-            resultPanel.classList.add('visible');
-            accuracySpan.textContent = accuracy.toFixed(0) + '%';
-            scoreNumSpan.textContent = correct;
-
-            // 趋势
-            const history = getHistory();
-            let trend = '',
-                trendClass = '';
-            if (history.length >= 2) {
-                const prev = history[history.length - 2].score;
-                if (correct > prev) { trend = '📈 上升';
-                    trendClass = 'up'; } else if (correct < prev) { trend = '📉 下降';
-                    trendClass = 'down'; } else { trend = '➖ 持平';
-                    trendClass = ''; }
-                trendIcon.textContent = trend;
-                trendIcon.className = 'trend ' + trendClass;
-                trendText.textContent = ` (上次 ${prev}/30)`;
-            } else if (history.length === 1) {
-                trendIcon.textContent = '—';
-                trendText.textContent = '首次记录';
-            } else {
-                trendIcon.textContent = '—';
-                trendText.textContent = '无历史';
-            }
-
-            // 建议
-            let suggestion = '';
-            if (accuracy >= 90) suggestion = '🌟 优秀！名词掌握扎实！';
-            else if (accuracy >= 70) suggestion = '👍 良好，复习错题巩固。';
-            else if (accuracy >= 50) suggestion = '📖 建议回顾名词单复数、所有格等规则。';
-            else suggestion = '💪 别灰心，从基础开始，逐一分析每道错题。';
-            suggestionDiv.textContent = suggestion;
-
-            // 错题列表
-            wrongListDiv.innerHTML = '';
-            const wrongs = results.filter(r => r.submitted && !r.correct);
-            if (wrongs.length === 0) {
-                wrongListDiv.innerHTML = '<p style="color:#27ae60; font-weight:500;">🎉 全部正确！</p>';
-            } else {
-                wrongs.forEach((w, idx) => {
-                    const q = currentQuestions[idx];
-                    const item = document.createElement('div');
-                    item.className = 'wrong-item';
-                    const userAns = typeof w.userAnswer === 'string' ? w.userAnswer : (w.userAnswer.err + ' → ' + w
-                        .userAnswer.cor);
-                    const correctAns = getCorrectAnswerText(q);
-                    item.innerHTML = `
-                                <div class="q-original">${q.question || q.sentence}</div>
-                                <div class="q-user">你的答案: ${userAns}</div>
-                                <div class="q-answer">正确答案: ${correctAns}</div>
-                            `;
-                    wrongListDiv.appendChild(item);
-                });
-            }
-        }
-
-        // ---------- 初始化 / 随机出题 ----------
-        function randomQuestions() {
-            const selected = pickRandom(allQuestions, 30);
-            currentQuestions = selected;
-            results = currentQuestions.map(() => ({ submitted: false, correct: false, userAnswer: null }));
-            currentIndex = 0;
-            allSubmitted = false;
-            resultPanel.classList.remove('visible');
-            renderCurrentQuestion();
-            updateLatestDisplay();
-        }
-
-        // ---------- 题库模态框（显示完整答案） ----------
-        function showBank() {
-            const modal = document.getElementById('bankModal');
-            const content = document.getElementById('bankContent');
-            content.innerHTML = '';
-            allQuestions.forEach((q, i) => {
-                const div = document.createElement('div');
-                div.className = 'bank-item';
-                let type = '';
-                if (q.type === 'choice') type = '选择';
-                else if (q.type === 'fill') type = '填空';
-                else type = '改错';
-
-                let answerText = '';
-                if (q.type === 'choice') {
-                    answerText = `正确答案: ${q.options[q.answer]}`;
-                } else if (q.type === 'fill') {
-                    answerText = `答案: ${q.answer}`;
-                } else if (q.type === 'error') {
-                    answerText = `错误: ${q.error} → 正确: ${q.correction}`;
-                }
-
-                div.innerHTML = `
-                            <div class="b-q">${i+1}. ${q.question || q.sentence}</div>
-                            <div class="b-answer">${answerText}</div>
-                            <span class="b-type">${type}</span>
-                        `;
-                content.appendChild(div);
-            });
-            modal.classList.add('open');
-        }
-
-        // ---------- 历史 ----------
-        function showHistory() {
-            const modal = document.getElementById('historyModal');
-            const content = document.getElementById('historyContent');
-            const history = getHistory();
-            if (history.length === 0) {
-                content.innerHTML = '<p style="color:#6f8faa;">暂无记录</p>';
-            } else {
-                let html = `<ul class="history-list">`;
-                history.slice().reverse().forEach((r, i) => {
-                    const isLatest = (i === 0);
-                    html +=
-                        `<li><span>#${history.length - i}  ${r.date}</span><span class="${isLatest ? 'score-high' : ''}">${r.score} / ${r.total}</span></li>`;
-                });
-                html += '</ul>';
-                content.innerHTML = html;
-            }
-            modal.classList.add('open');
-        }
-
-        // ---------- 事件绑定 ----------
-        randomBtn.addEventListener('click', randomQuestions);
-        submitBtn.addEventListener('click', submitCurrent);
-        prevBtn.addEventListener('click', goToPrev);
-        nextBtn.addEventListener('click', goToNext);
-
-        showBankBtn.addEventListener('click', showBank);
-        document.getElementById('closeBankModal').addEventListener('click', () => {
-            document.getElementById('bankModal').classList.remove('open');
-        });
-        document.getElementById('bankModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) document.getElementById('bankModal').classList.remove('open');
-        });
-
-        showHistoryBtn.addEventListener('click', showHistory);
-        document.getElementById('closeHistoryModal').addEventListener('click', () => {
-            document.getElementById('historyModal').classList.remove('open');
-        });
-        document.getElementById('historyModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) document.getElementById('historyModal').classList.remove('open');
-        });
-
-        // 键盘支持：左右箭头切换
-        document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT') return;
-            if (e.key === 'ArrowLeft') goToPrev();
-            else if (e.key === 'ArrowRight') goToNext();
-        });
-
-        // ---------- 启动 ----------
-        randomQuestions();
-    </script>
+document.getElementById('reshuffleBtn').addEventListener('click',initRound);
+document.getElementById('bankBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('bankClose').addEventListener('click',function(){bankPanel.classList.remove('show');overlay.classList.remove('show');});
+overlay.addEventListener('click',function(){bankPanel.classList.remove('show');document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.getElementById('bankSearch').addEventListener('input',function(e){renderBank(e.target.value);});
+document.getElementById('againBtn').addEventListener('click',initRound);
+document.getElementById('reviewBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('wrongBtn').addEventListener('click',showWrongAnswers);
+document.getElementById('wrongClose').addEventListener('click',function(){document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.addEventListener('keydown',function(e){
+  if(bankPanel.classList.contains('show')||document.getElementById('wrongPanel').classList.contains('show'))return;
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft')prevQuestion();
+  if(e.key==='ArrowRight')goNext();
+  if(['a','A'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="A"]');if(b)onOptionClick(b,'A');}
+  if(['b','B'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="B"]');if(b)onOptionClick(b,'B');}
+  if(['c','C'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="C"]');if(b)onOptionClick(b,'C');}
+  if(['d','D'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="D"]');if(b)onOptionClick(b,'D');}
+});
+renderHistory();initRound();
+</script>
 </body>
 </html>
