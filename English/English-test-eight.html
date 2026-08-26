@@ -192,6 +192,11 @@ body::before {
 .bank-opt-tag { font-size:12px; color:var(--correct); font-weight:600; margin-left:auto; }
 .bank-answer { display:inline-block; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; background:var(--correct-bg); color:var(--correct); border:1px solid var(--correct); margin-bottom:8px; }
 .bank-exp { background:var(--parchment); border-radius:10px; padding:10px 16px; font-size:13px; color:var(--ink-soft); line-height:1.6; border-left:3px solid var(--gold); }
+.wrong-user { display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:10px; background:var(--wrong-bg); border:1px solid var(--wrong); margin-bottom:6px; font-size:14px; }
+.wrong-user .tag { font-size:12px; font-weight:700; color:var(--wrong); white-space:nowrap; }
+.wrong-correct { display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:10px; background:var(--correct-bg); border:1px solid var(--correct); margin-bottom:10px; font-size:14px; }
+.wrong-correct .tag { font-size:12px; font-weight:700; color:var(--correct); white-space:nowrap; }
+.wrong-skipped { padding:8px 14px; border-radius:10px; background:#f5f5f5; border:1px solid #ddd; margin-bottom:6px; font-size:14px; color:#999; }
 .overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.3); z-index:99; opacity:0; pointer-events:none; transition:opacity .3s; }
 .overlay.show { opacity:1; pointer-events:auto; }
 .history-bar { display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap; }
@@ -237,6 +242,7 @@ body::before {
     <div class="result-suggestion" id="resultSuggestion"></div>
     <div class="result-actions">
       <button class="nav-btn gold" id="againBtn">🔄 再来一轮</button>
+      <button class="nav-btn primary" id="wrongBtn">🔍 查看错题</button>
       <button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button>
     </div>
   </div>
@@ -247,6 +253,11 @@ body::before {
   <div class="bank-header"><h2>📖 题库一览</h2><button class="bank-close" id="bankClose">✕</button></div>
   <div class="bank-search"><input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类..."></div>
   <div class="bank-list" id="bankList"></div>
+</div>
+<div class="bank-panel" id="wrongPanel">
+  <div class="bank-header"><h2>🔍 错题回顾</h2><button class="bank-close" id="wrongClose">✕</button></div>
+  <div class="bank-search"><div id="wrongSummary" style="padding:4px 8px;font-size:14px;color:var(--ink-soft);font-weight:600;"></div></div>
+  <div class="bank-list" id="wrongList"></div>
 </div>
 
 <script>
@@ -483,12 +494,14 @@ function renderBank(filter=''){
 document.getElementById('reshuffleBtn').addEventListener('click',initRound);
 document.getElementById('bankBtn').addEventListener('click',()=>{bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
 document.getElementById('bankClose').addEventListener('click',()=>{bankPanel.classList.remove('show');overlay.classList.remove('show');});
-overlay.addEventListener('click',()=>{bankPanel.classList.remove('show');overlay.classList.remove('show');});
+overlay.addEventListener('click',()=>{bankPanel.classList.remove('show');document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
 document.getElementById('bankSearch').addEventListener('input',e=>renderBank(e.target.value));
 document.getElementById('againBtn').addEventListener('click',initRound);
 document.getElementById('reviewBtn').addEventListener('click',()=>{bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('wrongBtn').addEventListener('click',showWrongAnswers);
+document.getElementById('wrongClose').addEventListener('click',()=>{document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
 document.addEventListener('keydown',e=>{
-  if(bankPanel.classList.contains('show'))return;
+  if(bankPanel.classList.contains('show')||document.getElementById('wrongPanel').classList.contains('show'))return;
   if(e.target.tagName==='INPUT')return;
   if(e.key==='ArrowLeft')prevQuestion();
   if(e.key==='ArrowRight')goNext();
@@ -498,6 +511,61 @@ document.addEventListener('keydown',e=>{
   if(['d','D'].includes(e.key)){const b=document.querySelector('.option-btn[data-value="D"]');if(b)onOptionClick(b,'D');}
 });
 renderHistory();initRound();
+
+function showWrongAnswers(){
+  const wrongPanel=document.getElementById('wrongPanel');
+  const wrongList=document.getElementById('wrongList');
+  const wrongSummary=document.getElementById('wrongSummary');
+  let wrongCount=0,skipCount=0;
+  let html='';
+  currentRound.forEach((q,i)=>{
+    const ans=userAnswers.find(a=>a.index===i);
+    let isWrong=false,isSkip=false;
+    if(!ans){isSkip=true;skipCount++;}
+    else{
+      let ok=false;
+      if(q.t==='choice')ok=ans.answer===q.a;
+      else if(q.t==='fill'){const acc=q.a.split(';').map(s=>s.trim().toLowerCase());ok=acc.includes(ans.answer.trim().toLowerCase())||ans.answer.trim()==='/'&&q.a.trim()==='/'||ans.answer.trim()==='不填'&&q.a.trim()==='/';}
+      else if(q.t==='correct'){const a=ans.answer.trim().toLowerCase();const t=q.r.trim().toLowerCase();ok=a===t||['无错误','无','正确','没错'].includes(a)&&['无错误','无','正确','没错'].includes(t);}
+      if(!ok){isWrong=true;wrongCount++;}
+    }
+    if(!isWrong&&!isSkip)return;
+    const tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    const tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    let ah='';
+    if(q.t==='choice'){
+      const L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach((o,j)=>{
+        const co=o.replace(/^[A-D]\.\s*/,'');
+        const ic=L[j]===q.a;
+        const iu=ans&&L[j]===ans.answer;
+        let cls='bank-opt';
+        if(ic)cls+=' is-correct';
+        if(iu&&!ic)cls+='';
+        let tag='';
+        if(ic)tag='<span class="bank-opt-tag">✓ 正确</span>';
+        if(iu&&!ic)tag='<span class="bank-opt-tag" style="color:var(--wrong)">✗ 你的选择</span>';
+        ah+=`<div class="${cls}" style="${iu&&!ic?'background:var(--wrong-bg);border-color:var(--wrong);':''}"><span class="bank-opt-letter" style="${iu&&!ic?'background:var(--wrong);color:#fff;':''}">${L[j]}</span><span>${co}</span>${tag}</div>`;
+      });
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      if(isSkip)ah='<div class="wrong-skipped">⏭ 未作答</div>';
+      else ah=`<div class="wrong-user"><span class="tag">✗ 你的答案：</span><span>${ans.answer}</span></div>`;
+      ah+=`<div class="wrong-correct"><span class="tag">✓ 正确答案：</span><span>${q.a}</span></div>`;
+    } else if(q.t==='correct'){
+      if(isSkip)ah='<div class="wrong-skipped">⏭ 未作答</div>';
+      else ah=`<div class="wrong-user"><span class="tag">✗ 你的答案：</span><span>${ans.answer}</span></div>`;
+      ah+=`<div class="wrong-correct"><span class="tag">✓ 错误部分：</span><span>${q.w}</span></div>`;
+      ah+=`<div class="wrong-correct"><span class="tag">✓ 正确形式：</span><span>${q.r}</span></div>`;
+    }
+    html+=`<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#${q.id}</span><span class="bank-item-type ${tc}">${tl}</span><span class="bank-item-cat">${q.c}</span></div><div class="bank-item-q">${q.q}</div>${ah}<div class="bank-exp">📖 ${q.e}</div></div>`;
+  });
+  wrongSummary.textContent=`共 ${wrongCount} 题错误，${skipCount} 题未答，${currentRound.length-wrongCount-skipCount} 题正确`;
+  wrongList.innerHTML=html||'<div style="padding:40px;text-align:center;color:var(--correct);font-size:18px;font-weight:700;">🎉 全部正确，没有错题！</div>';
+  wrongPanel.classList.add('show');
+  overlay.classList.add('show');
+}
 </script>
 </body>
 </html>
