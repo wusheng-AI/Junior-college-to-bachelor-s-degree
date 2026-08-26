@@ -3,971 +3,519 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>形容词副词专项训练 · English Grammar Quiz</title>
+<title>形容词副词200题专项训练 · English Grammar Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-:root {
-  --gold:#d4a017; --gold-light:#f0c75e; --gold-deep:#b8860b;
-  --royal:#4a3f8c; --royal-light:#6b5fb0; --royal-deep:#2d2360;
-  --cream:#fffbf0; --warm-white:#fdf8ee; --parchment:#faf3e0;
-  --ink:#2a1a0a; --ink-soft:#5a4a2a;
-  --correct:#1a8a3a; --correct-bg:#e6f7ed;
-  --wrong:#c43a3a; --wrong-bg:#fdf4f4;
-  --shadow:0 8px 32px rgba(74,63,140,.15);
-  --shadow-lg:0 12px 48px rgba(74,63,140,.22);
-}
-body {
-  font-family:'Open Sans','Noto Serif SC',serif;
-  background:linear-gradient(135deg,#fffbf0 0%,#f5ecd9 30%,#e8dff0 70%,#ddd6f0 100%);
-  min-height:100vh; color:var(--ink); overflow-x:hidden;
-}
-body::before {
-  content:''; position:fixed; top:0; left:0; right:0; bottom:0;
-  background-image:
-    radial-gradient(ellipse at 10% 20%, rgba(212,160,23,.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(74,63,140,.08) 0%, transparent 50%);
-  pointer-events:none; z-index:0;
-}
-/* ===== Header ===== */
-.header {
-  position:relative; z-index:10;
-  background:linear-gradient(135deg,var(--royal) 0%,var(--royal-light) 50%,var(--royal-deep) 100%);
-  padding:18px 30px; box-shadow:0 4px 24px rgba(45,35,96,.3);
-  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
-}
-.header-left { display:flex; align-items:center; gap:14px; }
-.logo-badge {
-  width:54px; height:54px; border-radius:50%;
-  background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Playfair Display',serif; font-size:26px; font-weight:900; color:var(--royal-deep);
-  box-shadow:0 4px 12px rgba(212,160,23,.4); flex-shrink:0;
-}
-.header-title {
-  font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:#fff;
-  text-shadow:0 2px 4px rgba(0,0,0,.2); line-height:1.2;
-}
-.header-sub { font-size:13px; color:rgba(255,255,255,.7); margin-top:2px; }
-.header-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-.header-btn {
-  background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25);
-  color:#fff; padding:8px 18px; border-radius:30px; cursor:pointer;
-  font-size:14px; font-weight:600; transition:all .25s; white-space:nowrap;
-}
-.header-btn:hover { background:rgba(255,255,255,.28); transform:translateY(-2px); }
-.header-btn.gold { background:linear-gradient(135deg,var(--gold-light),var(--gold)); border-color:var(--gold); color:var(--royal-deep); }
-.header-btn.gold:hover { background:linear-gradient(135deg,var(--gold),var(--gold-deep)); }
-/* ===== Main Container ===== */
-.container { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:24px 20px 60px; }
-/* ===== Quiz Card ===== */
-.quiz-card {
-  background:#fff; border-radius:24px; box-shadow:var(--shadow-lg);
-  overflow:hidden; min-height:480px; position:relative;
-  border:1px solid rgba(212,160,23,.2);
-}
-.quiz-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:6px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--royal-light),var(--gold-light),var(--gold));
-}
-.card-inner { padding:36px 40px; }
-/* Progress */
-.progress-bar {
-  display:flex; align-items:center; gap:16px; margin-bottom:28px;
-}
-.progress-track {
-  flex:1; height:10px; background:#f0ead6; border-radius:10px; overflow:hidden; position:relative;
-}
-.progress-fill {
-  height:100%; background:linear-gradient(90deg,var(--gold),var(--royal-light));
-  border-radius:10px; transition:width .4s ease; width:0%;
-}
-.progress-text { font-size:14px; font-weight:700; color:var(--royal-deep); white-space:nowrap; }
-.progress-badge {
-  display:inline-flex; align-items:center; gap:6px; background:var(--parchment);
-  border:1px solid var(--gold); border-radius:20px; padding:4px 14px; font-size:13px; color:var(--ink-soft); font-weight:600;
-}
-/* Question */
-.q-type-tag {
-  display:inline-block; background:linear-gradient(135deg,var(--royal),var(--royal-light));
-  color:#fff; padding:5px 16px; border-radius:20px; font-size:13px; font-weight:600; margin-bottom:16px;
-}
-.q-cat-tag {
-  display:inline-block; background:var(--parchment); color:var(--gold-deep);
-  border:1px solid var(--gold-light); padding:3px 12px; border-radius:20px;
-  font-size:12px; font-weight:600; margin-left:8px;
-}
-.q-number {
-  font-family:'Playfair Display',serif; font-size:14px; color:var(--gold-deep);
-  font-weight:700; margin-bottom:8px; letter-spacing:1px;
-}
-.q-text {
-  font-family:'Noto Serif SC',serif; font-size:22px; line-height:1.7; color:var(--ink);
-  margin-bottom:28px; font-weight:500;
-}
-.q-text .blank { display:inline-block; min-width:80px; border-bottom:3px solid var(--gold); margin:0 4px; }
-.q-text .hint { font-size:15px; color:var(--ink-soft); font-style:italic; }
-/* Options */
-.options-list { display:flex; flex-direction:column; gap:12px; }
-.option-btn {
-  display:flex; align-items:center; gap:14px; padding:16px 22px;
-  border:2px solid #e8e0d0; border-radius:16px; cursor:pointer;
-  font-size:17px; transition:all .25s; background:#fffdf8; text-align:left;
-  font-family:'Open Sans',sans-serif;
-}
-.option-btn:hover { border-color:var(--gold); background:var(--warm-white); transform:translateX(4px); }
-.option-btn.selected { border-color:var(--royal); background:#f5f0ff; box-shadow:0 4px 16px rgba(74,63,140,.15); }
-.option-btn.disabled { cursor:not-allowed; opacity:.85; }
-.option-btn.correct-answer { border-color:var(--correct); background:var(--correct-bg); }
-.option-btn.wrong-answer { border-color:var(--wrong); background:var(--wrong-bg); }
-.option-letter {
-  width:36px; height:36px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:700; font-size:16px; background:#f0ead6; color:var(--royal-deep);
-  transition:all .25s;
-}
-.option-btn.selected .option-letter { background:var(--royal); color:#fff; }
-.option-btn.correct-answer .option-letter { background:var(--correct); color:#fff; }
-.option-btn.wrong-answer .option-letter { background:var(--wrong); color:#fff; }
-.option-text { flex:1; }
-/* Fill Input */
-.fill-input {
-  width:100%; padding:14px 20px; font-size:18px; border:2px solid #e8e0d0;
-  border-radius:14px; background:#fffdf8; font-family:'Open Sans',sans-serif;
-  transition:all .25s; color:var(--ink);
-}
-.fill-input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 4px rgba(212,160,23,.15); }
-.fill-label { font-size:14px; color:var(--ink-soft); margin-bottom:6px; font-weight:600; }
-.fill-group { margin-bottom:20px; }
-/* Correct (改错) */
-.correct-box { display:flex; gap:16px; margin-bottom:20px; }
-.correct-field { flex:1; }
-.correct-field .fill-label {
-  display:flex; align-items:center; gap:6px;
-}
-.correct-field .fill-label .icon { font-size:16px; }
-.correct-field.wrong-field .fill-label { color:var(--wrong); }
-.correct-field.right-field .fill-label { color:var(--correct); }
-/* Feedback */
-.feedback-box {
-  margin-top:20px; padding:16px 22px; border-radius:16px; font-size:15px; line-height:1.6;
-  animation:fadeUp .35s ease;
-}
-.feedback-box.correct { background:var(--correct-bg); border-left:5px solid var(--correct); color:var(--correct); }
-.feedback-box.wrong { background:var(--wrong-bg); border-left:5px solid var(--wrong); color:var(--wrong); }
-.feedback-box .exp { color:var(--ink-soft); font-size:13px; margin-top:6px; }
-@keyframes fadeUp { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
-/* Nav Buttons */
-.nav-row {
-  display:flex; justify-content:space-between; align-items:center; margin-top:32px; gap:12px; flex-wrap:wrap;
-}
-.nav-btn {
-  padding:12px 28px; border-radius:30px; font-size:16px; font-weight:700; cursor:pointer;
-  transition:all .25s; border:none; display:flex; align-items:center; gap:8px;
-}
-.nav-btn.primary { background:linear-gradient(135deg,var(--royal),var(--royal-light)); color:#fff; box-shadow:0 4px 16px rgba(74,63,140,.3); }
-.nav-btn.primary:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(74,63,140,.4); }
-.nav-btn.secondary { background:var(--parchment); color:var(--royal-deep); border:1px solid var(--gold); }
-.nav-btn.secondary:hover { background:var(--warm-white); }
-.nav-btn.gold { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--royal-deep); }
-.nav-btn.gold:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(212,160,23,.4); }
-.nav-btn:disabled { opacity:.4; cursor:not-allowed; transform:none !important; }
-.nav-mid { display:flex; gap:10px; }
-.confirm-btn {
-  display:block; margin:16px 0 0; padding:14px 32px; border-radius:30px; font-size:17px; font-weight:700;
-  cursor:pointer; border:none; background:linear-gradient(135deg,var(--gold-light),var(--gold));
-  color:var(--royal-deep); box-shadow:0 4px 16px rgba(212,160,23,.35); transition:all .25s; width:100%; text-align:center;
-}
-.confirm-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(212,160,23,.45); }
-.confirm-btn:disabled { opacity:.4; cursor:not-allowed; transform:none !important; }
-/* ===== Question Navigation Grid ===== */
-.q-nav-section {
-  margin-top:28px; padding:20px; border-radius:16px; background:var(--parchment);
-  border:1px solid rgba(212,160,23,.25);
-}
-.q-nav-title {
-  font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:12px; text-align:center;
-}
-.q-nav-grid {
-  display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
-}
-.q-nav-cell {
-  width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
-  font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; border:2px solid #e0d8c0;
-  background:#fff; color:var(--ink-soft);
-}
-.q-nav-cell:hover { border-color:var(--gold); background:var(--warm-white); transform:scale(1.1); }
-.q-nav-cell.current { background:linear-gradient(135deg,var(--royal),var(--royal-light)); color:#fff; border-color:var(--royal); transform:scale(1.15); }
-.q-nav-cell.answered { background:linear-gradient(135deg,var(--correct),#2aa85a); color:#fff; border-color:var(--correct); }
-.q-nav-cell.wrong { background:linear-gradient(135deg,var(--wrong),#d95555); color:#fff; border-color:var(--wrong); }
-/* ===== Result Panel ===== */
-.result-panel {
-  background:#fff; border-radius:24px; box-shadow:var(--shadow-lg);
-  overflow:hidden; padding:40px; border:1px solid rgba(212,160,23,.2);
-  display:none;
-}
-.result-panel.show { display:block; animation:fadeUp .4s ease; }
-.result-header { text-align:center; margin-bottom:30px; }
-.result-title {
-  font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--royal-deep);
-}
-.result-score-big {
-  font-family:'Playfair Display',serif; font-size:64px; font-weight:900;
-  background:linear-gradient(135deg,var(--gold),var(--royal));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  margin:16px 0 8px; line-height:1;
-}
-.result-score-label { font-size:16px; color:var(--ink-soft); }
-.result-compare {
-  display:flex; justify-content:center; align-items:center; gap:12px; margin:20px 0;
-  font-size:18px; font-weight:600;
-}
-.result-compare .up { color:var(--correct); }
-.result-compare .down { color:var(--wrong); }
-.result-compare .same { color:var(--ink-soft); }
-.result-stats {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0;
-}
-.stat-card {
-  text-align:center; padding:20px 12px; border-radius:16px; background:var(--warm-white);
-  border:1px solid #e8e0d0;
-}
-.stat-num { font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--royal); }
-.stat-label { font-size:13px; color:var(--ink-soft); margin-top:4px; }
-.result-suggestion {
-  background:var(--parchment); border-radius:16px; padding:24px;
-  border-left:5px solid var(--gold); margin-top:24px;
-}
-.result-suggestion h3 { font-size:18px; color:var(--royal-deep); margin-bottom:12px; }
-.result-suggestion ul { list-style:none; }
-.result-suggestion li { padding:6px 0; font-size:15px; color:var(--ink-soft); line-height:1.6; }
-.result-suggestion li::before { content:'▸ '; color:var(--gold); font-weight:700; }
-.result-actions { display:flex; justify-content:center; gap:14px; margin-top:30px; flex-wrap:wrap; }
-/* ===== Bank Panel ===== */
-.bank-panel {
-  position:fixed; top:0; right:-100%; width:min(640px,90vw); height:100vh;
-  background:#fff; box-shadow:-8px 0 48px rgba(0,0,0,.15);
-  z-index:100; transition:right .35s ease; overflow-y:auto;
-}
-.bank-panel.show { right:0; }
-.bank-header {
-  position:sticky; top:0; background:linear-gradient(135deg,var(--royal),var(--royal-deep));
-  padding:20px 24px; display:flex; justify-content:space-between; align-items:center; z-index:5;
-}
-.bank-header h2 { color:#fff; font-family:'Playfair Display',serif; font-size:22px; }
-.bank-close {
-  background:rgba(255,255,255,.2); border:none; color:#fff; width:36px; height:36px;
-  border-radius:50%; cursor:pointer; font-size:18px; transition:all .2s;
-}
-.bank-close:hover { background:rgba(255,255,255,.35); }
-.bank-search { padding:16px 24px; position:sticky; top:72px; background:#fff; border-bottom:1px solid #eee; z-index:4; }
-.bank-search input {
-  width:100%; padding:10px 18px; font-size:15px; border:2px solid #e8e0d0;
-  border-radius:30px; background:var(--warm-white); font-family:'Open Sans',sans-serif;
-}
-.bank-search input:focus { outline:none; border-color:var(--gold); }
-.bank-list { padding:0 0 40px; }
-.bank-item {
-  padding:20px 24px; border-bottom:1px solid #f0ead6; transition:background .2s;
-}
-.bank-item:hover { background:var(--warm-white); }
-.bank-item-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-.bank-item-id { font-weight:700; color:var(--royal); font-size:14px; }
-.bank-item-type {
-  font-size:12px; padding:2px 10px; border-radius:20px; font-weight:600;
-}
-.bank-item-type.choice { background:#e8f4ff; color:#1a5a8a; }
-.bank-item-type.fill { background:#fff3e0; color:#b86800; }
-.bank-item-type.correct { background:#f0e8ff; color:#5a3f8c; }
-.bank-item-cat { font-size:12px; color:var(--ink-soft); }
-.bank-item-q { font-size:16px; line-height:1.7; margin-bottom:12px; color:var(--ink); }
-.bank-opts { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-.bank-opt {
-  display:flex; align-items:center; gap:10px; padding:8px 14px; border-radius:10px;
-  background:#f8f5ee; font-size:14px; border:1px solid #e8e0d0;
-}
-.bank-opt.is-correct { background:var(--correct-bg); border-color:var(--correct); }
-.bank-opt-letter {
-  width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-  font-size:12px; font-weight:700; background:#e0d8c0; color:var(--royal-deep); flex-shrink:0;
-}
-.bank-opt.is-correct .bank-opt-letter { background:var(--correct); color:#fff; }
-.bank-opt-tag { font-size:12px; color:var(--correct); font-weight:600; margin-left:auto; }
-.bank-answer {
-  display:inline-block; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600;
-  background:var(--correct-bg); color:var(--correct); border:1px solid var(--correct); margin-bottom:8px;
-}
-.bank-exp {
-  background:var(--parchment); border-radius:10px; padding:10px 16px; font-size:13px;
-  color:var(--ink-soft); line-height:1.6; border-left:3px solid var(--gold);
-}
-/* Overlay */
-.overlay {
-  position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.3);
-  z-index:99; opacity:0; pointer-events:none; transition:opacity .3s;
-}
-.overlay.show { opacity:1; pointer-events:auto; }
-/* Score History */
-.history-bar {
-  display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;
-}
-.history-chip {
-  display:inline-flex; align-items:center; gap:4px; padding:4px 12px;
-  border-radius:20px; font-size:13px; font-weight:600; background:var(--parchment);
-  border:1px solid var(--gold-light); color:var(--ink-soft);
-}
-.history-chip.latest { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--royal-deep); border-color:var(--gold); }
-/* Responsive */
-@media (max-width:640px) {
-  .card-inner { padding:24px 20px; }
-  .q-text { font-size:18px; }
-  .header-title { font-size:18px; }
-  .result-score-big { font-size:48px; }
-  .result-stats { grid-template-columns:1fr; }
-  .correct-box { flex-direction:column; }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#d4a017;--gold-light:#f0c75e;--gold-deep:#b8860b;--royal:#4a3f8c;--royal-light:#6b5fb0;--royal-deep:#2d2360;--cream:#fffbf0;--warm-white:#fdf8ee;--parchment:#faf3e0;--ink:#2a1a0a;--ink-soft:#5a4a2a;--correct:#1a8a3a;--correct-bg:#e6f7ed;--wrong:#c43a3a;--wrong-bg:#fdf4f4;--shadow:0 8px 32px rgba(74,63,140,.15);--shadow-lg:0 12px 48px rgba(74,63,140,.22)}
+body{font-family:'Open Sans','Noto Serif SC',serif;background:linear-gradient(135deg,#fffbf0 0%,#f5ecd9 30%,#e8dff0 70%,#ddd6f0 100%);min-height:100vh;color:var(--ink);overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(ellipse at 10% 20%,rgba(212,160,23,.08) 0%,transparent 50%),radial-gradient(ellipse at 90% 80%,rgba(74,63,140,.08) 0%,transparent 50%);pointer-events:none;z-index:0}
+.header{position:relative;z-index:10;background:linear-gradient(135deg,var(--royal) 0%,var(--royal-light) 50%,var(--royal-deep) 100%);padding:18px 30px;box-shadow:0 4px 24px rgba(45,35,96,.3);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo-badge{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--royal-deep);box-shadow:0 4px 12px rgba(212,160,23,.4);flex-shrink:0}
+.header-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.2);line-height:1.2}
+.header-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:8px 18px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s;white-space:nowrap}
+.header-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+.header-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--royal-deep)}
+.header-btn.gold:hover{background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+.container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.quiz-card{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;min-height:480px;position:relative;border:1px solid rgba(212,160,23,.2)}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--royal-light),var(--gold-light),var(--gold))}
+.card-inner{padding:36px 40px}
+.progress-bar{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.progress-track{flex:1;height:10px;background:#f0ead6;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--royal-light));border-radius:10px;transition:width .4s ease;width:0%}
+.progress-text{font-size:14px;font-weight:700;color:var(--royal-deep);white-space:nowrap}
+.progress-badge{display:inline-flex;align-items:center;gap:6px;background:var(--parchment);border:1px solid var(--gold);border-radius:20px;padding:4px 14px;font-size:13px;color:var(--ink-soft);font-weight:600}
+.q-type-tag{display:inline-block;background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;padding:5px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:16px}
+.q-cat-tag{display:inline-block;background:var(--parchment);color:var(--gold-deep);border:1px solid var(--gold-light);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-left:8px}
+.q-number{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-deep);font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.q-text{font-family:'Noto Serif SC',serif;font-size:22px;line-height:1.7;color:var(--ink);margin-bottom:28px;font-weight:500}
+.q-text .blank{display:inline-block;min-width:80px;border-bottom:3px solid var(--gold);margin:0 4px}
+.options-list{display:flex;flex-direction:column;gap:12px}
+.option-btn{display:flex;align-items:center;gap:14px;padding:16px 22px;border:2px solid #e8e0d0;border-radius:16px;cursor:pointer;font-size:17px;transition:all .25s;background:#fffdf8;text-align:left;font-family:'Open Sans',sans-serif}
+.option-btn:hover{border-color:var(--gold);background:var(--warm-white);transform:translateX(4px)}
+.option-btn.selected{border-color:var(--royal);background:#f5f0ff;box-shadow:0 4px 16px rgba(74,63,140,.15)}
+.option-letter{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;background:#f0ead6;color:var(--royal-deep);transition:all .25s}
+.option-btn.selected .option-letter{background:var(--royal);color:#fff}
+.option-text{flex:1}
+.fill-input{width:100%;padding:14px 20px;font-size:18px;border:2px solid #e8e0d0;border-radius:14px;background:#fffdf8;font-family:'Open Sans',sans-serif;transition:all .25s;color:var(--ink)}
+.fill-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,160,23,.15)}
+.fill-label{font-size:14px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.fill-group{margin-bottom:20px}
+.correct-box{display:flex;gap:16px;margin-bottom:20px}
+.correct-field{flex:1}
+.correct-field .fill-label{display:flex;align-items:center;gap:6px}
+.correct-field .fill-label .icon{font-size:16px}
+.correct-field.wrong-field .fill-label{color:var(--wrong)}
+.correct-field.right-field .fill-label{color:var(--correct)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:12px;flex-wrap:wrap}
+.nav-btn{padding:12px 28px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;border:none;display:flex;align-items:center;gap:8px}
+.nav-btn.primary{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;box-shadow:0 4px 16px rgba(74,63,140,.3)}
+.nav-btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,63,140,.4)}
+.nav-btn.secondary{background:var(--parchment);color:var(--royal-deep);border:1px solid var(--gold)}
+.nav-btn.secondary:hover{background:var(--warm-white)}
+.nav-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep)}
+.nav-btn.gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4)}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.nav-mid{display:flex;gap:10px}
+.q-nav-section{margin-top:28px;padding:20px;border-radius:16px;background:var(--parchment);border:1px solid rgba(212,160,23,.25)}
+.q-nav-title{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:12px;text-align:center}
+.q-nav-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.q-nav-cell{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;border:2px solid #e0d8c0;background:#fff;color:var(--ink-soft)}
+.q-nav-cell:hover{border-color:var(--gold);background:var(--warm-white);transform:scale(1.1)}
+.q-nav-cell.current{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;border-color:var(--royal);transform:scale(1.15)}
+.q-nav-cell.answered{background:linear-gradient(135deg,var(--correct),#2aa85a);color:#fff;border-color:var(--correct)}
+.result-panel{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;padding:40px;border:1px solid rgba(212,160,23,.2);display:none}
+.result-panel.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.result-header{text-align:center;margin-bottom:30px}
+.result-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal-deep)}
+.result-score-big{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--royal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:16px 0 8px;line-height:1}
+.result-score-label{font-size:16px;color:var(--ink-soft)}
+.result-compare{display:flex;justify-content:center;align-items:center;gap:12px;margin:20px 0;font-size:18px;font-weight:600}
+.result-compare .up{color:var(--correct)}
+.result-compare .down{color:var(--wrong)}
+.result-compare .same{color:var(--ink-soft)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.stat-card{text-align:center;padding:20px 12px;border-radius:16px;background:var(--warm-white);border:1px solid #e8e0d0}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal)}
+.stat-label{font-size:13px;color:var(--ink-soft);margin-top:4px}
+.result-suggestion{background:var(--parchment);border-radius:16px;padding:24px;border-left:5px solid var(--gold);margin-top:24px}
+.result-suggestion h3{font-size:18px;color:var(--royal-deep);margin-bottom:12px}
+.result-suggestion ul{list-style:none}
+.result-suggestion li{padding:6px 0;font-size:15px;color:var(--ink-soft);line-height:1.6}
+.result-suggestion li::before{content:'▸ ';color:var(--gold);font-weight:700}
+.result-actions{display:flex;justify-content:center;gap:14px;margin-top:30px;flex-wrap:wrap}
+.bank-panel{position:fixed;top:0;right:-100%;width:min(640px,90vw);height:100vh;background:#fff;box-shadow:-8px 0 48px rgba(0,0,0,.15);z-index:100;transition:right .35s ease;overflow-y:auto}
+.bank-panel.show{right:0}
+.bank-header{position:sticky;top:0;background:linear-gradient(135deg,var(--royal),var(--royal-deep));padding:20px 24px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.bank-header h2{color:#fff;font-family:'Playfair Display',serif;font-size:22px}
+.bank-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;transition:all .2s}
+.bank-close:hover{background:rgba(255,255,255,.35)}
+.bank-search{padding:16px 24px;position:sticky;top:72px;background:#fff;border-bottom:1px solid #eee;z-index:4}
+.bank-search input{width:100%;padding:10px 18px;font-size:15px;border:2px solid #e8e0d0;border-radius:30px;background:var(--warm-white);font-family:'Open Sans',sans-serif}
+.bank-search input:focus{outline:none;border-color:var(--gold)}
+.bank-list{padding:0 0 40px}
+.bank-item{padding:20px 24px;border-bottom:1px solid #f0ead6;transition:background .2s}
+.bank-item:hover{background:var(--warm-white)}
+.bank-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.bank-item-id{font-weight:700;color:var(--royal);font-size:14px}
+.bank-item-type{font-size:12px;padding:2px 10px;border-radius:20px;font-weight:600}
+.bank-item-type.choice{background:#e8f4ff;color:#1a5a8a}
+.bank-item-type.fill{background:#fff3e0;color:#b86800}
+.bank-item-type.correct{background:#f0e8ff;color:#5a3f8c}
+.bank-item-cat{font-size:12px;color:var(--ink-soft)}
+.bank-item-q{font-size:16px;line-height:1.7;margin-bottom:12px;color:var(--ink)}
+.bank-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.bank-opt{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;background:#f8f5ee;font-size:14px;border:1px solid #e8e0d0}
+.bank-opt.is-correct{background:var(--correct-bg);border-color:var(--correct)}
+.bank-opt-letter{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#e0d8c0;color:var(--royal-deep);flex-shrink:0}
+.bank-opt.is-correct .bank-opt-letter{background:var(--correct);color:#fff}
+.bank-opt-tag{font-size:12px;color:var(--correct);font-weight:600;margin-left:auto}
+.bank-answer{display:inline-block;padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;background:var(--correct-bg);color:var(--correct);border:1px solid var(--correct);margin-bottom:8px}
+.bank-exp{background:var(--parchment);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--ink-soft);line-height:1.6;border-left:3px solid var(--gold)}
+.wrong-user{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--wrong-bg);border:1px solid var(--wrong);margin-bottom:6px;font-size:14px}
+.wrong-user .tag{font-size:12px;font-weight:700;color:var(--wrong);white-space:nowrap}
+.wrong-correct{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--correct-bg);border:1px solid var(--correct);margin-bottom:10px;font-size:14px}
+.wrong-correct .tag{font-size:12px;font-weight:700;color:var(--correct);white-space:nowrap}
+.wrong-skipped{padding:8px 14px;border-radius:10px;background:#f5f5f5;border:1px solid #ddd;margin-bottom:6px;font-size:14px;color:#999}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.show{opacity:1;pointer-events:auto}
+.history-bar{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.history-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600;background:var(--parchment);border:1px solid var(--gold-light);color:var(--ink-soft)}
+.history-chip.latest{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep);border-color:var(--gold)}
+@media(max-width:640px){.card-inner{padding:24px 20px}.q-text{font-size:18px}.header-title{font-size:18px}.result-score-big{font-size:48px}.result-stats{grid-template-columns:1fr}.correct-box{flex-direction:column}}
 </style>
 </head>
 <body>
-
 <div class="header">
-  <div class="header-left">
-    <div class="logo-badge">Aa</div>
-    <div>
-      <div class="header-title">形容词 &amp; 副词 专项训练</div>
-      <div class="header-sub">Adjective &amp; Adverb · 150 Questions · Random 30 per round</div>
-    </div>
-  </div>
-  <div class="header-right">
-    <button class="header-btn" id="bankBtn">📖 题库</button>
-    <button class="header-btn gold" id="reshuffleBtn">🎲 重新随机</button>
-  </div>
+  <div class="header-left"><div class="logo-badge">Aa</div><div><div class="header-title">形容词副词200题 专项训练</div><div class="header-sub">Adjective &amp; Adverb · 200 Questions · Random 30 per round</div></div></div>
+  <div class="header-right"><button class="header-btn" id="bankBtn">📖 题库</button><button class="header-btn gold" id="reshuffleBtn">🎲 重新随机</button></div>
 </div>
-
 <div class="container">
   <div class="history-bar" id="historyBar"></div>
-
-  <div class="quiz-card" id="quizCard">
-    <div class="card-inner" id="cardInner"></div>
-  </div>
-
+  <div class="quiz-card" id="quizCard"><div class="card-inner" id="cardInner"></div></div>
   <div class="result-panel" id="resultPanel">
-    <div class="result-header">
-      <div class="result-title">🎯 练习完成</div>
-      <div class="result-score-big" id="scoreBig">0</div>
-      <div class="result-score-label">分 / 共 30 题</div>
-      <div class="result-compare" id="resultCompare"></div>
-    </div>
+    <div class="result-header"><div class="result-title">🎯 练习完成</div><div class="result-score-big" id="scoreBig">0</div><div class="result-score-label">分 / 共 30 题</div><div class="result-compare" id="resultCompare"></div></div>
     <div class="result-stats" id="resultStats"></div>
     <div class="result-suggestion" id="resultSuggestion"></div>
-    <div class="result-actions">
-      <button class="nav-btn gold" id="againBtn">🔄 再来一轮</button>
-      <button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button>
-    </div>
+    <div class="result-actions"><button class="nav-btn gold" id="againBtn">🔄 再来一轮</button><button class="nav-btn primary" id="wrongBtn">🔍 查看错题</button><button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button></div>
   </div>
 </div>
-
 <div class="overlay" id="overlay"></div>
-<div class="bank-panel" id="bankPanel">
-  <div class="bank-header">
-    <h2>📖 题库一览</h2>
-    <button class="bank-close" id="bankClose">✕</button>
-  </div>
-  <div class="bank-search">
-    <input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类...">
-  </div>
-  <div class="bank-list" id="bankList"></div>
-</div>
-
+<div class="bank-panel" id="bankPanel"><div class="bank-header"><h2>📖 题库一览</h2><button class="bank-close" id="bankClose">✕</button></div><div class="bank-search"><input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类..."></div><div class="bank-list" id="bankList"></div></div>
+<div class="bank-panel" id="wrongPanel"><div class="bank-header"><h2>🔍 错题回顾</h2><button class="bank-close" id="wrongClose">✕</button></div><div class="bank-search"><div id="wrongSummary" style="padding:4px 8px;font-size:14px;color:var(--ink-soft);font-weight:600;"></div></div><div class="bank-list" id="wrongList"></div></div>
 <script>
-// ====== Question Data ======
-const ALL_Q = [
-// -- 选择题 1-10 形容词基本用法 --
-{id:1,t:'choice',c:'形容词基本用法',q:'The story was so ______ that all of us were deeply ______.',o:['A. moving; moved','B. moved; moving','C. moving; moving','D. moved; moved'],a:'A',e:'moving（令人感动的）修饰物；moved（感动的）修饰人。故事是物用moving，人是人用moved。'},
-{id:2,t:'choice',c:'形容词基本用法',q:'I feel ______ with this ______ job.',o:['A. boring; bored','B. bored; boring','C. boring; boring','D. bored; bored'],a:'B',e:'bored（感到无聊的）修饰人；boring（令人无聊的）修饰物。'},
-{id:3,t:'choice',c:'形容词基本用法',q:'The ______ news made everyone ______.',o:['A. exciting; excited','B. excited; exciting','C. exciting; exciting','D. excited; excited'],a:'A',e:'exciting修饰物news；excited修饰人everyone。'},
-{id:4,t:'choice',c:'形容词基本用法',q:'She is a ______ girl and she always speaks ______.',o:['A. gentle; gently','B. gently; gentle','C. gentle; gentle','D. gently; gently'],a:'A',e:'gentle形容词修饰名词girl；gently副词修饰动词speaks。'},
-{id:5,t:'choice',c:'形容词基本用法',q:'It is ______ to swim in this river because it is too deep.',o:['A. safe','B. dangerous','C. interesting','D. exciting'],a:'B',e:'根据too deep可知游泳是危险的(dangerous)。'},
-{id:6,t:'choice',c:'形容词基本用法',q:'The old man lives ______, but he never feels ______.',o:['A. alone; lonely','B. lonely; alone','C. alone; alone','D. lonely; lonely'],a:'A',e:'alone（独自地）副词修饰lives；lonely（孤独的）形容词作表语。'},
-{id:7,t:'choice',c:'形容词基本用法',q:'I would like ______ to drink.',o:['A. something cold','B. cold something','C. anything cold','D. cold anything'],a:'A',e:'形容词修饰复合不定代词需后置。肯定句用something。'},
-{id:8,t:'choice',c:'形容词基本用法',q:'The children were ______ after the ______ trip.',o:['A. tired; tiring','B. tiring; tired','C. tired; tired','D. tiring; tiring'],a:'A',e:'tired修饰人children；tiring修饰物trip。'},
-{id:9,t:'choice',c:'形容词基本用法',q:'He is ______ to carry the heavy box.',o:['A. enough strong','B. strong enough','C. too strong','D. so strong'],a:'B',e:'enough修饰形容词时需后置：形容词+enough。'},
-{id:10,t:'choice',c:'形容词基本用法',q:'The ______ look on his face suggested that he was ______.',o:['A. confusing; confused','B. confused; confusing','C. confusing; confusing','D. confused; confused'],a:'A',e:'confusing修饰look（表情本身令人困惑）；confused修饰he（人的状态）。'},
-// -- 选择题 11-20 形容词变副词 --
-{id:11,t:'choice',c:'形容词变副词',q:'Please drive ______ on the snowy road.',o:['A. careful','B. carefully','C. carefulness','D. more careful'],a:'B',e:'修饰动词drive需用副词carefully。'},
-{id:12,t:'choice',c:'形容词变副词',q:'She smiled ______ at the little baby.',o:['A. happy','B. happier','C. happily','D. happiness'],a:'C',e:'修饰动词smiled需用副词happily。'},
-{id:13,t:'choice',c:'形容词变副词',q:'He can speak English ______.',o:['A. fluent','B. fluently','C. fluency','D. more fluent'],a:'B',e:'修饰动词speak需用副词fluently。'},
-{id:14,t:'choice',c:'形容词变副词',q:'You should treat others ______.',o:['A. honest','B. honesty','C. honestly','D. more honest'],a:'C',e:'修饰动词treat需用副词honestly。'},
-{id:15,t:'choice',c:'形容词变副词',q:'The sun is shining ______ today.',o:['A. bright','B. brightness','C. brightly','D. more bright'],a:'C',e:'修饰动词is shining需用副词brightly。'},
-{id:16,t:'choice',c:'形容词变副词',q:'She is a ______ girl and she sings ______.',o:['A. beautiful; beautiful','B. beautifully; beautiful','C. beautiful; beautifully','D. beautifully; beautifully'],a:'C',e:'第一空修饰名词girl用形容词beautiful；第二空修饰动词sings用副词beautifully。'},
-{id:17,t:'choice',c:'形容词变副词',q:'He ran ______ to catch the bus.',o:['A. quick','B. quicker','C. quickly','D. quickness'],a:'C',e:'修饰动词ran需用副词quickly。'},
-{id:18,t:'choice',c:'形容词变副词',q:'Please speak ______ so that everyone can hear you.',o:['A. loud','B. louder','C. loudly','D. aloud'],a:'C',e:'修饰动词speak需用副词loudly。'},
-{id:19,t:'choice',c:'形容词变副词',q:'The exam was ______ easy.',o:['A. surprising','B. surprised','C. surprisingly','D. surprise'],a:'C',e:'修饰形容词easy需用副词surprisingly。'},
-{id:20,t:'choice',c:'形容词变副词',q:'He is ______ interested in playing basketball.',o:['A. extreme','B. extremely','C. more extreme','D. extremeness'],a:'B',e:'修饰形容词interested需用副词extremely。'},
-// -- 选择题 21-30 原级比较 --
-{id:21,t:'choice',c:'原级比较',q:'Tom is ______ as his brother.',o:['A. as tall','B. so tall','C. taller','D. tallest'],a:'A',e:'as...as结构，中间用原级。'},
-{id:22,t:'choice',c:'原级比较',q:'This book is not ______ interesting as that one.',o:['A. as','B. so','C. more','D. most'],a:'B',e:'否定句用not so/as...as。'},
-{id:23,t:'choice',c:'原级比较',q:'She runs ______ fast as I do.',o:['A. as','B. so','C. more','D. most'],a:'A',e:'肯定句用as...as结构。'},
-{id:24,t:'choice',c:'原级比较',q:'The weather in Beijing is colder than ______ in Shanghai.',o:['A. it','B. that','C. this','D. those'],a:'B',e:'比较对象要一致，weather不可数用that代替。'},
-{id:25,t:'choice',c:'原级比较',q:'He is ______ a donkey — stubborn and refuses to listen.',o:['A. as stubborn as','B. so stubborn as','C. as stubborn so','D. so stubborn that'],a:'A',e:'as stubborn as a donkey是固定搭配。'},
-{id:26,t:'choice',c:'原级比较',q:'My hometown is not ______ big ______ yours.',o:['A. as; than','B. so; as','C. as; so','D. so; than'],a:'B',e:'否定句用not so...as。'},
-{id:27,t:'choice',c:'原级比较',q:'She is ______ her mother.',o:['A. as beautiful as','B. as beautiful so','C. so beautiful as','D. beautiful as'],a:'A',e:'肯定句用as...as结构。'},
-{id:28,t:'choice',c:'原级比较',q:'This problem is ______ that one.',o:['A. as difficult as','B. as difficult so','C. so difficult as','D. difficult as'],a:'A',e:'肯定句用as...as结构。'},
-{id:29,t:'choice',c:'原级比较',q:"He doesn't speak English ______ his teacher.",o:['A. as well as','B. as good as','C. so well so','D. so good as'],a:'A',e:'否定句用not as/so...as，修饰动词speak用副词well。'},
-{id:30,t:'choice',c:'原级比较',q:'The film is ______ I expected.',o:['A. not as wonderful as','B. not as wonderful so','C. so wonderful as','D. as wonderful so'],a:'A',e:'否定句用not as/so...as，用原级wonderful。'},
-// -- 选择题 31-50 比较级 --
-{id:31,t:'choice',c:'比较级',q:'She is ______ than her sister.',o:['A. tall','B. taller','C. tallest','D. more tall'],a:'B',e:'than前用比较级taller。'},
-{id:32,t:'choice',c:'比较级',q:'This room is ______ than that one.',o:['A. big','B. bigger','C. biggest','D. more big'],a:'B',e:'big重读闭音节双写g加-er。'},
-{id:33,t:'choice',c:'比较级',q:'He runs ______ than me.',o:['A. fast','B. faster','C. fastest','D. more fast'],a:'B',e:'fast单音节词加-er。'},
-{id:34,t:'choice',c:'比较级',q:'The weather today is ______ than yesterday.',o:['A. bad','B. worse','C. worst','D. more bad'],a:'B',e:'bad的比较级是worse（不规则变化）。'},
-{id:35,t:'choice',c:'比较级',q:'She sings ______ than her friend.',o:['A. beautiful','B. more beautiful','C. beautifully','D. more beautifully'],a:'D',e:'修饰动词sings需用副词，beautifully的比较级是more beautifully。'},
-{id:36,t:'choice',c:'比较级',q:'This city is ______ than I thought.',o:['A. much bigger','B. more bigger','C. very bigger','D. quite bigger'],a:'A',e:'much可以修饰比较级bigger。'},
-{id:37,t:'choice',c:'比较级',q:'He is ______ than any other student in his class.',o:['A. taller','B. tallest','C. more tall','D. most tall'],a:'A',e:'比较级+than any other+单数名词表示最高级含义。'},
-{id:38,t:'choice',c:'比较级',q:'She can care for her elderly parents ______ than any other girl.',o:['A. better','B. best','C. more good','D. most good'],a:'A',e:'better是well的比较级，修饰动词care。'},
-{id:39,t:'choice',c:'比较级',q:'The ______ he tried, the ______ he seemed to succeed.',o:['A. hard; little','B. harder; less','C. hardest; least','D. more hard; fewer'],a:'B',e:'the+比较级，the+比较级。harder对应less。'},
-{id:40,t:'choice',c:'比较级',q:'The ______ you work, the ______ progress you will make.',o:['A. hard; much','B. harder; more','C. hardest; most','D. more hard; many'],a:'B',e:'the+比较级，the+比较级。harder对应more。'},
-{id:41,t:'choice',c:'比较级',q:'Our city is becoming ______.',o:['A. beautiful and beautiful','B. more and more beautiful','C. most and most beautiful','D. beautifuller and beautifuller'],a:'B',e:'多音节词用more and more+原级。'},
-{id:42,t:'choice',c:'比较级',q:'He speaks English ______ better than I.',o:['A. very','B. much','C. more','D. so'],a:'B',e:'much可以修饰比较级better。'},
-{id:43,t:'choice',c:'比较级',q:'This one is clearly ______ better than the other.',o:['A. very','B. far','C. more','D. too'],a:'B',e:'far可以修饰比较级better。'},
-{id:44,t:'choice',c:'比较级',q:'His knowledge of Chinese literature is inferior ______ mine.',o:['A. than','B. to','C. as','D. from'],a:'B',e:'inferior to是固定搭配，不用than。'},
-{id:45,t:'choice',c:'比较级',q:'She is junior ______ me by two years.',o:['A. than','B. to','C. as','D. from'],a:'B',e:'junior to是固定搭配。'},
-{id:46,t:'choice',c:'比较级',q:'The actual cost was much higher ______ our original estimate.',o:['A. than','B. to','C. as','D. from'],a:'A',e:'higher than是正常比较级用法。'},
-{id:47,t:'choice',c:'比较级',q:'The conditions of my new job were better ______ the old one.',o:['A. than','B. to','C. as','D. from'],a:'A',e:'better than是正常比较级用法。'},
-{id:48,t:'choice',c:'比较级',q:'He is superior ______ any other student in his class.',o:['A. than','B. to','C. as','D. from'],a:'B',e:'superior to是固定搭配。'},
-{id:49,t:'choice',c:'比较级',q:'The harder you study, ______ you will learn.',o:['A. the more','B. the most','C. more','D. most'],a:'A',e:'the+比较级，the+比较级。'},
-{id:50,t:'choice',c:'比较级',q:'She is becoming ______ interested in English.',o:['A. much and much','B. more and more','C. most and most','D. much more'],a:'B',e:'多音节词用more and more+原级。'},
-// -- 选择题 51-60 最高级 --
-{id:51,t:'choice',c:'最高级',q:'Mount Qomolangma is ______ mountain in the world.',o:['A. high','B. higher','C. highest','D. the highest'],a:'D',e:'最高级前加the。'},
-{id:52,t:'choice',c:'最高级',q:'She is ______ of all the girls.',o:['A. the most beautiful','B. more beautiful','C. most beautiful','D. beautiful'],a:'A',e:'of all the girls三者以上用最高级。'},
-{id:53,t:'choice',c:'最高级',q:'Shanghai is one of ______ cities in China.',o:['A. large','B. larger','C. the largest','D. largest'],a:'C',e:'one of+the+最高级+复数名词。'},
-{id:54,t:'choice',c:'最高级',q:'My grandpa is ______ in my family.',o:['A. old','B. older','C. the oldest','D. eldest'],a:'C',e:'in my family三者以上用最高级the oldest。'},
-{id:55,t:'choice',c:'最高级',q:'Asia is ______ among the seven continents.',o:['A. large','B. larger','C. the largest','D. largest'],a:'C',e:'among the seven continents三者以上用最高级。'},
-{id:56,t:'choice',c:'最高级',q:'Parrots are becoming one of ______ popular pets in America.',o:['A. more','B. most','C. the most','D. more and more'],a:'C',e:'one of+the+最高级+复数名词。'},
-{id:57,t:'choice',c:'最高级',q:'He is ______ boy in our class.',o:['A. the most tallest','B. the tallest','C. taller','D. most tall'],a:'B',e:'tallest已是最高级，不用加most。'},
-{id:58,t:'choice',c:'最高级',q:'This is ______ film I have ever seen.',o:['A. the most exciting','B. most exciting','C. more exciting','D. exciting'],a:'A',e:'最高级前加the，exciting多音节用most。'},
-{id:59,t:'choice',c:'最高级',q:'She is ______ student in our grade.',o:['A. the most hard-working','B. more hard-working','C. most hard-working','D. harder-working'],a:'A',e:'in our grade三者以上用最高级。'},
-{id:60,t:'choice',c:'最高级',q:'Tom is ______ of the two brothers.',o:['A. tall','B. taller','C. the taller','D. the tallest'],a:'C',e:'of the two两者比较用the+比较级。'},
-// -- 填空题 61-110 --
-{id:61,t:'fill',c:'语法填空',q:'Please speak ______ (clear) so that everyone can hear you.',a:'clearly',e:'修饰speak用副词，clear变clearly。'},
-{id:62,t:'fill',c:'语法填空',q:'She is a ______ (love) girl and everyone likes her.',a:'lovely',e:'love变lovely（形容词），注意lovely是形容词。'},
-{id:63,t:'fill',c:'语法填空',q:'He is ______ (tall) than his father now.',a:'taller',e:'than前用比较级。'},
-{id:64,t:'fill',c:'语法填空',q:'This problem is ______ (difficult) than that one.',a:'more difficult',e:'difficult多音节词比较级加more。'},
-{id:65,t:'fill',c:'语法填空',q:'She runs ______ (fast) in our class.',a:'fastest',e:'in our class范围三者以上用最高级。'},
-{id:66,t:'fill',c:'语法填空',q:'The ______ (excite) news made all of us ______ (excite).',a:'exciting; excited',e:'news用exciting，人用excited。'},
-{id:67,t:'fill',c:'语法填空',q:'He looked ______ (angry) at me without saying a word.',a:'angrily',e:'修饰动词looked用副词angrily。'},
-{id:68,t:'fill',c:'语法填空',q:'The ______ (surprise) result made everyone ______ (surprise).',a:'surprising; surprised',e:'result用surprising，人用surprised。'},
-{id:69,t:'fill',c:'语法填空',q:'She is ______ (beautiful) than her sister.',a:'more beautiful',e:'than前用比较级。'},
-{id:70,t:'fill',c:'语法填空',q:'He speaks English ______ (fluent) now than before.',a:'more fluently',e:'than前用比较级，修饰speak用副词。'},
-{id:71,t:'fill',c:'语法填空',q:'The weather is getting ______ and ______ (bad).',a:'worse; worse',e:'bad比较级worse，越来越差。'},
-{id:72,t:'fill',c:'语法填空',q:'The ______ (hard) you study, the ______ (good) grades you will get.',a:'harder; better',e:'the+比较级，the+比较级。'},
-{id:73,t:'fill',c:'语法填空',q:'She is ______ (old) of the three sisters.',a:'the oldest',e:'of the three sisters三者以上用最高级。'},
-{id:74,t:'fill',c:'语法填空',q:'This book is ______ (interesting) than that one.',a:'more interesting',e:'than前用比较级。'},
-{id:75,t:'fill',c:'语法填空',q:'He is ______ (lazy) boy in the class.',a:'the laziest',e:'in the class三者以上用最高级。'},
-{id:76,t:'fill',c:'语法填空',q:'Please drive ______ (careful) on the icy road.',a:'carefully',e:'修饰drive用副词。'},
-{id:77,t:'fill',c:'语法填空',q:'She smiled ______ (happy) at the good news.',a:'happily',e:'修饰smiled用副词。'},
-{id:78,t:'fill',c:'语法填空',q:'He can express himself ______ (free) now.',a:'freely',e:'修饰express用副词，free变freely。'},
-{id:79,t:'fill',c:'语法填空',q:'The old man lives ______ (lonely), but he doesn\'t feel ______ (lonely).',a:'alone; lonely',e:'lives用副词alone，feel用形容词lonely。'},
-{id:80,t:'fill',c:'语法填空',q:'She is ______ (confuse) about the ______ (confuse) question.',a:'confused; confusing',e:'人用confused，物用confusing。'},
-{id:81,t:'fill',c:'语法填空',q:'This movie is ______ (boring) than that one.',a:'more boring',e:'than前用比较级。'},
-{id:82,t:'fill',c:'语法填空',q:'He is ______ (young) than his brother.',a:'younger',e:'than前用比较级。'},
-{id:83,t:'fill',c:'语法填空',q:'Shanghai is one of ______ (big) cities in China.',a:'the biggest',e:'one of+the+最高级+复数名词。'},
-{id:84,t:'fill',c:'语法填空',q:'She dances ______ (graceful) than her partner.',a:'more gracefully',e:'than前用比较级，修饰dances用副词。'},
-{id:85,t:'fill',c:'语法填空',q:'He is ______ (stubborn) as a donkey.',a:'as stubborn',e:'as...as结构中间用原级。'},
-{id:86,t:'fill',c:'语法填空',q:'The new model costs twice ______ (much) as last year\'s.',a:'as much',e:'倍数表达：twice as much as。'},
-{id:87,t:'fill',c:'语法填空',q:'This room is three times ______ (large) than that one.',a:'larger',e:'倍数+比较级+than。'},
-{id:88,t:'fill',c:'语法填空',q:'She is becoming ______ and ______ (interested) in painting.',a:'more; more interested',e:'越来越感兴趣。'},
-{id:89,t:'fill',c:'语法填空',q:'The ______ (far) away you stand, the ______ (small) the object looks.',a:'farther; smaller',e:'the+比较级，the+比较级。further也可。'},
-{id:90,t:'fill',c:'语法填空',q:'He is ______ (superior) to me in many ways.',a:'superior',e:'superior本身就是比较级含义，不需加more。'},
-{id:91,t:'fill',c:'语法填空',q:'Please speak ______ (loud) so that everyone can hear.',a:'loudly',e:'修饰speak用副词。'},
-{id:92,t:'fill',c:'语法填空',q:'She is a ______ (quick) learner and she learns ______ (quick).',a:'quick; quickly',e:'learner用形容词，learns用副词。'},
-{id:93,t:'fill',c:'语法填空',q:'The ______ (tire) workers stopped to have a rest.',a:'tired',e:'修饰workers人，用tired。'},
-{id:94,t:'fill',c:'语法填空',q:'He felt ______ (embarrass) when he made the mistake.',a:'embarrassed',e:'人感到尴尬用embarrassed。'},
-{id:95,t:'fill',c:'语法填空',q:'She is ______ (concern) about her son\'s health.',a:'concerned',e:'be concerned about固定短语。'},
-{id:96,t:'fill',c:'语法填空',q:'This is ______ (amaze) news!',a:'amazing',e:'news令人惊讶用amazing。'},
-{id:97,t:'fill',c:'语法填空',q:'He is ______ (energy) than his brother.',a:'more energetic',e:'than前用比较级。'},
-{id:98,t:'fill',c:'语法填空',q:'She is ______ (patient) than most people.',a:'more patient',e:'than前用比较级。'},
-{id:99,t:'fill',c:'语法填空',q:'This book is ______ (useful) than that one.',a:'more useful',e:'than前用比较级。'},
-{id:100,t:'fill',c:'语法填空',q:'He is ______ (famous) than his father.',a:'more famous',e:'than前用比较级。'},
-{id:101,t:'fill',c:'语法填空',q:'The ______ (pollute) air is harmful to our health.',a:'polluted',e:'修饰air，表示被污染的。'},
-{id:102,t:'fill',c:'语法填空',q:'She is ______ (friendly) than her sister.',a:'more friendly',e:'than前用比较级。'},
-{id:103,t:'fill',c:'语法填空',q:'This is ______ (comfortable) chair I have ever sat in.',a:'the most comfortable',e:'I have ever sat in表示最高级。'},
-{id:104,t:'fill',c:'语法填空',q:'He is ______ (intelligent) than his classmates.',a:'more intelligent',e:'than前用比较级。'},
-{id:105,t:'fill',c:'语法填空',q:'The ______ (late) news is on Channel 5.',a:'latest',e:'表示最新的新闻用latest。'},
-{id:106,t:'fill',c:'语法填空',q:'She is ______ (tall) of the two girls.',a:'the taller',e:'of the two两者比较用the+比较级。'},
-{id:107,t:'fill',c:'语法填空',q:'This problem is ______ (simple) than I expected.',a:'simpler',e:'than前用比较级，simple比较级为simpler。'},
-{id:108,t:'fill',c:'语法填空',q:'He is ______ (careful) than before.',a:'more careful',e:'than前用比较级。'},
-{id:109,t:'fill',c:'语法填空',q:'She is ______ (attractive) than her friend.',a:'more attractive',e:'than前用比较级。'},
-{id:110,t:'fill',c:'语法填空',q:'This is ______ (delicious) meal I have ever had.',a:'the most delicious',e:'I have ever had表示最高级。'},
-// -- 改错题 111-150 --
-{id:111,t:'correct',c:'改错题',q:'She is more taller than her sister.',w:'more taller',r:'taller',e:'taller已经是比较级，不能用more修饰。'},
-{id:112,t:'correct',c:'改错题',q:'He speaks English as good as his teacher.',w:'good',r:'well',e:'修饰动词speaks需用副词well。'},
-{id:113,t:'correct',c:'改错题',q:'This room is the biggest than that one.',w:'the biggest',r:'bigger',e:'than前用比较级，不是最高级。'},
-{id:114,t:'correct',c:'改错题',q:'She is the most beautiful of the two sisters.',w:'the most beautiful',r:'the more beautiful',e:'of the two两者比较用比较级。'},
-{id:115,t:'correct',c:'改错题',q:'He runs more fast than me.',w:'more fast',r:'faster',e:'fast单音节词比较级加-er。'},
-{id:116,t:'correct',c:'改错题',q:'The weather is getting bad and bad.',w:'bad and bad',r:'worse and worse',e:'越来越差用worse and worse。'},
-{id:117,t:'correct',c:'改错题',q:'He is the taller boy in our class.',w:'taller',r:'tallest',e:'in our class三者以上用最高级。'},
-{id:118,t:'correct',c:'改错题',q:'She is more beautiful as her mother.',w:'as',r:'than',e:'比较级用than。'},
-{id:119,t:'correct',c:'改错题',q:'This book is more interesting as that one.',w:'as',r:'than',e:'比较级用than。'},
-{id:120,t:'correct',c:'改错题',q:'He is superior than any other student.',w:'than',r:'to',e:'superior to是固定搭配。'},
-{id:121,t:'correct',c:'改错题',q:'His knowledge is inferior than mine.',w:'than',r:'to',e:'inferior to是固定搭配。'},
-{id:122,t:'correct',c:'改错题',q:'She is junior than me.',w:'than',r:'to',e:'junior to是固定搭配。'},
-{id:123,t:'correct',c:'改错题',q:'The conditions of my new job were better than the old one.',w:'the old one',r:'those of the old one',e:'比较对象不一致，条件应与旧工作的条件比较。'},
-{id:124,t:'correct',c:'改错题',q:'He is as stubborn so a donkey.',w:'so',r:'as',e:'as...as是固定搭配，肯定句用as...as。'},
-{id:125,t:'correct',c:'改错题',q:"She doesn't run so fast as he does.",w:'无错误',r:'无错误',e:'否定句用so...as正确，此句无错误。'},
-{id:126,t:'correct',c:'改错题',q:'The excited news made everyone excited.',w:'excited',r:'exciting',e:'news是物用exciting。'},
-{id:127,t:'correct',c:'改错题',q:'He looked at me angry.',w:'angry',r:'angrily',e:'修饰动词looked at需用副词angrily。'},
-{id:128,t:'correct',c:'改错题',q:'She is a beautifully girl.',w:'beautifully',r:'beautiful',e:'修饰名词girl用形容词beautiful。'},
-{id:129,t:'correct',c:'改错题',q:'He speaks English fluent.',w:'fluent',r:'fluently',e:'修饰动词speaks需用副词fluently。'},
-{id:130,t:'correct',c:'改错题',q:'Please drive careful on the snowy road.',w:'careful',r:'carefully',e:'修饰动词drive需用副词carefully。'},
-{id:131,t:'correct',c:'改错题',q:'The old man lives lonely, but he doesn\'t feel alone.',w:'lonely',r:'alone',e:'修饰动词lives需用副词alone。lonely是形容词。'},
-{id:132,t:'correct',c:'改错题',q:'She is interesting in music.',w:'interesting',r:'interested',e:'人对…感兴趣用be interested in。'},
-{id:133,t:'correct',c:'改错题',q:'He is confusing about the confusing question.',w:'confusing',r:'confused',e:'人感到困惑用confused。'},
-{id:134,t:'correct',c:'改错题',q:'This film is bored, I feel boring.',w:'bored',r:'boring',e:'film是物用boring；人用bored。（此处第一处错误：bored→boring）'},
-{id:135,t:'correct',c:'改错题',q:'She is more happier than before.',w:'more happier',r:'happier',e:'happier已经是比较级，不能用more修饰。'},
-{id:136,t:'correct',c:'改错题',q:'The harder you study, the most you will learn.',w:'most',r:'more',e:'the+比较级，the+比较级。'},
-{id:137,t:'correct',c:'改错题',q:'He is the most tallest boy in our class.',w:'most tallest',r:'tallest',e:'tallest已是最高级，不用加most。'},
-{id:138,t:'correct',c:'改错题',q:'This is one of the most beautiful city in China.',w:'city',r:'cities',e:'one of+the+最高级+复数名词。'},
-{id:139,t:'correct',c:'改错题',q:'My grandpa is eldest in my family.',w:'eldest',r:'oldest',e:'指年龄最大用oldest。'},
-{id:140,t:'correct',c:'改错题',q:'Asia is the largest among the seven continent.',w:'continent',r:'continents',e:'among the seven continents用复数。'},
-{id:141,t:'correct',c:'改错题',q:'Parrots are becoming one of the more popular pets.',w:'more',r:'most',e:'one of+the+最高级。'},
-{id:142,t:'correct',c:'改错题',q:'The new model costs twice many as last year\'s.',w:'many',r:'much',e:'比较价格用much，twice as much as。'},
-{id:143,t:'correct',c:'改错题',q:'This room is three times the size of that one.',w:'无错误',r:'无错误',e:'倍数表达"倍数+the+名词+of"结构正确，此句无错误。'},
-{id:144,t:'correct',c:'改错题',q:'She can care for her parents better than any other girls.',w:'girls',r:'girl',e:'any other+单数名词。'},
-{id:145,t:'correct',c:'改错题',q:'There are twice as many Chinese restaurants in New York as in Boston.',w:'无错误',r:'无错误',e:'倍数表达"倍数+as+原级+as"结构正确，此句无错误。'},
-{id:146,t:'correct',c:'改错题',q:'He is taller than any boy in his class.',w:'any',r:'any other',e:'比较级表示最高级时用than any other+单数名词，排除自身。'},
-{id:147,t:'correct',c:'改错题',q:'She is more and more beautifuler.',w:'beautifuler',r:'beautiful',e:'more and more+原级，不能用beautifuler。'},
-{id:148,t:'correct',c:'改错题',q:'The more he tried, the less he seemed to appreciate it.',w:'无错误',r:'无错误',e:'the+比较级，the+比较级结构正确，此句无错误。'},
-{id:149,t:'correct',c:'改错题',q:'He speaks English much more better than I.',w:'more better',r:'better',e:'better已经是比较级，不能用more修饰。'},
-{id:150,t:'correct',c:'改错题',q:"Staying in a hotel costs twice much as renting a room in a dormitory.",w:'much',r:'as much',e:'倍数表达"倍数+as much as"，应为twice as much as。'}
+var ALL_Q=[
+// ===== 选择题 1-80 =====
+{id:1,t:'choice',c:'形容词副词',q:'The movie was so ______ that almost everyone was ______ to tears.',o:['A. moved; moving','B. moving; moved','C. moving; moving','D. moved; moved'],a:'B',e:'-ing修饰物，-ed修饰人。电影令人感动用moving，人被感动用moved。'},
+{id:2,t:'choice',c:'形容词副词',q:'She is ______ than her sister in math.',o:['A. more clever','B. cleverer','C. more cleverer','D. cleverest'],a:'B',e:'clever比较级是cleverer。'},
+{id:3,t:'choice',c:'形容词副词',q:'He runs ______ than any other student in his class.',o:['A. fast','B. faster','C. fastest','D. more fast'],a:'B',e:'than前用比较级faster。'},
+{id:4,t:'choice',c:'形容词副词',q:'The ______ you work, the ______ progress you will make.',o:['A. hard; great','B. harder; greater','C. hardest; greatest','D. more hard; more great'],a:'B',e:'the+比较级，the+比较级。'},
+{id:5,t:'choice',c:'形容词副词',q:'This is ______ book I have ever read.',o:['A. the most interesting','B. more interesting','C. interesting','D. most interesting'],a:'A',e:'最高级前加the。'},
+{id:6,t:'choice',c:'形容词副词',q:'He is ______ taller than his brother.',o:['A. very','B. much','C. more','D. quite'],a:'B',e:'much可修饰比较级。'},
+{id:7,t:'choice',c:'形容词副词',q:'She speaks English ______.',o:['A. clearly','B. clear','C. clearer','D. more clear'],a:'A',e:'副词修饰动词speaks用clearly。'},
+{id:8,t:'choice',c:'形容词副词',q:'The old man lives ______, but he doesn\'t feel ______.',o:['A. lonely; alone','B. alone; lonely','C. lonely; lonely','D. alone; alone'],a:'B',e:'alone独自地，lonely孤独的。'},
+{id:9,t:'choice',c:'形容词副词',q:'The weather is getting ______.',o:['A. warmer and warmer','B. warm and warm','C. more warm and more warm','D. warmer and warm'],a:'A',e:'比较级+and+比较级表示越来越。'},
+{id:10,t:'choice',c:'形容词副词',q:'This room is three times ______ that one.',o:['A. as larger as','B. as large as','C. larger as','D. large than'],a:'B',e:'倍数+as+原级+as。'},
+{id:11,t:'choice',c:'形容词副词',q:'He is ______ than I.',o:['A. senior to','B. senior than','C. more senior to','D. more senior than'],a:'A',e:'senior本身含比较义，用to不用than。'},
+{id:12,t:'choice',c:'形容词副词',q:'Of all the subjects, English is ______.',o:['A. the most interesting','B. more interesting','C. interesting','D. most interesting'],a:'A',e:'三者以上用最高级加the。'},
+{id:13,t:'choice',c:'形容词副词',q:'I have never seen ______ movie before.',o:['A. a so interesting','B. so an interesting','C. such an interesting','D. such interesting'],a:'C',e:'such+a/an+形容词+名词单数。'},
+{id:14,t:'choice',c:'形容词副词',q:'The ______ you eat, the healthier you will be.',o:['A. more healthy','B. healthier','C. more healthily','D. healthily'],a:'B',e:'the+比较级，the+比较级。healthy比较级healthier。'},
+{id:15,t:'choice',c:'形容词副词',q:'She is ______ girl in our class.',o:['A. the most beautiful','B. more beautiful','C. most beautiful','D. beautiful'],a:'A',e:'最高级前加the。'},
+{id:16,t:'choice',c:'形容词副词',q:'This problem is ______ that one.',o:['A. not as easy as','B. not so easy than','C. not easier as','D. not more easy as'],a:'A',e:'not as/so+原级+as。'},
+{id:17,t:'choice',c:'形容词副词',q:'He can run ______ than me.',o:['A. more faster','B. much faster','C. very faster','D. quite faster'],a:'B',e:'much可修饰比较级faster。'},
+{id:18,t:'choice',c:'形容词副词',q:'______ he tried, ______ he felt.',o:['A. The more; the happier','B. More; happier','C. The more; the more happy','D. The more; the happily'],a:'A',e:'the+比较级，the+比较级。'},
+{id:19,t:'choice',c:'形容词副词',q:'He is ______ of the two brothers.',o:['A. taller','B. the taller','C. tallest','D. the tallest'],a:'B',e:'两者比较用比较级加the。'},
+{id:20,t:'choice',c:'形容词副词',q:'The population of China is larger than ______ of Japan.',o:['A. that','B. those','C. one','D. it'],a:'A',e:'that指代不可数名词population。'},
+{id:21,t:'choice',c:'形容词副词',q:'He felt ______ at the ______ news.',o:['A. excited; exciting','B. exciting; excited','C. excited; excited','D. exciting; exciting'],a:'A',e:'人用excited，物用exciting。'},
+{id:22,t:'choice',c:'形容词副词',q:'She is ______ careful than her sister.',o:['A. more','B. much','C. very','D. quite'],a:'A',e:'careful多音节用more careful。'},
+{id:23,t:'choice',c:'形容词副词',q:'The more you read, ______ you will understand.',o:['A. the better','B. better','C. the best','D. best'],a:'A',e:'the+比较级，the+比较级。'},
+{id:24,t:'choice',c:'形容词副词',q:'This is one of ______ cities in the country.',o:['A. the largest','B. larger','C. largest','D. more large'],a:'A',e:'one of+the+最高级+复数名词。'},
+{id:25,t:'choice',c:'形容词副词',q:'He speaks English ______ fluently than his brother.',o:['A. more','B. much','C. very','D. so'],a:'A',e:'fluently多音节用more fluently。'},
+{id:26,t:'choice',c:'形容词副词',q:'I have ______ money than you.',o:['A. less','B. fewer','C. little','D. few'],a:'A',e:'money不可数用less。'},
+{id:27,t:'choice',c:'形容词副词',q:'She is ______ older than she looks.',o:['A. much','B. more','C. very','D. quite'],a:'A',e:'much可修饰比较级。'},
+{id:28,t:'choice',c:'形容词副词',q:'The higher the mountain is, ______ the air is.',o:['A. the thinner','B. thinner','C. the more thin','D. thin'],a:'A',e:'the+比较级，the+比较级。thin比较级thinner。'},
+{id:29,t:'choice',c:'形容词副词',q:'He is ______ than all the other students in his grade.',o:['A. tall','B. taller','C. tallest','D. more tall'],a:'B',e:'than前用比较级taller。'},
+{id:30,t:'choice',c:'形容词副词',q:'This book is ______ that one.',o:['A. three times as expensive as','B. three times expensive than','C. as three times expensive as','D. three times more expensive as'],a:'A',e:'倍数+as+原级+as。'},
+{id:31,t:'choice',c:'形容词副词',q:'She is ______ to her sister.',o:['A. senior','B. more senior','C. senior than','D. more senior than'],a:'A',e:'senior to固定搭配。'},
+{id:32,t:'choice',c:'形容词副词',q:'The ______ we get together, the ______ we will be.',o:['A. more; happier','B. many; happy','C. much; happier','D. more; more happy'],a:'A',e:'the+比较级，the+比较级。'},
+{id:33,t:'choice',c:'形容词副词',q:'He is ______ boy in his family.',o:['A. the eldest','B. elder','C. oldest','D. older'],a:'A',e:'eldest指兄弟姐妹中的年长者。'},
+{id:34,t:'choice',c:'形容词副词',q:'This room is ______ as that one.',o:['A. twice as big','B. as twice big','C. twice bigger','D. bigger twice'],a:'A',e:'倍数+as+原级+as。'},
+{id:35,t:'choice',c:'形容词副词',q:'He is ______ more intelligent than his brother.',o:['A. far','B. very','C. quite','D. rather'],a:'A',e:'far可修饰比较级。'},
+{id:36,t:'choice',c:'形容词副词',q:'I have ______ time than before.',o:['A. less','B. fewer','C. little','D. few'],a:'A',e:'time不可数用less。'},
+{id:37,t:'choice',c:'形容词副词',q:'She sings ______ than her sister.',o:['A. more beautiful','B. more beautifully','C. beautifuler','D. beautifully'],a:'B',e:'副词比较级more beautifully。'},
+{id:38,t:'choice',c:'形容词副词',q:'The old man walked ______ into the forest.',o:['A. deep','B. deeply','C. deeper','D. deepest'],a:'A',e:'deep可作副词表示深入。'},
+{id:39,t:'choice',c:'形容词副词',q:'He was ______ late for school today.',o:['A. near','B. nearly','C. near to','D. nearer'],a:'B',e:'nearly几乎。'},
+{id:40,t:'choice',c:'形容词副词',q:'I can understand you ______.',o:['A. clear','B. clearly','C. clearer','D. more clear'],a:'B',e:'副词修饰动词用clearly。'},
+{id:41,t:'choice',c:'形容词副词',q:'The population of Shanghai is ______ than that of Beijing.',o:['A. larger','B. more','C. higher','D. bigger'],a:'A',e:'population用large修饰。'},
+{id:42,t:'choice',c:'形容词副词',q:'The ______ you practice, the ______ you will get.',o:['A. more; better','B. many; good','C. much; best','D. more; more better'],a:'A',e:'the+比较级，the+比较级。'},
+{id:43,t:'choice',c:'形容词副词',q:'He is ______ than his father.',o:['A. more tall','B. taller','C. tallest','D. more taller'],a:'B',e:'tall比较级taller。'},
+{id:44,t:'choice',c:'形容词副词',q:'She is ______ student I have ever taught.',o:['A. the most diligent','B. more diligent','C. most diligent','D. diligent'],a:'A',e:'最高级前加the。'},
+{id:45,t:'choice',c:'形容词副词',q:'I have ______ books than you.',o:['A. fewer','B. less','C. little','D. few'],a:'A',e:'books可数用fewer。'},
+{id:46,t:'choice',c:'形容词副词',q:'The car runs ______ than the old one.',o:['A. fast','B. faster','C. fastest','D. more fast'],a:'B',e:'fast比较级faster。'},
+{id:47,t:'choice',c:'形容词副词',q:'He is ______ to his boss.',o:['A. inferior','B. inferior than','C. more inferior','D. more inferior than'],a:'A',e:'inferior to固定搭配。'},
+{id:48,t:'choice',c:'形容词副词',q:'This is ______ boring movie I have ever seen.',o:['A. the most','B. more','C. most','D. very'],a:'A',e:'最高级前加the。'},
+{id:49,t:'choice',c:'形容词副词',q:'She felt ______ after hearing the bad news.',o:['A. depressed','B. depressing','C. depress','D. depression'],a:'A',e:'人感到沮丧用depressed。'},
+{id:50,t:'choice',c:'形容词副词',q:'The situation is becoming ______.',o:['A. bad and bad','B. worse and worse','C. worst and worst','D. more bad and more bad'],a:'B',e:'比较级+and+比较级。bad比较级worse。'},
+{id:51,t:'choice',c:'形容词副词',q:'He is ______ than any other boy in his class.',o:['A. strong','B. stronger','C. strongest','D. more strong'],a:'B',e:'than前用比较级stronger。'},
+{id:52,t:'choice',c:'形容词副词',q:'The ______ we climb, the ______ it becomes.',o:['A. higher; colder','B. high; cold','C. highest; coldest','D. more high; more cold'],a:'A',e:'the+比较级，the+比较级。'},
+{id:53,t:'choice',c:'形容词副词',q:'She is ______ older than she looks.',o:['A. far','B. more','C. very','D. quite'],a:'A',e:'far可修饰比较级。'},
+{id:54,t:'choice',c:'形容词副词',q:'I have ______ money than you, but I\'m happier.',o:['A. less','B. fewer','C. little','D. few'],a:'A',e:'money不可数用less。'},
+{id:55,t:'choice',c:'形容词副词',q:'He runs ______ of all the boys.',o:['A. fastest','B. faster','C. fast','D. more fast'],a:'A',e:'三者以上最高级fastest。'},
+{id:56,t:'choice',c:'形容词副词',q:'The weather is ______ today than yesterday.',o:['A. hot','B. hotter','C. hottest','D. more hot'],a:'B',e:'hot比较级hotter。'},
+{id:57,t:'choice',c:'形容词副词',q:'He is ______ the tallest student in his class.',o:['A. almost','B. near','C. nearly','D. close'],a:'A',e:'almost几乎，可修饰最高级。'},
+{id:58,t:'choice',c:'形容词副词',q:'She is ______ than her mother.',o:['A. more taller','B. much taller','C. very taller','D. quite taller'],a:'B',e:'much可修饰比较级taller。'},
+{id:59,t:'choice',c:'形容词副词',q:'The more you study, ______ you will know.',o:['A. the more','B. more','C. the most','D. most'],a:'A',e:'the+比较级，the+比较级。'},
+{id:60,t:'choice',c:'形容词副词',q:'He is ______ of all the brothers.',o:['A. the youngest','B. younger','C. young','D. more young'],a:'A',e:'三者以上最高级。'},
+{id:61,t:'choice',c:'形容词副词',q:'He is ______ than his brother in height.',o:['A. taller','B. tallest','C. more tall','D. most tall'],a:'A',e:'tall比较级taller。'},
+{id:62,t:'choice',c:'形容词副词',q:'She speaks English ______ than her friend.',o:['A. more clearly','B. clearly','C. most clearly','D. clear'],a:'A',e:'clearly多音节用more clearly。'},
+{id:63,t:'choice',c:'形容词副词',q:'The ______ we eat, the ______ we will be.',o:['A. more healthily; healthier','B. healthier; healthier','C. more healthy; healthier','D. healthily; healthy'],a:'A',e:'eat用副词healthily，be用形容词healthier。'},
+{id:64,t:'choice',c:'形容词副词',q:'He is ______ to me.',o:['A. superior','B. superior than','C. more superior','D. more superior than'],a:'A',e:'superior to固定搭配。'},
+{id:65,t:'choice',c:'形容词副词',q:'This is ______ film I have ever seen.',o:['A. the most exciting','B. more exciting','C. most exciting','D. exciting'],a:'A',e:'最高级前加the。'},
+{id:66,t:'choice',c:'形容词副词',q:'She is ______ than her sister.',o:['A. more beautiful','B. beautifuler','C. most beautiful','D. beautiful'],a:'A',e:'beautiful多音节用more beautiful。'},
+{id:67,t:'choice',c:'形容词副词',q:'The ______ you run, the ______ you will feel.',o:['A. faster; more tired','B. fast; tired','C. fastest; tiredest','D. faster; tired'],a:'A',e:'the+比较级，the+比较级。'},
+{id:68,t:'choice',c:'形容词副词',q:'He is ______ student in our grade.',o:['A. the most hard-working','B. more hard-working','C. hard-working','D. most hard-working'],a:'A',e:'最高级前加the。'},
+{id:69,t:'choice',c:'形容词副词',q:'I have ______ time to spend with you.',o:['A. less','B. fewer','C. little','D. few'],a:'A',e:'time不可数用less。'},
+{id:70,t:'choice',c:'形容词副词',q:'She is ______ singer among them.',o:['A. the best','B. better','C. good','D. well'],a:'A',e:'最高级前加the。'},
+{id:71,t:'choice',c:'形容词副词',q:'He is ______ than me.',o:['A. three years older','B. three years old','C. older three years','D. old three years'],a:'A',e:'数词+比较级。'},
+{id:72,t:'choice',c:'形容词副词',q:'The price of this house is ______ than that one.',o:['A. higher','B. more','C. larger','D. bigger'],a:'A',e:'price用high/low。'},
+{id:73,t:'choice',c:'形容词副词',q:'She is ______ girl I know.',o:['A. the most intelligent','B. more intelligent','C. most intelligent','D. intelligent'],a:'A',e:'最高级前加the。'},
+{id:74,t:'choice',c:'形容词副词',q:'He runs ______ than his brother.',o:['A. much faster','B. more fast','C. very faster','D. quite faster'],a:'A',e:'much可修饰比较级faster。'},
+{id:75,t:'choice',c:'形容词副词',q:'The ______ he waited, the ______ he became.',o:['A. longer; more impatient','B. long; impatient','C. longest; most impatient','D. more long; impatient'],a:'A',e:'the+比较级，the+比较级。'},
+{id:76,t:'choice',c:'形容词副词',q:'She is ______ of all the students.',o:['A. the most hard-working','B. more hard-working','C. hard-working','D. most hard-working'],a:'A',e:'最高级前加the。'},
+{id:77,t:'choice',c:'形容词副词',q:'I have ______ apples than you.',o:['A. more','B. much','C. many','D. most'],a:'A',e:'比较级more。'},
+{id:78,t:'choice',c:'形容词副词',q:'He is ______ than his father.',o:['A. wiser','B. more wise','C. wisest','D. most wise'],a:'A',e:'wise比较级wiser。'},
+{id:79,t:'choice',c:'形容词副词',q:'The ______ you talk, the ______ you learn.',o:['A. less; more','B. few; much','C. little; many','D. fewer; more'],a:'A',e:'talk不可数用less，learn用more。'},
+{id:80,t:'choice',c:'形容词副词',q:'She is ______ of the two.',o:['A. the taller','B. taller','C. tallest','D. the tallest'],a:'A',e:'两者比较用the+比较级。'},
+// ===== 填空题 81-140 =====
+{id:81,t:'fill',c:'语法填空',q:'He runs ______ (fast) than his brother.',a:'faster',e:'fast比较级faster。'},
+{id:82,t:'fill',c:'语法填空',q:'This is the ______ (good) movie I have ever seen.',a:'best',e:'good最高级best。'},
+{id:83,t:'fill',c:'语法填空',q:'She is ______ (tall) of the two sisters.',a:'the taller',e:'两者比较用the+比较级。'},
+{id:84,t:'fill',c:'语法填空',q:'The ______ (hard) you work, the ______ (great) progress you will make.',a:'harder; greater',e:'the+比较级，the+比较级。'},
+{id:85,t:'fill',c:'语法填空',q:'He speaks English ______ (fluent) than his friend.',a:'more fluently',e:'fluently多音节用more fluently。'},
+{id:86,t:'fill',c:'语法填空',q:'I have ______ (little) money than you.',a:'less',e:'little比较级less。'},
+{id:87,t:'fill',c:'语法填空',q:'She is ______ (beautiful) than her sister.',a:'more beautiful',e:'beautiful多音节用more beautiful。'},
+{id:88,t:'fill',c:'语法填空',q:'He is the ______ (old) in his family.',a:'oldest',e:'old最高级oldest。'},
+{id:89,t:'fill',c:'语法填空',q:'The weather is getting ______ (warm) and ______ (warm).',a:'warmer; warmer',e:'比较级+and+比较级。'},
+{id:90,t:'fill',c:'语法填空',q:'She sings ______ (beautiful) than anyone else.',a:'more beautifully',e:'beautifully多音节用more beautifully。'},
+{id:91,t:'fill',c:'语法填空',q:'He is ______ (senior) to me.',a:'senior',e:'senior本身无比较级形式。'},
+{id:92,t:'fill',c:'语法填空',q:'This room is three times as ______ (large) as that one.',a:'large',e:'as+原级+as。'},
+{id:93,t:'fill',c:'语法填空',q:'He is ______ (tall) than any other boy in his class.',a:'taller',e:'than前用比较级taller。'},
+{id:94,t:'fill',c:'语法填空',q:'She is the ______ (diligent) student in our class.',a:'most diligent',e:'diligent多音节最高级most diligent。'},
+{id:95,t:'fill',c:'语法填空',q:'He felt ______ (excite) at the news.',a:'excited',e:'人感到兴奋用excited。'},
+{id:96,t:'fill',c:'语法填空',q:'The news is very ______ (excite).',a:'exciting',e:'物令人兴奋用exciting。'},
+{id:97,t:'fill',c:'语法填空',q:'He is ______ (old) than his brother.',a:'older',e:'old比较级older。'},
+{id:98,t:'fill',c:'语法填空',q:'She is the ______ (young) of all the children.',a:'youngest',e:'young最高级youngest。'},
+{id:99,t:'fill',c:'语法填空',q:'I have ______ (few) books than you.',a:'fewer',e:'few比较级fewer。'},
+{id:100,t:'fill',c:'语法填空',q:'He runs ______ (fast) of all.',a:'fastest',e:'fast最高级fastest。'},
+{id:101,t:'fill',c:'语法填空',q:'The ______ (much) you eat, the ______ (fat) you will become.',a:'more; fatter',e:'the+比较级，the+比较级。'},
+{id:102,t:'fill',c:'语法填空',q:'She is ______ (happy) than before.',a:'happier',e:'happy比较级happier。'},
+{id:103,t:'fill',c:'语法填空',q:'He is ______ (intelligent) than his classmate.',a:'more intelligent',e:'intelligent多音节用more intelligent。'},
+{id:104,t:'fill',c:'语法填空',q:'This is the ______ (interesting) book I have read.',a:'most interesting',e:'interesting最高级most interesting。'},
+{id:105,t:'fill',c:'语法填空',q:'He is ______ (good) at English than me.',a:'better',e:'good比较级better。'},
+{id:106,t:'fill',c:'语法填空',q:'She drives ______ (careful) than her husband.',a:'more carefully',e:'carefully多音节用more carefully。'},
+{id:107,t:'fill',c:'语法填空',q:'He is ______ (tall) of the three.',a:'the tallest',e:'三者以上用最高级the tallest。'},
+{id:108,t:'fill',c:'语法填空',q:'The ______ (fast) you run, the ______ (soon) you will arrive.',a:'faster; sooner',e:'the+比较级，the+比较级。'},
+{id:109,t:'fill',c:'语法填空',q:'He is ______ (far) from home than before.',a:'farther',e:'far比较级farther或further。'},
+{id:110,t:'fill',c:'语法填空',q:'She is ______ (proud) of her success.',a:'proud',e:'形容词原级，系表结构。'},
+{id:111,t:'fill',c:'语法填空',q:'He is ______ (good) than his brother in sports.',a:'better',e:'good比较级better。'},
+{id:112,t:'fill',c:'语法填空',q:'She is ______ (bad) at math than her sister.',a:'worse',e:'bad比较级worse。'},
+{id:113,t:'fill',c:'语法填空',q:'This is the ______ (bad) mistake he has ever made.',a:'worst',e:'bad最高级worst。'},
+{id:114,t:'fill',c:'语法填空',q:'He is ______ (old) than me.',a:'older',e:'old比较级older。'},
+{id:115,t:'fill',c:'语法填空',q:'She is the ______ (old) of the three.',a:'oldest',e:'old最高级oldest。'},
+{id:116,t:'fill',c:'语法填空',q:'He works ______ (hard) than anyone else.',a:'harder',e:'hard比较级harder。'},
+{id:117,t:'fill',c:'语法填空',q:'She speaks ______ (loud) than her friend.',a:'louder',e:'loud比较级louder。'},
+{id:118,t:'fill',c:'语法填空',q:'The ______ (high) we climb, the ______ (cold) it becomes.',a:'higher; colder',e:'the+比较级，the+比较级。'},
+{id:119,t:'fill',c:'语法填空',q:'He is ______ (superior) to me in intelligence.',a:'superior',e:'superior本身含比较义。'},
+{id:120,t:'fill',c:'语法填空',q:'She is ______ (inferior) to him in experience.',a:'inferior',e:'inferior本身含比较义。'},
+{id:121,t:'fill',c:'语法填空',q:'I have ______ (much) time than before.',a:'more',e:'much比较级more。'},
+{id:122,t:'fill',c:'语法填空',q:'He is ______ (little) interested in music than his sister.',a:'less',e:'little比较级less。'},
+{id:123,t:'fill',c:'语法填空',q:'She is the ______ (careful) girl in her class.',a:'most careful',e:'careful多音节最高级most careful。'},
+{id:124,t:'fill',c:'语法填空',q:'He runs ______ (quick) than his friend.',a:'more quickly',e:'quickly多音节用more quickly。'},
+{id:125,t:'fill',c:'语法填空',q:'This problem is ______ (easy) than that one.',a:'easier',e:'easy比较级easier。'},
+{id:126,t:'fill',c:'语法填空',q:'She is ______ (tall) of the two.',a:'the taller',e:'两者比较用the+比较级。'},
+{id:127,t:'fill',c:'语法填空',q:'The ______ (early) you come, the ______ (good).',a:'earlier; better',e:'the+比较级，the+比较级。'},
+{id:128,t:'fill',c:'语法填空',q:'He is ______ (young) than his brother.',a:'younger',e:'young比较级younger。'},
+{id:129,t:'fill',c:'语法填空',q:'She is the ______ (beautiful) in the class.',a:'most beautiful',e:'beautiful最高级most beautiful。'},
+{id:130,t:'fill',c:'语法填空',q:'He is ______ (old) of the brothers.',a:'the oldest',e:'三者以上用the oldest。'},
+{id:131,t:'fill',c:'语法填空',q:'This is ______ (far) than I expected.',a:'farther',e:'far比较级farther或further。'},
+{id:132,t:'fill',c:'语法填空',q:'She is ______ (good) at singing than dancing.',a:'better',e:'good比较级better。'},
+{id:133,t:'fill',c:'语法填空',q:'He is ______ (bad) than his brother in tennis.',a:'worse',e:'bad比较级worse。'},
+{id:134,t:'fill',c:'语法填空',q:'The ______ (much) you practice, the ______ (skillful) you will become.',a:'more; more skillful',e:'the+比较级，the+比较级。'},
+{id:135,t:'fill',c:'语法填空',q:'She speaks English ______ (clear) than me.',a:'more clearly',e:'clearly比较级more clearly。'},
+{id:136,t:'fill',c:'语法填空',q:'He is ______ (interested) in history than in math.',a:'more interested',e:'interested多音节用more interested。'},
+{id:137,t:'fill',c:'语法填空',q:'This is the ______ (exciting) match I have watched.',a:'most exciting',e:'exciting最高级most exciting。'},
+{id:138,t:'fill',c:'语法填空',q:'He is ______ (nervous) than his friend.',a:'more nervous',e:'nervous多音节用more nervous。'},
+{id:139,t:'fill',c:'语法填空',q:'She is ______ (happy) than she was.',a:'happier',e:'happy比较级happier。'},
+{id:140,t:'fill',c:'语法填空',q:'He is ______ (practical) than his colleague.',a:'more practical',e:'practical多音节用more practical。'},
+// ===== 改错题 141-200 =====
+{id:141,t:'correct',c:'改错题',q:'The movie was so moved that everyone was moving to tears.',w:'moved',r:'moving',e:'修饰物用moving。'},
+{id:142,t:'correct',c:'改错题',q:'She is more taller than her sister.',w:'more taller',r:'taller',e:'taller本身就是比较级，不用more。'},
+{id:143,t:'correct',c:'改错题',q:'He runs fast than any other student.',w:'fast',r:'faster',e:'than前用比较级faster。'},
+{id:144,t:'correct',c:'改错题',q:'The hard you work, the more progress you will make.',w:'hard',r:'harder',e:'the+比较级，用harder。'},
+{id:145,t:'correct',c:'改错题',q:'This is most interesting book I have ever read.',w:'most',r:'the most',e:'最高级前加the。'},
+{id:146,t:'correct',c:'改错题',q:'He is very taller than I.',w:'very',r:'much',e:'very不能修饰比较级，用much。'},
+{id:147,t:'correct',c:'改错题',q:'She speaks English clear than her friend.',w:'clear',r:'more clearly',e:'修饰speaks用副词比较级more clearly。'},
+{id:148,t:'correct',c:'改错题',q:'The old man lives lonely, but he feels happy.',w:'lonely',r:'alone',e:'live alone独自居住，alone是副词。'},
+{id:149,t:'correct',c:'改错题',q:'The weather is getting warmer and warmer than before.',w:'than',r:'去掉',e:'比较级+and+比较级不与than连用。'},
+{id:150,t:'correct',c:'改错题',q:'This room is three times as larger as that one.',w:'as larger as',r:'as large as',e:'as...as中间用原级。'},
+{id:151,t:'correct',c:'改错题',q:'He is senior than me in age.',w:'senior than',r:'senior to',e:'senior用to不用than。'},
+{id:152,t:'correct',c:'改错题',q:'Of all the subjects, English is more interesting to me.',w:'more interesting',r:'the most interesting',e:'of all用最高级。'},
+{id:153,t:'correct',c:'改错题',q:'I have ever seen such an interesting movie.',w:'ever',r:'never',e:'否定句用never。'},
+{id:154,t:'correct',c:'改错题',q:'The much you eat, the fatter you will become.',w:'much',r:'more',e:'the+比较级，用more。'},
+{id:155,t:'correct',c:'改错题',q:'She is the most beautiful of the two sisters.',w:'the most beautiful',r:'the more beautiful',e:'两者比较用比较级。'},
+{id:156,t:'correct',c:'改错题',q:'He is tall than any other boy.',w:'tall',r:'taller',e:'than前用比较级taller。'},
+{id:157,t:'correct',c:'改错题',q:'This is one of the most beautiful city in China.',w:'city',r:'cities',e:'one of+复数名词。'},
+{id:158,t:'correct',c:'改错题',q:'He runs fast than his brother.',w:'fast',r:'faster',e:'than前用比较级faster。'},
+{id:159,t:'correct',c:'改错题',q:'She is more older than her sister.',w:'more older',r:'older',e:'older已是比较级，不用more。'},
+{id:160,t:'correct',c:'改错题',q:'The high you climb, the colder it becomes.',w:'high',r:'higher',e:'the+比较级，用higher。'},
+{id:161,t:'correct',c:'改错题',q:'He is superior than me in math.',w:'superior than',r:'superior to',e:'superior用to不用than。'},
+{id:162,t:'correct',c:'改错题',q:'She has less books than me.',w:'less',r:'fewer',e:'books可数用fewer。'},
+{id:163,t:'correct',c:'改错题',q:'He is the tallest of his class.',w:'of his class',r:'in his class',e:'最高级用in不用of（指范围时）。'},
+{id:164,t:'correct',c:'改错题',q:'The much you practice, the more skillful you will become.',w:'much',r:'more',e:'the+比较级，用more。'},
+{id:165,t:'correct',c:'改错题',q:'She sings beautiful than her sister.',w:'beautiful',r:'more beautifully',e:'修饰sings用副词比较级more beautifully。'},
+{id:166,t:'correct',c:'改错题',q:'He is the most clever than the other two.',w:'than',r:'of',e:'最高级用of不用than。'},
+{id:167,t:'correct',c:'改错题',q:'This car is twice more expensive than that one.',w:'twice more expensive than',r:'twice as expensive as',e:'倍数+as+原级+as。'},
+{id:168,t:'correct',c:'改错题',q:'He is older than any student in his class.',w:'any student',r:'any other student',e:'比较级排除自身用any other。'},
+{id:169,t:'correct',c:'改错题',q:'She is more happy than her friend.',w:'more happy',r:'happier',e:'happy比较级happier。'},
+{id:170,t:'correct',c:'改错题',q:'The early you get up, the more time you have.',w:'early',r:'earlier',e:'the+比较级，用earlier。'},
+{id:171,t:'correct',c:'改错题',q:'He speaks English fluently than anyone in his class.',w:'fluently',r:'more fluently',e:'than前用比较级more fluently。'},
+{id:172,t:'correct',c:'改错题',q:'The hard you work, the more progress you will make.',w:'hard',r:'harder',e:'the+比较级，用harder。'},
+{id:173,t:'correct',c:'改错题',q:'She is the most beautiful of all girl.',w:'girl',r:'girls',e:'of all+复数名词。'},
+{id:174,t:'correct',c:'改错题',q:'He is more tall than his brother.',w:'more tall',r:'taller',e:'tall比较级taller。'},
+{id:175,t:'correct',c:'改错题',q:'This is best movie I have ever watched.',w:'best',r:'the best',e:'最高级前加the。'},
+{id:176,t:'correct',c:'改错题',q:'He is inferior than me in experience.',w:'inferior than',r:'inferior to',e:'inferior用to不用than。'},
+{id:177,t:'correct',c:'改错题',q:'She has fewer money than me.',w:'fewer',r:'less',e:'money不可数用less。'},
+{id:178,t:'correct',c:'改错题',q:'The many we discussed, the more confused we became.',w:'many',r:'more',e:'the+比较级，用more。'},
+{id:179,t:'correct',c:'改错题',q:'He runs fast of all the boys.',w:'fast',r:'fastest',e:'of all用最高级fastest。'},
+{id:180,t:'correct',c:'改错题',q:'She is elder than her sister.',w:'elder',r:'older',e:'elder只作定语，比较用older。'},
+{id:181,t:'correct',c:'改错题',q:'He is more hard-working than any student in his class.',w:'any student',r:'any other student',e:'比较级排除自身用any other。'},
+{id:182,t:'correct',c:'改错题',q:'The much he tried, the less success he achieved.',w:'much',r:'more',e:'the+比较级，用more。'},
+{id:183,t:'correct',c:'改错题',q:'She drives careful than her husband.',w:'careful',r:'more carefully',e:'修饰drives用副词比较级more carefully。'},
+{id:184,t:'correct',c:'改错题',q:'He is the most intelligent of his class.',w:'of his class',r:'in his class',e:'最高级用in不用of。'},
+{id:185,t:'correct',c:'改错题',q:'This is three times larger as that one.',w:'larger as',r:'larger than',e:'比较级用than不用as。'},
+{id:186,t:'correct',c:'改错题',q:'He is senior than me in age.',w:'than',r:'to',e:'senior用to不用than。'},
+{id:187,t:'correct',c:'改错题',q:'She is more beautiful than any girl in her class.',w:'any girl',r:'any other girl',e:'比较级排除自身用any other。'},
+{id:188,t:'correct',c:'改错题',q:'The higher the mountain, the thin the air becomes.',w:'thin',r:'thinner',e:'the+比较级，用thinner。'},
+{id:189,t:'correct',c:'改错题',q:'He has much money than me.',w:'much',r:'more',e:'than前用比较级more。'},
+{id:190,t:'correct',c:'改错题',q:'She is the most beautiful of the two sisters.',w:'the most beautiful',r:'the more beautiful',e:'两者比较用比较级。'},
+{id:191,t:'correct',c:'改错题',q:'He runs fast than anyone in his grade.',w:'fast',r:'faster',e:'than前用比较级faster。'},
+{id:192,t:'correct',c:'改错题',q:'The much you read, the more knowledge you will get.',w:'much',r:'more',e:'the+比较级，用more。'},
+{id:193,t:'correct',c:'改错题',q:'She is happy than her sister.',w:'happy',r:'happier',e:'happy比较级happier。'},
+{id:194,t:'correct',c:'改错题',q:'He is tall of the boys.',w:'tall',r:'the tallest',e:'of the boys用最高级the tallest。'},
+{id:195,t:'correct',c:'改错题',q:'This is more difficult question I have ever met.',w:'more difficult',r:'the most difficult',e:'最高级前加the。'},
+{id:196,t:'correct',c:'改错题',q:'He is inferior than me in English.',w:'inferior than',r:'inferior to',e:'inferior用to不用than。'},
+{id:197,t:'correct',c:'改错题',q:'She has less friends than me.',w:'less',r:'fewer',e:'friends可数用fewer。'},
+{id:198,t:'correct',c:'改错题',q:'The more he ate, the fat he became.',w:'fat',r:'fatter',e:'the+比较级，用fatter。'},
+{id:199,t:'correct',c:'改错题',q:'He is old of the two brothers.',w:'old',r:'the older',e:'两者比较用the+比较级。'},
+{id:200,t:'correct',c:'改错题',q:'She speaks loud than her friend.',w:'loud',r:'more loudly',e:'修饰speaks用副词比较级more loudly。'}
 ];
 
-// ====== State ======
-let currentRound = [];
-let currentIndex = 0;
-let userAnswers = []; // {index, type, answer, correct}
-let selectedOption = null;
-let fillValue = '';
-let correctWrong = '';
-let correctRight = '';
+var currentRound=[],currentIndex=0,userAnswers=[];
+var selectedOption=null,fillValue='',correctWrong='',correctRight='';
+var cardInner=document.getElementById('cardInner');
+var resultPanel=document.getElementById('resultPanel');
+var quizCard=document.getElementById('quizCard');
+var bankPanel=document.getElementById('bankPanel');
+var overlay=document.getElementById('overlay');
+var historyBar=document.getElementById('historyBar');
 
-// ====== Elements ======
-const cardInner = document.getElementById('cardInner');
-const resultPanel = document.getElementById('resultPanel');
-const quizCard = document.getElementById('quizCard');
-const bankPanel = document.getElementById('bankPanel');
-const overlay = document.getElementById('overlay');
-const historyBar = document.getElementById('historyBar');
+function shuffle(a){a=[...a];for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pickRandom(n){return shuffle(ALL_Q).slice(0,n);}
+function getHistory(){try{return JSON.parse(localStorage.getItem('adj_adv2_scores')||'[]');}catch(e){return[];}}
+function saveScore(s,t,c,w,u){var h=getHistory();h.push({score:s,total:t,correct:c,wrong:w,unanswered:u,date:new Date().toLocaleString('zh-CN')});localStorage.setItem('adj_adv2_scores',JSON.stringify(h));}
+function getLatest(){var h=getHistory();return h.length>0?h[h.length-1]:null;}
+function renderHistory(){var h=getHistory();if(!h.length){historyBar.innerHTML='';return;}var html='<span style="font-size:13px;color:#5a4a2a;font-weight:600;">历史成绩：</span>';h.slice(-5).forEach(function(r,i){var l=i===h.slice(-5).length-1;html+='<span class="history-chip'+(l?' latest':'')+'">'+r.score+'分'+(l?' (最新)':'')+'</span>';});historyBar.innerHTML=html;}
 
-// ====== Utils ======
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+function initRound(){currentRound=pickRandom(30);currentIndex=0;userAnswers=[];selectedOption=null;fillValue='';correctWrong='';correctRight='';resultPanel.classList.remove('show');quizCard.style.display='block';restoreAnswer();renderQuestion();}
+
+function renderQuestion(){
+  var q=currentRound[currentIndex];
+  var progress=((currentIndex+1)/currentRound.length*100).toFixed(0);
+  var typeLabel=q.t==='choice'?'选择题':q.t==='fill'?'语法填空':'改错题';
+  var html='<div class="progress-bar"><div class="progress-track"><div class="progress-fill" style="width:'+progress+'%"></div></div><span class="progress-text">'+(currentIndex+1)+' / '+currentRound.length+'</span><span class="progress-badge">已答 '+userAnswers.length+'</span></div>';
+  html+='<span class="q-type-tag">'+typeLabel+'</span><span class="q-cat-tag">'+q.c+'</span><div class="q-number">Question #'+q.id+'</div><div class="q-text">'+formatQ(q)+'</div>';
+  if(q.t==='choice'){
+    var L=['A','B','C','D'];
+    html+='<div class="options-list">';
+    q.o.forEach(function(opt,i){var cls='option-btn';if(selectedOption===L[i])cls+=' selected';var co=opt.replace(/^[A-D]\.\s*/,'');html+='<div class="'+cls+'" data-value="'+L[i]+'" onclick="onOptionClick(this,\''+L[i]+'\')"><div class="option-letter">'+L[i]+'</div><div class="option-text">'+co+'</div></div>';});
+    html+='</div>';
+  } else if(q.t==='fill'){
+    html+='<div class="fill-group"><div class="fill-label">请填写答案</div><input type="text" class="fill-input" id="fillInput" placeholder="输入你的答案..." value="'+fillValue+'" oninput="onFillInput(this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div>';
+  } else if(q.t==='correct'){
+    html+='<div class="correct-box"><div class="correct-field wrong-field"><div class="fill-label"><span class="icon">X</span> 错误部分</div><input type="text" class="fill-input" id="correctWrongInput" placeholder="写出错误的词语" value="'+correctWrong+'" oninput="onCorrectInput(\'wrong\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();document.getElementById(\'correctRightInput\').focus();}"></div><div class="correct-field right-field"><div class="fill-label"><span class="icon">V</span> 正确形式</div><input type="text" class="fill-input" id="correctRightInput" placeholder="写出正确的形式" value="'+correctRight+'" oninput="onCorrectInput(\'right\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div></div>';
   }
-  return a;
+  html+='<div class="nav-row"><button class="nav-btn secondary" onclick="prevQuestion()" '+(currentIndex===0?'disabled':'')+'>上一题</button><div class="nav-mid"><button class="nav-btn gold" onclick="submitQuiz()">提交</button></div><button class="nav-btn primary" onclick="goNext()">'+(currentIndex===currentRound.length-1?'查看结果':'下一题')+'</button></div>';
+  html+='<div class="q-nav-section"><div class="q-nav-title">题号导航 - 点击跳转</div><div class="q-nav-grid">';
+  for(var i=0;i<currentRound.length;i++){var c='q-nav-cell';if(i===currentIndex)c+=' current';if(userAnswers.find(function(a){return a.index===i;}))c+=' answered';html+='<div class="'+c+'" onclick="jumpToQuestion('+i+')">'+(i+1)+'</div>';}
+  html+='</div></div>';
+  cardInner.innerHTML=html;
+  setTimeout(function(){var fi=document.getElementById('fillInput');if(fi)fi.focus();var cwi=document.getElementById('correctWrongInput');if(cwi)cwi.focus();},100);
 }
 
-function pickRandom(n) {
-  return shuffle(ALL_Q).slice(0, n);
-}
+function formatQ(q){return q.q.replace(/______/g,'<span class="blank"></span>').replace(/_____/g,'<span class="blank"></span>').replace(/____/g,'<span class="blank"></span>').replace(/___/g,'<span class="blank"></span>');}
 
-// ====== Score History ======
-function getHistory() {
-  try { return JSON.parse(localStorage.getItem('adj_adv_scores') || '[]'); }
-  catch(e) { return []; }
-}
-function saveScore(score, total, correct, wrong, unanswered) {
-  const hist = getHistory();
-  hist.push({ score, total, correct, wrong, unanswered, date: new Date().toLocaleString('zh-CN') });
-  localStorage.setItem('adj_adv_scores', JSON.stringify(hist));
-}
-function getLatest() {
-  const h = getHistory();
-  return h.length > 0 ? h[h.length - 1] : null;
-}
+function saveOrUpdate(index,type,answer){var i=userAnswers.findIndex(function(a){return a.index===index;});if(i>=0)userAnswers[i]={index:index,type:type,answer:answer};else userAnswers.push({index:index,type:type,answer:answer});}
+function onOptionClick(btn,letter){selectedOption=letter;saveOrUpdate(currentIndex,'choice',letter);renderQuestion();}
+function onFillInput(v){fillValue=v;if(v.trim())saveOrUpdate(currentIndex,'fill',v.trim());else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}}
+function onCorrectInput(f,v){if(f==='wrong')correctWrong=v;else correctRight=v;if(correctWrong.trim())saveOrUpdate(currentIndex,'correct',correctWrong.trim());else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}}
+function goNext(){if(currentIndex<currentRound.length-1){currentIndex++;restoreAnswer();renderQuestion();}else{submitQuiz();}}
+function jumpToQuestion(i){if(i<0||i>=currentRound.length)return;currentIndex=i;restoreAnswer();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function prevQuestion(){if(currentIndex>0){currentIndex--;restoreAnswer();renderQuestion();}}
+function restoreAnswer(){selectedOption=null;fillValue='';correctWrong='';correctRight='';var a=userAnswers.find(function(x){return x.index===currentIndex;});if(a){if(a.type==='choice')selectedOption=a.answer;if(a.type==='fill')fillValue=a.answer;if(a.type==='correct')correctWrong=a.answer;}}
 
-function renderHistory() {
-  const h = getHistory();
-  if (h.length === 0) { historyBar.innerHTML = ''; return; }
-  let html = '<span style="font-size:13px;color:#5a4a2a;font-weight:600;">📊 历史成绩：</span>';
-  const recent = h.slice(-5);
-  recent.forEach((r, i) => {
-    const isLatest = i === recent.length - 1;
-    html += `<span class="history-chip${isLatest ? ' latest' : ''}">${r.score}分${isLatest ? ' (最新)' : ''}</span>`;
+function submitQuiz(){
+  var correct=0,wrong=0,unanswered=0;
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans){unanswered++;return;}
+    var ok=false;
+    if(q.t==='choice')ok=ans.answer===q.a;
+    else if(q.t==='fill'){var acc=q.a.split(';').map(function(s){return s.trim().toLowerCase();});ok=acc.indexOf(ans.answer.trim().toLowerCase())>=0;}
+    else if(q.t==='correct'){var a=ans.answer.trim().toLowerCase();var t=q.r.trim().toLowerCase();ok=a===t||['去掉','删除','不填','/'].indexOf(a)>=0&&['去掉','删除','不填','/'].indexOf(t)>=0;}
+    if(ok)correct++;else wrong++;
   });
-  historyBar.innerHTML = html;
-}
-
-// ====== Init Round ======
-function initRound() {
-  currentRound = pickRandom(30);
-  currentIndex = 0;
-  userAnswers = [];
-  selectedOption = null;
-  fillValue = '';
-  correctWrong = '';
-  correctRight = '';
-  resultPanel.classList.remove('show');
-  quizCard.style.display = 'block';
-  restoreAnswer();
-  renderQuestion();
-}
-
-// ====== Render Question ======
-function renderQuestion() {
-  const q = currentRound[currentIndex];
-  const progress = ((currentIndex + 1) / currentRound.length * 100).toFixed(0);
-
-  let typeLabel = q.t === 'choice' ? '选择题' : q.t === 'fill' ? '语法填空' : '改错题';
-  let typeColor = q.t === 'choice' ? '#e8f4ff' : q.t === 'fill' ? '#fff3e0' : '#f0e8ff';
-  let typeText = q.t === 'choice' ? '#1a5a8a' : q.t === 'fill' ? '#b86800' : '#5a3f8c';
-
-  let html = `
-    <div class="progress-bar">
-      <div class="progress-track"><div class="progress-fill" style="width:${progress}%"></div></div>
-      <span class="progress-text">${currentIndex + 1} / ${currentRound.length}</span>
-      <span class="progress-badge">✅ 已答 ${userAnswers.length}</span>
-    </div>
-    <span class="q-type-tag" style="background:linear-gradient(135deg,${typeText},${typeColor});">${typeLabel}</span>
-    <span class="q-cat-tag">${q.c}</span>
-    <div class="q-number">Question #${q.id}</div>
-    <div class="q-text">${formatQuestion(q)}</div>
-  `;
-
-  if (q.t === 'choice') {
-    const letters = ['A','B','C','D'];
-    let optsHtml = '<div class="options-list">';
-    q.o.forEach((opt, i) => {
-      let cls = 'option-btn';
-      if (selectedOption === letters[i]) cls += ' selected';
-      const cleanOpt = opt.replace(/^[A-D]\.\s*/, '');
-      optsHtml += `<div class="${cls}" data-value="${letters[i]}" onclick="onOptionClick(this,'${letters[i]}')">
-        <div class="option-letter">${letters[i]}</div>
-        <div class="option-text">${cleanOpt}</div>
-      </div>`;
-    });
-    optsHtml += '</div>';
-    html += optsHtml;
-  } else if (q.t === 'fill') {
-    html += `<div class="fill-group">
-      <div class="fill-label">请填写答案</div>
-      <input type="text" class="fill-input" id="fillInput" placeholder="输入你的答案..."
-        value="${fillValue}" oninput="onFillInput(this.value)"
-        onkeydown="if(event.key==='Enter'){event.preventDefault();goNext();}">
-    </div>`;
-  } else if (q.t === 'correct') {
-    html += `<div class="correct-box">
-      <div class="correct-field wrong-field">
-        <div class="fill-label"><span class="icon">❌</span> 错误部分</div>
-        <input type="text" class="fill-input" id="correctWrongInput" placeholder="写出错误的词语"
-          value="${correctWrong}" oninput="onCorrectInput('wrong',this.value)"
-          onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('correctRightInput').focus();}">
-      </div>
-      <div class="correct-field right-field">
-        <div class="fill-label"><span class="icon">✅</span> 正确形式</div>
-        <input type="text" class="fill-input" id="correctRightInput" placeholder="写出正确的形式"
-          value="${correctRight}" oninput="onCorrectInput('right',this.value)"
-          onkeydown="if(event.key==='Enter'){event.preventDefault();goNext();}">
-      </div>
-    </div>`;
-  }
-
-  // Navigation
-  html += `<div class="nav-row">
-    <button class="nav-btn secondary" onclick="prevQuestion()" ${currentIndex === 0 ? 'disabled' : ''}>⬅ 上一题</button>
-    <div class="nav-mid">
-      <button class="nav-btn gold" onclick="submitQuiz()">📥 提交</button>
-    </div>
-    <button class="nav-btn primary" onclick="goNext()">
-      ${currentIndex === currentRound.length - 1 ? '📊 查看结果' : '下一题 ➡'}
-    </button>
-  </div>`;
-
-  // Question Navigation Grid
-  html += `<div class="q-nav-section">
-    <div class="q-nav-title">📋 题号导航 — 点击跳转</div>
-    <div class="q-nav-grid">`;
-  for (let i = 0; i < currentRound.length; i++) {
-    let cellCls = 'q-nav-cell';
-    if (i === currentIndex) cellCls += ' current';
-    const ans = userAnswers.find(a => a.index === i);
-    if (ans) cellCls += ' answered';
-    html += `<div class="${cellCls}" onclick="jumpToQuestion(${i})">${i + 1}</div>`;
-  }
-  html += `</div></div>`;
-
-  cardInner.innerHTML = html;
-
-  // Auto-focus input
-  setTimeout(() => {
-    const fi = document.getElementById('fillInput');
-    if (fi) fi.focus();
-    const cwi = document.getElementById('correctWrongInput');
-    if (cwi) cwi.focus();
-  }, 100);
-}
-
-function formatQuestion(q) {
-  let s = q.q;
-  s = s.replace(/______/g, '<span class="blank"></span>');
-  s = s.replace(/_____/g, '<span class="blank"></span>');
-  s = s.replace(/____/g, '<span class="blank"></span>');
-  s = s.replace(/___/g, '<span class="blank"></span>');
-  s = s.replace(/&lt;/g,'<').replace(/&gt;/g,'>');
-  return s;
-}
-
-// ====== Answer Handlers ======
-function saveOrUpdate(index, type, answer) {
-  const existing = userAnswers.findIndex(a => a.index === index);
-  if (existing >= 0) userAnswers[existing] = { index, type, answer };
-  else userAnswers.push({ index, type, answer });
-}
-
-function onOptionClick(btn, letter) {
-  selectedOption = letter;
-  saveOrUpdate(currentIndex, 'choice', letter);
-  renderQuestion();
-}
-
-function onFillInput(val) {
-  fillValue = val;
-  if (val.trim()) saveOrUpdate(currentIndex, 'fill', val.trim());
-  else {
-    const i = userAnswers.findIndex(a => a.index === currentIndex);
-    if (i >= 0) userAnswers.splice(i, 1);
-  }
-}
-
-function onCorrectInput(field, val) {
-  if (field === 'wrong') correctWrong = val;
-  else correctRight = val;
-  if (correctWrong.trim()) saveOrUpdate(currentIndex, 'correct', correctWrong.trim());
-  else {
-    const i = userAnswers.findIndex(a => a.index === currentIndex);
-    if (i >= 0) userAnswers.splice(i, 1);
-  }
-}
-
-function goNext() {
-  if (currentIndex < currentRound.length - 1) {
-    currentIndex++;
-    restoreAnswer();
-    renderQuestion();
-  } else {
-    submitQuiz();
-  }
-}
-
-function jumpToQuestion(idx) {
-  if (idx < 0 || idx >= currentRound.length) return;
-  currentIndex = idx;
-  restoreAnswer();
-  renderQuestion();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function prevQuestion() {
-  if (currentIndex > 0) {
-    currentIndex--;
-    restoreAnswer();
-    renderQuestion();
-  }
-}
-
-function restoreAnswer() {
-  selectedOption = null;
-  fillValue = '';
-  correctWrong = '';
-  correctRight = '';
-  const ans = userAnswers.find(a => a.index === currentIndex);
-  if (ans) {
-    if (ans.type === 'choice') selectedOption = ans.answer;
-    if (ans.type === 'fill') fillValue = ans.answer;
-    if (ans.type === 'correct') correctWrong = ans.answer;
-  }
-}
-
-// ====== Submit & Score ======
-function submitQuiz() {
-  let correct = 0, wrong = 0, unanswered = 0;
-  currentRound.forEach((q, i) => {
-    const ans = userAnswers.find(a => a.index === i);
-    if (!ans) { unanswered++; return; }
-    let isCorrect = false;
-    if (q.t === 'choice') {
-      isCorrect = ans.answer === q.a;
-    } else if (q.t === 'fill') {
-      // Accept any of the answers (split by ;)
-      const acceptable = q.a.split(';').map(s => s.trim().toLowerCase());
-      isCorrect = acceptable.includes(ans.answer.trim().toLowerCase());
-    } else if (q.t === 'correct') {
-      isCorrect = ans.answer.trim().toLowerCase() === q.r.trim().toLowerCase();
-    }
-    if (isCorrect) correct++; else wrong++;
-  });
-  const score = Math.round(correct / currentRound.length * 100);
-
-  // Save score
-  const latest = getLatest();
-  saveScore(score, currentRound.length, correct, wrong, unanswered);
-
-  // Show results
-  quizCard.style.display = 'none';
-  resultPanel.classList.add('show');
-
-  document.getElementById('scoreBig').textContent = score;
-
-  // Compare with latest
-  const compareEl = document.getElementById('resultCompare');
-  if (latest && latest.score !== undefined) {
-    const diff = score - latest.score;
-    if (diff > 0) {
-      compareEl.innerHTML = `<span class="up">📈 较上次 ${latest.score} 分上升了 ${diff} 分！</span>`;
-    } else if (diff < 0) {
-      compareEl.innerHTML = `<span class="down">📉 较上次 ${latest.score} 分下降了 ${Math.abs(diff)} 分</span>`;
-    } else {
-      compareEl.innerHTML = `<span class="same">➡ 与上次 ${latest.score} 分持平</span>`;
-    }
-  } else {
-    compareEl.innerHTML = '<span class="same">🎉 首次答题，继续加油！</span>';
-  }
-
-  // Stats
-  document.getElementById('resultStats').innerHTML = `
-    <div class="stat-card"><div class="stat-num" style="color:var(--correct)">${correct}</div><div class="stat-label">正确</div></div>
-    <div class="stat-card"><div class="stat-num" style="color:var(--wrong)">${wrong}</div><div class="stat-label">错误</div></div>
-    <div class="stat-card"><div class="stat-num" style="color:#999">${unanswered}</div><div class="stat-label">未答</div></div>
-  `;
-
-  // Suggestions
-  let sugg = [];
-  if (score >= 90) sugg.push('表现优异！形容词副词掌握扎实，可以挑战更高难度的语法题。');
-  else if (score >= 70) sugg.push('基础不错，建议重点复习错题中涉及的语法点。');
-  else if (score >= 50) sugg.push('需要加强练习，建议重点复习-ed/-ing形容词、比较级和最高级的构成。');
+  var score=Math.round(correct/currentRound.length*100);
+  var latest=getLatest();
+  saveScore(score,currentRound.length,correct,wrong,unanswered);
+  quizCard.style.display='none';resultPanel.classList.add('show');
+  document.getElementById('scoreBig').textContent=score;
+  var ce=document.getElementById('resultCompare');
+  if(latest&&latest.score!==undefined){var d=score-latest.score;if(d>0)ce.innerHTML='<span class="up">较上次 '+latest.score+' 分上升了 '+d+' 分！</span>';else if(d<0)ce.innerHTML='<span class="down">较上次 '+latest.score+' 分下降了 '+Math.abs(d)+' 分</span>';else ce.innerHTML='<span class="same">与上次 '+latest.score+' 分持平</span>';}
+  else ce.innerHTML='<span class="same">首次答题，继续加油！</span>';
+  document.getElementById('resultStats').innerHTML='<div class="stat-card"><div class="stat-num" style="color:var(--correct)">'+correct+'</div><div class="stat-label">正确</div></div><div class="stat-card"><div class="stat-num" style="color:var(--wrong)">'+wrong+'</div><div class="stat-label">错误</div></div><div class="stat-card"><div class="stat-num" style="color:#999">'+unanswered+'</div><div class="stat-label">未答</div></div>';
+  var sugg=[];
+  if(score>=90)sugg.push('表现优异！形容词副词掌握扎实，可以挑战更高难度的语法题。');
+  else if(score>=70)sugg.push('基础不错，建议重点复习错题中涉及的语法点。');
+  else if(score>=50)sugg.push('需要加强练习，建议重点复习比较级和最高级的构成。');
   else sugg.push('基础薄弱，建议系统学习形容词副词的用法后再来练习。');
-
-  // Analyze weak areas
-  const wrongByType = {};
-  currentRound.forEach((q, i) => {
-    const ans = userAnswers.find(a => a.index === i);
-    if (!ans) return;
-    let isCorrect = false;
-    if (q.t === 'choice') isCorrect = ans.answer === q.a;
-    else if (q.t === 'fill') {
-      const acceptable = q.a.split(';').map(s => s.trim().toLowerCase());
-      isCorrect = acceptable.includes(ans.answer.trim().toLowerCase());
-    } else if (q.t === 'correct') isCorrect = ans.answer.trim().toLowerCase() === q.r.trim().toLowerCase();
-    if (!isCorrect) {
-      wrongByType[q.c] = (wrongByType[q.c] || 0) + 1;
-    }
-  });
-  const sorted = Object.entries(wrongByType).sort((a, b) => b[1] - a[1]);
-  if (sorted.length > 0) {
-    sugg.push('薄弱环节：' + sorted.map(s => `${s[0]}(${s[1]}题错)`).join('、'));
-  }
-  if (unanswered > 0) sugg.push(`有 ${unanswered} 题未作答，建议合理分配时间。`);
-
-  document.getElementById('resultSuggestion').innerHTML = `
-    <h3>💡 学习建议</h3>
-    <ul>${sugg.map(s => `<li>${s}</li>`).join('')}</ul>
-  `;
-
+  var wt={};currentRound.forEach(function(q,i){var a=userAnswers.find(function(x){return x.index===i;});if(!a)return;var ok=false;if(q.t==='choice')ok=a.answer===q.a;else if(q.t==='fill'){var acc=q.a.split(';').map(function(s){return s.trim().toLowerCase();});ok=acc.indexOf(a.answer.trim().toLowerCase())>=0;}else if(q.t==='correct')ok=a.answer.trim().toLowerCase()===q.r.trim().toLowerCase();if(!ok)wt[q.c]=(wt[q.c]||0)+1;});
+  var so=Object.keys(wt).map(function(k){return[k,wt[k]];}).sort(function(a,b){return b[1]-a[1];});
+  if(so.length)sugg.push('薄弱环节：'+so.map(function(s){return s[0]+'('+s[1]+'题错)';}).join('、'));
+  if(unanswered>0)sugg.push('有 '+unanswered+' 题未作答，建议合理分配时间。');
+  document.getElementById('resultSuggestion').innerHTML='<h3>学习建议</h3><ul>'+sugg.map(function(s){return '<li>'+s+'</li>';}).join('')+'</ul>';
   renderHistory();
 }
 
-// ====== Bank ======
-function renderBank(filter = '') {
-  const list = ALL_Q;
-  const f = filter.trim().toLowerCase();
-  const filtered = f === '' ? list : list.filter(q =>
-    q.q.toLowerCase().includes(f) ||
-    (q.c || '').toLowerCase().includes(f) ||
-    String(q.id).includes(f)
-  );
-  let html = '';
-  filtered.forEach(q => {
-    const typeLabel = q.t === 'choice' ? '选择' : q.t === 'fill' ? '填空' : '改错';
-    const typeClass = q.t === 'choice' ? 'choice' : q.t === 'fill' ? 'fill' : 'correct';
-    let answerHtml = '';
-    if (q.t === 'choice') {
-      const letters = ['A','B','C','D'];
-      let opts = '<div class="bank-opts">';
-      q.o.forEach((opt, i) => {
-        const cleanOpt = opt.replace(/^[A-D]\.\s*/, '');
-        const isC = letters[i] === q.a;
-        opts += `<div class="bank-opt${isC ? ' is-correct' : ''}">
-          <span class="bank-opt-letter">${letters[i]}</span>
-          <span>${cleanOpt}</span>
-          ${isC ? '<span class="bank-opt-tag">✓ 正确</span>' : ''}
-        </div>`;
-      });
-      opts += '</div>';
-      answerHtml = opts;
-    } else if (q.t === 'fill') {
-      answerHtml = `<div class="bank-answer">答案：${q.a}</div>`;
-    } else {
-      answerHtml = `<div class="bank-answer">错误：${q.w} → 正确：${q.r}</div>`;
-    }
-    html += `<div class="bank-item">
-      <div class="bank-item-top">
-        <span class="bank-item-id">#${q.id}</span>
-        <span class="bank-item-type ${typeClass}">${typeLabel}</span>
-        <span class="bank-item-cat">${q.c}</span>
-      </div>
-      <div class="bank-item-q">${q.q}</div>
-      ${answerHtml}
-      <div class="bank-exp">📖 ${q.e}</div>
-    </div>`;
+function renderBank(filter){
+  filter=filter||'';
+  var f=filter.trim().toLowerCase();
+  var filtered=f===''?ALL_Q:ALL_Q.filter(function(q){return q.q.toLowerCase().indexOf(f)>=0||(q.c||'').toLowerCase().indexOf(f)>=0||String(q.id).indexOf(f)>=0;});
+  var html='';
+  filtered.forEach(function(q){
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){var L=['A','B','C','D'];ah='<div class="bank-opts">';q.o.forEach(function(o,i){var co=o.replace(/^[A-D]\.\s*/,'');var ic=L[i]===q.a;ah+='<div class="bank-opt'+(ic?' is-correct':'')+'"><span class="bank-opt-letter">'+L[i]+'</span><span>'+co+'</span>'+(ic?'<span class="bank-opt-tag">正确</span>':'')+'</div>';});ah+='</div>';}
+    else if(q.t==='fill')ah='<div class="bank-answer">答案：'+q.a+'</div>';
+    else ah='<div class="bank-answer">错误：'+q.w+' -> 正确：'+q.r+'</div>';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+q.e+'</div></div>';
   });
-  document.getElementById('bankList').innerHTML = html || '<div style="padding:40px;text-align:center;color:#999;">未找到匹配题目</div>';
+  document.getElementById('bankList').innerHTML=html||'<div style="padding:40px;text-align:center;color:#999;">未找到匹配题目</div>';
 }
 
-// ====== Events ======
-document.getElementById('reshuffleBtn').addEventListener('click', () => {
-  initRound();
-});
-document.getElementById('bankBtn').addEventListener('click', () => {
-  bankPanel.classList.add('show');
+function showWrongAnswers(){
+  var wrongPanel=document.getElementById('wrongPanel');
+  var wrongList=document.getElementById('wrongList');
+  var wrongSummary=document.getElementById('wrongSummary');
+  var wrongCount=0,skipCount=0;
+  var html='';
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    var isWrong=false,isSkip=false;
+    if(!ans){isSkip=true;skipCount++;}
+    else{var ok=false;if(q.t==='choice')ok=ans.answer===q.a;else if(q.t==='fill'){var acc=q.a.split(';').map(function(s){return s.trim().toLowerCase();});ok=acc.indexOf(ans.answer.trim().toLowerCase())>=0;}else if(q.t==='correct'){var a=ans.answer.trim().toLowerCase();var t=q.r.trim().toLowerCase();ok=a===t||['去掉','删除','不填','/'].indexOf(a)>=0&&['去掉','删除','不填','/'].indexOf(t)>=0;}if(!ok){isWrong=true;wrongCount++;}}
+    if(!isWrong&&!isSkip)return;
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,j){var co=o.replace(/^[A-D]\.\s*/,'');var ic=L[j]===q.a;var iu=ans&&L[j]===ans.answer;var cls='bank-opt';if(ic)cls+=' is-correct';var tag='';if(ic)tag='<span class="bank-opt-tag">正确</span>';if(iu&&!ic)tag='<span class="bank-opt-tag" style="color:var(--wrong)">你的选择</span>';ah+='<div class="'+cls+'" style="'+(iu&&!ic?'background:var(--wrong-bg);border-color:var(--wrong);':'')+'"><span class="bank-opt-letter" style="'+(iu&&!ic?'background:var(--wrong);color:#fff;':'')+'">'+L[j]+'</span><span>'+co+'</span>'+tag+'</div>';});
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      if(isSkip)ah='<div class="wrong-skipped">未作答</div>';
+      else ah='<div class="wrong-user"><span class="tag">你的答案：</span><span>'+ans.answer+'</span></div>';
+      ah+='<div class="wrong-correct"><span class="tag">正确答案：</span><span>'+q.a+'</span></div>';
+    } else if(q.t==='correct'){
+      if(isSkip)ah='<div class="wrong-skipped">未作答</div>';
+      else ah='<div class="wrong-user"><span class="tag">你的答案：</span><span>'+ans.answer+'</span></div>';
+      ah+='<div class="wrong-correct"><span class="tag">错误部分：</span><span>'+q.w+'</span></div>';
+      ah+='<div class="wrong-correct"><span class="tag">正确形式：</span><span>'+q.r+'</span></div>';
+    }
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+q.e+'</div></div>';
+  });
+  wrongSummary.textContent='共 '+wrongCount+' 题错误，'+skipCount+' 题未答，'+(currentRound.length-wrongCount-skipCount)+' 题正确';
+  wrongList.innerHTML=html||'<div style="padding:40px;text-align:center;color:var(--correct);font-size:18px;font-weight:700;">全部正确，没有错题！</div>';
+  wrongPanel.classList.add('show');
   overlay.classList.add('show');
-  renderBank();
-});
-document.getElementById('bankClose').addEventListener('click', () => {
-  bankPanel.classList.remove('show');
-  overlay.classList.remove('show');
-});
-overlay.addEventListener('click', () => {
-  bankPanel.classList.remove('show');
-  overlay.classList.remove('show');
-});
-document.getElementById('bankSearch').addEventListener('input', (e) => {
-  renderBank(e.target.value);
-});
-document.getElementById('againBtn').addEventListener('click', () => {
-  initRound();
-});
-document.getElementById('reviewBtn').addEventListener('click', () => {
-  bankPanel.classList.add('show');
-  overlay.classList.add('show');
-  renderBank();
-});
+}
 
-// Keyboard
-document.addEventListener('keydown', (e) => {
-  if (bankPanel.classList.contains('show')) return;
-  if (e.target.tagName === 'INPUT') return;
-  if (e.key === 'ArrowLeft') prevQuestion();
-  if (e.key === 'ArrowRight') goNext();
-  if (e.key === 'a' || e.key === 'A') { const b = document.querySelector('.option-btn[data-value="A"]'); if (b) onOptionClick(b, 'A'); }
-  if (e.key === 'b' || e.key === 'B') { const b = document.querySelector('.option-btn[data-value="B"]'); if (b) onOptionClick(b, 'B'); }
-  if (e.key === 'c' || e.key === 'C') { const b = document.querySelector('.option-btn[data-value="C"]'); if (b) onOptionClick(b, 'C'); }
-  if (e.key === 'd' || e.key === 'D') { const b = document.querySelector('.option-btn[data-value="D"]'); if (b) onOptionClick(b, 'D'); }
+document.getElementById('reshuffleBtn').addEventListener('click',initRound);
+document.getElementById('bankBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('bankClose').addEventListener('click',function(){bankPanel.classList.remove('show');overlay.classList.remove('show');});
+overlay.addEventListener('click',function(){bankPanel.classList.remove('show');document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.getElementById('bankSearch').addEventListener('input',function(e){renderBank(e.target.value);});
+document.getElementById('againBtn').addEventListener('click',initRound);
+document.getElementById('reviewBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('wrongBtn').addEventListener('click',showWrongAnswers);
+document.getElementById('wrongClose').addEventListener('click',function(){document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.addEventListener('keydown',function(e){
+  if(bankPanel.classList.contains('show')||document.getElementById('wrongPanel').classList.contains('show'))return;
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft')prevQuestion();
+  if(e.key==='ArrowRight')goNext();
+  if(['a','A'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="A"]');if(b)onOptionClick(b,'A');}
+  if(['b','B'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="B"]');if(b)onOptionClick(b,'B');}
+  if(['c','C'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="C"]');if(b)onOptionClick(b,'C');}
+  if(['d','D'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="D"]');if(b)onOptionClick(b,'D');}
 });
-
-// ====== Start ======
-renderHistory();
-initRound();
+renderHistory();initRound();
 </script>
 </body>
 </html>
