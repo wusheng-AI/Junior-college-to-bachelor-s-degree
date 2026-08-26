@@ -23,7 +23,6 @@
                 radial-gradient(circle at 90% 80%, rgba(70, 130, 200, 0.08) 0%, transparent 50%);
         }
 
-        /* ===== 主卡片 ===== */
         .app-container {
             width: 100%;
             max-width: 1100px;
@@ -57,7 +56,6 @@
             z-index: 0;
         }
 
-        /* ===== 顶部栏 ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -168,7 +166,6 @@
             font-size: 13px;
         }
 
-        /* ===== 进度/统计条 ===== */
         .stats-bar {
             display: flex;
             justify-content: space-between;
@@ -231,7 +228,6 @@
             background: rgba(106, 122, 138, 0.10);
         }
 
-        /* ===== 题目区域 ===== */
         .question-area {
             flex: 1;
             display: flex;
@@ -285,7 +281,6 @@
             font-weight: 600;
         }
 
-        /* ===== 选项 (选择题) ===== */
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -367,7 +362,6 @@
             color: #1a2a3a;
         }
 
-        /* ===== 填空 (语法填空 & 改错) ===== */
         .fill-area {
             display: flex;
             flex-direction: column;
@@ -423,7 +417,6 @@
             background: rgba(176, 58, 58, 0.04);
         }
 
-        /* ===== 操作按钮 ===== */
         .action-bar {
             display: flex;
             justify-content: space-between;
@@ -445,7 +438,6 @@
             align-items: center;
         }
 
-        /* ===== 反馈消息 ===== */
         .feedback {
             margin-top: 14px;
             padding: 14px 22px;
@@ -480,7 +472,6 @@
             font-size: 28px;
         }
 
-        /* ===== 题库模态框 ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -630,7 +621,6 @@
             font-size: 13px;
         }
 
-        /* ===== 响应式 ===== */
         @media (max-width: 780px) {
             .app-container {
                 padding: 20px 18px;
@@ -719,7 +709,6 @@
             }
         }
 
-        /* ===== 工具类 ===== */
         .mt-8 {
             margin-top: 8px;
         }
@@ -742,7 +731,6 @@
 <body>
 
     <div class="app-container" id="app">
-        <!-- 顶部 -->
         <div class="header">
             <div class="logo-area">
                 <div class="logo-icon">📘</div>
@@ -755,7 +743,6 @@
             </div>
         </div>
 
-        <!-- 统计条 -->
         <div class="stats-bar" id="statsBar">
             <div class="stat-item">
                 <span class="label">📌 进度</span>
@@ -775,7 +762,6 @@
             </div>
         </div>
 
-        <!-- 题目区 -->
         <div class="question-area" id="questionArea">
             <div class="q-meta">
                 <span class="q-type-badge" id="qTypeBadge">📝 选择题</span>
@@ -785,13 +771,11 @@
             <div id="qInteraction"></div>
         </div>
 
-        <!-- 反馈 -->
         <div class="feedback" id="feedback">
             <span class="fb-icon" id="fbIcon">✅</span>
             <span id="fbText">回答正确！</span>
         </div>
 
-        <!-- 底部操作 -->
         <div class="action-bar">
             <div class="action-left">
                 <button class="btn btn-outline btn-sm" onclick="prevQuestion()">◀ 上一题</button>
@@ -805,7 +789,6 @@
         </div>
     </div>
 
-    <!-- ===== 题库模态框 ===== -->
     <div class="modal-overlay" id="bankModal">
         <div class="modal-box">
             <div class="modal-header">
@@ -974,7 +957,6 @@
                 question: d.q,
                 options: d.opts,
                 answer: d.ans,
-                // 用于展示
                 displayAnswer: d.opts[d.ans]
             });
         });
@@ -1139,23 +1121,16 @@
         //  2. 应用状态
         // ============================================================
         const TOTAL_PER_ROUND = 30;
-        let currentPool = []; // 当前30道题的索引 (在ALL_QUESTIONS中的索引)
-        let currentIndex = 0; // 当前显示第几题 (0~29)
-        let userAnswers = {}; // { questionId: userInput }
-        let submitted = {}; // { questionId: true/false } 是否已批改
-        let results = {}; // { questionId: 'correct' | 'wrong' }
+        let currentPool = [];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let submitted = {};
+        let results = {};
         let historyScores = JSON.parse(localStorage.getItem('subj_agree_history') || '[]');
         let bestScore = historyScores.length ? Math.max(...historyScores) : null;
-        let currentScore = null; // 本次提交后的正确数
-
-        // 题库过滤
+        let currentScore = null;
         let bankFilter = 'all';
 
-        // ============================================================
-        //  3. 核心函数
-        // ============================================================
-
-        // 洗牌算法 (Fisher-Yates)
         function shuffle(arr) {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -1164,13 +1139,11 @@
             return arr;
         }
 
-        // 从所有题中随机选30道 (不重复)
         function pickRandomQuestions(count) {
             const shuffled = shuffle([...Array(ALL_QUESTIONS.length).keys()]);
             return shuffled.slice(0, count);
         }
 
-        // 重新随机
         function reshuffle() {
             const pool = pickRandomQuestions(TOTAL_PER_ROUND);
             currentPool = pool;
@@ -1185,20 +1158,20 @@
             updateTrendDisplay();
         }
 
-        // 重置进度 (清空当前答题记录，重新随机)
         function resetProgress() {
             if (confirm('确定要重置当前进度吗？所有答题记录将被清除。')) {
                 reshuffle();
             }
         }
 
-        // 获取当前题目对象
         function getCurrentQuestion() {
             if (!currentPool.length || currentIndex >= currentPool.length) return null;
             return ALL_QUESTIONS[currentPool[currentIndex]];
         }
 
-        // 渲染题目
+        // ============================================================
+        //  3. 渲染题目（已修正：保留括号和提示词）
+        // ============================================================
         function renderQuestion() {
             const q = getCurrentQuestion();
             if (!q) {
@@ -1216,15 +1189,9 @@
             document.getElementById('qNavInfo').textContent = `${idx} / ${total}`;
             document.getElementById('qTypeBadge').textContent = q.typeLabel;
 
-            // 题干
-            let qText = q.question;
-            if (q.type === 'fill') {
-                // 将 _________ 替换为带下划线的占位
-                qText = qText.replace(/\([^)]*\)/g, '______');
-            }
-            document.getElementById('qText').innerHTML = qText;
+            // 直接显示题干，保留括号和提示词 (不再替换)
+            document.getElementById('qText').textContent = q.question;
 
-            // 交互区
             const container = document.getElementById('qInteraction');
             container.innerHTML = '';
 
@@ -1276,7 +1243,6 @@
                 }
                 area.appendChild(row);
                 container.appendChild(area);
-                // 绑定输入事件
                 const inp = document.getElementById('fillInput');
                 if (inp && !isSubmitted) {
                     inp.addEventListener('input', (e) => {
@@ -1284,7 +1250,6 @@
                     });
                 }
             } else if (q.type === 'correct') {
-                // 改错题：两个填空 (错误词, 正确词)
                 const area = document.createElement('div');
                 area.className = 'fill-area';
                 const row1 = document.createElement('div');
@@ -1319,7 +1284,6 @@
                     if (eVal) eInp.classList.add(isErrOk ? 'correct' : 'wrong');
                     if (cVal) cInp.classList.add(isCorOk ? 'correct' : 'wrong');
                 } else {
-                    // 绑定输入
                     document.getElementById('errorInput').addEventListener('input', (e) => {
                         userAnswers[q.id + '_err'] = e.target.value;
                     });
@@ -1329,7 +1293,6 @@
                 }
             }
 
-            // 如果已提交，显示反馈
             if (isSubmitted) {
                 const fb = document.getElementById('feedback');
                 const isCorrect = results[q.id] === 'correct';
@@ -1350,7 +1313,6 @@
             updateStats();
         }
 
-        // 上一题 / 下一题
         function prevQuestion() {
             if (currentIndex > 0) { currentIndex--;
                 renderQuestion(); }
@@ -1361,13 +1323,11 @@
                 renderQuestion(); }
         }
 
-        // 提交批改 (全部题目)
         function submitAll() {
             let anyAnswered = false;
             for (const idx of currentPool) {
                 const q = ALL_QUESTIONS[idx];
                 if (submitted[q.id]) continue;
-                // 检查是否有作答
                 let hasAnswer = false;
                 if (q.type === 'choice') {
                     if (userAnswers[q.id] !== undefined && userAnswers[q.id] !== null) hasAnswer = true;
@@ -1380,7 +1340,6 @@
                 }
                 if (hasAnswer) anyAnswered = true;
 
-                // 判题
                 let isCorrect = false;
                 if (q.type === 'choice') {
                     const userAns = userAnswers[q.id];
@@ -1402,7 +1361,6 @@
                 return;
             }
 
-            // 计算正确数
             let correctCount = 0;
             let totalAnswered = 0;
             for (const idx of currentPool) {
@@ -1413,14 +1371,12 @@
                 }
             }
             currentScore = correctCount;
-            // 保存历史
             historyScores.push(correctCount);
             localStorage.setItem('subj_agree_history', JSON.stringify(historyScores));
             bestScore = Math.max(...historyScores);
             updateStats();
             updateTrendDisplay();
             renderQuestion();
-            // 显示全局反馈
             const fb = document.getElementById('feedback');
             fb.className = 'feedback show correct';
             document.getElementById('fbIcon').textContent = '📊';
@@ -1428,7 +1384,6 @@
                 `已批改 ${totalAnswered} 题，正确 ${correctCount} 题，正确率 ${Math.round(correctCount/totalAnswered*100)}%。${correctCount/totalAnswered >= 0.8 ? '🌟 优秀！继续保持！' : correctCount/totalAnswered >= 0.6 ? '💪 加油，再练练！' : '📖 建议复习主谓一致规则！'}`;
         }
 
-        // 更新统计
         function updateStats() {
             const total = currentPool.length;
             let answered = 0,
@@ -1446,7 +1401,6 @@
             document.getElementById('bestNum').textContent = bestScore !== null ? bestScore + '/' + total : '--';
         }
 
-        // 更新趋势显示
         function updateTrendDisplay() {
             const el = document.getElementById('trendDisplay');
             const scores = historyScores;
@@ -1512,19 +1466,14 @@
             container.innerHTML = html || '<p style="color:#6a8aaa;padding:20px;">暂无题目</p>';
         }
 
-        // 点击模态框外部关闭
         document.getElementById('bankModal').addEventListener('click', function(e) {
             if (e.target === this) closeBank();
         });
 
-        // ESC 关闭
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeBank();
         });
 
-        // ============================================================
-        //  5. 键盘导航
-        // ============================================================
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') prevQuestion();
             if (e.key === 'ArrowRight') nextQuestion();
@@ -1535,7 +1484,7 @@
         });
 
         // ============================================================
-        //  6. 初始化
+        //  5. 初始化
         // ============================================================
         function init() {
             const pool = pickRandomQuestions(TOTAL_PER_ROUND);
