@@ -1,1506 +1,378 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ 主谓一致 · 英语专项训练</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #f5f9ff 0%, #e3edfa 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(70, 130, 200, 0.08) 0%, transparent 50%);
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 1100px;
-            min-height: 90vh;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 56px;
-            box-shadow: 0 30px 80px rgba(30, 60, 120, 0.15),
-                0 10px 30px rgba(30, 60, 120, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            padding: 32px 40px 28px;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-container::before {
-            content: '';
-            position: absolute;
-            top: -60%;
-            left: -20%;
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(ellipse at 30% 20%, rgba(255, 215, 0, 0.10) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 80%, rgba(70, 130, 220, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px 20px;
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            font-size: 32px;
-            line-height: 1;
-            background: linear-gradient(135deg, #f7c948, #f0a030);
-            border-radius: 16px;
-            padding: 6px 10px;
-            box-shadow: 0 4px 12px rgba(240, 160, 48, 0.3);
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #1a3a6b, #2a5f9e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo-text span {
-            font-weight: 300;
-            -webkit-text-fill-color: #4a7ab5;
-            opacity: 0.8;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 10px 22px;
-            border: none;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            position: relative;
-            z-index: 1;
-            background: white;
-            color: #1a3a6b;
-            border: 1px solid rgba(26, 58, 107, 0.10);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #2a5f9e, #1a3a6b);
-            color: white;
-            border: none;
-            box-shadow: 0 6px 20px rgba(26, 58, 107, 0.25);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(26, 58, 107, 0.35);
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, #f7c948, #f0a030);
-            color: #1a2a3a;
-            border: none;
-            box-shadow: 0 6px 20px rgba(240, 160, 48, 0.30);
-        }
-
-        .btn-gold:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(240, 160, 48, 0.40);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid rgba(26, 58, 107, 0.20);
-            color: #1a3a6b;
-        }
-
-        .btn-outline:hover {
-            background: rgba(26, 58, 107, 0.05);
-            border-color: #1a3a6b;
-            transform: translateY(-1px);
-        }
-
-        .btn-sm {
-            padding: 6px 16px;
-            font-size: 13px;
-        }
-
-        .stats-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px 16px;
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 40px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            position: relative;
-            z-index: 1;
-            font-size: 14px;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #1a3a6b;
-            font-weight: 500;
-        }
-
-        .stat-item .num {
-            font-weight: 700;
-            font-size: 18px;
-            color: #0a2a4a;
-            min-width: 28px;
-        }
-
-        .stat-item .label {
-            opacity: 0.7;
-            font-weight: 400;
-        }
-
-        .trend {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .trend.up {
-            color: #1a8a4a;
-            background: rgba(26, 138, 74, 0.12);
-        }
-
-        .trend.down {
-            color: #b03a3a;
-            background: rgba(176, 58, 58, 0.10);
-        }
-
-        .trend.same {
-            color: #6a7a8a;
-            background: rgba(106, 122, 138, 0.10);
-        }
-
-        .question-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 18px 10px 10px;
-            position: relative;
-            z-index: 1;
-            min-height: 340px;
-        }
-
-        .q-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #3a5a7a;
-            font-weight: 500;
-        }
-
-        .q-type-badge {
-            background: rgba(26, 58, 107, 0.08);
-            padding: 4px 18px;
-            border-radius: 30px;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-        }
-
-        .q-index {
-            opacity: 0.7;
-        }
-
-        .q-text {
-            font-size: 26px;
-            line-height: 1.6;
-            font-weight: 500;
-            color: #0a1a2a;
-            margin-bottom: 24px;
-            padding: 8px 4px;
-            letter-spacing: 0.3px;
-        }
-
-        .q-text .blank-indicator {
-            display: inline-block;
-            min-width: 120px;
-            border-bottom: 3px dashed #2a5f9e;
-            margin: 0 4px;
-            padding: 0 6px;
-            color: #2a5f9e;
-            font-weight: 600;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px 24px;
-            margin: 12px 0 8px;
-        }
-
-        .option-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 20px;
-            background: white;
-            border-radius: 20px;
-            border: 2px solid rgba(26, 58, 107, 0.06);
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-        }
-
-        .option-item:hover {
-            border-color: rgba(26, 58, 107, 0.20);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(26, 58, 107, 0.06);
-        }
-
-        .option-item.selected {
-            border-color: #2a5f9e;
-            background: rgba(42, 95, 158, 0.06);
-            box-shadow: 0 0 0 4px rgba(42, 95, 158, 0.08);
-        }
-
-        .option-item.correct-reveal {
-            border-color: #1a8a4a;
-            background: rgba(26, 138, 74, 0.08);
-        }
-
-        .option-item.wrong-reveal {
-            border-color: #b03a3a;
-            background: rgba(176, 58, 58, 0.08);
-        }
-
-        .option-radio {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            border: 2px solid rgba(26, 58, 107, 0.20);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: 0.2s;
-            font-size: 12px;
-            font-weight: 700;
-            color: #1a3a6b;
-        }
-
-        .option-item.selected .option-radio {
-            border-color: #2a5f9e;
-            background: #2a5f9e;
-            color: white;
-        }
-
-        .option-item.correct-reveal .option-radio {
-            border-color: #1a8a4a;
-            background: #1a8a4a;
-            color: white;
-        }
-
-        .option-item.wrong-reveal .option-radio {
-            border-color: #b03a3a;
-            background: #b03a3a;
-            color: white;
-        }
-
-        .option-label {
-            font-size: 17px;
-            font-weight: 450;
-            color: #1a2a3a;
-        }
-
-        .fill-area {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin: 10px 0 6px;
-            max-width: 700px;
-        }
-
-        .fill-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .fill-row label {
-            font-weight: 500;
-            color: #1a3a6b;
-            min-width: 80px;
-            font-size: 15px;
-        }
-
-        .fill-input {
-            flex: 1;
-            min-width: 160px;
-            padding: 12px 18px;
-            border: 2px solid rgba(26, 58, 107, 0.08);
-            border-radius: 16px;
-            font-size: 17px;
-            font-weight: 450;
-            background: white;
-            transition: 0.25s;
-            outline: none;
-            color: #0a1a2a;
-        }
-
-        .fill-input:focus {
-            border-color: #2a5f9e;
-            box-shadow: 0 0 0 4px rgba(42, 95, 158, 0.12);
-        }
-
-        .fill-input.correct {
-            border-color: #1a8a4a;
-            background: rgba(26, 138, 74, 0.04);
-        }
-
-        .fill-input.wrong {
-            border-color: #b03a3a;
-            background: rgba(176, 58, 58, 0.04);
-        }
-
-        .action-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 18px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(26, 58, 107, 0.06);
-            position: relative;
-            z-index: 1;
-        }
-
-        .action-left,
-        .action-right {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .feedback {
-            margin-top: 14px;
-            padding: 14px 22px;
-            border-radius: 24px;
-            font-weight: 500;
-            font-size: 15px;
-            display: none;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            position: relative;
-            z-index: 1;
-        }
-
-        .feedback.show {
-            display: flex;
-        }
-
-        .feedback.correct {
-            border-left: 6px solid #1a8a4a;
-            color: #0a4a2a;
-        }
-
-        .feedback.wrong {
-            border-left: 6px solid #b03a3a;
-            color: #6a2a2a;
-        }
-
-        .feedback .fb-icon {
-            font-size: 28px;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 20, 40, 0.50);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.open {
-            display: flex;
-        }
-
-        .modal-box {
-            background: white;
-            border-radius: 40px;
-            max-width: 1000px;
-            width: 100%;
-            max-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.30);
-            overflow: hidden;
-            animation: modalIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.94) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .modal-header {
-            padding: 24px 32px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8fbff;
-            flex-shrink: 0;
-        }
-
-        .modal-header h2 {
-            font-size: 22px;
-            color: #1a3a6b;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-close {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(0, 0, 0, 0.03);
-            font-size: 24px;
-            cursor: pointer;
-            transition: 0.2s;
-            color: #3a5a7a;
-        }
-
-        .modal-close:hover {
-            background: rgba(176, 58, 58, 0.08);
-            color: #b03a3a;
-        }
-
-        .modal-body {
-            padding: 20px 28px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .modal-body::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .modal-body::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 10px;
-        }
-
-        .modal-body::-webkit-scrollbar-thumb {
-            background: rgba(26, 58, 107, 0.20);
-            border-radius: 10px;
-        }
-
-        .bank-item {
-            padding: 14px 18px;
-            margin-bottom: 10px;
-            background: #f8fbff;
-            border-radius: 18px;
-            border-left: 4px solid #2a5f9e;
-            font-size: 14px;
-            line-height: 1.6;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .bank-item .bq {
-            flex: 1;
-            color: #0a1a2a;
-        }
-
-        .bank-item .bans {
-            font-weight: 600;
-            color: #1a8a4a;
-            background: rgba(26, 138, 74, 0.08);
-            padding: 2px 16px;
-            border-radius: 30px;
-            white-space: nowrap;
-            font-size: 13px;
-        }
-
-        .bank-item .btype {
-            font-size: 12px;
-            color: #6a8aaa;
-            background: rgba(0, 0, 0, 0.03);
-            padding: 2px 12px;
-            border-radius: 30px;
-        }
-
-        .bank-filter {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
-        }
-
-        .bank-filter .btn {
-            padding: 6px 18px;
-            font-size: 13px;
-        }
-
-        @media (max-width: 780px) {
-            .app-container {
-                padding: 20px 18px;
-                border-radius: 32px;
-                min-height: 92vh;
-            }
-            .q-text {
-                font-size: 20px;
-            }
-            .options-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            .option-item {
-                padding: 12px 16px;
-            }
-            .header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .header-actions {
-                justify-content: flex-start;
-            }
-            .stats-bar {
-                flex-wrap: wrap;
-                font-size: 12px;
-                padding: 8px 14px;
-                gap: 6px 12px;
-            }
-            .stat-item .num {
-                font-size: 16px;
-                min-width: 20px;
-            }
-            .action-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .action-left,
-            .action-right {
-                justify-content: center;
-            }
-            .fill-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-            }
-            .fill-row label {
-                min-width: auto;
-            }
-            .modal-box {
-                max-height: 92vh;
-                border-radius: 28px;
-            }
-            .modal-header {
-                padding: 16px 20px;
-            }
-            .modal-body {
-                padding: 14px 16px;
-            }
-            .bank-item {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 6px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .app-container {
-                padding: 14px 12px;
-                border-radius: 24px;
-                min-height: 96vh;
-            }
-            .q-text {
-                font-size: 18px;
-            }
-            .btn {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-            .logo-text {
-                font-size: 17px;
-            }
-            .logo-icon {
-                font-size: 24px;
-                padding: 4px 8px;
-            }
-        }
-
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .mb-8 {
-            margin-bottom: 8px;
-        }
-        .flex-center {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .text-muted {
-            color: #6a8aaa;
-        }
-        .text-gold {
-            color: #f0a030;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>主谓一致200题专项训练 · English Grammar Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#d4a017;--gold-light:#f0c75e;--gold-deep:#b8860b;--royal:#4a3f8c;--royal-light:#6b5fb0;--royal-deep:#2d2360;--cream:#fffbf0;--warm-white:#fdf8ee;--parchment:#faf3e0;--ink:#2a1a0a;--ink-soft:#5a4a2a;--correct:#1a8a3a;--correct-bg:#e6f7ed;--wrong:#c43a3a;--wrong-bg:#fdf4f4;--shadow:0 8px 32px rgba(74,63,140,.15);--shadow-lg:0 12px 48px rgba(74,63,140,.22)}
+body{font-family:'Open Sans','Noto Serif SC',serif;background:linear-gradient(135deg,#fffbf0 0%,#f5ecd9 30%,#e8dff0 70%,#ddd6f0 100%);min-height:100vh;color:var(--ink);overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(ellipse at 10% 20%,rgba(212,160,23,.08) 0%,transparent 50%),radial-gradient(ellipse at 90% 80%,rgba(74,63,140,.08) 0%,transparent 50%);pointer-events:none;z-index:0}
+.header{position:relative;z-index:10;background:linear-gradient(135deg,var(--royal) 0%,var(--royal-light) 50%,var(--royal-deep) 100%);padding:18px 30px;box-shadow:0 4px 24px rgba(45,35,96,.3);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo-badge{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--royal-deep);box-shadow:0 4px 12px rgba(212,160,23,.4);flex-shrink:0}
+.header-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.2);line-height:1.2}
+.header-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:8px 18px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s;white-space:nowrap}
+.header-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+.header-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--royal-deep)}
+.header-btn.gold:hover{background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+.container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.quiz-card{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;min-height:480px;position:relative;border:1px solid rgba(212,160,23,.2)}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--royal-light),var(--gold-light),var(--gold))}
+.card-inner{padding:36px 40px}
+.progress-bar{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.progress-track{flex:1;height:10px;background:#f0ead6;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--royal-light));border-radius:10px;transition:width .4s ease;width:0%}
+.progress-text{font-size:14px;font-weight:700;color:var(--royal-deep);white-space:nowrap}
+.progress-badge{display:inline-flex;align-items:center;gap:6px;background:var(--parchment);border:1px solid var(--gold);border-radius:20px;padding:4px 14px;font-size:13px;color:var(--ink-soft);font-weight:600}
+.q-type-tag{display:inline-block;background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;padding:5px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:16px}
+.q-cat-tag{display:inline-block;background:var(--parchment);color:var(--gold-deep);border:1px solid var(--gold-light);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-left:8px}
+.q-number{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-deep);font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.q-text{font-family:'Noto Serif SC',serif;font-size:22px;line-height:1.7;color:var(--ink);margin-bottom:28px;font-weight:500}
+.q-text .blank{display:inline-block;min-width:80px;border-bottom:3px solid var(--gold);margin:0 4px}
+.options-list{display:flex;flex-direction:column;gap:12px}
+.option-btn{display:flex;align-items:center;gap:14px;padding:16px 22px;border:2px solid #e8e0d0;border-radius:16px;cursor:pointer;font-size:17px;transition:all .25s;background:#fffdf8;text-align:left;font-family:'Open Sans',sans-serif}
+.option-btn:hover{border-color:var(--gold);background:var(--warm-white);transform:translateX(4px)}
+.option-btn.selected{border-color:var(--royal);background:#f5f0ff;box-shadow:0 4px 16px rgba(74,63,140,.15)}
+.option-letter{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;background:#f0ead6;color:var(--royal-deep);transition:all .25s}
+.option-btn.selected .option-letter{background:var(--royal);color:#fff}
+.option-text{flex:1}
+.fill-input{width:100%;padding:14px 20px;font-size:18px;border:2px solid #e8e0d0;border-radius:14px;background:#fffdf8;font-family:'Open Sans',sans-serif;transition:all .25s;color:var(--ink)}
+.fill-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,160,23,.15)}
+.fill-label{font-size:14px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.fill-group{margin-bottom:20px}
+.correct-box{display:flex;gap:16px;margin-bottom:20px}
+.correct-field{flex:1}
+.correct-field .fill-label{display:flex;align-items:center;gap:6px}
+.correct-field .fill-label .icon{font-size:16px}
+.correct-field.wrong-field .fill-label{color:var(--wrong)}
+.correct-field.right-field .fill-label{color:var(--correct)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:12px;flex-wrap:wrap}
+.nav-btn{padding:12px 28px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;border:none;display:flex;align-items:center;gap:8px}
+.nav-btn.primary{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;box-shadow:0 4px 16px rgba(74,63,140,.3)}
+.nav-btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,63,140,.4)}
+.nav-btn.secondary{background:var(--parchment);color:var(--royal-deep);border:1px solid var(--gold)}
+.nav-btn.secondary:hover{background:var(--warm-white)}
+.nav-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep)}
+.nav-btn.gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4)}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.nav-mid{display:flex;gap:10px}
+.q-nav-section{margin-top:28px;padding:20px;border-radius:16px;background:var(--parchment);border:1px solid rgba(212,160,23,.25)}
+.q-nav-title{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:12px;text-align:center}
+.q-nav-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.q-nav-cell{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;border:2px solid #e0d8c0;background:#fff;color:var(--ink-soft)}
+.q-nav-cell:hover{border-color:var(--gold);background:var(--warm-white);transform:scale(1.1)}
+.q-nav-cell.current{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;border-color:var(--royal);transform:scale(1.15)}
+.q-nav-cell.answered{background:linear-gradient(135deg,var(--correct),#2aa85a);color:#fff;border-color:var(--correct)}
+.result-panel{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;padding:40px;border:1px solid rgba(212,160,23,.2);display:none}
+.result-panel.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.result-header{text-align:center;margin-bottom:30px}
+.result-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal-deep)}
+.result-score-big{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--royal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:16px 0 8px;line-height:1}
+.result-score-label{font-size:16px;color:var(--ink-soft)}
+.result-compare{display:flex;justify-content:center;align-items:center;gap:12px;margin:20px 0;font-size:18px;font-weight:600}
+.result-compare .up{color:var(--correct)}
+.result-compare .down{color:var(--wrong)}
+.result-compare .same{color:var(--ink-soft)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.stat-card{text-align:center;padding:20px 12px;border-radius:16px;background:var(--warm-white);border:1px solid #e8e0d0}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal)}
+.stat-label{font-size:13px;color:var(--ink-soft);margin-top:4px}
+.result-suggestion{background:var(--parchment);border-radius:16px;padding:24px;border-left:5px solid var(--gold);margin-top:24px}
+.result-suggestion h3{font-size:18px;color:var(--royal-deep);margin-bottom:12px}
+.result-suggestion ul{list-style:none}
+.result-suggestion li{padding:6px 0;font-size:15px;color:var(--ink-soft);line-height:1.6}
+.result-suggestion li::before{content:'\25B8 ';color:var(--gold);font-weight:700}
+.result-actions{display:flex;justify-content:center;gap:14px;margin-top:30px;flex-wrap:wrap}
+.bank-panel{position:fixed;top:0;right:-100%;width:min(640px,90vw);height:100vh;background:#fff;box-shadow:-8px 0 48px rgba(0,0,0,.15);z-index:100;transition:right .35s ease;overflow-y:auto}
+.bank-panel.show{right:0}
+.bank-header{position:sticky;top:0;background:linear-gradient(135deg,var(--royal),var(--royal-deep));padding:20px 24px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.bank-header h2{color:#fff;font-family:'Playfair Display',serif;font-size:22px}
+.bank-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;transition:all .2s}
+.bank-close:hover{background:rgba(255,255,255,.35)}
+.bank-search{padding:16px 24px;position:sticky;top:72px;background:#fff;border-bottom:1px solid #eee;z-index:4}
+.bank-search input{width:100%;padding:10px 18px;font-size:15px;border:2px solid #e8e0d0;border-radius:30px;background:var(--warm-white);font-family:'Open Sans',sans-serif}
+.bank-search input:focus{outline:none;border-color:var(--gold)}
+.bank-list{padding:0 0 40px}
+.bank-item{padding:20px 24px;border-bottom:1px solid #f0ead6;transition:background .2s}
+.bank-item:hover{background:var(--warm-white)}
+.bank-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.bank-item-id{font-weight:700;color:var(--royal);font-size:14px}
+.bank-item-type{font-size:12px;padding:2px 10px;border-radius:20px;font-weight:600}
+.bank-item-type.choice{background:#e8f4ff;color:#1a5a8a}
+.bank-item-type.fill{background:#fff3e0;color:#b86800}
+.bank-item-type.correct{background:#f0e8ff;color:#5a3f8c}
+.bank-item-cat{font-size:12px;color:var(--ink-soft)}
+.bank-item-q{font-size:16px;line-height:1.7;margin-bottom:12px;color:var(--ink)}
+.bank-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.bank-opt{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;background:#f8f5ee;font-size:14px;border:1px solid #e8e0d0}
+.bank-opt.is-correct{background:var(--correct-bg);border-color:var(--correct)}
+.bank-opt-letter{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#e0d8c0;color:var(--royal-deep);flex-shrink:0}
+.bank-opt.is-correct .bank-opt-letter{background:var(--correct);color:#fff}
+.bank-opt-tag{font-size:12px;color:var(--correct);font-weight:600;margin-left:auto}
+.bank-answer{display:inline-block;padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;background:var(--correct-bg);color:var(--correct);border:1px solid var(--correct);margin-bottom:8px}
+.bank-exp{background:var(--parchment);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--ink-soft);line-height:1.6;border-left:3px solid var(--gold)}
+.wrong-user{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--wrong-bg);border:1px solid var(--wrong);margin-bottom:6px;font-size:14px}
+.wrong-user .tag{font-size:12px;font-weight:700;color:var(--wrong);white-space:nowrap}
+.wrong-correct{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--correct-bg);border:1px solid var(--correct);margin-bottom:10px;font-size:14px}
+.wrong-correct .tag{font-size:12px;font-weight:700;color:var(--correct);white-space:nowrap}
+.wrong-skipped{padding:8px 14px;border-radius:10px;background:#f5f5f5;border:1px solid #ddd;margin-bottom:6px;font-size:14px;color:#999}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.show{opacity:1;pointer-events:auto}
+.history-bar{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.history-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600;background:var(--parchment);border:1px solid var(--gold-light);color:var(--ink-soft)}
+.history-chip.latest{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep);border-color:var(--gold)}
+@media(max-width:640px){.card-inner{padding:24px 20px}.q-text{font-size:18px}.header-title{font-size:18px}.result-score-big{font-size:48px}.result-stats{grid-template-columns:1fr}.correct-box{flex-direction:column}}
+</style>
 </head>
 <body>
+<div class="header">
+  <div class="header-left"><div class="logo-badge">Sv</div><div><div class="header-title">主谓一致200题 专项训练</div><div class="header-sub">Subject-Verb Agreement · 200 Questions · Random 30 per round</div></div></div>
+  <div class="header-right"><button class="header-btn" id="bankBtn">📖 题库</button><button class="header-btn gold" id="reshuffleBtn">🎲 重新随机</button></div>
+</div>
+<div class="container">
+  <div class="history-bar" id="historyBar"></div>
+  <div class="quiz-card" id="quizCard"><div class="card-inner" id="cardInner"></div></div>
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header"><div class="result-title">🎯 练习完成</div><div class="result-score-big" id="scoreBig">0</div><div class="result-score-label">分 / 共 30 题</div><div class="result-compare" id="resultCompare"></div></div>
+    <div class="result-stats" id="resultStats"></div>
+    <div class="result-suggestion" id="resultSuggestion"></div>
+    <div class="result-actions"><button class="nav-btn gold" id="againBtn">🔄 再来一轮</button><button class="nav-btn primary" id="wrongBtn">🔍 查看错题</button><button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button></div>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="bank-panel" id="bankPanel"><div class="bank-header"><h2>📖 题库一览</h2><button class="bank-close" id="bankClose">✕</button></div><div class="bank-search"><input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类..."></div><div class="bank-list" id="bankList"></div></div>
+<div class="bank-panel" id="wrongPanel"><div class="bank-header"><h2>🔍 错题回顾</h2><button class="bank-close" id="wrongClose">✕</button></div><div class="bank-search"><div id="wrongSummary" style="padding:4px 8px;font-size:14px;color:var(--ink-soft);font-weight:600;"></div></div><div class="bank-list" id="wrongList"></div></div>
+<script>
+var ALL_Q=[{"id":1,"t":"choice","c":"主谓一致","q":"A large amount of money ______ spent on the project last year.","o":["A. were","B. was","C. have","D. are"],"a":"B","e":""},{"id":2,"t":"choice","c":"主谓一致","q":"Large quantities of water ______ polluted in that area.","o":["A. has","B. have","C. is","D. was"],"a":"B","e":""},{"id":3,"t":"choice","c":"主谓一致","q":"This kind of apples ______ sweet.","o":["A. taste","B. tastes","C. have tasted","D. are tasting"],"a":"B","e":""},{"id":4,"t":"choice","c":"主谓一致","q":"Apples of this kind ______ well in this area.","o":["A. grows","B. grow","C. is grown","D. has grown"],"a":"B","e":""},{"id":5,"t":"choice","c":"主谓一致","q":"A day or two ______ enough for this work.","o":["A. are","B. is","C. were","D. have been"],"a":"B","e":""},{"id":6,"t":"choice","c":"主谓一致","q":"One or two days ______ enough for this work.","o":["A. is","B. was","C. are","D. has been"],"a":"C","e":""},{"id":7,"t":"choice","c":"主谓一致","q":"One of the girls in our class ______ my daughter.","o":["A. are","B. is","C. were","D. have been"],"a":"B","e":""},{"id":8,"t":"choice","c":"主谓一致","q":"This is one of the rooms that ______ damaged in the fire.","o":["A. was","B. were","C. has","D. is"],"a":"B","e":""},{"id":9,"t":"choice","c":"主谓一致","q":"Mary is the only one of the youngest girls who ______ in the band.","o":["A. play","B. plays","C. are playing","D. have played"],"a":"B","e":""},{"id":10,"t":"choice","c":"主谓一致","q":"One-third of the area ______ covered with green trees.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":11,"t":"choice","c":"主谓一致","q":"About seventy percent of the trees ______ been planted.","o":["A. has","B. have","C. is","D. was"],"a":"B","e":""},{"id":12,"t":"choice","c":"主谓一致","q":"The number of teachers in our college ______ greatly increased last term.","o":["A. was","B. were","C. has","D. have"],"a":"A","e":""},{"id":13,"t":"choice","c":"主谓一致","q":"A number of teachers in this school ______ from the countryside.","o":["A. is","B. was","C. are","D. has been"],"a":"C","e":""},{"id":14,"t":"choice","c":"主谓一致","q":"What ______ the population of China?","o":["A. are","B. is","C. were","D. have"],"a":"B","e":""},{"id":15,"t":"choice","c":"主谓一致","q":"One-third of the population workers ______.","o":["A. is","B. was","C. are","D. has"],"a":"C","e":""},{"id":16,"t":"choice","c":"主谓一致","q":"He is one of the boys who ______ here on time.","o":["A. has come","B. have come","C. comes","D. is coming"],"a":"B","e":""},{"id":17,"t":"choice","c":"主谓一致","q":"He is the only one of the boys who ______ here on time.","o":["A. have come","B. have came","C. has come","D. are coming"],"a":"C","e":""},{"id":18,"t":"choice","c":"主谓一致","q":"Many a professor ______ looking forward to visiting Germany now.","o":["A. are","B. is","C. have","D. were"],"a":"B","e":""},{"id":19,"t":"choice","c":"主谓一致","q":"Many scientists ______ studying plants in the last two years.","o":["A. have","B. has","C. is","D. was"],"a":"A","e":""},{"id":20,"t":"choice","c":"主谓一致","q":"Two fifths of the land in that district ______ covered with trees.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":21,"t":"choice","c":"主谓一致","q":"Climbing hills ______ of great help to health.","o":["A. are","B. is","C. were","D. have"],"a":"B","e":""},{"id":22,"t":"choice","c":"主谓一致","q":"Each man and each woman ______ asked to help when the fire broke out.","o":["A. are","B. were","C. was","D. have"],"a":"C","e":""},{"id":23,"t":"choice","c":"主谓一致","q":"Many a student ______ that mistake before.","o":["A. have made","B. has made","C. have been made","D. had made"],"a":"B","e":""},{"id":24,"t":"choice","c":"主谓一致","q":"The students in our school each ______ an English dictionary.","o":["A. has","B. have","C. is having","D. are having"],"a":"B","e":""},{"id":25,"t":"choice","c":"主谓一致","q":"A teacher and a writer ______ in the office.","o":["A. is","B. was","C. are","D. has been"],"a":"C","e":""},{"id":26,"t":"choice","c":"主谓一致","q":"The teacher and writer ______ going to give us a talk.","o":["A. are","B. were","C. have","D. is"],"a":"D","e":""},{"id":27,"t":"choice","c":"主谓一致","q":"My trousers ______ black.","o":["A. is","B. was","C. are","D. has been"],"a":"C","e":""},{"id":28,"t":"choice","c":"主谓一致","q":"A pair of trousers ______ on my bed.","o":["A. are","B. lie","C. lies","D. were"],"a":"C","e":""},{"id":29,"t":"choice","c":"主谓一致","q":"His glasses ______ expensive.","o":["A. is","B. was","C. are","D. has been"],"a":"C","e":""},{"id":30,"t":"choice","c":"主谓一致","q":"A pair of glasses ______ given to me as a gift.","o":["A. were","B. was","C. have","D. are"],"a":"B","e":""},{"id":31,"t":"choice","c":"主谓一致","q":"The rich ______ eager to help the poor.","o":["A. is","B. was","C. are","D. has been"],"a":"C","e":""},{"id":32,"t":"choice","c":"主谓一致","q":"The wounded ______ been taken good care of.","o":["A. has","B. have","C. is","D. was"],"a":"B","e":""},{"id":33,"t":"choice","c":"主谓一致","q":"The family ______ all fond of football.","o":["A. is","B. are","C. was","D. has been"],"a":"B","e":""},{"id":34,"t":"choice","c":"主谓一致","q":"The family ______ the tiniest cell of the society.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":35,"t":"choice","c":"主谓一致","q":"The public ______ now come to know the whole story.","o":["A. has","B. have","C. is","D. was"],"a":"B","e":""},{"id":36,"t":"choice","c":"主谓一致","q":"One million dollars ______ a lot of money.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":37,"t":"choice","c":"主谓一致","q":"Ten miles ______ a long distance.","o":["A. are","B. is","C. have","D. were"],"a":"B","e":""},{"id":38,"t":"choice","c":"主谓一致","q":"Two years ______ enough to learn a foreign language.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":39,"t":"choice","c":"主谓一致","q":"A part of the textbooks ______ arrived.","o":["A. has","B. have","C. is","D. was"],"a":"B","e":""},{"id":40,"t":"choice","c":"主谓一致","q":"A part of the apple ______ been eaten up.","o":["A. have","B. are","C. has","D. were"],"a":"C","e":""},{"id":41,"t":"choice","c":"主谓一致","q":"A lot of people ______ heard the news.","o":["A. has","B. have","C. is","D. was"],"a":"B","e":""},{"id":42,"t":"choice","c":"主谓一致","q":"A lot of money ______ been spent on this project.","o":["A. have","B. has","C. were","D. are"],"a":"B","e":""},{"id":43,"t":"choice","c":"主谓一致","q":"Most of the apple ______ rotten.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":44,"t":"choice","c":"主谓一致","q":"Most of the apples ______ rotten.","o":["A. is","B. has","C. are","D. was"],"a":"C","e":""},{"id":45,"t":"choice","c":"主谓一致","q":"The injured in the tsunami ______ good care of by some medical teams.","o":["A. is being taken","B. are being taken","C. are taking","D. is taking"],"a":"B","e":""},{"id":46,"t":"choice","c":"主谓一致","q":"A knife and a fork ______ on the table.","o":["A. is","B. are","C. was","D. has"],"a":"B","e":""},{"id":47,"t":"choice","c":"主谓一致","q":"A knife and fork ______ on the table.","o":["A. are","B. have","C. were","D. is"],"a":"D","e":""},{"id":48,"t":"choice","c":"主谓一致","q":"Her family ______ much larger than mine four years ago.","o":["A. was","B. were","C. have","D. are"],"a":"A","e":""},{"id":49,"t":"choice","c":"主谓一致","q":"Her family ______ dancing and singing when I came in last night.","o":["A. was","B. is","C. were","D. has"],"a":"C","e":""},{"id":50,"t":"choice","c":"主谓一致","q":"How and why Jack came to China ______ not known.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":51,"t":"choice","c":"主谓一致","q":"When and where to build the new library ______ not been decided.","o":["A. have","B. has","C. are","D. were"],"a":"B","e":""},{"id":52,"t":"choice","c":"主谓一致","q":"Two hundred and fifty pounds ______ too unreasonable a price.","o":["A. is","B. are","C. were","D. have"],"a":"A","e":""},{"id":53,"t":"choice","c":"主谓一致","q":"The police ______ a prisoner.","o":["A. is searching for","B. are searching for","C. is searching","D. are searched"],"a":"B","e":""},{"id":54,"t":"choice","c":"主谓一致","q":"Neither the students nor the teacher ______ anything about it.","o":["A. know","B. knows","C. are knowing","D. have known"],"a":"B","e":""},{"id":55,"t":"choice","c":"主谓一致","q":"He or you ______ my pen.","o":["A. has taken","B. have taken","C. takes","D. is taking"],"a":"B","e":""},{"id":56,"t":"choice","c":"主谓一致","q":"Not only Tom but I ______ satisfied with the result.","o":["A. am","B. is","C. are","D. were"],"a":"A","e":""},{"id":57,"t":"choice","c":"主谓一致","q":"A library together with 5000 books ______ given to our school.","o":["A. were","B. have","C. was","D. are"],"a":"C","e":""},{"id":58,"t":"choice","c":"主谓一致","q":"Mr. Johnson as well as his wife and children ______ visiting the Great Wall now.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":59,"t":"choice","c":"主谓一致","q":"Not only he but also we ______ right.","o":["A. is","B. are","C. was","D. has"],"a":"B","e":""},{"id":60,"t":"choice","c":"主谓一致","q":"He as well as we ______ right.","o":["A. are","B. is","C. were","D. have"],"a":"B","e":""},{"id":61,"t":"choice","c":"主谓一致","q":"Either you or he ______ interested in playing chess.","o":["A. are","B. is","C. were","D. have"],"a":"B","e":""},{"id":62,"t":"choice","c":"主谓一致","q":"Now Tom together with his classmates ______ football on the playground.","o":["A. play","B. is playing","C. are playing","D. have played"],"a":"B","e":""},{"id":63,"t":"choice","c":"主谓一致","q":"There ______ a pen, two pencils, and three books on the desk.","o":["A. are","B. have","C. is","D. were"],"a":"C","e":""},{"id":64,"t":"choice","c":"主谓一致","q":"The factory, including its machines and buildings, ______ burnt last night.","o":["A. is","B. are","C. were","D. was"],"a":"D","e":""},{"id":65,"t":"choice","c":"主谓一致","q":"Not the teacher but the students ______ excited.","o":["A. is","B. has","C. are","D. have"],"a":"C","e":""},{"id":66,"t":"choice","c":"主谓一致","q":"Not only Tom but also his wife ______ fond of watching television.","o":["A. are","B. were","C. be","D. is"],"a":"D","e":""},{"id":67,"t":"choice","c":"主谓一致","q":"Neither he nor I ______ for the plan.","o":["A. were","B. is","C. are","D. am"],"a":"D","e":""},{"id":68,"t":"choice","c":"主谓一致","q":"My family as well as I ______ glad to see you.","o":["A. were","B. is","C. are","D. am"],"a":"C","e":""},{"id":69,"t":"choice","c":"主谓一致","q":"Reading often ______ learning.","o":["A. mean","B. means","C. are meaning","D. have meant"],"a":"B","e":""},{"id":70,"t":"choice","c":"主谓一致","q":"What he said ______ been recorded.","o":["A. have","B. are","C. is","D. has"],"a":"D","e":""},{"id":71,"t":"choice","c":"主谓一致","q":"Neither of my sisters ______ sports.","o":["A. like","B. likes","C. are liking","D. have liked"],"a":"B","e":""},{"id":72,"t":"choice","c":"主谓一致","q":"Every boy and girl ______ great interest in extra-curriculum activities.","o":["A. show","B. shows","C. have shown","D. are showing"],"a":"B","e":""},{"id":73,"t":"choice","c":"主谓一致","q":"The United States ______ leading the world in science and technology.","o":["A. are","B. were","C. is","D. have"],"a":"C","e":""},{"id":74,"t":"choice","c":"主谓一致","q":"My father, together with some of his old friends, ______ there already.","o":["A. will be","B. had been","C. has been","D. have been"],"a":"C","e":""},{"id":75,"t":"choice","c":"主谓一致","q":"Tom is one of those students who ______ friendly.","o":["A. appears to be","B. appear to be","C. is appeared","D. are appeared"],"a":"B","e":""},{"id":76,"t":"choice","c":"主谓一致","q":"His wife as well as he ______ invited to the business party.","o":["A. have been","B. has been","C. are","D. have"],"a":"B","e":""},{"id":77,"t":"choice","c":"主谓一致","q":"Every means ______ but without much result.","o":["A. have been tried","B. has been tried","C. have tried","D. has tried"],"a":"B","e":""},{"id":78,"t":"choice","c":"主谓一致","q":"Neither Mary nor her sister ______ to the party.","o":["A. go","B. are going","C. have gone","D. is going"],"a":"D","e":""},{"id":79,"t":"choice","c":"主谓一致","q":"Orlando, a city in Florida, ______ for its main attraction.","o":["A. which is well known","B. are well known","C. is well known","D. well known"],"a":"C","e":""},{"id":80,"t":"choice","c":"主谓一致","q":"Half of his good ______ stolen the other day.","o":["A. are","B. were","C. is","D. was"],"a":"D","e":""},{"id":81,"t":"fill","c":"语法填空","q":"A large amount of time _________ (spend) on English every day.","a":"is spent","e":""},{"id":82,"t":"fill","c":"语法填空","q":"Large amounts of money _________ (have) been wasted on the project.","a":"have","e":""},{"id":83,"t":"fill","c":"语法填空","q":"This kind of books _________ (sell) well.","a":"sells","e":""},{"id":84,"t":"fill","c":"语法填空","q":"Books of this kind _________ (be) popular among students.","a":"are","e":""},{"id":85,"t":"fill","c":"语法填空","q":"A day or two _________ (be) enough for this work.","a":"is","e":""},{"id":86,"t":"fill","c":"语法填空","q":"One or two days _________ (have) passed.","a":"have","e":""},{"id":87,"t":"fill","c":"语法填空","q":"One of the windows _________ (be) broken.","a":"is","e":""},{"id":88,"t":"fill","c":"语法填空","q":"This is one of the doors that _________ (have) been painted.","a":"have","e":""},{"id":89,"t":"fill","c":"语法填空","q":"She is the only one of the girls who _________ (know) the truth.","a":"knows","e":""},{"id":90,"t":"fill","c":"语法填空","q":"Two-thirds of the population in this city _________ (be) from other provinces.","a":"are","e":""},{"id":91,"t":"fill","c":"语法填空","q":"The number of students in our class _________ (be) 50.","a":"is","e":""},{"id":92,"t":"fill","c":"语法填空","q":"A number of students _________ (have) gone to the lab.","a":"have","e":""},{"id":93,"t":"fill","c":"语法填空","q":"Many a student _________ (have) visited the museum.","a":"has","e":""},{"id":94,"t":"fill","c":"语法填空","q":"Many students _________ (have) visited the museum.","a":"have","e":""},{"id":95,"t":"fill","c":"语法填空","q":"The teacher and writer _________ (be) coming to our school.","a":"is","e":""},{"id":96,"t":"fill","c":"语法填空","q":"A teacher and a writer _________ (be) coming to our school.","a":"are","e":""},{"id":97,"t":"fill","c":"语法填空","q":"His clothes _________ (be) all made in Italy.","a":"are","e":""},{"id":98,"t":"fill","c":"语法填空","q":"A pair of shoes _________ (be) under the bed.","a":"is","e":""},{"id":99,"t":"fill","c":"语法填空","q":"The rich _________ (have) their own problems.","a":"have","e":""},{"id":100,"t":"fill","c":"语法填空","q":"The injured _________ (have) been sent to the hospital.","a":"have","e":""},{"id":101,"t":"fill","c":"语法填空","q":"His family _________ (be) very large.","a":"is","e":""},{"id":102,"t":"fill","c":"语法填空","q":"His family _________ (be) watching TV now.","a":"are","e":""},{"id":103,"t":"fill","c":"语法填空","q":"The public _________ (have) the right to know the truth.","a":"have","e":""},{"id":104,"t":"fill","c":"语法填空","q":"One hundred dollars _________ (be) not enough.","a":"is","e":""},{"id":105,"t":"fill","c":"语法填空","q":"Two miles _________ (be) a short distance.","a":"is","e":""},{"id":106,"t":"fill","c":"语法填空","q":"Five years _________ (have) passed since we met.","a":"have","e":""},{"id":107,"t":"fill","c":"语法填空","q":"A part of the cake _________ (have) been eaten.","a":"has","e":""},{"id":108,"t":"fill","c":"语法填空","q":"A part of the books _________ (have) been sold.","a":"have","e":""},{"id":109,"t":"fill","c":"语法填空","q":"A lot of information _________ (have) been collected.","a":"has","e":""},{"id":110,"t":"fill","c":"语法填空","q":"A lot of people _________ (have) attended the meeting.","a":"have","e":""},{"id":111,"t":"fill","c":"语法填空","q":"Most of the homework _________ (have) been finished.","a":"has","e":""},{"id":112,"t":"fill","c":"语法填空","q":"Most of the students _________ (have) finished their homework.","a":"have","e":""},{"id":113,"t":"fill","c":"语法填空","q":"Either you or I _________ (be) going to do it.","a":"am","e":""},{"id":114,"t":"fill","c":"语法填空","q":"Neither he nor she _________ (have) been to Beijing.","a":"has","e":""},{"id":115,"t":"fill","c":"语法填空","q":"Not only the students but also the teacher _________ (have) seen the film.","a":"has","e":""},{"id":116,"t":"fill","c":"语法填空","q":"Not only the teacher but also the students _________ (have) seen the film.","a":"have","e":""},{"id":117,"t":"fill","c":"语法填空","q":"The teacher as well as the students _________ (have) visited the museum.","a":"has","e":""},{"id":118,"t":"fill","c":"语法填空","q":"The students as well as the teacher _________ (have) visited the museum.","a":"have","e":""},{"id":119,"t":"fill","c":"语法填空","q":"There _________ (be) a book and two pens on the desk.","a":"is","e":""},{"id":120,"t":"fill","c":"语法填空","q":"There _________ (be) two pens and a book on the desk.","a":"are","e":""},{"id":121,"t":"fill","c":"语法填空","q":"Climbing mountains _________ (be) good for health.","a":"is","e":""},{"id":122,"t":"fill","c":"语法填空","q":"To learn a foreign language _________ (take) a long time.","a":"takes","e":""},{"id":123,"t":"fill","c":"语法填空","q":"What he said _________ (have) surprised us.","a":"has","e":""},{"id":124,"t":"fill","c":"语法填空","q":"What we need _________ (be) more time.","a":"is","e":""},{"id":125,"t":"fill","c":"语法填空","q":"Neither of them _________ (know) how to solve the problem.","a":"knows","e":""},{"id":126,"t":"fill","c":"语法填空","q":"Each boy and each girl _________ (have) a copybook.","a":"has","e":""},{"id":127,"t":"fill","c":"语法填空","q":"Every means _________ (have) been tried.","a":"has","e":""},{"id":128,"t":"fill","c":"语法填空","q":"Many a scientist _________ (have) devoted his life to science.","a":"has","e":""},{"id":129,"t":"fill","c":"语法填空","q":"The police _________ (have) caught the thief.","a":"have","e":""},{"id":130,"t":"fill","c":"语法填空","q":"Cattle _________ (be) grazing on the grassland.","a":"are","e":""},{"id":131,"t":"fill","c":"语法填空","q":"His glasses _________ (be) new.","a":"are","e":""},{"id":132,"t":"fill","c":"语法填空","q":"A pair of scissors _________ (be) lying on the table.","a":"is","e":""},{"id":133,"t":"fill","c":"语法填空","q":"The Chinese people _________ (be) brave and hardworking.","a":"are","e":""},{"id":134,"t":"fill","c":"语法填空","q":"The United Nations _________ (have) its headquarters in New York.","a":"has","e":""},{"id":135,"t":"fill","c":"语法填空","q":"Physics _________ (be) my favorite subject.","a":"is","e":""},{"id":136,"t":"fill","c":"语法填空","q":"News _________ (have) come that he won the first prize.","a":"has","e":""},{"id":137,"t":"fill","c":"语法填空","q":"One-third of the area _________ (have) been covered with trees.","a":"has","e":""},{"id":138,"t":"fill","c":"语法填空","q":"One-third of the students _________ (have) been to the museum.","a":"have","e":""},{"id":139,"t":"fill","c":"语法填空","q":"The old _________ (need) more care.","a":"need","e":""},{"id":140,"t":"fill","c":"语法填空","q":"The beautiful _________ (be) in the eye of the beholder.","a":"is","e":""},{"id":141,"t":"fill","c":"语法填空","q":"Either answer _________ (be) acceptable.","a":"is","e":""},{"id":142,"t":"fill","c":"语法填空","q":"Every student and every teacher _________ (have) attended the meeting.","a":"has","e":""},{"id":143,"t":"fill","c":"语法填空","q":"The team _________ (be) all in high spirits.","a":"are","e":""},{"id":144,"t":"fill","c":"语法填空","q":"The team _________ (have) won the game.","a":"has","e":""},{"id":145,"t":"fill","c":"语法填空","q":"The government _________ (have) made a new policy.","a":"has","e":""},{"id":146,"t":"fill","c":"语法填空","q":"The government _________ (be) discussing the new policy now.","a":"are","e":""},{"id":147,"t":"fill","c":"语法填空","q":"A number of people _________ (have) been invited.","a":"have","e":""},{"id":148,"t":"fill","c":"语法填空","q":"The number of unemployed people _________ (have) increased.","a":"has","e":""},{"id":149,"t":"fill","c":"语法填空","q":"It is not you but he who _________ (have) been wrong.","a":"has","e":""},{"id":150,"t":"fill","c":"语法填空","q":"Not only I but also she _________ (be) going to the party.","a":"is","e":""},{"id":151,"t":"fill","c":"语法填空","q":"He or I _________ (be) to blame.","a":"am","e":""},{"id":152,"t":"fill","c":"语法填空","q":"Neither the students nor the teacher _________ (have) arrived yet.","a":"has","e":""},{"id":153,"t":"fill","c":"语法填空","q":"The singer and dancer _________ (have) won many awards.","a":"has","e":""},{"id":154,"t":"fill","c":"语法填空","q":"The singer and the dancer _________ (have) won many awards.","a":"have","e":""},{"id":155,"t":"fill","c":"语法填空","q":"Eight hours _________ (be) enough for the work.","a":"is","e":""},{"id":156,"t":"fill","c":"语法填空","q":"Twenty kilometers _________ (have) been covered.","a":"have","e":""},{"id":157,"t":"fill","c":"语法填空","q":"The committee _________ (be) divided in opinion.","a":"are","e":""},{"id":158,"t":"fill","c":"语法填空","q":"The committee _________ (have) decided to build a new bridge.","a":"has","e":""},{"id":159,"t":"fill","c":"语法填空","q":"Each of us _________ (have) a task to do.","a":"has","e":""},{"id":160,"t":"fill","c":"语法填空","q":"We each _________ (have) a task to do.","a":"have","e":""},{"id":161,"t":"correct","c":"改错题","q":"A large amount of people were present at the meeting.","w":"amount","r":"number","e":""},{"id":162,"t":"correct","c":"改错题","q":"Large quantities of water has been wasted.","w":"has","r":"have","e":""},{"id":163,"t":"correct","c":"改错题","q":"This kind of flowers were imported from Japan.","w":"were","r":"was","e":""},{"id":164,"t":"correct","c":"改错题","q":"A day or two are enough for this work.","w":"are","r":"is","e":""},{"id":165,"t":"correct","c":"改错题","q":"One or two day is enough for this work.","w":"day","r":"days","e":""},{"id":166,"t":"correct","c":"改错题","q":"This is one of the rooms that was damaged in the fire.","w":"was","r":"were","e":""},{"id":167,"t":"correct","c":"改错题","q":"Mary is the only one of the youngest girls who play in the band.","w":"play","r":"plays","e":""},{"id":168,"t":"correct","c":"改错题","q":"The number of teachers in our college have greatly increased.","w":"have","r":"has","e":""},{"id":169,"t":"correct","c":"改错题","q":"A number of teachers in this school is from the countryside.","w":"is","r":"are","e":""},{"id":170,"t":"correct","c":"改错题","q":"What are the population of China?","w":"are","r":"is","e":""},{"id":171,"t":"correct","c":"改错题","q":"One-third of the population in this city is workers.","w":"is","r":"are","e":""},{"id":172,"t":"correct","c":"改错题","q":"He is one of the boys who has come here on time.","w":"has","r":"have","e":""},{"id":173,"t":"correct","c":"改错题","q":"Many a professor have visited our school.","w":"have","r":"has","e":""},{"id":174,"t":"correct","c":"改错题","q":"The students in our school each has an English dictionary.","w":"has","r":"have","e":""},{"id":175,"t":"correct","c":"改错题","q":"A teacher and writer are in the office.","w":"are","r":"is","e":""},{"id":176,"t":"correct","c":"改错题","q":"My trousers is black.","w":"is","r":"are","e":""},{"id":177,"t":"correct","c":"改错题","q":"A pair of trousers are on my bed.","w":"are","r":"is","e":""},{"id":178,"t":"correct","c":"改错题","q":"The rich is eager to help the poor.","w":"is","r":"are","e":""},{"id":179,"t":"correct","c":"改错题","q":"The family is all fond of football.","w":"is","r":"are","e":""},{"id":180,"t":"correct","c":"改错题","q":"The family are the tiniest cell of the society.","w":"are","r":"is","e":""},{"id":181,"t":"correct","c":"改错题","q":"Two years are enough to learn a foreign language.","w":"are","r":"is","e":""},{"id":182,"t":"correct","c":"改错题","q":"A part of the textbooks has arrived.","w":"has","r":"have","e":""},{"id":183,"t":"correct","c":"改错题","q":"A lot of money have been spent on this project.","w":"have","r":"has","e":""},{"id":184,"t":"correct","c":"改错题","q":"Most of the apples is rotten.","w":"is","r":"are","e":""},{"id":185,"t":"correct","c":"改错题","q":"The injured in the tsunami is being taken good care of.","w":"is","r":"are","e":""},{"id":186,"t":"correct","c":"改错题","q":"A knife and fork are on the table.","w":"are","r":"is","e":""},{"id":187,"t":"correct","c":"改错题","q":"How and why Jack came to China are not known.","w":"are","r":"is","e":""},{"id":188,"t":"correct","c":"改错题","q":"Neither the students nor the teacher know anything about it.","w":"know","r":"knows","e":""},{"id":189,"t":"correct","c":"改错题","q":"He or you has taken my pen.","w":"has","r":"have","e":""},{"id":190,"t":"correct","c":"改错题","q":"Mr. Johnson as well as his wife and children are visiting the Great Wall now.","w":"are","r":"is","e":""},{"id":191,"t":"correct","c":"改错题","q":"Either you or he are interested in playing chess.","w":"are","r":"is","e":""},{"id":192,"t":"correct","c":"改错题","q":"There are a pen, two pencils, and three books on the desk.","w":"are","r":"is","e":""},{"id":193,"t":"correct","c":"改错题","q":"The factory, including its machines and buildings, were burnt last night.","w":"were","r":"was","e":""},{"id":194,"t":"correct","c":"改错题","q":"Not the teacher but the students is excited.","w":"is","r":"are","e":""},{"id":195,"t":"correct","c":"改错题","q":"Neither he nor I are for the plan.","w":"are","r":"am","e":""},{"id":196,"t":"correct","c":"改错题","q":"Every boy and girl show great interest in extra-curriculum activities.","w":"show","r":"shows","e":""},{"id":197,"t":"correct","c":"改错题","q":"The United States are leading the world in science and technology.","w":"are","r":"is","e":""},{"id":198,"t":"correct","c":"改错题","q":"My father, together with some of his old friends, have been there already.","w":"have","r":"has","e":""},{"id":199,"t":"correct","c":"改错题","q":"Neither of my sisters like sports.","w":"like","r":"likes","e":""},{"id":200,"t":"correct","c":"改错题","q":"Every means have been tried but without much result.","w":"have","r":"has","e":""}];
 
-    <div class="app-container" id="app">
-        <div class="header">
-            <div class="logo-area">
-                <div class="logo-icon">📘</div>
-                <div class="logo-text">主谓一致 <span>· 专项训练</span></div>
-            </div>
-            <div class="header-actions">
-                <button class="btn btn-outline btn-sm" onclick="openBank()">📚 题库</button>
-                <button class="btn btn-gold btn-sm" onclick="reshuffle()">🎲 重新随机</button>
-                <button class="btn btn-primary btn-sm" onclick="submitAll()">✔ 提交批改</button>
-            </div>
-        </div>
+var currentRound=[],currentIndex=0,userAnswers=[];
+var selectedOption=null,fillValue='',correctWrong='',correctRight='';
+var cardInner=document.getElementById('cardInner');
+var resultPanel=document.getElementById('resultPanel');
+var quizCard=document.getElementById('quizCard');
+var bankPanel=document.getElementById('bankPanel');
+var overlay=document.getElementById('overlay');
+var historyBar=document.getElementById('historyBar');
 
-        <div class="stats-bar" id="statsBar">
-            <div class="stat-item">
-                <span class="label">📌 进度</span>
-                <span class="num" id="progressNum">0/30</span>
-            </div>
-            <div class="stat-item">
-                <span class="label">✅ 正确率</span>
-                <span class="num" id="rateNum">0%</span>
-            </div>
-            <div class="stat-item">
-                <span class="label">🏆 历史最佳</span>
-                <span class="num" id="bestNum">--</span>
-            </div>
-            <div class="stat-item">
-                <span class="label">📊 对比</span>
-                <span id="trendDisplay" class="trend same">— 首次</span>
-            </div>
-        </div>
+function shuffle(a){a=[...a];for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pickRandom(n){return shuffle(ALL_Q).slice(0,n);}
+function getHistory(){try{return JSON.parse(localStorage.getItem('sva_200_scores')||'[]');}catch(e){return[];}}
+function saveScore(s,t,c,w,u){var h=getHistory();h.push({score:s,total:t,correct:c,wrong:w,unanswered:u,date:new Date().toLocaleString('zh-CN')});localStorage.setItem('sva_200_scores',JSON.stringify(h));}
+function getLatest(){var h=getHistory();return h.length>0?h[h.length-1]:null;}
+function renderHistory(){var h=getHistory();if(!h.length){historyBar.innerHTML='';return;}var html='<span style="font-size:13px;color:#5a4a2a;font-weight:600;">历史成绩：</span>';h.slice(-5).forEach(function(r,i){var l=i===h.slice(-5).length-1;html+='<span class="history-chip'+(l?' latest':'')+'">'+r.score+'分'+(l?' (最新)':'')+'</span>';});historyBar.innerHTML=html;}
 
-        <div class="question-area" id="questionArea">
-            <div class="q-meta">
-                <span class="q-type-badge" id="qTypeBadge">📝 选择题</span>
-                <span class="q-index" id="qIndexDisplay">1 / 30</span>
-            </div>
-            <div class="q-text" id="qText">加载题目中...</div>
-            <div id="qInteraction"></div>
-        </div>
+function initRound(){currentRound=pickRandom(30);currentIndex=0;userAnswers=[];selectedOption=null;fillValue='';correctWrong='';correctRight='';resultPanel.classList.remove('show');quizCard.style.display='block';restoreAnswer();renderQuestion();}
 
-        <div class="feedback" id="feedback">
-            <span class="fb-icon" id="fbIcon">✅</span>
-            <span id="fbText">回答正确！</span>
-        </div>
+function renderQuestion(){
+  var q=currentRound[currentIndex];
+  var progress=((currentIndex+1)/currentRound.length*100).toFixed(0);
+  var typeLabel=q.t==='choice'?'选择题':q.t==='fill'?'语法填空':'改错题';
+  var html='<div class="progress-bar"><div class="progress-track"><div class="progress-fill" style="width:'+progress+'%"></div></div><span class="progress-text">'+(currentIndex+1)+' / '+currentRound.length+'</span><span class="progress-badge">已答 '+userAnswers.length+'</span></div>';
+  html+='<span class="q-type-tag">'+typeLabel+'</span><span class="q-cat-tag">'+q.c+'</span><div class="q-number">Question #'+q.id+'</div><div class="q-text">'+formatQ(q)+'</div>';
+  if(q.t==='choice'){
+    var L=['A','B','C','D'];
+    html+='<div class="options-list">';
+    q.o.forEach(function(opt,i){var cls='option-btn';if(selectedOption===L[i])cls+=' selected';var co=opt.replace(/^[A-D]\.\s*/,'');html+='<div class="'+cls+'" data-value="'+L[i]+'" onclick="onOptionClick(this,\''+L[i]+'\')"><div class="option-letter">'+L[i]+'</div><div class="option-text">'+co+'</div></div>';});
+    html+='</div>';
+  } else if(q.t==='fill'){
+    html+='<div class="fill-group"><div class="fill-label">请填写答案</div><input type="text" class="fill-input" id="fillInput" placeholder="输入你的答案..." value="'+fillValue+'" oninput="onFillInput(this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div>';
+  } else if(q.t==='correct'){
+    html+='<div class="correct-box"><div class="correct-field wrong-field"><div class="fill-label"><span class="icon">✗</span> 错误部分</div><input type="text" class="fill-input" id="correctWrongInput" placeholder="写出错误的词语" value="'+correctWrong+'" oninput="onCorrectInput(\'wrong\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();document.getElementById(\'correctRightInput\').focus();}"></div><div class="correct-field right-field"><div class="fill-label"><span class="icon">✓</span> 正确形式</div><input type="text" class="fill-input" id="correctRightInput" placeholder="写出正确的形式" value="'+correctRight+'" oninput="onCorrectInput(\'right\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div></div>';
+  }
+  html+='<div class="nav-row"><button class="nav-btn secondary" onclick="prevQuestion()" '+(currentIndex===0?'disabled':'')+'>上一题</button><div class="nav-mid"><button class="nav-btn gold" onclick="submitQuiz()">提交</button></div><button class="nav-btn primary" onclick="goNext()">'+(currentIndex===currentRound.length-1?'查看结果':'下一题')+'</button></div>';
+  html+='<div class="q-nav-section"><div class="q-nav-title">题号导航 - 点击跳转</div><div class="q-nav-grid">';
+  for(var i=0;i<currentRound.length;i++){var c='q-nav-cell';if(i===currentIndex)c+=' current';if(userAnswers.find(function(a){return a.index===i;}))c+=' answered';html+='<div class="'+c+'" onclick="jumpToQuestion('+i+')">'+(i+1)+'</div>';}
+  html+='</div></div>';
+  cardInner.innerHTML=html;
+  setTimeout(function(){var fi=document.getElementById('fillInput');if(fi)fi.focus();var cwi=document.getElementById('correctWrongInput');if(cwi)cwi.focus();},100);
+}
 
-        <div class="action-bar">
-            <div class="action-left">
-                <button class="btn btn-outline btn-sm" onclick="prevQuestion()">◀ 上一题</button>
-                <button class="btn btn-outline btn-sm" onclick="nextQuestion()">下一题 ▶</button>
-                <span style="font-size:13px;color:#6a8aaa;" id="qNavInfo">1 / 30</span>
-            </div>
-            <div class="action-right">
-                <button class="btn btn-gold btn-sm" onclick="submitAll()">📝 提交批改</button>
-                <button class="btn btn-primary btn-sm" onclick="resetProgress()">🔄 重置进度</button>
-            </div>
-        </div>
-    </div>
+function formatQ(q){return q.q.replace(/______/g,'<span class="blank"></span>').replace(/_____/g,'<span class="blank"></span>').replace(/____/g,'<span class="blank"></span>').replace(/___/g,'<span class="blank"></span>');}
 
-    <div class="modal-overlay" id="bankModal">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h2>📚 全部题库 <span style="font-size:15px;font-weight:400;color:#6a8aaa;">(200题)</span></h2>
-                <button class="modal-close" onclick="closeBank()">✕</button>
-            </div>
-            <div class="modal-body" id="bankBody">
-                <div class="bank-filter">
-                    <button class="btn btn-sm btn-outline" onclick="filterBank('all')">📋 全部</button>
-                    <button class="btn btn-sm btn-outline" onclick="filterBank('choice')">🔘 选择</button>
-                    <button class="btn btn-sm btn-outline" onclick="filterBank('fill')">✏️ 填空</button>
-                    <button class="btn btn-sm btn-outline" onclick="filterBank('correct')">🔧 改错</button>
-                </div>
-                <div id="bankList"></div>
-            </div>
-        </div>
-    </div>
+function saveOrUpdate(index,type,answer){var i=userAnswers.findIndex(function(a){return a.index===index;});if(i>=0)userAnswers[i]={index:index,type:type,answer:answer};else userAnswers.push({index:index,type:type,answer:answer});}
+function onOptionClick(btn,letter){selectedOption=letter;saveOrUpdate(currentIndex,'choice',letter);renderQuestion();}
+function onFillInput(v){fillValue=v;if(v.trim())saveOrUpdate(currentIndex,'fill',v.trim());else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}}
+function onCorrectInput(f,v){
+  if(f==='wrong')correctWrong=v;else correctRight=v;
+  var ansObj={wrong:correctWrong.trim(),right:correctRight.trim()};
+  if(ansObj.wrong||ansObj.right)saveOrUpdate(currentIndex,'correct',ansObj);
+  else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}
+}
+function goNext(){if(currentIndex<currentRound.length-1){currentIndex++;restoreAnswer();renderQuestion();}else{submitQuiz();}}
+function jumpToQuestion(i){if(i<0||i>=currentRound.length)return;currentIndex=i;restoreAnswer();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function prevQuestion(){if(currentIndex>0){currentIndex--;restoreAnswer();renderQuestion();}}
+function restoreAnswer(){
+  selectedOption=null;fillValue='';correctWrong='';correctRight='';
+  var a=userAnswers.find(function(x){return x.index===currentIndex;});
+  if(a){
+    if(a.type==='choice')selectedOption=a.answer;
+    if(a.type==='fill')fillValue=a.answer;
+    if(a.type==='correct'){
+      if(typeof a.answer==='object'){correctWrong=a.answer.wrong||'';correctRight=a.answer.right||'';}
+      else{correctWrong=a.answer;correctRight='';}
+    }
+  }
+}
 
-    <script>
-        // ============================================================
-        //  1. 数据：200 道题（80 选择 + 80 填空 + 40 改错）
-        // ============================================================
-        const ALL_QUESTIONS = [];
+function checkAnswer(q,ans){
+  if(!ans)return false;
+  if(q.t==='choice')return ans.answer===q.a;
+  if(q.t==='fill'){
+    var acc=q.a.split(';').map(function(s){return s.trim().toLowerCase();});
+    var ua='';
+    if(typeof ans.answer==='string')ua=ans.answer.trim().toLowerCase();
+    return acc.indexOf(ua)>=0;
+  }
+  if(q.t==='correct'){
+    var uw='',ur='';
+    if(typeof ans.answer==='object'){uw=ans.answer.wrong||'';ur=ans.answer.right||'';}
+    else{uw=ans.answer;ur='';}
+    uw=uw.trim().toLowerCase();
+    ur=ur.trim().toLowerCase();
+    var qw=(q.w||'').trim().toLowerCase();
+    var qr=(q.r||'').trim().toLowerCase();
+    return uw===qw&&ur===qr;
+  }
+  return false;
+}
 
-        // ---------- 选择题 (80) ----------
-        const choiceData = [
-            { q: 'A large amount of money ______ spent on the project last year.', opts: ['were', 'was', 'have', 'are'],
-                ans: 1 },
-            { q: 'Large quantities of water ______ polluted in that area.', opts: ['has', 'have', 'is', 'was'], ans: 1 },
-            { q: 'This kind of apples ______ sweet.', opts: ['taste', 'tastes', 'have tasted', 'are tasting'], ans: 1 },
-            { q: 'Apples of this kind ______ well in this area.', opts: ['grows', 'grow', 'is grown', 'has grown'],
-            ans: 1 },
-            { q: 'A day or two ______ enough for this work.', opts: ['are', 'is', 'were', 'have been'], ans: 1 },
-            { q: 'One or two days ______ enough for this work.', opts: ['is', 'was', 'are', 'has been'], ans: 2 },
-            { q: 'One of the girls in our class ______ my daughter.', opts: ['are', 'is', 'were', 'have been'], ans: 1 },
-            { q: 'This is one of the rooms that ______ damaged in the fire.', opts: ['was', 'were', 'has', 'is'], ans: 1 },
-            { q: 'Mary is the only one of the youngest girls who ______ in the band.', opts: ['play', 'plays', 'are playing',
-                    'have played'
-                ], ans: 1 },
-            { q: 'One-third of the area ______ covered with green trees.', opts: ['are', 'have', 'is', 'were'], ans: 2 },
-            { q: 'About seventy percent of the trees ______ been planted.', opts: ['has', 'have', 'is', 'was'], ans: 1 },
-            { q: 'The number of teachers in our college ______ greatly increased last term.', opts: ['was', 'were', 'has',
-                    'have'
-                ], ans: 0 },
-            { q: 'A number of teachers in this school ______ from the countryside.', opts: ['is', 'was', 'are', 'has been'],
-                ans: 2 },
-            { q: 'What ______ the population of China?', opts: ['are', 'is', 'were', 'have'], ans: 1 },
-            { q: 'One-third of the population workers ______.', opts: ['is', 'was', 'are', 'has'], ans: 2 },
-            { q: 'He is one of the boys who ______ here on time.', opts: ['has come', 'have come', 'comes', 'is coming'],
-                ans: 1 },
-            { q: 'He is the only one of the boys who ______ here on time.', opts: ['have come', 'have came', 'has come',
-                    'are coming'
-                ], ans: 2 },
-            { q: 'Many a professor ______ looking forward to visiting Germany now.', opts: ['are', 'is', 'have', 'were'],
-                ans: 1 },
-            { q: 'Many scientists ______ studying plants in the last two years.', opts: ['have', 'has', 'is', 'was'],
-                ans: 0 },
-            { q: 'Two fifths of the land in that district ______ covered with trees.', opts: ['are', 'have', 'is', 'were'],
-                ans: 2 },
-            { q: 'Climbing hills ______ of great help to health.', opts: ['are', 'is', 'were', 'have'], ans: 1 },
-            { q: 'Each man and each woman ______ asked to help when the fire broke out.', opts: ['are', 'were', 'was',
-                    'have'
-                ], ans: 2 },
-            { q: 'Many a student ______ that mistake before.', opts: ['have made', 'has made', 'have been made',
-                    'had made'
-                ], ans: 1 },
-            { q: 'The students in our school each ______ an English dictionary.', opts: ['has', 'have', 'is having',
-                    'are having'
-                ], ans: 1 },
-            { q: 'A teacher and a writer ______ in the office.', opts: ['is', 'was', 'are', 'has been'], ans: 2 },
-            { q: 'The teacher and writer ______ going to give us a talk.', opts: ['are', 'were', 'have', 'is'], ans: 3 },
-            { q: 'My trousers ______ black.', opts: ['is', 'was', 'are', 'has been'], ans: 2 },
-            { q: 'A pair of trousers ______ on my bed.', opts: ['are', 'lie', 'lies', 'were'], ans: 2 },
-            { q: 'His glasses ______ expensive.', opts: ['is', 'was', 'are', 'has been'], ans: 2 },
-            { q: 'A pair of glasses ______ given to me as a gift.', opts: ['were', 'was', 'have', 'are'], ans: 1 },
-            { q: 'The rich ______ eager to help the poor.', opts: ['is', 'was', 'are', 'has been'], ans: 2 },
-            { q: 'The wounded ______ been taken good care of.', opts: ['has', 'have', 'is', 'was'], ans: 1 },
-            { q: 'The family ______ all fond of football.', opts: ['is', 'are', 'was', 'has been'], ans: 1 },
-            { q: 'The family ______ the tiniest cell of the society.', opts: ['are', 'have', 'is', 'were'], ans: 2 },
-            { q: 'The public ______ now come to know the whole story.', opts: ['has', 'have', 'is', 'was'], ans: 1 },
-            { q: 'One million dollars ______ a lot of money.', opts: ['are', 'have', 'is', 'were'], ans: 2 },
-            { q: 'Ten miles ______ a long distance.', opts: ['are', 'is', 'have', 'were'], ans: 1 },
-            { q: 'Two years ______ enough to learn a foreign language.', opts: ['are', 'have', 'is', 'were'], ans: 2 },
-            { q: 'A part of the textbooks ______ arrived.', opts: ['has', 'have', 'is', 'was'], ans: 1 },
-            { q: 'A part of the apple ______ been eaten up.', opts: ['have', 'are', 'has', 'were'], ans: 2 },
-            { q: 'A lot of people ______ heard the news.', opts: ['has', 'have', 'is', 'was'], ans: 1 },
-            { q: 'A lot of money ______ been spent on this project.', opts: ['have', 'has', 'were', 'are'], ans: 1 },
-            { q: 'Most of the apple ______ rotten.', opts: ['are', 'have', 'is', 'were'], ans: 2 },
-            { q: 'Most of the apples ______ rotten.', opts: ['is', 'has', 'are', 'was'], ans: 2 },
-            { q: 'The injured in the tsunami ______ good care of by some medical teams.', opts: ['is being taken',
-                    'are being taken', 'are taking', 'is taking'
-                ], ans: 1 },
-            { q: 'A knife and a fork ______ on the table.', opts: ['is', 'are', 'was', 'has'], ans: 1 },
-            { q: 'A knife and fork ______ on the table.', opts: ['are', 'have', 'were', 'is'], ans: 3 },
-            { q: 'Her family ______ much larger than mine four years ago.', opts: ['was', 'were', 'have', 'are'], ans: 0 },
-            { q: 'Her family ______ dancing and singing when I came in last night.', opts: ['was', 'is', 'were', 'has'],
-                ans: 2 },
-            { q: 'How and why Jack came to China ______ not known.', opts: ['are', 'have', 'is', 'were'], ans: 2 },
-            { q: 'When and where to build the new library ______ not been decided.', opts: ['have', 'has', 'are', 'were'],
-                ans: 1 },
-            { q: 'Two hundred and fifty pounds ______ too unreasonable a price.', opts: ['is', 'are', 'were', 'have'],
-                ans: 0 },
-            { q: 'The police ______ a prisoner.', opts: ['is searching for', 'are searching for', 'is searching',
-                    'are searched'
-                ], ans: 1 },
-            { q: 'Neither the students nor the teacher ______ anything about it.', opts: ['know', 'knows', 'are knowing',
-                    'have known'
-                ], ans: 1 },
-            { q: 'He or you ______ my pen.', opts: ['has taken', 'have taken', 'takes', 'is taking'], ans: 1 },
-            { q: 'Not only Tom but I ______ satisfied with the result.', opts: ['am', 'is', 'are', 'were'], ans: 0 },
-            { q: 'A library together with 5000 books ______ given to our school.', opts: ['were', 'have', 'was', 'are'],
-                ans: 2 },
-            { q: 'Mr. Johnson as well as his wife and children ______ visiting the Great Wall now.', opts: ['are', 'have',
-                    'is', 'were'
-                ], ans: 2 },
-            { q: 'Not only he but also we ______ right.', opts: ['is', 'are', 'was', 'has'], ans: 1 },
-            { q: 'He as well as we ______ right.', opts: ['are', 'is', 'were', 'have'], ans: 1 },
-            { q: 'Either you or he ______ interested in playing chess.', opts: ['are', 'is', 'were', 'have'], ans: 1 },
-            { q: 'Now Tom together with his classmates ______ football on the playground.', opts: ['play', 'is playing',
-                    'are playing', 'have played'
-                ], ans: 1 },
-            { q: 'There ______ a pen, two pencils, and three books on the desk.', opts: ['are', 'have', 'is', 'were'],
-                ans: 2 },
-            { q: 'The factory, including its machines and buildings, ______ burnt last night.', opts: ['is', 'are', 'were',
-                    'was'
-                ], ans: 3 },
-            { q: 'Not the teacher but the students ______ excited.', opts: ['is', 'has', 'are', 'have'], ans: 2 },
-            { q: 'Not only Tom but also his wife ______ fond of watching television.', opts: ['are', 'were', 'be', 'is'],
-                ans: 3 },
-            { q: 'Neither he nor I ______ for the plan.', opts: ['were', 'is', 'are', 'am'], ans: 3 },
-            { q: 'My family as well as I ______ glad to see you.', opts: ['were', 'is', 'are', 'am'], ans: 2 },
-            { q: 'Reading often ______ learning.', opts: ['mean', 'means', 'are meaning', 'have meant'], ans: 1 },
-            { q: 'What he said ______ been recorded.', opts: ['have', 'are', 'is', 'has'], ans: 3 },
-            { q: 'Neither of my sisters ______ sports.', opts: ['like', 'likes', 'are liking', 'have liked'], ans: 1 },
-            { q: 'Every boy and girl ______ great interest in extra-curriculum activities.', opts: ['show', 'shows',
-                    'have shown', 'are showing'
-                ], ans: 1 },
-            { q: 'The United States ______ leading the world in science and technology.', opts: ['are', 'were', 'is',
-                    'have'
-                ], ans: 2 },
-            { q: 'My father, together with some of his old friends, ______ there already.', opts: ['will be', 'had been',
-                    'has been', 'have been'
-                ], ans: 2 },
-            { q: 'Tom is one of those students who ______ friendly.', opts: ['appears to be', 'appear to be',
-                    'is appeared', 'are appeared'
-                ], ans: 1 },
-            { q: 'His wife as well as he ______ invited to the business party.', opts: ['have been', 'has been', 'are',
-                    'have'
-                ], ans: 1 },
-            { q: 'Every means ______ but without much result.', opts: ['have been tried', 'has been tried', 'have tried',
-                    'has tried'
-                ], ans: 1 },
-            { q: 'Neither Mary nor her sister ______ to the party.', opts: ['go', 'are going', 'have gone', 'is going'],
-                ans: 3 },
-            { q: 'Orlando, a city in Florida, ______ for its main attraction.', opts: ['which is well known',
-                    'are well known', 'is well known', 'well known'
-                ], ans: 2 },
-            { q: 'Half of his good ______ stolen the other day.', opts: ['are', 'were', 'is', 'was'], ans: 3 },
-        ];
+function submitQuiz(){
+  var correct=0,wrong=0,unanswered=0;
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans||ans.answer===''||(typeof ans.answer==='object'&&!ans.answer.wrong&&!ans.answer.right)){unanswered++;return;}
+    if(checkAnswer(q,ans))correct++;else wrong++;
+  });
+  var score=Math.round(correct/currentRound.length*100);
+  var latest=getLatest();
+  saveScore(score,currentRound.length,correct,wrong,unanswered);
+  quizCard.style.display='none';resultPanel.classList.add('show');
+  document.getElementById('scoreBig').textContent=score;
+  var ce=document.getElementById('resultCompare');
+  if(latest&&latest.score!==undefined){var d=score-latest.score;if(d>0)ce.innerHTML='<span class="up">↑ 较上次 '+latest.score+' 分上升了 '+d+' 分！</span>';else if(d<0)ce.innerHTML='<span class="down">↓ 较上次 '+latest.score+' 分下降了 '+Math.abs(d)+' 分</span>';else ce.innerHTML='<span class="same">→ 与上次 '+latest.score+' 分持平</span>';}
+  else ce.innerHTML='<span class="same">首次答题，继续加油！</span>';
+  document.getElementById('resultStats').innerHTML='<div class="stat-card"><div class="stat-num" style="color:var(--correct)">'+correct+'</div><div class="stat-label">正确</div></div><div class="stat-card"><div class="stat-num" style="color:var(--wrong)">'+wrong+'</div><div class="stat-label">错误</div></div><div class="stat-card"><div class="stat-num" style="color:#999">'+unanswered+'</div><div class="stat-label">未答</div></div>';
+  var sugg=[];
+  if(score>=90)sugg.push('表现优异！主谓一致掌握扎实，可以挑战更高难度的语法题。');
+  else if(score>=70)sugg.push('基础不错，建议重点复习错题中涉及的主谓一致知识点。');
+  else if(score>=50)sugg.push('需要加强练习，建议重点复习主谓一致的三大原则：语法一致、意义一致和就近原则。');
+  else sugg.push('基础薄弱，建议系统学习主谓一致的规则和特殊用法后再来练习。');
+  var wt={};
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans||!checkAnswer(q,ans)){var cat=q.c||'未分类';wt[cat]=(wt[cat]||0)+1;}
+  });
+  var so=Object.keys(wt).map(function(k){return[k,wt[k]];}).sort(function(a,b){return b[1]-a[1];});
+  if(so.length)sugg.push('薄弱环节：'+so.map(function(s){return s[0]+'('+s[1]+'题错)';}).join('、'));
+  if(unanswered>0)sugg.push('有 '+unanswered+' 题未作答，建议合理分配时间。');
+  document.getElementById('resultSuggestion').innerHTML='<h3>学习建议</h3><ul>'+sugg.map(function(s){return '<li>'+s+'</li>';}).join('')+'</ul>';
+  renderHistory();
+}
 
-        choiceData.forEach((d, i) => {
-            ALL_QUESTIONS.push({
-                id: 'c' + String(i + 1).padStart(3, '0'),
-                type: 'choice',
-                typeLabel: '🔘 选择题',
-                question: d.q,
-                options: d.opts,
-                answer: d.ans,
-                displayAnswer: d.opts[d.ans]
-            });
-        });
+function renderBank(filter){
+  filter=filter||'';
+  var f=filter.trim().toLowerCase();
+  var filtered=f===''?ALL_Q:ALL_Q.filter(function(q){return q.q.toLowerCase().indexOf(f)>=0||(q.c||'').toLowerCase().indexOf(f)>=0||String(q.id).indexOf(f)>=0;});
+  var html='';
+  filtered.forEach(function(q){
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,i){var co=o.replace(/^[A-D]\.\s*/,'');var ic=L[i]===q.a;ah+='<div class="bank-opt'+(ic?' is-correct':'')+'"><span class="bank-opt-letter">'+L[i]+'</span><span>'+co+'</span>'+(ic?'<span class="bank-opt-tag">正确</span>':'')+'</div>';});
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      ah='<div class="bank-answer">答案：'+q.a+'</div>';
+    } else {
+      ah='<div class="bank-answer">错误：'+q.w+' → 正确：'+q.r+'</div>';
+    }
+    var exp=q.e||'';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+exp+'</div></div>';
+  });
+  document.getElementById('bankList').innerHTML=html||'<div style="padding:40px;text-align:center;color:#999;">未找到匹配题目</div>';
+}
 
-        // ---------- 语法填空 (80) ----------
-        const fillData = [
-            { q: 'A large amount of time _________ (spend) on English every day.', ans: 'is spent' },
-            { q: 'Large amounts of money _________ (have) been wasted on the project.', ans: 'have' },
-            { q: 'This kind of books _________ (sell) well.', ans: 'sells' },
-            { q: 'Books of this kind _________ (be) popular among students.', ans: 'are' },
-            { q: 'A day or two _________ (be) enough for this work.', ans: 'is' },
-            { q: 'One or two days _________ (have) passed.', ans: 'have' },
-            { q: 'One of the windows _________ (be) broken.', ans: 'is' },
-            { q: 'This is one of the doors that _________ (have) been painted.', ans: 'have' },
-            { q: 'She is the only one of the girls who _________ (know) the truth.', ans: 'knows' },
-            { q: 'Two-thirds of the population in this city _________ (be) from other provinces.', ans: 'are' },
-            { q: 'The number of students in our class _________ (be) 50.', ans: 'is' },
-            { q: 'A number of students _________ (have) gone to the lab.', ans: 'have' },
-            { q: 'Many a student _________ (have) visited the museum.', ans: 'has' },
-            { q: 'Many students _________ (have) visited the museum.', ans: 'have' },
-            { q: 'The teacher and writer _________ (be) coming to our school.', ans: 'is' },
-            { q: 'A teacher and a writer _________ (be) coming to our school.', ans: 'are' },
-            { q: 'His clothes _________ (be) all made in Italy.', ans: 'are' },
-            { q: 'A pair of shoes _________ (be) under the bed.', ans: 'is' },
-            { q: 'The rich _________ (have) their own problems.', ans: 'have' },
-            { q: 'The injured _________ (have) been sent to the hospital.', ans: 'have' },
-            { q: 'His family _________ (be) very large.', ans: 'is' },
-            { q: 'His family _________ (be) watching TV now.', ans: 'are' },
-            { q: 'The public _________ (have) the right to know the truth.', ans: 'have' },
-            { q: 'One hundred dollars _________ (be) not enough.', ans: 'is' },
-            { q: 'Two miles _________ (be) a short distance.', ans: 'is' },
-            { q: 'Five years _________ (have) passed since we met.', ans: 'have' },
-            { q: 'A part of the cake _________ (have) been eaten.', ans: 'has' },
-            { q: 'A part of the books _________ (have) been sold.', ans: 'have' },
-            { q: 'A lot of information _________ (have) been collected.', ans: 'has' },
-            { q: 'A lot of people _________ (have) attended the meeting.', ans: 'have' },
-            { q: 'Most of the homework _________ (have) been finished.', ans: 'has' },
-            { q: 'Most of the students _________ (have) finished their homework.', ans: 'have' },
-            { q: 'Either you or I _________ (be) going to do it.', ans: 'am' },
-            { q: 'Neither he nor she _________ (have) been to Beijing.', ans: 'has' },
-            { q: 'Not only the students but also the teacher _________ (have) seen the film.', ans: 'has' },
-            { q: 'Not only the teacher but also the students _________ (have) seen the film.', ans: 'have' },
-            { q: 'The teacher as well as the students _________ (have) visited the museum.', ans: 'has' },
-            { q: 'The students as well as the teacher _________ (have) visited the museum.', ans: 'have' },
-            { q: 'There _________ (be) a book and two pens on the desk.', ans: 'is' },
-            { q: 'There _________ (be) two pens and a book on the desk.', ans: 'are' },
-            { q: 'Climbing mountains _________ (be) good for health.', ans: 'is' },
-            { q: 'To learn a foreign language _________ (take) a long time.', ans: 'takes' },
-            { q: 'What he said _________ (have) surprised us.', ans: 'has' },
-            { q: 'What we need _________ (be) more time.', ans: 'is' },
-            { q: 'Neither of them _________ (know) how to solve the problem.', ans: 'knows' },
-            { q: 'Each boy and each girl _________ (have) a copybook.', ans: 'has' },
-            { q: 'Every means _________ (have) been tried.', ans: 'has' },
-            { q: 'Many a scientist _________ (have) devoted his life to science.', ans: 'has' },
-            { q: 'The police _________ (have) caught the thief.', ans: 'have' },
-            { q: 'Cattle _________ (be) grazing on the grassland.', ans: 'are' },
-            { q: 'His glasses _________ (be) new.', ans: 'are' },
-            { q: 'A pair of scissors _________ (be) lying on the table.', ans: 'is' },
-            { q: 'The Chinese people _________ (be) brave and hardworking.', ans: 'are' },
-            { q: 'The United Nations _________ (have) its headquarters in New York.', ans: 'has' },
-            { q: 'Physics _________ (be) my favorite subject.', ans: 'is' },
-            { q: 'News _________ (have) come that he won the first prize.', ans: 'has' },
-            { q: 'One-third of the area _________ (have) been covered with trees.', ans: 'has' },
-            { q: 'One-third of the students _________ (have) been to the museum.', ans: 'have' },
-            { q: 'The old _________ (need) more care.', ans: 'need' },
-            { q: 'The beautiful _________ (be) in the eye of the beholder.', ans: 'is' },
-            { q: 'Either answer _________ (be) acceptable.', ans: 'is' },
-            { q: 'Every student and every teacher _________ (have) attended the meeting.', ans: 'has' },
-            { q: 'The team _________ (be) all in high spirits.', ans: 'are' },
-            { q: 'The team _________ (have) won the game.', ans: 'has' },
-            { q: 'The government _________ (have) made a new policy.', ans: 'has' },
-            { q: 'The government _________ (be) discussing the new policy now.', ans: 'are' },
-            { q: 'A number of people _________ (have) been invited.', ans: 'have' },
-            { q: 'The number of unemployed people _________ (have) increased.', ans: 'has' },
-            { q: 'It is not you but he who _________ (have) been wrong.', ans: 'has' },
-            { q: 'Not only I but also she _________ (be) going to the party.', ans: 'is' },
-            { q: 'He or I _________ (be) to blame.', ans: 'am' },
-            { q: 'Neither the students nor the teacher _________ (have) arrived yet.', ans: 'has' },
-            { q: 'The singer and dancer _________ (have) won many awards.', ans: 'has' },
-            { q: 'The singer and the dancer _________ (have) won many awards.', ans: 'have' },
-            { q: 'Eight hours _________ (be) enough for the work.', ans: 'is' },
-            { q: 'Twenty kilometers _________ (have) been covered.', ans: 'have' },
-            { q: 'The committee _________ (be) divided in opinion.', ans: 'are' },
-            { q: 'The committee _________ (have) decided to build a new bridge.', ans: 'has' },
-            { q: 'Each of us _________ (have) a task to do.', ans: 'has' },
-            { q: 'We each _________ (have) a task to do.', ans: 'have' },
-        ];
+function showWrongAnswers(){
+  var wrongPanel=document.getElementById('wrongPanel');
+  var wrongList=document.getElementById('wrongList');
+  var wrongSummary=document.getElementById('wrongSummary');
+  var wrongCount=0,skipCount=0;
+  var html='';
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    var isWrong=false,isSkip=false;
+    if(!ans||ans.answer===''||(typeof ans.answer==='object'&&!ans.answer.wrong&&!ans.answer.right)){isSkip=true;skipCount++;}
+    else{if(!checkAnswer(q,ans)){isWrong=true;wrongCount++;}}
+    if(!isWrong&&!isSkip)return;
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,j){
+        var co=o.replace(/^[A-D]\.\s*/,'');
+        var ic=L[j]===q.a;
+        var iu=ans&&typeof ans.answer==='string'&&L[j]===ans.answer;
+        var cls='bank-opt';if(ic)cls+=' is-correct';
+        var tag='';if(ic)tag='<span class="bank-opt-tag">正确</span>';if(iu&&!ic)tag='<span class="bank-opt-tag" style="color:var(--wrong)">你的选择</span>';
+        ah+='<div class="'+cls+'" style="'+(iu&&!ic?'background:var(--wrong-bg);border-color:var(--wrong);':'')+'"><span class="bank-opt-letter" style="'+(iu&&!ic?'background:var(--wrong);color:#fff;':'')+'">'+L[j]+'</span><span>'+co+'</span>'+tag+'</div>';
+      });
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      if(isSkip)ah='<div class="wrong-skipped">未作答</div>';
+      else ah='<div class="wrong-user"><span class="tag">你的答案：</span><span>'+ans.answer+'</span></div>';
+      ah+='<div class="wrong-correct"><span class="tag">正确答案：</span><span>'+q.a+'</span></div>';
+    } else if(q.t==='correct'){
+      if(isSkip){
+        ah='<div class="wrong-skipped">未作答</div>';
+      } else {
+        var uw='',ur='';
+        if(typeof ans.answer==='object'){uw=ans.answer.wrong||'';ur=ans.answer.right||'';}
+        else{uw=ans.answer;ur='';}
+        ah='<div class="wrong-user"><span class="tag">你写的错误部分：</span><span>'+(uw||'(空)')+'</span></div>';
+        ah+='<div class="wrong-correct"><span class="tag">实际错误部分：</span><span>'+q.w+'</span></div>';
+        ah+='<div class="wrong-user"><span class="tag">你写的正确形式：</span><span>'+(ur||'(空)')+'</span></div>';
+        ah+='<div class="wrong-correct"><span class="tag">正确形式：</span><span>'+q.r+'</span></div>';
+      }
+    }
+    var exp=q.e||'';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+exp+'</div></div>';
+  });
+  wrongSummary.textContent='共 '+wrongCount+' 题错误，'+skipCount+' 题未答，'+(currentRound.length-wrongCount-skipCount)+' 题正确';
+  wrongList.innerHTML=html||'<div style="padding:40px;text-align:center;color:var(--correct);font-size:18px;font-weight:700;">全部正确，没有错题！</div>';
+  wrongPanel.classList.add('show');
+  overlay.classList.add('show');
+}
 
-        fillData.forEach((d, i) => {
-            ALL_QUESTIONS.push({
-                id: 'f' + String(i + 1).padStart(3, '0'),
-                type: 'fill',
-                typeLabel: '✏️ 语法填空',
-                question: d.q,
-                answer: d.ans,
-                displayAnswer: d.ans
-            });
-        });
-
-        // ---------- 改错题 (40) ----------
-        const correctData = [
-            { q: 'A large amount of people were present at the meeting.', error: 'amount', correct: 'number' },
-            { q: 'Large quantities of water has been wasted.', error: 'has', correct: 'have' },
-            { q: 'This kind of flowers were imported from Japan.', error: 'were', correct: 'was' },
-            { q: 'A day or two are enough for this work.', error: 'are', correct: 'is' },
-            { q: 'One or two day is enough for this work.', error: 'day', correct: 'days' },
-            { q: 'This is one of the rooms that was damaged in the fire.', error: 'was', correct: 'were' },
-            { q: 'Mary is the only one of the youngest girls who play in the band.', error: 'play', correct: 'plays' },
-            { q: 'The number of teachers in our college have greatly increased.', error: 'have', correct: 'has' },
-            { q: 'A number of teachers in this school is from the countryside.', error: 'is', correct: 'are' },
-            { q: 'What are the population of China?', error: 'are', correct: 'is' },
-            { q: 'One-third of the population in this city is workers.', error: 'is', correct: 'are' },
-            { q: 'He is one of the boys who has come here on time.', error: 'has', correct: 'have' },
-            { q: 'Many a professor have visited our school.', error: 'have', correct: 'has' },
-            { q: 'The students in our school each has an English dictionary.', error: 'has', correct: 'have' },
-            { q: 'A teacher and writer are in the office.', error: 'are', correct: 'is' },
-            { q: 'My trousers is black.', error: 'is', correct: 'are' },
-            { q: 'A pair of trousers are on my bed.', error: 'are', correct: 'is' },
-            { q: 'The rich is eager to help the poor.', error: 'is', correct: 'are' },
-            { q: 'The family is all fond of football.', error: 'is', correct: 'are' },
-            { q: 'The family are the tiniest cell of the society.', error: 'are', correct: 'is' },
-            { q: 'Two years are enough to learn a foreign language.', error: 'are', correct: 'is' },
-            { q: 'A part of the textbooks has arrived.', error: 'has', correct: 'have' },
-            { q: 'A lot of money have been spent on this project.', error: 'have', correct: 'has' },
-            { q: 'Most of the apples is rotten.', error: 'is', correct: 'are' },
-            { q: 'The injured in the tsunami is being taken good care of.', error: 'is', correct: 'are' },
-            { q: 'A knife and fork are on the table.', error: 'are', correct: 'is' },
-            { q: 'How and why Jack came to China are not known.', error: 'are', correct: 'is' },
-            { q: 'Neither the students nor the teacher know anything about it.', error: 'know', correct: 'knows' },
-            { q: 'He or you has taken my pen.', error: 'has', correct: 'have' },
-            { q: 'Mr. Johnson as well as his wife and children are visiting the Great Wall now.', error: 'are',
-            correct: 'is' },
-            { q: 'Either you or he are interested in playing chess.', error: 'are', correct: 'is' },
-            { q: 'There are a pen, two pencils, and three books on the desk.', error: 'are', correct: 'is' },
-            { q: 'The factory, including its machines and buildings, were burnt last night.', error: 'were',
-            correct: 'was' },
-            { q: 'Not the teacher but the students is excited.', error: 'is', correct: 'are' },
-            { q: 'Neither he nor I are for the plan.', error: 'are', correct: 'am' },
-            { q: 'Every boy and girl show great interest in extra-curriculum activities.', error: 'show',
-            correct: 'shows' },
-            { q: 'The United States are leading the world in science and technology.', error: 'are', correct: 'is' },
-            { q: 'My father, together with some of his old friends, have been there already.', error: 'have',
-                correct: 'has' },
-            { q: 'Neither of my sisters like sports.', error: 'like', correct: 'likes' },
-            { q: 'Every means have been tried but without much result.', error: 'have', correct: 'has' },
-        ];
-
-        correctData.forEach((d, i) => {
-            ALL_QUESTIONS.push({
-                id: 'r' + String(i + 1).padStart(3, '0'),
-                type: 'correct',
-                typeLabel: '🔧 改错题',
-                question: d.q,
-                answer: d.correct,
-                errorWord: d.error,
-                correctWord: d.correct,
-                displayAnswer: `错误: ${d.error} → 正确: ${d.correct}`
-            });
-        });
-
-        // ============================================================
-        //  2. 应用状态
-        // ============================================================
-        const TOTAL_PER_ROUND = 30;
-        let currentPool = [];
-        let currentIndex = 0;
-        let userAnswers = {};
-        let submitted = {};
-        let results = {};
-        let historyScores = JSON.parse(localStorage.getItem('subj_agree_history') || '[]');
-        let bestScore = historyScores.length ? Math.max(...historyScores) : null;
-        let currentScore = null;
-        let bankFilter = 'all';
-
-        function shuffle(arr) {
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
-        }
-
-        function pickRandomQuestions(count) {
-            const shuffled = shuffle([...Array(ALL_QUESTIONS.length).keys()]);
-            return shuffled.slice(0, count);
-        }
-
-        function reshuffle() {
-            const pool = pickRandomQuestions(TOTAL_PER_ROUND);
-            currentPool = pool;
-            currentIndex = 0;
-            userAnswers = {};
-            submitted = {};
-            results = {};
-            currentScore = null;
-            renderQuestion();
-            updateStats();
-            document.getElementById('feedback').classList.remove('show');
-            updateTrendDisplay();
-        }
-
-        function resetProgress() {
-            if (confirm('确定要重置当前进度吗？所有答题记录将被清除。')) {
-                reshuffle();
-            }
-        }
-
-        function getCurrentQuestion() {
-            if (!currentPool.length || currentIndex >= currentPool.length) return null;
-            return ALL_QUESTIONS[currentPool[currentIndex]];
-        }
-
-        // ============================================================
-        //  3. 渲染题目（已修正：保留括号和提示词）
-        // ============================================================
-        function renderQuestion() {
-            const q = getCurrentQuestion();
-            if (!q) {
-                document.getElementById('qText').textContent = '🎉 所有题目已完成！';
-                document.getElementById('qInteraction').innerHTML = '';
-                document.getElementById('qTypeBadge').textContent = '🎯 完成';
-                document.getElementById('qIndexDisplay').textContent = '-- / --';
-                document.getElementById('qNavInfo').textContent = '-- / --';
-                return;
-            }
-
-            const idx = currentIndex + 1;
-            const total = currentPool.length;
-            document.getElementById('qIndexDisplay').textContent = `${idx} / ${total}`;
-            document.getElementById('qNavInfo').textContent = `${idx} / ${total}`;
-            document.getElementById('qTypeBadge').textContent = q.typeLabel;
-
-            // 直接显示题干，保留括号和提示词 (不再替换)
-            document.getElementById('qText').textContent = q.question;
-
-            const container = document.getElementById('qInteraction');
-            container.innerHTML = '';
-
-            const isSubmitted = submitted[q.id] || false;
-
-            if (q.type === 'choice') {
-                const grid = document.createElement('div');
-                grid.className = 'options-grid';
-                const labels = ['A', 'B', 'C', 'D'];
-                q.options.forEach((opt, i) => {
-                    const div = document.createElement('div');
-                    div.className = 'option-item';
-                    if (userAnswers[q.id] === i) div.classList.add('selected');
-                    if (isSubmitted) {
-                        if (i === q.answer) div.classList.add('correct-reveal');
-                        if (userAnswers[q.id] === i && i !== q.answer) div.classList.add('wrong-reveal');
-                    }
-                    div.innerHTML = `
-                        <span class="option-radio">${labels[i]}</span>
-                        <span class="option-label">${opt}</span>
-                    `;
-                    div.onclick = () => {
-                        if (isSubmitted) return;
-                        userAnswers[q.id] = i;
-                        renderQuestion();
-                    };
-                    grid.appendChild(div);
-                });
-                container.appendChild(grid);
-            } else if (q.type === 'fill') {
-                const area = document.createElement('div');
-                area.className = 'fill-area';
-                const row = document.createElement('div');
-                row.className = 'fill-row';
-                row.innerHTML = `
-                    <label>📝 填空</label>
-                    <input class="fill-input" type="text" id="fillInput" 
-                           placeholder="输入答案..." 
-                           value="${userAnswers[q.id] || ''}"
-                           ${isSubmitted ? 'disabled' : ''}>
-                `;
-                if (isSubmitted) {
-                    const inp = row.querySelector('.fill-input');
-                    if (userAnswers[q.id] && userAnswers[q.id].trim().toLowerCase() === q.answer.toLowerCase()) {
-                        inp.classList.add('correct');
-                    } else if (userAnswers[q.id]) {
-                        inp.classList.add('wrong');
-                    }
-                }
-                area.appendChild(row);
-                container.appendChild(area);
-                const inp = document.getElementById('fillInput');
-                if (inp && !isSubmitted) {
-                    inp.addEventListener('input', (e) => {
-                        userAnswers[q.id] = e.target.value;
-                    });
-                }
-            } else if (q.type === 'correct') {
-                const area = document.createElement('div');
-                area.className = 'fill-area';
-                const row1 = document.createElement('div');
-                row1.className = 'fill-row';
-                row1.innerHTML = `
-                    <label>❌ 错误词</label>
-                    <input class="fill-input" type="text" id="errorInput" 
-                           placeholder="输入错误的词..." 
-                           value="${userAnswers[q.id + '_err'] || ''}"
-                           ${isSubmitted ? 'disabled' : ''}>
-                `;
-                const row2 = document.createElement('div');
-                row2.className = 'fill-row';
-                row2.innerHTML = `
-                    <label>✅ 正确词</label>
-                    <input class="fill-input" type="text" id="correctInput" 
-                           placeholder="输入正确的词..." 
-                           value="${userAnswers[q.id + '_cor'] || ''}"
-                           ${isSubmitted ? 'disabled' : ''}>
-                `;
-                area.appendChild(row1);
-                area.appendChild(row2);
-                container.appendChild(area);
-
-                if (isSubmitted) {
-                    const eInp = document.getElementById('errorInput');
-                    const cInp = document.getElementById('correctInput');
-                    const eVal = userAnswers[q.id + '_err'] || '';
-                    const cVal = userAnswers[q.id + '_cor'] || '';
-                    const isErrOk = eVal.trim().toLowerCase() === q.errorWord.toLowerCase();
-                    const isCorOk = cVal.trim().toLowerCase() === q.correctWord.toLowerCase();
-                    if (eVal) eInp.classList.add(isErrOk ? 'correct' : 'wrong');
-                    if (cVal) cInp.classList.add(isCorOk ? 'correct' : 'wrong');
-                } else {
-                    document.getElementById('errorInput').addEventListener('input', (e) => {
-                        userAnswers[q.id + '_err'] = e.target.value;
-                    });
-                    document.getElementById('correctInput').addEventListener('input', (e) => {
-                        userAnswers[q.id + '_cor'] = e.target.value;
-                    });
-                }
-            }
-
-            if (isSubmitted) {
-                const fb = document.getElementById('feedback');
-                const isCorrect = results[q.id] === 'correct';
-                fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong');
-                document.getElementById('fbIcon').textContent = isCorrect ? '✅' : '❌';
-                document.getElementById('fbText').textContent = isCorrect ? '回答正确！' : '回答错误，查看正确答案。';
-                if (q.type === 'choice') {
-                    document.getElementById('fbText').textContent += ` 正确答案: ${q.options[q.answer]}`;
-                } else if (q.type === 'fill') {
-                    document.getElementById('fbText').textContent += ` 正确答案: ${q.answer}`;
-                } else if (q.type === 'correct') {
-                    document.getElementById('fbText').textContent += ` 错误词: ${q.errorWord} → 正确词: ${q.correctWord}`;
-                }
-            } else {
-                document.getElementById('feedback').classList.remove('show');
-            }
-
-            updateStats();
-        }
-
-        function prevQuestion() {
-            if (currentIndex > 0) { currentIndex--;
-                renderQuestion(); }
-        }
-
-        function nextQuestion() {
-            if (currentIndex < currentPool.length - 1) { currentIndex++;
-                renderQuestion(); }
-        }
-
-        function submitAll() {
-            let anyAnswered = false;
-            for (const idx of currentPool) {
-                const q = ALL_QUESTIONS[idx];
-                if (submitted[q.id]) continue;
-                let hasAnswer = false;
-                if (q.type === 'choice') {
-                    if (userAnswers[q.id] !== undefined && userAnswers[q.id] !== null) hasAnswer = true;
-                } else if (q.type === 'fill') {
-                    if (userAnswers[q.id] && userAnswers[q.id].trim() !== '') hasAnswer = true;
-                } else if (q.type === 'correct') {
-                    const e = userAnswers[q.id + '_err'] || '';
-                    const c = userAnswers[q.id + '_cor'] || '';
-                    if (e.trim() !== '' || c.trim() !== '') hasAnswer = true;
-                }
-                if (hasAnswer) anyAnswered = true;
-
-                let isCorrect = false;
-                if (q.type === 'choice') {
-                    const userAns = userAnswers[q.id];
-                    if (userAns !== undefined && userAns !== null && userAns === q.answer) isCorrect = true;
-                } else if (q.type === 'fill') {
-                    const userAns = (userAnswers[q.id] || '').trim();
-                    if (userAns.toLowerCase() === q.answer.toLowerCase()) isCorrect = true;
-                } else if (q.type === 'correct') {
-                    const e = (userAnswers[q.id + '_err'] || '').trim().toLowerCase();
-                    const c = (userAnswers[q.id + '_cor'] || '').trim().toLowerCase();
-                    if (e === q.errorWord.toLowerCase() && c === q.correctWord.toLowerCase()) isCorrect = true;
-                }
-                submitted[q.id] = true;
-                results[q.id] = isCorrect ? 'correct' : 'wrong';
-            }
-
-            if (!anyAnswered) {
-                alert('⚠️ 请至少回答一题再提交！');
-                return;
-            }
-
-            let correctCount = 0;
-            let totalAnswered = 0;
-            for (const idx of currentPool) {
-                const q = ALL_QUESTIONS[idx];
-                if (submitted[q.id]) {
-                    totalAnswered++;
-                    if (results[q.id] === 'correct') correctCount++;
-                }
-            }
-            currentScore = correctCount;
-            historyScores.push(correctCount);
-            localStorage.setItem('subj_agree_history', JSON.stringify(historyScores));
-            bestScore = Math.max(...historyScores);
-            updateStats();
-            updateTrendDisplay();
-            renderQuestion();
-            const fb = document.getElementById('feedback');
-            fb.className = 'feedback show correct';
-            document.getElementById('fbIcon').textContent = '📊';
-            document.getElementById('fbText').textContent =
-                `已批改 ${totalAnswered} 题，正确 ${correctCount} 题，正确率 ${Math.round(correctCount/totalAnswered*100)}%。${correctCount/totalAnswered >= 0.8 ? '🌟 优秀！继续保持！' : correctCount/totalAnswered >= 0.6 ? '💪 加油，再练练！' : '📖 建议复习主谓一致规则！'}`;
-        }
-
-        function updateStats() {
-            const total = currentPool.length;
-            let answered = 0,
-                correct = 0;
-            for (const idx of currentPool) {
-                const q = ALL_QUESTIONS[idx];
-                if (submitted[q.id]) {
-                    answered++;
-                    if (results[q.id] === 'correct') correct++;
-                }
-            }
-            document.getElementById('progressNum').textContent = `${answered}/${total}`;
-            const rate = answered > 0 ? Math.round(correct / answered * 100) : 0;
-            document.getElementById('rateNum').textContent = answered > 0 ? rate + '%' : '0%';
-            document.getElementById('bestNum').textContent = bestScore !== null ? bestScore + '/' + total : '--';
-        }
-
-        function updateTrendDisplay() {
-            const el = document.getElementById('trendDisplay');
-            const scores = historyScores;
-            if (scores.length < 2) {
-                el.className = 'trend same';
-                el.textContent = '— 首次';
-                return;
-            }
-            const latest = scores[scores.length - 1];
-            const prev = scores[scores.length - 2];
-            if (latest > prev) {
-                el.className = 'trend up';
-                el.textContent = `📈 上升 +${latest - prev}`;
-            } else if (latest < prev) {
-                el.className = 'trend down';
-                el.textContent = `📉 下降 ${latest - prev}`;
-            } else {
-                el.className = 'trend same';
-                el.textContent = `➖ 持平 ${latest}`;
-            }
-        }
-
-        // ============================================================
-        //  4. 题库查看
-        // ============================================================
-        function openBank() {
-            document.getElementById('bankModal').classList.add('open');
-            renderBankList('all');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeBank() {
-            document.getElementById('bankModal').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function filterBank(type) {
-            bankFilter = type;
-            renderBankList(type);
-        }
-
-        function renderBankList(type) {
-            const container = document.getElementById('bankList');
-            let filtered = ALL_QUESTIONS;
-            if (type === 'choice') filtered = ALL_QUESTIONS.filter(q => q.type === 'choice');
-            else if (type === 'fill') filtered = ALL_QUESTIONS.filter(q => q.type === 'fill');
-            else if (type === 'correct') filtered = ALL_QUESTIONS.filter(q => q.type === 'correct');
-
-            let html = '';
-            filtered.forEach((q, i) => {
-                let ansDisplay = q.displayAnswer || q.answer || '';
-                if (q.type === 'correct') {
-                    ansDisplay = `❌ ${q.errorWord} → ✅ ${q.correctWord}`;
-                }
-                html += `
-                    <div class="bank-item">
-                        <span class="btype">${q.typeLabel}</span>
-                        <span class="bq">${q.question}</span>
-                        <span class="bans">✔ ${ansDisplay}</span>
-                    </div>
-                `;
-            });
-            container.innerHTML = html || '<p style="color:#6a8aaa;padding:20px;">暂无题目</p>';
-        }
-
-        document.getElementById('bankModal').addEventListener('click', function(e) {
-            if (e.target === this) closeBank();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeBank();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevQuestion();
-            if (e.key === 'ArrowRight') nextQuestion();
-            if (e.key === 'Enter') {
-                const fb = document.getElementById('feedback');
-                if (!fb.classList.contains('show')) submitAll();
-            }
-        });
-
-        // ============================================================
-        //  5. 初始化
-        // ============================================================
-        function init() {
-            const pool = pickRandomQuestions(TOTAL_PER_ROUND);
-            currentPool = pool;
-            currentIndex = 0;
-            userAnswers = {};
-            submitted = {};
-            results = {};
-            currentScore = null;
-            renderQuestion();
-            updateStats();
-            updateTrendDisplay();
-        }
-
-        init();
-    </script>
-
+document.getElementById('reshuffleBtn').addEventListener('click',initRound);
+document.getElementById('bankBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('bankClose').addEventListener('click',function(){bankPanel.classList.remove('show');overlay.classList.remove('show');});
+overlay.addEventListener('click',function(){bankPanel.classList.remove('show');document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.getElementById('bankSearch').addEventListener('input',function(e){renderBank(e.target.value);});
+document.getElementById('againBtn').addEventListener('click',initRound);
+document.getElementById('reviewBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('wrongBtn').addEventListener('click',showWrongAnswers);
+document.getElementById('wrongClose').addEventListener('click',function(){document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.addEventListener('keydown',function(e){
+  if(bankPanel.classList.contains('show')||document.getElementById('wrongPanel').classList.contains('show'))return;
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft')prevQuestion();
+  if(e.key==='ArrowRight')goNext();
+  if(['a','A'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="A"]');if(b)onOptionClick(b,'A');}
+  if(['b','B'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="B"]');if(b)onOptionClick(b,'B');}
+  if(['c','C'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="C"]');if(b)onOptionClick(b,'C');}
+  if(['d','D'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="D"]');if(b)onOptionClick(b,'D');}
+});
+renderHistory();initRound();
+</script>
 </body>
 </html>
