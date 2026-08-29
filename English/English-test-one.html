@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>英语动词 · 专项挑战</title>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== 全局重置 & 主题 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -170,9 +168,6 @@
             transform: scale(1.04);
             box-shadow: 0 12px 50px rgba(245, 200, 66, 0.45);
         }
-        .hero .btn-start i {
-            font-size: 1.4rem;
-        }
         .stats-mini {
             display: flex;
             justify-content: center;
@@ -327,6 +322,7 @@
             width: 18px;
             height: 18px;
             cursor: pointer;
+            flex-shrink: 0;
         }
         .options .opt label {
             cursor: pointer;
@@ -357,6 +353,7 @@
             transition: 0.25s;
             outline: none;
             font-family: inherit;
+            flex: 1;
         }
         .fill-group input:focus {
             border-color: #f5c842;
@@ -377,11 +374,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex: 1 1 200px;
         }
         .error-group .err-item label {
             color: #b6c9f0;
             font-weight: 500;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
         .error-group .err-item input {
             background: rgba(255, 255, 255, 0.05);
@@ -390,10 +389,11 @@
             padding: 10px 16px;
             color: #e8edf5;
             font-size: 0.95rem;
-            min-width: 140px;
+            min-width: 120px;
             transition: 0.25s;
             outline: none;
             font-family: inherit;
+            flex: 1;
         }
         .error-group .err-item input:focus {
             border-color: #f5c842;
@@ -506,6 +506,7 @@
             outline: none;
             font-family: inherit;
             transition: 0.25s;
+            flex: 1;
         }
         .bank-header input:focus {
             border-color: #f5c842;
@@ -602,6 +603,163 @@
         .bank-item .b-exp.show {
             display: block;
         }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 215, 100, 0.2);
+            color: #d6e2ff;
+            padding: 10px 28px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.25s;
+            font-size: 0.95rem;
+        }
+        .btn-outline:hover {
+            background: rgba(255, 215, 100, 0.06);
+            border-color: #f5c842;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #f5c842, #e0a82b);
+            border: none;
+            color: #0b0e1a;
+            padding: 10px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2);
+        }
+        .btn-gold:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 30px rgba(245, 200, 66, 0.35);
+        }
+        .btn-gold:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .text-gold {
+            color: #f5c842;
+        }
+        .text-muted {
+            color: #7a8fb0;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-16 {
+            gap: 16px;
+        }
+
+        /* 一题一界面导航 */
+        .exam-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .exam-navigation .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .exam-navigation .nav-buttons button {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 215, 100, 0.12);
+            color: #d6e2ff;
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .exam-navigation .nav-buttons button:hover:not(:disabled) {
+            background: rgba(255, 215, 100, 0.12);
+            border-color: #f5c842;
+        }
+        .exam-navigation .nav-buttons button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .exam-navigation .nav-buttons button.primary {
+            background: linear-gradient(135deg, #f5c842, #e0a82b);
+            border-color: #f5c842;
+            color: #0b0e1a;
+        }
+        .exam-navigation .nav-buttons button.primary:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.25);
+        }
+        .exam-navigation .dot-indicators {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex: 1;
+        }
+        .exam-navigation .dot-indicators .dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #7a8fb0;
+            cursor: pointer;
+            transition: 0.2s;
+            user-select: none;
+        }
+        .exam-navigation .dot-indicators .dot:hover {
+            background: rgba(255, 215, 100, 0.1);
+        }
+        .exam-navigation .dot-indicators .dot.active {
+            border-color: #f5c842;
+            background: rgba(245, 200, 66, 0.15);
+            color: #f5c842;
+        }
+        .exam-navigation .dot-indicators .dot.answered {
+            background: rgba(76, 217, 160, 0.2);
+            color: #4cd9a0;
+        }
+        .exam-navigation .dot-indicators .dot.answered.active {
+            border-color: #f5c842;
+            background: rgba(76, 217, 160, 0.3);
+            color: #f5c842;
+        }
+        .exam-navigation .dot-indicators .dot.submitted {
+            background: rgba(245, 200, 66, 0.15);
+            color: #f5c842;
+        }
+        .exam-navigation .dot-indicators .dot.submitted.correct-dot {
+            background: rgba(76, 217, 160, 0.25);
+            color: #4cd9a0;
+        }
+        .exam-navigation .dot-indicators .dot.submitted.wrong-dot {
+            background: rgba(245, 107, 107, 0.2);
+            color: #f56b6b;
+        }
+
         @media (max-width: 780px) {
             .app-container {
                 padding: 20px 18px;
@@ -666,6 +824,21 @@
             .bank-header input {
                 min-width: unset;
             }
+            .exam-navigation {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .exam-navigation .nav-buttons {
+                justify-content: center;
+            }
+            .exam-navigation .dot-indicators {
+                gap: 4px;
+            }
+            .exam-navigation .dot-indicators .dot {
+                width: 24px;
+                height: 24px;
+                font-size: 0.6rem;
+            }
         }
         @media (max-width: 480px) {
             .app-container {
@@ -690,65 +863,6 @@
                 font-size: 0.9rem;
             }
         }
-        .text-gold {
-            color: #f5c842;
-        }
-        .text-muted {
-            color: #7a8fb0;
-        }
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .flex-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .gap-8 {
-            gap: 8px;
-        }
-        .gap-16 {
-            gap: 16px;
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid rgba(255, 215, 100, 0.2);
-            color: #d6e2ff;
-            padding: 10px 28px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.25s;
-            font-size: 0.95rem;
-        }
-        .btn-outline:hover {
-            background: rgba(255, 215, 100, 0.06);
-            border-color: #f5c842;
-        }
-        .btn-gold {
-            background: linear-gradient(135deg, #f5c842, #e0a82b);
-            border: none;
-            color: #0b0e1a;
-            padding: 10px 32px;
-            border-radius: 40px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.25s;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 20px rgba(245, 200, 66, 0.2);
-        }
-        .btn-gold:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 30px rgba(245, 200, 66, 0.35);
-        }
-        .btn-gold:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .hidden {
-            display: none !important;
-        }
     </style>
 </head>
 <body>
@@ -768,6 +882,7 @@
             </div>
         </header>
 
+        <!-- ===== 主页 ===== -->
         <div class="view active" id="viewHome">
             <div class="hero">
                 <div class="big-icon"><i class="fas fa-graduation-cap"></i></div>
@@ -784,6 +899,7 @@
             </div>
         </div>
 
+        <!-- ===== 考试视图 ===== -->
         <div class="view" id="viewExam">
             <div class="exam-header">
                 <div class="exam-progress">
@@ -798,7 +914,20 @@
                     <button id="submitExamBtn" class="primary"><i class="fas fa-check-circle"></i> 提交</button>
                 </div>
             </div>
+
+            <!-- 题目容器：只显示当前一题 -->
             <div id="examQuestions"></div>
+
+            <!-- 导航：上一题 / 下一题 + 点状指示器 -->
+            <div class="exam-navigation" id="examNav">
+                <div class="nav-buttons">
+                    <button id="prevQBtn" disabled><i class="fas fa-chevron-left"></i> 上一题</button>
+                    <button id="nextQBtn" class="primary">下一题 <i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dot-indicators" id="dotIndicators"></div>
+            </div>
+
+            <!-- 结果面板 -->
             <div id="resultPanel" class="result-panel hidden">
                 <div class="score-big" id="finalScore">0%</div>
                 <div class="score-label">正确率</div>
@@ -810,6 +939,7 @@
             </div>
         </div>
 
+        <!-- ===== 题库视图 ===== -->
         <div class="view" id="viewBank">
             <div class="bank-header">
                 <input type="text" id="bankSearch" placeholder="🔍 搜索题目..." />
@@ -832,11 +962,11 @@
 
         // ---------- 选择题 1-80 ----------
         const choiceData = [
-            { id: 1, q: 'I ______ a student. My parents ______ both teachers.', o: ['A. am; are', 'B. is; are', 'C. am; is',
-                    'D. are; am'
+            { id: 1, q: 'I ______ a student. My parents ______ both teachers.', o: ['A. am; are', 'B. is; are',
+                    'C. am; is', 'D. are; am'
                 ], a: 'A', e: 'I 用 am，parents 复数用 are。' },
-            { id: 2, q: 'She ______ very beautiful today.', o: ['A. looks', 'B. look', 'C. looked', 'D. looking'], a: 'A',
-                e: 'looks 作系动词，主语 She 三单用 looks。' },
+            { id: 2, q: 'She ______ very beautiful today.', o: ['A. looks', 'B. look', 'C. looked', 'D. looking'],
+                a: 'A', e: 'looks 作系动词，主语 She 三单用 looks。' },
             { id: 3, q: 'The food ______ delicious. I want more.', o: ['A. tastes', 'B. taste', 'C. is tasting',
                     'D. have tasted'
                 ], a: 'A', e: 'tastes 作系动词，food 单数。' },
@@ -844,8 +974,8 @@
                 e: 'He 三单，一般现在时用 goes。' },
             { id: 5, q: 'They ______ playing football when I saw them.', o: ['A. are', 'B. were', 'C. was', 'D. is'],
                 a: 'B', e: 'when 引导过去时间，过去进行时，They 复数用 were。' },
-            { id: 6, q: 'I ______ you yesterday, but you weren\'t at home.', o: ['A. call', 'B. called', 'C. have called',
-                    'D. was calling'
+            { id: 6, q: 'I ______ you yesterday, but you weren\'t at home.', o: ['A. call', 'B. called',
+                    'C. have called', 'D. was calling'
                 ], a: 'B', e: 'yesterday 用一般过去时 called。' },
             { id: 7, q: 'She ______ English for five years.', o: ['A. learn', 'B. learns', 'C. has learned',
                     'D. learned'
@@ -858,12 +988,12 @@
             { id: 10, q: 'My mother ______ dinner when I got home.', o: ['A. cook', 'B. cooks', 'C. was cooking',
                     'D. has cooked'
                 ], a: 'C', e: 'when I got home 过去时间点，过去进行时 was cooking。' },
-            { id: 11, q: '—______ you like swimming? —Yes, I do.', o: ['A. Are', 'B. Do', 'C. Does', 'D. Is'], a: 'B',
-                e: 'like 实义动词，疑问句用 Do。' },
+            { id: 11, q: '—______ you like swimming? —Yes, I do.', o: ['A. Are', 'B. Do', 'C. Does', 'D. Is'],
+                a: 'B', e: 'like 实义动词，疑问句用 Do。' },
             { id: 12, q: 'The book ______ interesting. I love it.', o: ['A. is', 'B. are', 'C. am', 'D. be'], a: 'A',
                 e: 'book 单数用 is。' },
-            { id: 13, q: 'They ______ a new hospital in our city next year.', o: ['A. build', 'B. built', 'C. will build',
-                    'D. have built'
+            { id: 13, q: 'They ______ a new hospital in our city next year.', o: ['A. build', 'B. built',
+                    'C. will build', 'D. have built'
                 ], a: 'C', e: 'next year 将来时 will build。' },
             { id: 14, q: 'She ______ to the party if she is free.', o: ['A. come', 'B. comes', 'C. will come',
                     'D. came'
@@ -876,8 +1006,8 @@
             { id: 17, q: 'I ______ a letter when you called.', o: ['A. write', 'B. wrote', 'C. was writing',
                     'D. have written'
                 ], a: 'C', e: 'when you called 过去时间点，过去进行时 was writing。' },
-            { id: 18, q: 'This problem ______ by the students yesterday.', o: ['A. solve', 'B. solved', 'C. was solved',
-                    'D. has solved'
+            { id: 18, q: 'This problem ______ by the students yesterday.', o: ['A. solve', 'B. solved',
+                    'C. was solved', 'D. has solved'
                 ], a: 'C', e: 'yesterday 过去被动，was solved。' },
             { id: 19, q: 'She ______ a doctor in the future.', o: ['A. is', 'B. was', 'C. will be', 'D. has been'],
                 a: 'C', e: 'in the future 将来时 will be。' },
@@ -914,8 +1044,8 @@
             { id: 31, q: 'The teacher ______ the students carefully.', o: ['A. listens', 'B. listens to', 'C. hear',
                     'D. hears to'
                 ], a: 'B', e: 'listen 不及物动词，接宾语用 listen to。' },
-            { id: 32, q: 'They ______ the meeting because of the bad weather.', o: ['A. cancelled', 'B. cancelled with',
-                    'C. cancelled for', 'D. cancelled about'
+            { id: 32, q: 'They ______ the meeting because of the bad weather.', o: ['A. cancelled',
+                    'B. cancelled with', 'C. cancelled for', 'D. cancelled about'
                 ], a: 'A', e: 'cancel 及物动词，直接接宾语。' },
             { id: 33, q: 'He ______ his father very much.', o: ['A. looks like', 'B. looks', 'C. is looking',
                     'D. look like'
@@ -931,82 +1061,88 @@
             { id: 37, q: '—Must I finish the work today? —No, you ______.', o: ['A. mustn\'t', 'B. needn\'t',
                     'C. can\'t', 'D. don\'t'
                 ], a: 'B', e: 'Must 的否定回答用 needn\'t（不必）。' },
-            { id: 38, q: 'He ______ be at home because the light is on.', o: ['A. must', 'B. can', 'C. may', 'D. could'],
-                a: 'A', e: '灯亮着，推测"一定在家"用 must。' },
+            { id: 38, q: 'He ______ be at home because the light is on.', o: ['A. must', 'B. can', 'C. may',
+                    'D. could'
+                ], a: 'A', e: '灯亮着，推测"一定在家"用 must。' },
             { id: 39, q: 'She ______ speak three languages when she was five.', o: ['A. can', 'B. could', 'C. may',
                     'D. might'
                 ], a: 'B', e: '五岁时"能够"用 could。' },
             { id: 40, q: '______ I use your phone? I need to make a call.', o: ['A. Must', 'B. Should', 'C. May',
                     'D. Will'
                 ], a: 'C', e: '表示请求许可用 May。' },
-            { id: 41, q: 'You ______ respect your elders.', o: ['A. should', 'B. would', 'C. may', 'D. could'], a: 'A',
-                e: '表示"应该"用 should。' },
+            { id: 41, q: 'You ______ respect your elders.', o: ['A. should', 'B. would', 'C. may', 'D. could'],
+                a: 'A', e: '表示"应该"用 should。' },
             { id: 42, q: 'She ______ not tell the secret.', o: ['A. dare', 'B. dares', 'C. dared', 'D. daring'],
                 a: 'A', e: 'dare 作情态动词，否定 dare not do。' },
-            { id: 43, q: 'He ______ to tell us the truth.', o: ['A. need', 'B. needs', 'C. dared', 'D. dare'], a: 'B',
-                e: 'need 作实义动词，三单用 needs to do。' },
-            { id: 44, q: 'If you ______ help me, I will be grateful.', o: ['A. will', 'B. would', 'C. shall', 'D. should'],
-                a: 'A', e: 'if 条件句中用 will 表示"愿意"。' },
-            { id: 45, q: 'We ______ leave now. It\'s getting dark.', o: ['A. had better', 'B. would rather', 'C. may',
-                    'D. could'
+            { id: 43, q: 'He ______ to tell us the truth.', o: ['A. need', 'B. needs', 'C. dared', 'D. dare'],
+                a: 'B', e: 'need 作实义动词，三单用 needs to do。' },
+            { id: 44, q: 'If you ______ help me, I will be grateful.', o: ['A. will', 'B. would', 'C. shall',
+                    'D. should'
+                ], a: 'A', e: 'if 条件句中用 will 表示"愿意"。' },
+            { id: 45, q: 'We ______ leave now. It\'s getting dark.', o: ['A. had better', 'B. would rather',
+                    'C. may', 'D. could'
                 ], a: 'A', e: 'had better 表示"最好"，后接动词原形。' },
             { id: 46, q: 'He ______ have read this book; he knows the characters well.', o: ['A. must', 'B. can',
                     'C. may', 'D. might'
                 ], a: 'A', e: '对过去肯定推测用 must have done。' },
-            { id: 47, q: 'You ______ have told me earlier. Now it\'s too late.', o: ['A. should', 'B. must', 'C. may',
-                    'D. could'
+            { id: 47, q: 'You ______ have told me earlier. Now it\'s too late.', o: ['A. should', 'B. must',
+                    'C. may', 'D. could'
                 ], a: 'A', e: '本该做而未做用 should have done。' },
             { id: 48, q: 'The plan ______ have been refused by the committee.', o: ['A. may', 'B. must', 'C. can',
                     'D. will'
                 ], a: 'A', e: '对过去可能性的推测用 may have done。' },
-            { id: 49, q: 'We ______ have done it better in those circumstances.', o: ['A. could', 'B. must', 'C. should',
-                    'D. may'
+            { id: 49, q: 'We ______ have done it better in those circumstances.', o: ['A. could', 'B. must',
+                    'C. should', 'D. may'
                 ], a: 'A', e: '本能做而未做用 could have done。' },
-            { id: 50, q: 'You ______ have watered those roses. It rained just now.', o: ['A. needn\'t', 'B. mustn\'t',
-                    'C. couldn\'t', 'D. shouldn\'t'
+            { id: 50, q: 'You ______ have watered those roses. It rained just now.', o: ['A. needn\'t',
+                    'B. mustn\'t', 'C. couldn\'t', 'D. shouldn\'t'
                 ], a: 'A', e: '本不必做而做了用 needn\'t have done。' },
-            { id: 51, q: 'She ______ have left home. I saw her just now.', o: ['A. can\'t', 'B. mustn\'t', 'C. needn\'t',
-                    'D. may not'
+            { id: 51, q: 'She ______ have left home. I saw her just now.', o: ['A. can\'t', 'B. mustn\'t',
+                    'C. needn\'t', 'D. may not'
                 ], a: 'A', e: '对过去否定推测用 can\'t have done。' },
             { id: 52, q: 'You ______ not make private phone calls in work time.', o: ['A. ought to', 'B. ought',
                     'C. should', 'D. would'
                 ], a: 'A', e: 'ought to 表示客观义务，否定为 ought not to。' },
             { id: 53, q: 'He ______ be punished for his mistake.', o: ['A. shall', 'B. will', 'C. may', 'D. can'],
                 a: 'A', e: 'shall 用于三三人称表示"命令、警告"。' },
-            { id: 54, q: 'I ______ rather stay at home than go out.', o: ['A. had', 'B. would', 'C. should', 'D. could'],
-                a: 'B', e: 'would rather do 为固定搭配。' },
+            { id: 54, q: 'I ______ rather stay at home than go out.', o: ['A. had', 'B. would', 'C. should',
+                    'D. could'
+                ], a: 'B', e: 'would rather do 为固定搭配。' },
             { id: 55, q: 'They ______ able to escape from the fire in time.', o: ['A. were', 'B. was', 'C. are',
                     'D. is'
                 ], a: 'A', e: 'be able to 过去式用 were able to。' },
-            { id: 56, q: 'Little boys ______ be annoying sometimes.', o: ['A. can', 'B. must', 'C. should', 'D. will'],
-                a: 'A', e: 'can 表示客观可能性"有时会"。' },
+            { id: 56, q: 'Little boys ______ be annoying sometimes.', o: ['A. can', 'B. must', 'C. should',
+                    'D. will'
+                ], a: 'A', e: 'can 表示客观可能性"有时会"。' },
             { id: 57, q: '—______ you tell me your name? —Sure.', o: ['A. Will', 'B. Would', 'C. Shall', 'D. Must'],
                 a: 'B', e: 'Would you... 表示礼貌请求。' },
             { id: 58, q: 'If you must go, at least wait ______ the storm is over.', o: ['A. until', 'B. after',
                     'C. before', 'D. when'
                 ], a: 'A', e: 'until 表示"直到"。' },
-            { id: 59, q: 'You ______ not to have left home without telling me.', o: ['A. should', 'B. ought', 'C. may',
-                    'D. must'
+            { id: 59, q: 'You ______ not to have left home without telling me.', o: ['A. should', 'B. ought',
+                    'C. may', 'D. must'
                 ], a: 'B', e: 'ought to have done 本该做而未做。' },
             { id: 60, q: 'She ______ do it by herself; she is old enough.', o: ['A. needn\'t', 'B. mustn\'t',
                     'C. can\'t', 'D. may not'
                 ], a: 'A', e: 'needn\'t 表示"不必"。' },
             { id: 61, q: 'She ______ work here, does she?', o: ['A. doesn\'t', 'B. don\'t', 'C. isn\'t', 'D. aren\'t'],
                 a: 'A', e: '反意疑问句，前面否定用 doesn\'t。' },
-            { id: 62, q: '______ waste your time and energy on that.', o: ['A. No', 'B. Not', 'C. Don\'t', 'D. Doesn\'t'],
-                a: 'C', e: '祈使句否定用 Don\'t。' },
-            { id: 63, q: '______ you find it difficult to learn English?', o: ['A. Are', 'B. Do', 'C. Does', 'D. Is'],
-                a: 'B', e: 'find 实义动词，疑问句用 Do。' },
+            { id: 62, q: '______ waste your time and energy on that.', o: ['A. No', 'B. Not', 'C. Don\'t',
+                    'D. Doesn\'t'
+                ], a: 'C', e: '祈使句否定用 Don\'t。' },
+            { id: 63, q: '______ you find it difficult to learn English?', o: ['A. Are', 'B. Do', 'C. Does',
+                    'D. Is'
+                ], a: 'B', e: 'find 实义动词，疑问句用 Do。' },
             { id: 64, q: 'Matter ______ constantly moving and changing.', o: ['A. is', 'B. are', 'C. was', 'D. were'],
                 a: 'A', e: 'is + moving 现在进行时被动概念。' },
-            { id: 65, q: 'I\'m sure that you ______ soon make many friends here.', o: ['A. will', 'B. shall', 'C. would',
-                    'D. should'
+            { id: 65, q: 'I\'m sure that you ______ soon make many friends here.', o: ['A. will', 'B. shall',
+                    'C. would', 'D. should'
                 ], a: 'A', e: '将来时用 will。' },
-            { id: 66, q: 'The topic ______ discussed in detail during the meeting.', o: ['A. is', 'B. was', 'C. were',
-                    'D. has'
+            { id: 66, q: 'The topic ______ discussed in detail during the meeting.', o: ['A. is', 'B. was',
+                    'C. were', 'D. has'
                 ], a: 'B', e: '过去时被动用 was。' },
-            { id: 67, q: 'The contest ______ held tomorrow.', o: ['A. will be', 'B. will', 'C. is', 'D. was'], a: 'A',
-                e: '将来时被动用 will be。' },
+            { id: 67, q: 'The contest ______ held tomorrow.', o: ['A. will be', 'B. will', 'C. is', 'D. was'],
+                a: 'A', e: '将来时被动用 will be。' },
             { id: 68, q: 'You ______ look very nice today. (表示强调)', o: ['A. do', 'B. does', 'C. did', 'D. are'],
                 a: 'A', e: 'do 强调谓语动词。' },
             { id: 69, q: '______ be afraid of making mistakes.', o: ['A. No', 'B. Not', 'C. Don\'t', 'D. Doesn\'t'],
@@ -1014,8 +1150,9 @@
             { id: 70, q: 'If you had not hurried, you ______ have missed the train.', o: ['A. will', 'B. would',
                     'C. shall', 'D. should'
                 ], a: 'B', e: '虚拟语气主句用 would have done。' },
-            { id: 71, q: 'He ______ been studying English for three years.', o: ['A. have', 'B. has', 'C. is', 'D. was'],
-                a: 'B', e: 'He 单数，现在完成时用 has。' },
+            { id: 71, q: 'He ______ been studying English for three years.', o: ['A. have', 'B. has', 'C. is',
+                    'D. was'
+                ], a: 'B', e: 'He 单数，现在完成时用 has。' },
             { id: 72, q: 'The children ______ playing in the garden now.', o: ['A. is', 'B. are', 'C. was', 'D. were'],
                 a: 'B', e: 'children 复数，现在进行时用 are。' },
             { id: 73, q: 'She ______ already finished her homework.', o: ['A. have', 'B. has', 'C. had', 'D. was'],
@@ -1024,8 +1161,9 @@
                 a: 'C', e: 'yesterday 过去时，否定用 did not。' },
             { id: 75, q: '______ you like some coffee?', o: ['A. Are', 'B. Do', 'C. Would', 'D. Will'], a: 'C',
                 e: 'Would you like... 表邀请。' },
-            { id: 76, q: 'The car ______ repaired by the mechanic now.', o: ['A. is being', 'B. is', 'C. was', 'D. has'],
-                a: 'A', e: 'now 现在进行时被动用 is being repaired。' },
+            { id: 76, q: 'The car ______ repaired by the mechanic now.', o: ['A. is being', 'B. is', 'C. was',
+                    'D. has'
+                ], a: 'A', e: 'now 现在进行时被动用 is being repaired。' },
             { id: 77, q: 'We ______ have a meeting next Monday.', o: ['A. will', 'B. shall', 'C. are', 'D. were'],
                 a: 'A', e: '将来时用 will。' },
             { id: 78, q: 'She ______ not know the answer, does she?', o: ['A. do', 'B. does', 'C. did', 'D. is'],
@@ -1088,7 +1226,8 @@
                 e: '本该做而未做用 should not have left。' },
             { id: 105, q: 'He ______ (must read) this book because he knows all the details.', a: 'must have read',
                 e: '对过去肯定推测用 must have read。' },
-            { id: 106, q: 'We ______ (could complete) the task earlier if we had tried harder.', a: 'could have completed',
+            { id: 106, q: 'We ______ (could complete) the task earlier if we had tried harder.',
+                a: 'could have completed',
                 e: '本能做而未做用 could have completed。' },
             { id: 107, q: 'She ______ (ought not to say) that to her mother.', a: 'ought not to have said',
                 e: '本不该做而做了用 ought not to have said。' },
@@ -1117,8 +1256,10 @@
             { id: 120, q: 'He ______ (be used to) getting up early.', a: 'is used to', e: 'be used to doing 习惯于。' },
             { id: 121, q: 'The children ______ (enjoy) playing in the park.', a: 'enjoy', e: '一般现在时 enjoy。' },
             { id: 122, q: 'She ______ (be) very beautiful when she was young.', a: 'was', e: '过去时 was。' },
-            { id: 123, q: 'They ______ (have) a great time at the party last night.', a: 'had', e: 'last night 用过去时 had。' },
-            { id: 124, q: 'I ______ (not know) the answer to this question.', a: 'don\'t know', e: '一般现在时否定 don\'t know。' },
+            { id: 123, q: 'They ______ (have) a great time at the party last night.', a: 'had',
+                e: 'last night 用过去时 had。' },
+            { id: 124, q: 'I ______ (not know) the answer to this question.', a: 'don\'t know',
+                e: '一般现在时否定 don\'t know。' },
             { id: 125, q: 'He ______ (start) learning English when he was six.', a: 'started', e: '过去时 started。' },
             { id: 126, q: 'The car ______ (break) down on the way home.', a: 'broke', e: '过去时 broke。' },
             { id: 127, q: 'She ______ (forget) to lock the door again.', a: 'forgot', e: '过去时 forgot。' },
@@ -1132,7 +1273,8 @@
             { id: 132, q: 'The concert ______ (begin) at 8 o\'clock.', a: 'begins', e: '一般现在时 begins。' },
             { id: 133, q: 'He ______ (always complain) about the weather.', a: 'always complains',
                 e: '一般现在时 always complains。' },
-            { id: 134, q: 'I ______ (call) you as soon as I arrive.', a: 'will call', e: 'as soon as 主将从现，主句用 will call。' },
+            { id: 134, q: 'I ______ (call) you as soon as I arrive.', a: 'will call',
+                e: 'as soon as 主将从现，主句用 will call。' },
             { id: 135, q: 'The building ______ (destroy) in the earthquake.', a: 'was destroyed',
                 e: '过去时被动 was destroyed。' },
             { id: 136, q: 'She ______ (write) a letter to her parents every month.', a: 'writes',
@@ -1141,7 +1283,8 @@
                 e: '现在进行时 are building。' },
             { id: 138, q: 'He ______ (finish) his homework before dinner.', a: 'had finished',
                 e: '过去完成时 had finished。' },
-            { id: 139, q: 'I ______ (never be) to a foreign country.', a: 'have never been', e: 'never 用现在完成时。' },
+            { id: 139, q: 'I ______ (never be) to a foreign country.', a: 'have never been',
+                e: 'never 用现在完成时。' },
             { id: 140, q: 'The teacher ______ (explain) the problem to us now.', a: 'is explaining',
                 e: 'now 现在进行时 is explaining。' }
         ];
@@ -1158,7 +1301,8 @@
             { id: 143, q: 'They was playing football when I saw them.', w: 'was', c: 'were',
                 e: 'They 复数用 were playing。' },
             { id: 144, q: 'I have saw this movie before.', w: 'saw', c: 'seen', e: '现在完成时 have 后接过去分词 seen。' },
-            { id: 145, q: 'The homework was do by the students.', w: 'do', c: 'done', e: '被动语态 was 后接过去分词 done。' },
+            { id: 145, q: 'The homework was do by the students.', w: 'do', c: 'done',
+                e: '被动语态 was 后接过去分词 done。' },
             { id: 146, q: 'He must to finish the work today.', w: 'to', c: '', e: '情态动词 must 后接动词原形 finish。' },
             { id: 147, q: 'You needn\'t to worry about me.', w: 'to', c: '', e: 'needn\'t 为情态动词，后接动词原形 worry。' },
             { id: 148, q: 'She dare not to go out alone.', w: 'to', c: '', e: 'dare 作情态动词，后接动词原形 go。' },
@@ -1183,7 +1327,8 @@
                 e: '"忘记"发生在"想起"之前，用过去完成时。' },
             { id: 160, q: 'Everyone experience these problems in their life.', w: 'experience', c: 'experiences',
                 e: 'everyone 单数用 experiences。' },
-            { id: 161, q: 'The problem was solve by the boy.', w: 'solve', c: 'solved', e: '被动语态 was 后接过去分词 solved。' },
+            { id: 161, q: 'The problem was solve by the boy.', w: 'solve', c: 'solved',
+                e: '被动语态 was 后接过去分词 solved。' },
             { id: 162, q: 'He started a new job, didn\'t he? Yes, he started.', w: 'started', c: 'did',
                 e: '简短回答用助动词 did 代替 started。' },
             { id: 163, q: 'It is time for us starting now.', w: 'starting', c: 'to start',
@@ -1209,7 +1354,7 @@
             { id: 174, q: 'She needs tell us the truth.', w: 'tell', c: 'to tell',
                 e: 'need 作实义动词，三单用 needs to do。' },
             { id: 175, q: 'He dare not to tell his father the news.', w: 'to', c: '',
-            e: 'dare 作情态动词，后接动词原形 tell。' },
+                e: 'dare 作情态动词，后接动词原形 tell。' },
             { id: 176, q: 'If you will help me, I will go with you.', w: 'will help', c: 'help',
                 e: '条件句中常用一般现在时，will 表"愿意"也可，建议改为 help。' },
             { id: 177, q: 'He shall be punished, shall he?', w: 'shall', c: 'shan\'t',
@@ -1217,31 +1362,30 @@
             { id: 178, q: 'I would rather to stay at home.', w: 'to', c: '', e: 'would rather 后接动词原形 stay。' },
             { id: 179, q: 'She doesn\'t work here, doesn\'t she?', w: 'doesn\'t', c: 'does',
                 e: '前面否定，反意疑问句用肯定 does she。' },
-            { id: 180, q: 'Don\'t waste your time and energy on the thing, will you?', w: 'will', c: 'will',
-                e: '否定祈使句反意疑问句用 will you（正确，无需改）。' },
+            { id: 180, q: 'Don\'t waste your time and energy on the thing, will you?', w: '', c: '',
+                e: '句子正确，无需修改。' },
             { id: 181, q: 'Do you find it difficult to learning a new language?', w: 'learning', c: 'learn',
                 e: 'to 后接动词原形 learn。' },
             { id: 182, q: 'Matter is constantly moved and changing.', w: 'moved', c: 'moving',
                 e: 'is constantly moving 表示"不断运动"。' },
             { id: 183, q: 'I\'m sure that you will soon make many friends here, won\'t you?', w: 'won\'t', c: 'will',
                 e: '主句为 I\'m sure that...，反意疑问句与 that 从句一致用 will you。' },
-            { id: 184, q: 'The topic was discussed in detail during the meeting, wasn\'t it?', w: 'wasn\'t', c: 'wasn\'t',
-                e: '正确（无需改）。' },
+            { id: 184, q: 'The topic was discussed in detail during the meeting, wasn\'t it?', w: '', c: '',
+                e: '句子正确，无需修改。' },
             { id: 185, q: 'The contest will be held tomorrow, isn\'t it?', w: 'isn\'t', c: 'won\'t',
                 e: '将来时被动 will be held，反意疑问句用 won\'t it。' },
-            { id: 186, q: 'You do look very nice today, don\'t you?', w: 'don\'t', c: 'don\'t', e: '正确（无需改）。' },
+            { id: 186, q: 'You do look very nice today, don\'t you?', w: '', c: '', e: '句子正确，无需修改。' },
             { id: 187, q: 'Don\'t be afraid of make mistakes.', w: 'make', c: 'making',
                 e: '介词 of 后接动名词 making。' },
             { id: 188, q: 'If you had not hurried, you would have miss the train.', w: 'miss', c: 'missed',
                 e: 'would have 后接过去分词 missed。' },
             { id: 189, q: 'How can you be so careless, can you?', w: 'can', c: 'can\'t',
                 e: '前肯后否，用 can\'t you。' },
-            { id: 190, q: 'May I know your name? Yes, you may.', w: 'you may', c: 'please / sure',
+            { id: 190, q: 'May I know your name? Yes, you may.', w: 'you may', c: 'please',
                 e: 'May I... 的回答通常为 Yes, please. / Sure. / Certainly.' },
             { id: 191, q: 'Would you tell me your name? Yes, I would.', w: 'I would', c: 'I will',
                 e: 'Would you... 的回答常用 Yes, I will / I\'d love to。' },
-            { id: 192, q: 'We should respect each other, shouldn\'t we?', w: 'shouldn\'t', c: 'shouldn\'t',
-                e: '正确（无需改）。' },
+            { id: 192, q: 'We should respect each other, shouldn\'t we?', w: '', c: '', e: '句子正确，无需修改。' },
             { id: 193, q: 'You ought not make private phone calls in work time.', w: 'make', c: 'to make',
                 e: 'ought to 的否定为 ought not to。' },
             { id: 194, q: 'He shall be punished, doesn\'t he?', w: 'doesn\'t', c: 'shan\'t',
@@ -1252,11 +1396,11 @@
                 e: 'be able to 后接动词原形 escape。' },
             { id: 197, q: 'It can not be true, can\'t it?', w: 'can\'t', c: 'can',
                 e: 'It can not be true 为否定句，反意疑问句用 can it。' },
-            { id: 198, q: 'Little boys can be annoying sometimes, can\'t they?', w: 'can\'t', c: 'can\'t',
-                e: '正确（无需改）。' },
+            { id: 198, q: 'Little boys can be annoying sometimes, can\'t they?', w: '', c: '', e: '句子正确，无需修改。' },
+            // ★ 修复第199题：答案改为 "mustn't|hasn't" 并在解析中补充说明
             { id: 199, q: 'He must have read this book because he knows the characters in the book, mustn\'t he?',
-                w: 'mustn\'t', c: 'hasn\'t / didn\'t',
-                e: 'must have done 推测，反意疑问句根据具体情况用 hasn\'t/didn\'t。' },
+                w: 'mustn\'t', c: 'hasn\'t',
+                e: 'must have done 推测，反意疑问句用 hasn\'t he（或 didn\'t he，两种均可）。' },
             { id: 200, q: 'You needn\'t have watered those roses, needn\'t you?', w: 'needn\'t', c: 'need',
                 e: '前肯后否，needn\'t have 为否定，反意疑问句用 need you。' }
         ];
@@ -1269,14 +1413,14 @@
         // ================================================================
         const state = {
             allQuestions: ALL_QUESTIONS,
-            examQuestions: [], // 当前考试30题
-            userAnswers: [], // 用户答案
+            examQuestions: [],
+            userAnswers: [],
             submitted: false,
             score: null,
             historyBest: parseInt(localStorage.getItem('verbMaster_best')) || 0,
+            currentIndex: 0,
         };
 
-        // DOM 引用
         const $ = s => document.querySelector(s);
         const $$ = s => document.querySelectorAll(s);
 
@@ -1302,12 +1446,14 @@
         const bankList = $('#bankList');
         const bankSearch = $('#bankSearch');
         const bankFilterBtns = $$('#viewBank .bank-filter button');
+        const prevQBtn = $('#prevQBtn');
+        const nextQBtn = $('#nextQBtn');
+        const dotIndicators = $('#dotIndicators');
 
         // ================================================================
         // 3. 核心逻辑
         // ================================================================
 
-        // 随机抽取 n 道（不重复）
         function pickRandom(arr, n) {
             const shuffled = [...arr];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -1317,155 +1463,257 @@
             return shuffled.slice(0, n);
         }
 
-        // 初始化考试
         function initExam() {
             state.examQuestions = pickRandom(state.allQuestions, 30);
-            state.userAnswers = state.examQuestions.map(() => ({}));
+            state.userAnswers = state.examQuestions.map(() => ({ value: '' }));
             state.submitted = false;
             state.score = null;
+            state.currentIndex = 0;
             resultPanel.classList.add('hidden');
-            renderExam();
+            renderCurrentQuestion();
             updateProgress();
+            updateNavButtons();
+            updateDots();
             submitBtn.disabled = false;
             submitBtn.textContent = '📝 提交';
+            // 如果提交后重新抽题，恢复按钮状态
+            submitBtn.classList.remove('submitted');
             viewExam.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // 渲染考试题目
-        function renderExam() {
+        // 渲染当前题目（一题一界面）
+        function renderCurrentQuestion() {
             const qs = state.examQuestions;
-            let html = '';
-            qs.forEach((q, idx) => {
-                const ans = state.userAnswers[idx] || {};
-                let inner = '';
-                const qNum = idx + 1;
+            if (!qs.length) { examContainer.innerHTML = '<p class="text-muted">暂无题目</p>'; return; }
+            const idx = state.currentIndex;
+            const q = qs[idx];
+            const ans = state.userAnswers[idx] || { value: '' };
+            let inner = '';
+            const qNum = idx + 1;
 
-                if (q.type === 'choice') {
-                    inner = `<div class="options">`;
-                    q.o.forEach((opt, oi) => {
-                        const letter = String.fromCharCode(65 + oi);
-                        const checked = ans.value === letter ? 'checked' : '';
-                        inner += `
-                            <div class="opt" onclick="this.querySelector('input').click()">
-                                <input type="radio" name="q${idx}" value="${letter}" id="q${idx}_${letter}" ${checked} />
-                                <label for="q${idx}_${letter}">${opt}</label>
-                            </div>
-                        `;
-                    });
-                    inner += `</div>`;
-                } else if (q.type === 'fill') {
-                    const val = ans.value || '';
-                    inner = `
-                        <div class="fill-group">
-                            <label>答案：</label>
-                            <input type="text" class="fill-input" data-idx="${idx}" placeholder="填写单词..." value="${val}" />
+            // 题型标签
+            const typeMap = { choice: '选择题', fill: '语法填空', error: '改错题' };
+
+            if (q.type === 'choice') {
+                inner = `<div class="options">`;
+                q.o.forEach((opt, oi) => {
+                    const letter = String.fromCharCode(65 + oi);
+                    const checked = ans.value === letter ? 'checked' : '';
+                    inner += `
+                        <div class="opt" onclick="this.querySelector('input').click()">
+                            <input type="radio" name="q${idx}" value="${letter}" id="q${idx}_${letter}" ${checked} ${state.submitted ? 'disabled' : ''} />
+                            <label for="q${idx}_${letter}">${opt}</label>
                         </div>
                     `;
-                } else if (q.type === 'error') {
-                    const parts = ans.value ? ans.value.split('|') : ['', ''];
-                    inner = `
-                        <div class="error-group">
-                            <div class="err-item">
-                                <label>❌ 错误：</label>
-                                <input type="text" class="err-wrong" data-idx="${idx}" placeholder="错误部分" value="${parts[0] || ''}" />
-                            </div>
-                            <div class="err-item">
-                                <label>✅ 正确：</label>
-                                <input type="text" class="err-correct" data-idx="${idx}" placeholder="正确部分" value="${parts[1] || ''}" />
-                            </div>
-                        </div>
-                    `;
-                }
-
-                let resultBadge = '';
-                let expHtml = '';
-                if (state.submitted) {
-                    const isCorrect = state.userAnswers[idx] && state.userAnswers[idx].isCorrect;
-                    const badgeClass = isCorrect ? 'correct' : 'wrong';
-                    const badgeText = isCorrect ? '✅ 正确' : '❌ 错误';
-                    resultBadge = `<div class="result-badge ${badgeClass}">${badgeText}</div>`;
-                    const cardClass = isCorrect ? 'correct' : 'wrong';
-                    const exp = q.explanation || '无解析';
-                    const correctAns = q.answer || '';
-                    let showAns = correctAns;
-                    if (q.type === 'error') {
-                        const parts = correctAns.split('|');
-                        showAns = `错误: ${parts[0] || '—'} → 正确: ${parts[1] || '—'}`;
-                    }
-                    expHtml = `
-                        <div class="explanation show">
-                            <strong>📖 解析：</strong> ${exp}<br />
-                            <span style="color:#f5c842;">✔ 正确答案：${showAns}</span>
-                        </div>
-                    `;
-                    html += `<div class="question-card ${cardClass}" id="qcard_${idx}">`;
-                } else {
-                    html += `<div class="question-card" id="qcard_${idx}">`;
-                }
-
-                const typeMap = { choice: '选择题', fill: '语法填空', error: '改错题' };
-                html += `
-                    <div class="q-header">
-                        <span class="q-number">#${qNum}</span>
-                        <span class="q-type">${typeMap[q.type] || q.type}</span>
+                });
+                inner += `</div>`;
+            } else if (q.type === 'fill') {
+                const val = ans.value || '';
+                inner = `
+                    <div class="fill-group">
+                        <label>答案：</label>
+                        <input type="text" class="fill-input" data-idx="${idx}" placeholder="填写单词..." value="${val}" ${state.submitted ? 'disabled' : ''} />
                     </div>
-                    <div class="q-text">${q.q}</div>
-                    ${inner}
-                    ${resultBadge}
-                    ${expHtml}
                 `;
-                html += `</div>`;
-            });
-            examContainer.innerHTML = html;
+            } else if (q.type === 'error') {
+                const parts = ans.value ? ans.value.split('|') : ['', ''];
+                const isCorrectSentence = (q.w === '' && q.c === '');
+                inner = `
+                    <div class="error-group">
+                        <div class="err-item">
+                            <label>❌ 错误：</label>
+                            <input type="text" class="err-wrong" data-idx="${idx}" placeholder="${isCorrectSentence ? '无需修改' : '错误部分'}" value="${parts[0] || ''}" ${state.submitted ? 'disabled' : ''} />
+                        </div>
+                        <div class="err-item">
+                            <label>✅ 正确：</label>
+                            <input type="text" class="err-correct" data-idx="${idx}" placeholder="${isCorrectSentence ? '无需修改' : '正确部分'}" value="${parts[1] || ''}" ${state.submitted ? 'disabled' : ''} />
+                        </div>
+                    </div>
+                    ${isCorrectSentence ? '<p style="color:#4cd9a0;margin-top:8px;font-size:0.9rem;">✅ 这个句子是正确的，无需修改，两个输入框留空即可。</p>' : ''}
+                `;
+            }
 
-            if (!state.submitted) {
+            // 结果徽章和解析（提交后显示）
+            let resultBadge = '';
+            let expHtml = '';
+            if (state.submitted) {
+                const isCorrect = state.userAnswers[idx] && state.userAnswers[idx].isCorrect;
+                const badgeClass = isCorrect ? 'correct' : 'wrong';
+                const badgeText = isCorrect ? '✅ 正确' : '❌ 错误';
+                resultBadge = `<div class="result-badge ${badgeClass}">${badgeText}</div>`;
+                const cardClass = isCorrect ? 'correct' : 'wrong';
+                const exp = q.explanation || '无解析';
+                let correctAns = q.answer || '';
+                if (q.type === 'error') {
+                    const parts = correctAns.split('|');
+                    const wPart = parts[0] || '（无）';
+                    const cPart = parts[1] || '（无）';
+                    correctAns = `错误: ${wPart} → 正确: ${cPart}`;
+                }
+                expHtml = `
+                    <div class="explanation show">
+                        <strong>📖 解析：</strong> ${exp}<br />
+                        <span style="color:#f5c842;">✔ 正确答案：${correctAns}</span>
+                    </div>
+                `;
+                examContainer.innerHTML = `
+                    <div class="question-card ${cardClass}">
+                        <div class="q-header">
+                            <span class="q-number">#${qNum}</span>
+                            <span class="q-type">${typeMap[q.type] || q.type}</span>
+                        </div>
+                        <div class="q-text">${q.q}</div>
+                        ${inner}
+                        ${resultBadge}
+                        ${expHtml}
+                    </div>
+                `;
+            } else {
+                examContainer.innerHTML = `
+                    <div class="question-card">
+                        <div class="q-header">
+                            <span class="q-number">#${qNum}</span>
+                            <span class="q-type">${typeMap[q.type] || q.type}</span>
+                        </div>
+                        <div class="q-text">${q.q}</div>
+                        ${inner}
+                    </div>
+                `;
+                // 绑定输入事件
                 document.querySelectorAll('.fill-input').forEach(inp => {
                     inp.addEventListener('input', function() {
-                        const idx = parseInt(this.dataset.idx);
-                        state.userAnswers[idx].value = this.value;
+                        const idx2 = parseInt(this.dataset.idx);
+                        state.userAnswers[idx2].value = this.value;
                         updateProgress();
+                        updateDots();
                     });
                 });
                 document.querySelectorAll('.err-wrong').forEach(inp => {
                     inp.addEventListener('input', function() {
-                        const idx = parseInt(this.dataset.idx);
-                        const correct = document.querySelector(`.err-correct[data-idx="${idx}"]`);
-                        state.userAnswers[idx].value = (this.value || '') + '|' + (correct ? correct.value : '');
+                        const idx2 = parseInt(this.dataset.idx);
+                        const correct = document.querySelector(`.err-correct[data-idx="${idx2}"]`);
+                        state.userAnswers[idx2].value = (this.value || '') + '|' + (correct ? correct
+                            .value : '');
                         updateProgress();
+                        updateDots();
                     });
                 });
                 document.querySelectorAll('.err-correct').forEach(inp => {
                     inp.addEventListener('input', function() {
-                        const idx = parseInt(this.dataset.idx);
-                        const wrong = document.querySelector(`.err-wrong[data-idx="${idx}"]`);
-                        state.userAnswers[idx].value = (wrong ? wrong.value : '') + '|' + (this.value || '');
+                        const idx2 = parseInt(this.dataset.idx);
+                        const wrong = document.querySelector(`.err-wrong[data-idx="${idx2}"]`);
+                        state.userAnswers[idx2].value = (wrong ? wrong.value : '') + '|' + (this.value ||
+                            '');
                         updateProgress();
+                        updateDots();
                     });
                 });
                 document.querySelectorAll('.options input[type="radio"]').forEach(radio => {
                     radio.addEventListener('change', function() {
                         const name = this.name;
-                        const idx = parseInt(name.replace('q', ''));
-                        state.userAnswers[idx].value = this.value;
+                        const idx2 = parseInt(name.replace('q', ''));
+                        state.userAnswers[idx2].value = this.value;
                         updateProgress();
+                        updateDots();
                     });
                 });
             }
+
+            // 更新进度显示
+            updateProgress();
+            updateNavButtons();
+            updateDots();
         }
 
-        // 更新进度
         function updateProgress() {
             const total = state.examQuestions.length;
+            if (!total) return;
             const answered = state.userAnswers.filter(a => a.value && a.value.trim() !== '').length;
-            const pct = total ? Math.round((answered / total) * 100) : 0;
-            progressText.textContent = `第 ${Math.min(answered + 1, total)} / ${total} 题 (已答 ${answered})`;
+            const pct = Math.round((answered / total) * 100);
+            const current = state.currentIndex + 1;
+            progressText.textContent = `第 ${current} / ${total} 题 (已答 ${answered})`;
             progressPercent.textContent = `${pct}%`;
             progressFill.style.width = `${pct}%`;
+        }
+
+        function updateNavButtons() {
+            const total = state.examQuestions.length;
+            prevQBtn.disabled = state.currentIndex === 0 || state.submitted;
+            nextQBtn.disabled = state.currentIndex === total - 1 || state.submitted;
+            if (state.submitted) {
+                prevQBtn.disabled = true;
+                nextQBtn.disabled = true;
+            }
+            // 更新下一题按钮文字
+            if (state.currentIndex === total - 1) {
+                nextQBtn.innerHTML = '完成 <i class="fas fa-check"></i>';
+            } else {
+                nextQBtn.innerHTML = '下一题 <i class="fas fa-chevron-right"></i>';
+            }
+        }
+
+        function updateDots() {
+            const total = state.examQuestions.length;
+            let html = '';
+            for (let i = 0; i < total; i++) {
+                const answered = state.userAnswers[i] && state.userAnswers[i].value && state.userAnswers[i].value.trim() !==
+                    '';
+                let cls = 'dot';
+                if (state.submitted) {
+                    cls += ' submitted';
+                    if (state.userAnswers[i] && state.userAnswers[i].isCorrect === true) cls += ' correct-dot';
+                    else if (state.userAnswers[i] && state.userAnswers[i].isCorrect === false) cls += ' wrong-dot';
+                } else {
+                    if (answered) cls += ' answered';
+                }
+                if (i === state.currentIndex) cls += ' active';
+                html += `<span class="${cls}" data-idx="${i}">${i+1}</span>`;
+            }
+            dotIndicators.innerHTML = html;
+            // 点击跳转
+            dotIndicators.querySelectorAll('.dot').forEach(el => {
+                el.addEventListener('click', function() {
+                    if (state.submitted) return;
+                    const idx = parseInt(this.dataset.idx);
+                    if (idx >= 0 && idx < total) {
+                        // 保存当前输入
+                        saveCurrentInput();
+                        state.currentIndex = idx;
+                        renderCurrentQuestion();
+                        updateNavButtons();
+                        updateDots();
+                        updateProgress();
+                    }
+                });
+            });
+        }
+
+        // 保存当前题目的输入（在切换时调用）
+        function saveCurrentInput() {
+            const idx = state.currentIndex;
+            const q = state.examQuestions[idx];
+            if (!q) return;
+            if (q.type === 'fill') {
+                const inp = document.querySelector(`.fill-input[data-idx="${idx}"]`);
+                if (inp) state.userAnswers[idx].value = inp.value;
+            } else if (q.type === 'error') {
+                const wrong = document.querySelector(`.err-wrong[data-idx="${idx}"]`);
+                const correct = document.querySelector(`.err-correct[data-idx="${idx}"]`);
+                if (wrong || correct) {
+                    state.userAnswers[idx].value = (wrong ? wrong.value : '') + '|' + (correct ? correct.value : '');
+                }
+            } else if (q.type === 'choice') {
+                const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+                if (checked) state.userAnswers[idx].value = checked.value;
+            }
         }
 
         // 提交考试
         function submitExam() {
             if (state.submitted) return;
+            // 保存当前输入
+            saveCurrentInput();
+
             const total = state.examQuestions.length;
             const answered = state.userAnswers.filter(a => a.value && a.value.trim() !== '').length;
             if (answered < total) {
@@ -1479,21 +1727,43 @@
                 const userVal = ans.value.trim();
                 const correctVal = q.answer ? q.answer.trim() : '';
                 let isCorrect = false;
+
                 if (q.type === 'choice') {
                     isCorrect = userVal === correctVal;
                 } else if (q.type === 'fill') {
                     isCorrect = userVal.toLowerCase() === correctVal.toLowerCase();
                 } else if (q.type === 'error') {
+                    // ★ 重写改错题判断逻辑，更健壮
                     const parts = userVal.split('|');
                     const correctParts = correctVal.split('|');
                     const userWrong = (parts[0] || '').trim().toLowerCase();
                     const userCorrect = (parts[1] || '').trim().toLowerCase();
                     const cWrong = (correctParts[0] || '').trim().toLowerCase();
                     const cCorrect = (correctParts[1] || '').trim().toLowerCase();
-                    isCorrect = (userWrong === cWrong && userCorrect === cCorrect) ||
-                        (userWrong === '' && userCorrect === '' && cWrong === '' && cCorrect === '') ? false : false;
-                    if (correctParts[1] === '' && userCorrect === '' && userWrong === cWrong) isCorrect = true;
-                    if (correctParts[0] === '' && userWrong === '' && userCorrect === cCorrect) isCorrect = true;
+
+                    // 情况1：完全匹配
+                    if (userWrong === cWrong && userCorrect === cCorrect) {
+                        isCorrect = true;
+                    }
+                    // 情况2：答案的正确部分为空，用户正确部分为空，用户错误部分与答案错误部分匹配
+                    else if (cCorrect === '' && userCorrect === '' && userWrong === cWrong) {
+                        isCorrect = true;
+                    }
+                    // 情况3：答案的错误部分为空，用户错误部分为空，用户正确部分与答案正确部分匹配
+                    else if (cWrong === '' && userWrong === '' && userCorrect === cCorrect) {
+                        isCorrect = true;
+                    }
+                    // 情况4：答案的错误和正确都为空（句子正确），用户输入也均为空
+                    else if (cWrong === '' && cCorrect === '' && userWrong === '' && userCorrect === '') {
+                        isCorrect = true;
+                    }
+                    // ★ 额外：第199题特殊处理，允许 "hasn't" 或 "didn't"
+                    if (q.id === 199) {
+                        const altCorrect = 'didn\'t';
+                        if (userWrong === cWrong && userCorrect === altCorrect) {
+                            isCorrect = true;
+                        }
+                    }
                 }
                 ans.isCorrect = isCorrect;
                 if (isCorrect) correctCount++;
@@ -1507,10 +1777,15 @@
                 localStorage.setItem('verbMaster_best', String(state.score));
             }
 
-            renderExam();
+            // 重新渲染当前题（显示结果）
+            renderCurrentQuestion();
             updateProgress();
+            updateNavButtons();
+            updateDots();
+
             submitBtn.disabled = true;
             submitBtn.textContent = '✅ 已提交';
+            submitBtn.classList.add('submitted');
 
             resultPanel.classList.remove('hidden');
             finalScore.textContent = `${state.score}%`;
@@ -1564,7 +1839,7 @@
                         </div>
                         <div class="b-q">${q.q}</div>
                         <div class="b-ans">✔ 答案：${ansDisplay}</div>
-                        <div class="b-exp" style="display:none;">📖 ${q.explanation || '无解析'}</div>
+                        <div class="b-exp">📖 ${q.explanation || '无解析'}</div>
                         <button class="btn-outline" style="margin-top:8px;padding:4px 16px;font-size:0.8rem;" onclick="this.previousElementSibling.style.display=this.previousElementSibling.style.display==='none'?'block':'none'">查看解析</button>
                     </div>
                 `;
@@ -1578,7 +1853,8 @@
 
         function switchView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('view' + viewId.charAt(0).toUpperCase() + viewId.slice(1)).classList.add('active');
+            const map = { home: 'viewHome', exam: 'viewExam', bank: 'viewBank' };
+            document.getElementById(map[viewId]).classList.add('active');
             navBtns.forEach(b => {
                 b.classList.toggle('active', b.dataset.view === viewId);
             });
@@ -1610,6 +1886,44 @@
 
         submitBtn.addEventListener('click', submitExam);
 
+        // 上一题 / 下一题
+        prevQBtn.addEventListener('click', function() {
+            if (state.submitted || state.currentIndex === 0) return;
+            saveCurrentInput();
+            state.currentIndex--;
+            renderCurrentQuestion();
+            updateNavButtons();
+            updateDots();
+            updateProgress();
+        });
+
+        nextQBtn.addEventListener('click', function() {
+            if (state.submitted) return;
+            if (state.currentIndex === state.examQuestions.length - 1) {
+                // 最后一题：提交
+                submitExam();
+                return;
+            }
+            saveCurrentInput();
+            state.currentIndex++;
+            renderCurrentQuestion();
+            updateNavButtons();
+            updateDots();
+            updateProgress();
+        });
+
+        // 键盘快捷键：左右箭头切换
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('viewExam').classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevQBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextQBtn.click();
+            }
+        });
+
         bankSearch.addEventListener('input', function() {
             const activeFilter = document.querySelector('#viewBank .bank-filter .active');
             const filter = activeFilter ? activeFilter.dataset.filter : 'all';
@@ -1635,6 +1949,7 @@
 
         console.log('✅ Verb·Master 已加载！总题数：', state.allQuestions.length);
         console.log('📊 历史最高分：', state.historyBest + '%');
+        console.log('🔧 改错题逻辑已优化，第199题已修复（支持 hasn\'t / didn\'t）');
     </script>
 </body>
 </html>
