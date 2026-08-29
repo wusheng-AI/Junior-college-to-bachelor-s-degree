@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📐 不定积分 · 通关练习</title>
+    <!-- MathJax 配置 -->
+    <script>
+        MathJax = {
+            tex: { inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ] },
+            svg: { fontCache: 'global' },
+            options: { skipHtmlTypes: 'script' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        /* ===== 全局重置 & 字体 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f8faff 0%, #eef4fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        /* ===== 主容器 ===== */
+        .app-container {
+            width: 1100px;
+            max-width: 98vw;
+            min-height: 90vh;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 56px;
+            box-shadow: 0 30px 60px rgba(26, 48, 84, 0.15), 0 8px 24px rgba(0, 20, 50, 0.06);
+            padding: 32px 40px 40px;
+            position: relative;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== 顶部栏 ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 18px;
+            border-bottom: 2px solid rgba(26, 48, 84, 0.08);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a3054;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #1a3054 0%, #2b4a7a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text span {
+            font-weight: 300;
+            background: none;
+            -webkit-text-fill-color: #5b7ca3;
+            color: #5b7ca3;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .progress-badge {
+            background: #eaf1fb;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1a3054;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+            letter-spacing: 0.3px;
+        }
+
+        .progress-badge strong {
+            color: #2b6bb0;
+            font-size: 20px;
+        }
+
+        .score-badge {
+            background: #1a3054;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(26, 48, 84, 0.20);
+        }
+
+        .action-btn-sm {
+            background: transparent;
+            border: 1.5px solid #b7cfe0;
+            color: #1a3054;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        .action-btn-sm:hover {
+            background: #1a3054;
+            color: #fff;
+            border-color: #1a3054;
+            transform: scale(1.02);
+        }
+
+        /* ===== 主内容 ===== */
+        .main-content {
+            margin-top: 28px;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== 做题视图 ===== */
+        #quizView {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            animation: fadeSlide 0.35s ease;
+        }
+
+        .question-number {
+            font-size: 15px;
+            font-weight: 500;
+            color: #5b7ca3;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .question-text {
+            font-size: 32px;
+            font-weight: 500;
+            color: #0a1e36;
+            line-height: 1.5;
+            padding: 18px 0 12px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .question-text .math {
+            font-size: 34px;
+        }
+
+        /* 选项网格 */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 22px 0 30px;
+        }
+
+        .option-btn {
+            background: #ffffff;
+            border: 2px solid #dce6f0;
+            border-radius: 24px;
+            padding: 18px 22px;
+            font-size: 22px;
+            font-weight: 500;
+            color: #1a3054;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            text-align: left;
+            line-height: 1.4;
+        }
+        .option-btn:hover {
+            border-color: #7fa3c9;
+            background: #f5faff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 48, 84, 0.08);
+        }
+        .option-btn .label {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #eaf1fb;
+            font-weight: 700;
+            font-size: 18px;
+            color: #1a3054;
+            flex-shrink: 0;
+        }
+        .option-btn .content {
+            flex: 1;
+        }
+        .option-btn .content .math {
+            font-size: 24px;
+        }
+
+        .option-btn.selected {
+            border-color: #2b6bb0;
+            background: #e3edfa;
+            box-shadow: 0 4px 16px rgba(43, 107, 176, 0.15);
+        }
+        .option-btn.selected .label {
+            background: #1a3054;
+            color: #fff;
+        }
+
+        .option-btn.correct-reveal {
+            border-color: #1fa36a;
+            background: #e3f5ec;
+        }
+        .option-btn.correct-reveal .label {
+            background: #1fa36a;
+            color: #fff;
+        }
+        .option-btn.wrong-reveal {
+            border-color: #d14c4c;
+            background: #fce8e8;
+        }
+        .option-btn.wrong-reveal .label {
+            background: #d14c4c;
+            color: #fff;
+        }
+
+        .option-btn.disabled {
+            cursor: default;
+            opacity: 0.7;
+        }
+        .option-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* 底部导航 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #1a3054;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(26, 48, 84, 0.25);
+        }
+        .btn-primary:hover {
+            background: #23426b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(26, 48, 84, 0.30);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1a3054;
+            border: 2px solid #b7cfe0;
+        }
+        .btn-outline:hover {
+            background: #eaf1fb;
+            border-color: #7fa3c9;
+        }
+
+        .btn-success {
+            background: #1fa36a;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(31, 163, 106, 0.25);
+        }
+        .btn-success:hover {
+            background: #188a59;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #d14c4c;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(209, 76, 76, 0.20);
+        }
+        .btn-danger:hover {
+            background: #b83e3e;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: #d4a843;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(212, 168, 67, 0.25);
+        }
+        .btn-gold:hover {
+            background: #c29a3a;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ===== 结果视图 ===== */
+        #resultView {
+            display: none;
+            animation: fadeSlide 0.45s ease;
+            flex-direction: column;
+        }
+
+        .result-hero {
+            text-align: center;
+            padding: 22px 0 16px;
+        }
+        .result-hero .big-score {
+            font-size: 78px;
+            font-weight: 800;
+            color: #1a3054;
+            line-height: 1.1;
+        }
+        .result-hero .big-score span {
+            font-size: 32px;
+            font-weight: 500;
+            color: #5b7ca3;
+        }
+        .result-hero .sub-text {
+            font-size: 20px;
+            color: #3d5f82;
+            margin-top: 6px;
+        }
+        .result-hero .compare {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 8px;
+            padding: 8px 24px;
+            display: inline-block;
+            border-radius: 40px;
+            background: #eaf1fb;
+        }
+        .compare.up {
+            color: #1fa36a;
+            background: #e3f5ec;
+        }
+        .compare.down {
+            color: #d14c4c;
+            background: #fce8e8;
+        }
+        .compare.same {
+            color: #7fa3c9;
+            background: #eaf1fb;
+        }
+
+        .result-stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 14px 0 24px;
+        }
+        .stat-item {
+            background: #fff;
+            border-radius: 24px;
+            padding: 14px 34px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eaf1fb;
+        }
+        .stat-item .num {
+            font-size: 34px;
+            font-weight: 700;
+            color: #1a3054;
+        }
+        .stat-item .label {
+            font-size: 16px;
+            color: #5b7ca3;
+            margin-left: 6px;
+        }
+
+        .error-section {
+            margin: 16px 0 20px;
+            border-top: 2px solid #eaf1fb;
+            padding-top: 18px;
+        }
+        .error-section .title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a3054;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .error-section .title .badge {
+            background: #d14c4c;
+            color: #fff;
+            border-radius: 40px;
+            padding: 2px 16px;
+            font-size: 15px;
+        }
+
+        .error-item {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px 26px;
+            margin-top: 14px;
+            border-left: 6px solid #d14c4c;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+        }
+        .error-item .q {
+            font-size: 20px;
+            font-weight: 500;
+            color: #0a1e36;
+        }
+        .error-item .detail {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 40px;
+            font-size: 17px;
+        }
+        .error-item .detail .wrong {
+            color: #d14c4c;
+            font-weight: 500;
+        }
+        .error-item .detail .correct {
+            color: #1fa36a;
+            font-weight: 500;
+        }
+        .error-item .explanation {
+            margin-top: 12px;
+            padding: 14px 20px;
+            background: #f5f9ff;
+            border-radius: 16px;
+            font-size: 17px;
+            color: #1a3054;
+            border: 1px solid #eaf1fb;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 2px solid #eaf1fb;
+        }
+
+        /* ===== 题库模态框 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 30, 54, 0.55);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 44px;
+            max-width: 1100px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 36px 44px 44px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #b7cfe0;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 18px;
+            border-bottom: 2px solid #eaf1fb;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 10;
+        }
+        .modal-header h2 {
+            font-size: 28px;
+            color: #1a3054;
+        }
+        .modal-close {
+            background: #eaf1fb;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1a3054;
+            font-weight: 300;
+        }
+        .modal-close:hover {
+            background: #d4e0ed;
+            transform: rotate(90deg);
+        }
+
+        .bank-item {
+            background: #f8faff;
+            border-radius: 20px;
+            padding: 18px 24px;
+            margin-bottom: 16px;
+            border: 1px solid #eaf1fb;
+            transition: 0.15s;
+        }
+        .bank-item:hover {
+            border-color: #b7cfe0;
+        }
+        .bank-item .bq {
+            font-size: 19px;
+            font-weight: 500;
+            color: #0a1e36;
+        }
+        .bank-item .boptions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+            margin-top: 10px;
+            font-size: 17px;
+            color: #1a3054;
+        }
+        .bank-item .bexplain {
+            margin-top: 10px;
+            padding: 10px 16px;
+            background: #eaf1fb;
+            border-radius: 14px;
+            font-size: 16px;
+            color: #1a3054;
+        }
+
+        /* ===== 动画 ===== */
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 760px) {
+            .app-container {
+                padding: 22px 18px;
+                border-radius: 32px;
+            }
+            .logo-text {
+                font-size: 20px;
+            }
+            .question-text {
+                font-size: 24px;
+            }
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .option-btn {
+                font-size: 18px;
+                padding: 14px 18px;
+            }
+            .option-btn .content .math {
+                font-size: 20px;
+            }
+            .header-right .action-btn-sm {
+                font-size: 13px;
+                padding: 6px 14px;
+            }
+            .result-hero .big-score {
+                font-size: 54px;
+            }
+            .modal-box {
+                padding: 24px 18px;
+            }
+            .bank-item .boptions {
+                grid-template-columns: 1fr;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-group {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .btn {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 16px 12px;
+                border-radius: 24px;
+            }
+            .question-text {
+                font-size: 20px;
+            }
+            .option-btn {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
+            .option-btn .label {
+                width: 30px;
+                height: 30px;
+                font-size: 15px;
+            }
+            .result-hero .big-score {
+                font-size: 40px;
+            }
+        }
+
+        /* ===== 辅助 ===== */
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .w-full {
+            width: 100%;
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5b7ca3;
+            font-size: 18px;
+        }
+        .empty-state .big-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container" id="app">
+        <!-- ====== 顶部栏 ====== -->
+        <header class="header">
+            <div class="logo-area">
+                <span class="logo-icon">∫</span>
+                <span class="logo-text">不定积分 <span>· 通关练习</span></span>
+            </div>
+            <div class="header-right">
+                <span class="progress-badge" id="progressBadge">第 <strong>1</strong> / 25 题</span>
+                <span class="score-badge" id="liveScoreBadge">✅ 0 / 25</span>
+                <button class="action-btn-sm" id="viewBankBtn">📚 题库</button>
+                <button class="action-btn-sm" id="resetBtn">🔄 重来</button>
+            </div>
+        </header>
+
+        <!-- ====== 主内容 ====== -->
+        <div class="main-content">
+
+            <!-- ===== 做题视图 ===== -->
+            <div id="quizView">
+                <div class="question-number" id="qNumDisplay">第 1 题</div>
+                <div class="question-text" id="qText">加载题目中...</div>
+
+                <div class="options-grid" id="optionsContainer">
+                    <!-- 由JS动态生成 -->
+                </div>
+
+                <div class="nav-bar">
+                    <div class="nav-group">
+                        <button class="btn btn-outline" id="prevBtn">◀ 上一题</button>
+                        <button class="btn btn-outline" id="nextBtn">下一题 ▶</button>
+                    </div>
+                    <div class="nav-group">
+                        <button class="btn btn-success" id="submitBtn">📝 提交答卷</button>
+                    </div>
+                </div>
+                <div class="text-center mt-8" style="color:#7fa3c9;font-size:15px;">
+                    已选 <span id="answeredCount">0</span> / 25 题
+                </div>
+            </div>
+
+            <!-- ===== 结果视图 ===== -->
+            <div id="resultView">
+                <div class="result-hero">
+                    <div class="big-score" id="finalScore">0<span>%</span></div>
+                    <div class="sub-text" id="finalSub">正确 0 题，错误 0 题，未答 0 题</div>
+                    <div class="compare" id="compareMsg">📊 首次测试</div>
+                </div>
+
+                <div class="result-stats">
+                    <div class="stat-item"><span class="num" id="rCorrect">0</span><span class="label">正确</span></div>
+                    <div class="stat-item"><span class="num" id="rWrong">0</span><span class="label">错误</span></div>
+                    <div class="stat-item"><span class="num" id="rUnanswered">0</span><span class="label">未答</span></div>
+                </div>
+
+                <div class="error-section" id="errorSection">
+                    <div class="title">📋 错误回顾 <span class="badge" id="errorCountBadge">0</span></div>
+                    <div id="errorList"></div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn btn-primary" id="retryBtn">🔄 重新随机</button>
+                    <button class="btn btn-outline" id="viewBankFromResultBtn">📚 查看题库</button>
+                    <button class="btn btn-outline" id="backToQuizBtn">📝 返回继续</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== 题库模态框 ====== -->
+    <div class="modal-overlay" id="bankModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>📚 完整题库 · 25 道不定积分</h2>
+                <button class="modal-close" id="bankModalClose">✕</button>
+            </div>
+            <div id="bankContent"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            //  1. 题库定义（25 道题，正确选项索引均为 0）
+            // ============================================================
+            const RAW_QUESTIONS = [{
+                id: 1,
+                q: '\\displaystyle \\int x^n \\, dx \\quad (n \\neq -1) =',
+                opts: [
+                    '\\displaystyle \\frac{x^{n+1}}{n+1}+C',
+                    '\\displaystyle \\frac{x^{n-1}}{n}+C',
+                    '\\displaystyle (n+1)x^n+C',
+                    '\\displaystyle \\ln|x|+C'
+                ],
+                explain: '根据幂函数积分公式：\\displaystyle \\int x^n dx = \\frac{x^{n+1}}{n+1}+C \\ (n \\neq -1)，对结果求导即可验证。'
+            }, {
+                id: 2,
+                q: '\\displaystyle \\int \\frac{1}{x} \\, dx =',
+                opts: [
+                    '\\displaystyle \\ln|x|+C',
+                    '\\displaystyle \\ln x + C',
+                    '\\displaystyle \\frac{1}{x^2}+C',
+                    '\\displaystyle -\\frac{1}{x^2}+C'
+                ],
+                explain: '\\displaystyle \\int \\frac{1}{x} dx = \\ln|x|+C，注意绝对值不可省略（定义域为 x \\neq 0）。'
+            }, {
+                id: 3,
+                q: '\\displaystyle \\int -\\frac{1}{x^2} \\, dx =',
+                opts: [
+                    '\\displaystyle \\frac{1}{x}+C',
+                    '\\displaystyle -\\frac{1}{x}+C',
+                    '\\displaystyle \\frac{1}{2x}+C',
+                    '\\displaystyle -\\frac{1}{2x}+C'
+                ],
+                explain: '\\displaystyle \\int -\\frac{1}{x^2} dx = -\\int x^{-2} dx = -\\left(-\\frac{1}{x}\\right)+C = \\frac{1}{x}+C。'
+            }, {
+                id: 4,
+                q: '\\displaystyle \\int e^x \\, dx =',
+                opts: [
+                    '\\displaystyle e^x+C',
+                    '\\displaystyle -e^x+C',
+                    '\\displaystyle e^x \\ln x + C',
+                    '\\displaystyle x e^{x-1}+C'
+                ],
+                explain: '指数函数 \\displaystyle e^x 的导数是其本身，因此 \\displaystyle \\int e^x dx = e^x+C。'
+            }, {
+                id: 5,
+                q: '\\displaystyle \\int a^x \\, dx \\quad (a>0,\\ a\\neq1) =',
+                opts: [
+                    '\\displaystyle \\frac{a^x}{\\ln a}+C',
+                    '\\displaystyle a^x \\ln a + C',
+                    '\\displaystyle \\frac{a^{x+1}}{x+1}+C',
+                    '\\displaystyle a^x + C'
+                ],
+                explain: '\\displaystyle \\int a^x dx = \\frac{a^x}{\\ln a}+C，因为 \\displaystyle \\frac{d}{dx}\\left(\\frac{a^x}{\\ln a}\\right) = a^x。'
+            }, {
+                id: 6,
+                q: '\\displaystyle \\int \\sin x \\, dx =',
+                opts: [
+                    '\\displaystyle -\\cos x + C',
+                    '\\displaystyle \\cos x + C',
+                    '\\displaystyle \\sin x + C',
+                    '\\displaystyle -\\sin x + C'
+                ],
+                explain: '\\displaystyle \\int \\sin x dx = -\\cos x + C，因为 \\displaystyle (-\\cos x)\' = \\sin x。'
+            }, {
+                id: 7,
+                q: '\\displaystyle \\int \\cos x \\, dx =',
+                opts: [
+                    '\\displaystyle \\sin x + C',
+                    '\\displaystyle -\\sin x + C',
+                    '\\displaystyle \\cos x + C',
+                    '\\displaystyle -\\cos x + C'
+                ],
+                explain: '\\displaystyle \\int \\cos x dx = \\sin x + C，因为 \\displaystyle (\\sin x)\' = \\cos x。'
+            }, {
+                id: 8,
+                q: '\\displaystyle \\int \\tan x \\, dx =',
+                opts: [
+                    '\\displaystyle -\\ln|\\cos x| + C',
+                    '\\displaystyle \\ln|\\cos x| + C',
+                    '\\displaystyle \\ln|\\sin x| + C',
+                    '\\displaystyle \\sec^2 x + C'
+                ],
+                explain: '\\displaystyle \\int \\tan x dx = -\\ln|\\cos x| + C = \\ln|\\sec x| + C，因为 \\displaystyle (\\ln|\\sec x|)\' = \\tan x。'
+            }, {
+                id: 9,
+                q: '\\displaystyle \\int \\cot x \\, dx =',
+                opts: [
+                    '\\displaystyle \\ln|\\sin x| + C',
+                    '\\displaystyle -\\ln|\\sin x| + C',
+                    '\\displaystyle \\ln|\\cos x| + C',
+                    '\\displaystyle -\\ln|\\cos x| + C'
+                ],
+                explain: '\\displaystyle \\int \\cot x dx = \\ln|\\sin x| + C = -\\ln|\\csc x| + C，因为 \\displaystyle (\\ln|\\sin x|)\' = \\cot x。'
+            }, {
+                id: 10,
+                q: '\\displaystyle \\int \\sec x \\, dx =',
+                opts: [
+                    '\\displaystyle \\ln|\\sec x + \\tan x| + C',
+                    '\\displaystyle \\ln|\\sec x - \\tan x| + C',
+                    '\\displaystyle \\tan x + C',
+                    '\\displaystyle \\ln|\\cos x| + C'
+                ],
+                explain: '\\displaystyle \\int \\sec x dx = \\ln|\\sec x + \\tan x| + C，是正割函数的经典积分公式。'
+            }, {
+                id: 11,
+                q: '\\displaystyle \\int \\csc x \\, dx =',
+                opts: [
+                    '\\displaystyle \\ln|\\csc x - \\cot x| + C',
+                    '\\displaystyle \\ln|\\csc x + \\cot x| + C',
+                    '\\displaystyle -\\cot x + C',
+                    '\\displaystyle \\ln|\\sin x| + C'
+                ],
+                explain: '\\displaystyle \\int \\csc x dx = \\ln|\\csc x - \\cot x| + C = \\ln\\left|\\tan\\frac{x}{2}\\right| + C。'
+            }, {
+                id: 12,
+                q: '\\displaystyle \\int \\sec^2 x \\, dx =',
+                opts: [
+                    '\\displaystyle \\tan x + C',
+                    '\\displaystyle \\sec x + C',
+                    '\\displaystyle \\sec x \\tan x + C',
+                    '\\displaystyle -\\cot x + C'
+                ],
+                explain: '\\displaystyle \\int \\sec^2 x dx = \\tan x + C，因为 \\displaystyle (\\tan x)\' = \\sec^2 x。'
+            }, {
+                id: 13,
+                q: '\\displaystyle \\int \\csc^2 x \\, dx =',
+                opts: [
+                    '\\displaystyle -\\cot x + C',
+                    '\\displaystyle \\cot x + C',
+                    '\\displaystyle \\tan x + C',
+                    '\\displaystyle -\\tan x + C'
+                ],
+                explain: '\\displaystyle \\int \\csc^2 x dx = -\\cot x + C，因为 \\displaystyle (-\\cot x)\' = \\csc^2 x。'
+            }, {
+                id: 14,
+                q: '\\displaystyle \\int \\sec x \\tan x \\, dx =',
+                opts: [
+                    '\\displaystyle \\sec x + C',
+                    '\\displaystyle \\tan x + C',
+                    '\\displaystyle \\sec x \\tan x + C',
+                    '\\displaystyle -\\sec x + C'
+                ],
+                explain: '\\displaystyle \\int \\sec x \\tan x dx = \\sec x + C，因为 \\displaystyle (\\sec x)\' = \\sec x \\tan x。'
+            }, {
+                id: 15,
+                q: '\\displaystyle \\int \\csc x \\cot x \\, dx =',
+                opts: [
+                    '\\displaystyle -\\csc x + C',
+                    '\\displaystyle \\csc x + C',
+                    '\\displaystyle -\\cot x + C',
+                    '\\displaystyle \\csc x \\cot x + C'
+                ],
+                explain: '\\displaystyle \\int \\csc x \\cot x dx = -\\csc x + C，因为 \\displaystyle (-\\csc x)\' = \\csc x \\cot x。'
+            }, {
+                id: 16,
+                q: '\\displaystyle \\int \\tan^2 x \\, dx =',
+                opts: [
+                    '\\displaystyle \\tan x - x + C',
+                    '\\displaystyle \\tan x + x + C',
+                    '\\displaystyle \\sec^2 x + C',
+                    '\\displaystyle -\\tan x - x + C'
+                ],
+                explain: '利用 \\displaystyle \\tan^2 x = \\sec^2 x - 1，得 \\displaystyle \\int \\tan^2 x dx = \\tan x - x + C。'
+            }, {
+                id: 17,
+                q: '\\displaystyle \\int \\cot^2 x \\, dx =',
+                opts: [
+                    '\\displaystyle -\\cot x - x + C',
+                    '\\displaystyle \\cot x - x + C',
+                    '\\displaystyle -\\cot x + x + C',
+                    '\\displaystyle \\tan x - x + C'
+                ],
+                explain: '利用 \\displaystyle \\cot^2 x = \\csc^2 x - 1，得 \\displaystyle \\int \\cot^2 x dx = -\\cot x - x + C。'
+            }, {
+                id: 18,
+                q: '\\displaystyle \\int \\frac{1}{a^2 + x^2} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\frac{1}{a}\\arctan\\frac{x}{a} + C',
+                    '\\displaystyle \\arctan\\frac{x}{a} + C',
+                    '\\displaystyle \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + C',
+                    '\\displaystyle \\arcsin\\frac{x}{a} + C'
+                ],
+                explain: '\\displaystyle \\int \\frac{1}{a^2+x^2} dx = \\frac{1}{a}\\arctan\\frac{x}{a} + C，这是反正切函数的导数形式。'
+            }, {
+                id: 19,
+                q: '\\displaystyle \\int \\frac{1}{a^2 - x^2} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + C',
+                    '\\displaystyle \\frac{1}{a}\\arctan\\frac{x}{a} + C',
+                    '\\displaystyle \\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\ln\\left|x + \\sqrt{x^2 + a^2}\\right| + C'
+                ],
+                explain: '\\displaystyle \\int \\frac{1}{a^2-x^2} dx = \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + C，注意分母无根号，结果为对数形式。'
+            }, {
+                id: 20,
+                q: '\\displaystyle \\int \\frac{1}{\\sqrt{a^2 - x^2}} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\frac{1}{a}\\arctan\\frac{x}{a} + C',
+                    '\\displaystyle \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + C',
+                    '\\displaystyle \\ln\\left|x + \\sqrt{x^2 + a^2}\\right| + C'
+                ],
+                explain: '\\displaystyle \\int \\frac{1}{\\sqrt{a^2-x^2}} dx = \\arcsin\\frac{x}{a} + C，分母有根号，结果为反正弦。'
+            }, {
+                id: 21,
+                q: '\\displaystyle \\int \\frac{1}{\\sqrt{x^2 + a^2}} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\ln\\left(x + \\sqrt{x^2 + a^2}\\right) + C',
+                    '\\displaystyle \\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\frac{1}{a}\\arctan\\frac{x}{a} + C',
+                    '\\displaystyle \\ln\\left|x + \\sqrt{x^2 - a^2}\\right| + C'
+                ],
+                explain: '\\displaystyle \\int \\frac{1}{\\sqrt{x^2+a^2}} dx = \\ln\\left(x + \\sqrt{x^2+a^2}\\right) + C，双曲代换的经典结果。'
+            }, {
+                id: 22,
+                q: '\\displaystyle \\int \\frac{1}{\\sqrt{x^2 - a^2}} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\ln\\left|x + \\sqrt{x^2 - a^2}\\right| + C',
+                    '\\displaystyle \\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\ln\\left(x + \\sqrt{x^2 + a^2}\\right) + C',
+                    '\\displaystyle \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + C'
+                ],
+                explain: '\\displaystyle \\int \\frac{1}{\\sqrt{x^2-a^2}} dx = \\ln\\left|x + \\sqrt{x^2-a^2}\\right| + C，注意绝对值保证定义域。'
+            }, {
+                id: 23,
+                q: '\\displaystyle \\int \\sqrt{a^2 - x^2} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\frac{x}{2}\\sqrt{a^2 - x^2} + \\frac{a^2}{2}\\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{a^2 - x^2} + \\frac{a^2}{2}\\ln\\left|x + \\sqrt{a^2 - x^2}\\right| + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{a^2 - x^2} + \\frac{a}{2}\\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\sqrt{a^2 - x^2} + C'
+                ],
+                explain: '\\displaystyle \\int \\sqrt{a^2-x^2} dx = \\frac{x}{2}\\sqrt{a^2-x^2} + \\frac{a^2}{2}\\arcsin\\frac{x}{a} + C，三角代换 x = a\\sin t。'
+            }, {
+                id: 24,
+                q: '\\displaystyle \\int \\sqrt{x^2 + a^2} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 + a^2} + \\frac{a^2}{2}\\ln\\left(x + \\sqrt{x^2 + a^2}\\right) + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 + a^2} - \\frac{a^2}{2}\\ln\\left(x + \\sqrt{x^2 + a^2}\\right) + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 + a^2} + \\frac{a}{2}\\ln\\left|x + \\sqrt{x^2 + a^2}\\right| + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 + a^2} + \\frac{a^2}{2}\\arcsin\\frac{x}{a} + C'
+                ],
+                explain: '\\displaystyle \\int \\sqrt{x^2+a^2} dx = \\frac{x}{2}\\sqrt{x^2+a^2} + \\frac{a^2}{2}\\ln\\left(x + \\sqrt{x^2+a^2}\\right) + C，双曲代换。'
+            }, {
+                id: 25,
+                q: '\\displaystyle \\int \\sqrt{x^2 - a^2} \\, dx \\quad (a>0) =',
+                opts: [
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 - a^2} - \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2 - a^2}\\right| + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 - a^2} + \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2 - a^2}\\right| + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 - a^2} - \\frac{a^2}{2}\\arcsin\\frac{x}{a} + C',
+                    '\\displaystyle \\frac{x}{2}\\sqrt{x^2 - a^2} + \\frac{a^2}{2}\\ln\\left(x + \\sqrt{x^2 - a^2}\\right) + C'
+                ],
+                explain: '\\displaystyle \\int \\sqrt{x^2-a^2} dx = \\frac{x}{2}\\sqrt{x^2-a^2} - \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2-a^2}\\right| + C。'
+            }];
+
+            // ============================================================
+            //  2. 状态管理
+            // ============================================================
+            const STATE = {
+                questions: [],
+                currentIndex: 0,
+                answers: [],
+                submitted: false,
+                resultData: null,
+                history: []
+            };
+
+            // ============================================================
+            //  3. DOM 引用
+            // ============================================================
+            const $ = id => document.getElementById(id);
+            const quizView = $('quizView');
+            const resultView = $('resultView');
+            const qNumDisplay = $('qNumDisplay');
+            const qText = $('qText');
+            const optionsContainer = $('optionsContainer');
+            const prevBtn = $('prevBtn');
+            const nextBtn = $('nextBtn');
+            const submitBtn = $('submitBtn');
+            const resetBtn = $('resetBtn');
+            const progressBadge = $('progressBadge');
+            const liveScoreBadge = $('liveScoreBadge');
+            const answeredCount = $('answeredCount');
+
+            const finalScore = $('finalScore');
+            const finalSub = $('finalSub');
+            const compareMsg = $('compareMsg');
+            const rCorrect = $('rCorrect');
+            const rWrong = $('rWrong');
+            const rUnanswered = $('rUnanswered');
+            const errorSection = $('errorSection');
+            const errorCountBadge = $('errorCountBadge');
+            const errorList = $('errorList');
+
+            const retryBtn = $('retryBtn');
+            const viewBankBtn = $('viewBankBtn');
+            const viewBankFromResultBtn = $('viewBankFromResultBtn');
+            const backToQuizBtn = $('backToQuizBtn');
+
+            const bankModal = $('bankModal');
+            const bankModalClose = $('bankModalClose');
+            const bankContent = $('bankContent');
+
+            // ============================================================
+            //  4. 工具：包裹 LaTeX 为行内公式
+            // ============================================================
+            function wrapMath(s) {
+                // 如果已经包含定界符则不再添加（避免重复）
+                if (/^\\\(.*\\\)$/.test(s.trim())) return s;
+                return '\\(' + s + '\\)';
+            }
+
+            // 批量包裹
+            function wrapAllMath(arr) {
+                return arr.map(s => wrapMath(s));
+            }
+
+            // ============================================================
+            //  5. 渲染数学公式（强制刷新）
+            // ============================================================
+            function renderMath() {
+                return new Promise((resolve) => {
+                    if (window.MathJax && MathJax.typesetPromise) {
+                        MathJax.typesetPromise()
+                            .then(() => resolve(true))
+                            .catch(() => {
+                                try { if (MathJax.typeset) MathJax.typeset(); } catch (e) {}
+                                resolve(false);
+                            });
+                    } else {
+                        let attempts = 0;
+                        const wait = setInterval(() => {
+                            attempts++;
+                            if (window.MathJax && MathJax.typesetPromise) {
+                                clearInterval(wait);
+                                MathJax.typesetPromise().then(() => resolve(true)).catch(() => resolve(false));
+                            } else if (attempts > 30) {
+                                clearInterval(wait);
+                                resolve(false);
+                            }
+                        }, 200);
+                    }
+                });
+            }
+
+            // ============================================================
+            //  6. 核心工具
+            // ============================================================
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+
+            function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
+
+            function shuffleOptions(q) {
+                const opts = q.opts.map((text, idx) => ({ text, idx }));
+                shuffle(opts);
+                const newOpts = opts.map(item => item.text);
+                const newCorrect = opts.findIndex(item => item.idx === q.correct);
+                return { opts: newOpts, correct: newCorrect };
+            }
+
+            function initQuestions() {
+                const raw = clone(RAW_QUESTIONS);
+                raw.forEach(q => { q.correct = 0; });
+                shuffle(raw);
+                const result = raw.map(q => {
+                    const { opts, correct } = shuffleOptions(q);
+                    return {
+                        id: q.id,
+                        q: q.q,
+                        opts: opts,
+                        correct: correct,
+                        explain: q.explain
+                    };
+                });
+                return result;
+            }
+
+            // ============================================================
+            //  7. 渲染 & 交互
+            // ============================================================
+            function renderQuestion() {
+                const qs = STATE.questions;
+                if (!qs.length) return;
+                const idx = STATE.currentIndex;
+                const q = qs[idx];
+                const ans = STATE.answers[idx];
+
+                qNumDisplay.textContent = `第 ${idx+1} 题`;
+                // 题目包裹定界符
+                qText.innerHTML = wrapMath(q.q);
+
+                const labels = ['A', 'B', 'C', 'D'];
+                let html = '';
+                for (let i = 0; i < q.opts.length; i++) {
+                    const selected = (ans === i) ? 'selected' : '';
+                    // 选项内容包裹定界符
+                    const optContent = wrapMath(q.opts[i]);
+                    html += `
+                        <button class="option-btn ${selected}" data-optidx="${i}">
+                            <span class="label">${labels[i]}</span>
+                            <span class="content">${optContent}</span>
+                        </button>
+                    `;
+                }
+                optionsContainer.innerHTML = html;
+
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        if (STATE.submitted) return;
+                        const idx2 = parseInt(this.dataset.optidx);
+                        selectOption(idx2);
+                    });
+                });
+
+                progressBadge.innerHTML = `第 <strong>${idx+1}</strong> / 25 题`;
+                const answered = STATE.answers.filter(a => a !== -1).length;
+                answeredCount.textContent = answered;
+                liveScoreBadge.textContent = `✅ ${answered} / 25`;
+
+                prevBtn.disabled = (idx === 0);
+                nextBtn.disabled = (idx === qs.length - 1);
+
+                // 渲染公式
+                renderMath().catch(() => {});
+            }
+
+            function selectOption(optIdx) {
+                if (STATE.submitted) return;
+                const idx = STATE.currentIndex;
+                STATE.answers[idx] = optIdx;
+                renderQuestion();
+            }
+
+            function goToPrev() {
+                if (STATE.currentIndex > 0) {
+                    STATE.currentIndex--;
+                    renderQuestion();
+                }
+            }
+
+            function goToNext() {
+                if (STATE.currentIndex < STATE.questions.length - 1) {
+                    STATE.currentIndex++;
+                    renderQuestion();
+                }
+            }
+
+            // ============================================================
+            //  8. 提交逻辑
+            // ============================================================
+            function submitQuiz() {
+                if (STATE.submitted) return;
+                const qs = STATE.questions;
+                const ans = STATE.answers;
+                let correct = 0,
+                    wrong = 0,
+                    unanswered = 0;
+                const details = [];
+
+                for (let i = 0; i < qs.length; i++) {
+                    const chosen = ans[i];
+                    const isCorrect = (chosen === qs[i].correct);
+                    if (chosen === -1) {
+                        unanswered++;
+                        details.push({
+                            index: i,
+                            chosen: -1,
+                            isCorrect: false,
+                            correctIdx: qs[i].correct,
+                            q: qs[i].q,
+                            opts: qs[i].opts,
+                            explain: qs[i].explain
+                        });
+                    } else if (isCorrect) {
+                        correct++;
+                        details.push({
+                            index: i,
+                            chosen: chosen,
+                            isCorrect: true,
+                            correctIdx: qs[i].correct,
+                            q: qs[i].q,
+                            opts: qs[i].opts,
+                            explain: qs[i].explain
+                        });
+                    } else {
+                        wrong++;
+                        details.push({
+                            index: i,
+                            chosen: chosen,
+                            isCorrect: false,
+                            correctIdx: qs[i].correct,
+                            q: qs[i].q,
+                            opts: qs[i].opts,
+                            explain: qs[i].explain
+                        });
+                    }
+                }
+
+                const total = qs.length;
+                const pct = Math.round((correct / total) * 100);
+                const result = { correct, wrong, unanswered, total, pct, details };
+
+                saveHistory(pct);
+
+                STATE.submitted = true;
+                STATE.resultData = result;
+
+                showResult(result);
+            }
+
+            // ============================================================
+            //  9. 结果展示
+            // ============================================================
+            function showResult(result) {
+                quizView.style.display = 'none';
+                resultView.style.display = 'flex';
+
+                const { correct, wrong, unanswered, total, pct, details } = result;
+
+                finalScore.innerHTML = `${pct}<span>%</span>`;
+                finalSub.textContent = `正确 ${correct} 题，错误 ${wrong} 题，未答 ${unanswered} 题`;
+                rCorrect.textContent = correct;
+                rWrong.textContent = wrong;
+                rUnanswered.textContent = unanswered;
+
+                const history = getHistory();
+                const last = history.length >= 2 ? history[history.length - 2] : null;
+                if (last !== null) {
+                    const diff = pct - last;
+                    if (diff > 0) {
+                        compareMsg.className = 'compare up';
+                        compareMsg.textContent = `📈 比上次提升 ${diff}% (上次 ${last}%)`;
+                    } else if (diff < 0) {
+                        compareMsg.className = 'compare down';
+                        compareMsg.textContent = `📉 比上次下降 ${Math.abs(diff)}% (上次 ${last}%)`;
+                    } else {
+                        compareMsg.className = 'compare same';
+                        compareMsg.textContent = `➖ 与上次持平 (上次 ${last}%)`;
+                    }
+                } else {
+                    compareMsg.className = 'compare same';
+                    compareMsg.textContent = '📊 首次测试，继续加油！';
+                }
+
+                const errors = details.filter(d => !d.isCorrect);
+                errorCountBadge.textContent = errors.length;
+                if (errors.length === 0) {
+                    errorList.innerHTML = `<div class="empty-state"><span class="big-icon">🎉</span>全部正确，太棒了！</div>`;
+                } else {
+                    let html = '';
+                    const labels = ['A', 'B', 'C', 'D'];
+                    errors.forEach((e, idx) => {
+                        const chosenLabel = e.chosen === -1 ? '未作答' : labels[e.chosen];
+                        const correctLabel = labels[e.correctIdx];
+                        const chosenStr = e.chosen === -1 ? '未作答' : e.opts[e.chosen];
+                        const correctStr = e.opts[e.correctIdx];
+                        // 包裹数学内容
+                        const qWrapped = wrapMath(e.q);
+                        const chosenWrapped = wrapMath(chosenStr);
+                        const correctWrapped = wrapMath(correctStr);
+                        const explainWrapped = wrapMath(e.explain);
+                        html += `
+                            <div class="error-item">
+                                <div class="q">${idx+1}. ${qWrapped}</div>
+                                <div class="detail">
+                                    <span><span style="color:#d14c4c;font-weight:600;">你的选择：</span> ${chosenLabel} — ${chosenWrapped}</span>
+                                    <span><span style="color:#1fa36a;font-weight:600;">正确答案：</span> ${correctLabel} — ${correctWrapped}</span>
+                                </div>
+                                <div class="explanation">
+                                    <strong>📖 解析：</strong> ${explainWrapped}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    errorList.innerHTML = html;
+                }
+
+                renderMath().catch(() => {});
+            }
+
+            // ============================================================
+            //  10. 历史记录
+            // ============================================================
+            function getHistory() {
+                try {
+                    const data = localStorage.getItem('integral_quiz_history');
+                    return data ? JSON.parse(data) : [];
+                } catch { return []; }
+            }
+
+            function saveHistory(pct) {
+                const history = getHistory();
+                history.push(pct);
+                if (history.length > 50) history.shift();
+                try {
+                    localStorage.setItem('integral_quiz_history', JSON.stringify(history));
+                } catch {}
+                STATE.history = history;
+            }
+
+            // ============================================================
+            //  11. 重置
+            // ============================================================
+            function resetQuiz() {
+                STATE.questions = initQuestions();
+                STATE.currentIndex = 0;
+                STATE.answers = new Array(STATE.questions.length).fill(-1);
+                STATE.submitted = false;
+                STATE.resultData = null;
+
+                quizView.style.display = 'flex';
+                resultView.style.display = 'none';
+
+                renderQuestion();
+                // 额外渲染
+                setTimeout(() => renderMath().catch(() => {}), 300);
+            }
+
+            // ============================================================
+            //  12. 题库展示
+            // ============================================================
+            function renderBank() {
+                const labels = ['A', 'B', 'C', 'D'];
+                let html = '';
+                RAW_QUESTIONS.forEach((q, idx) => {
+                    const qWrapped = wrapMath(q.q);
+                    const optsWrapped = q.opts.map(s => wrapMath(s));
+                    const explainWrapped = wrapMath(q.explain);
+                    html += `
+                        <div class="bank-item">
+                            <div class="bq"><strong>${idx+1}.</strong> ${qWrapped}</div>
+                            <div class="boptions">
+                                ${optsWrapped.map((opt, i) => {
+                                    const mark = (i === 0) ? ' ✅' : '';
+                                    return `<span>${labels[i]}. ${opt}${mark}</span>`;
+                                }).join('')}
+                            </div>
+                            <div class="bexplain"><strong>解析：</strong> ${explainWrapped}</div>
+                        </div>
+                    `;
+                });
+                bankContent.innerHTML = html;
+                setTimeout(() => renderMath().catch(() => {}), 200);
+            }
+
+            function openBank() {
+                renderBank();
+                bankModal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeBank() {
+                bankModal.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            // ============================================================
+            //  13. 键盘快捷键
+            // ============================================================
+            document.addEventListener('keydown', (e) => {
+                if (bankModal.classList.contains('open')) {
+                    if (e.key === 'Escape') closeBank();
+                    return;
+                }
+                if (STATE.submitted) return;
+                if (e.key === 'ArrowLeft') goToPrev();
+                if (e.key === 'ArrowRight') goToNext();
+                if (e.key >= '1' && e.key <= '4') {
+                    const idx = parseInt(e.key) - 1;
+                    const btns = document.querySelectorAll('.option-btn');
+                    if (btns[idx]) btns[idx].click();
+                }
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    e.preventDefault();
+                    submitBtn.click();
+                }
+            });
+
+            // ============================================================
+            //  14. 绑定事件
+            // ============================================================
+            prevBtn.addEventListener('click', goToPrev);
+            nextBtn.addEventListener('click', goToNext);
+            submitBtn.addEventListener('click', submitQuiz);
+            resetBtn.addEventListener('click', resetQuiz);
+            retryBtn.addEventListener('click', resetQuiz);
+            viewBankBtn.addEventListener('click', openBank);
+            viewBankFromResultBtn.addEventListener('click', openBank);
+            bankModalClose.addEventListener('click', closeBank);
+            bankModal.addEventListener('click', (e) => {
+                if (e.target === bankModal) closeBank();
+            });
+            backToQuizBtn.addEventListener('click', () => {
+                resultView.style.display = 'none';
+                quizView.style.display = 'flex';
+                renderQuestion();
+            });
+
+            // ============================================================
+            //  15. 启动
+            // ============================================================
+            resetQuiz();
+
+            // 额外确保加载后渲染
+            window.addEventListener('load', function() {
+                setTimeout(() => renderMath().catch(() => {}), 500);
+            });
+
+            console.log('📐 不定积分 · 通关练习已加载 (公式定界符已修复)');
+            console.log('💡 快捷键: ← → 切换题目 | 1-4 选择选项 | Ctrl+Enter 提交');
+
+        })();
+    </script>
+</body>
+</html>
