@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 动词不规则变化 · 交互式测试</title>
+    <style>
+        :root {
+            --bg-grad-1: #eaf4fc;
+            --bg-grad-2: #d4e8f7;
+            --bg-grad-3: #fef9e7;
+            --card-bg: #ffffff;
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --gold: #f7dc6f;
+            --gold-dark: #d4ac0d;
+            --success: #27ae60;
+            --success-bg: #eafaf1;
+            --danger: #e74c3c;
+            --danger-bg: #fdedec;
+            --text-dark: #2c3e50;
+            --text-medium: #5d6d7e;
+            --text-light: #aab7b8;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 40px rgba(41, 128, 185, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-main: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            --font-deco: 'Georgia', 'Times New Roman', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 40%, var(--bg-grad-3) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(231, 76, 60, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(41, 128, 185, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 580px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 顶部标题栏 ========== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
+            animation: pulse-badge 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse-badge {
+            0%,
+            100% {
+                box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(41, 128, 185, 0.5);
+            }
+        }
+        .title-group h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+        .title-group .subtitle {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .header-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .btn-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 2px solid rgba(26, 82, 118, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        .btn-icon:hover {
+            border-color: var(--primary-light);
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .btn-icon:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* ========== 统计栏 ========== */
+        .stats-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .stat-chip {
+            flex: 1;
+            min-width: 80px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 10px 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+        }
+        .stat-chip:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .stat-chip .stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        .stat-chip .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .stat-chip.best .stat-value {
+            color: var(--gold-dark);
+        }
+        .stat-chip.history .stat-value {
+            color: var(--accent);
+        }
+
+        /* ========== 题目卡片 ========== */
+        .quiz-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+        }
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent-light), var(--gold), var(--accent-light), var(--primary-light));
+            background-size: 200% 100%;
+            animation: shimmer-bar 4s linear infinite;
+        }
+        @keyframes shimmer-bar {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+
+        .quiz-card .card-decoration {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 28px;
+            opacity: 0.12;
+            pointer-events: none;
+            animation: float-deco 4s ease-in-out infinite;
+        }
+        @keyframes float-deco {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(8deg);
+            }
+        }
+
+        .progress-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            gap: 12px;
+        }
+        .progress-indicator {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .progress-bar-track {
+            flex: 1;
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent-light));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .question-type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .question-type-badge.type-2 {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        }
+        .question-type-badge.type-3 {
+            background: linear-gradient(135deg, #8e44ad, #a569bd);
+        }
+        .question-type-badge.type-4 {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .question-prompt {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        .question-word {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            font-family: var(--font-deco);
+            text-shadow: 0 2px 4px rgba(26, 82, 118, 0.1);
+            word-break: break-word;
+        }
+        .question-word .meaning-hint {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-medium);
+            margin-left: 10px;
+            font-family: var(--font-main);
+            letter-spacing: 0;
+            text-shadow: none;
+        }
+        .question-sub {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .answer-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            justify-content: center;
+        }
+        .answer-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .answer-input-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-medium);
+            min-width: 70px;
+            text-align: right;
+            letter-spacing: 0.5px;
+        }
+        .answer-input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid #dce4ec;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: #fafcfd;
+            transition: all var(--transition);
+            outline: none;
+            font-family: var(--font-main);
+            letter-spacing: 0.5px;
+            min-width: 0;
+        }
+        .answer-input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.12);
+            background: #fff;
+        }
+        .answer-input::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 0;
+        }
+        .answer-input.correct {
+            border-color: var(--success);
+            background: var(--success-bg);
+        }
+        .answer-input.incorrect {
+            border-color: var(--danger);
+            background: var(--danger-bg);
+        }
+
+        .multi-input-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .multi-input-row .answer-input-group {
+            flex: 1;
+            min-width: 130px;
+        }
+        .multi-input-row .answer-input-group label {
+            min-width: auto;
+            text-align: left;
+            font-size: 0.7rem;
+        }
+
+        /* ========== 按钮 ========== */
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition);
+            letter-spacing: 0.5px;
+            font-family: var(--font-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(26, 82, 118, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+        }
+        .btn-accent:hover {
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: #fff;
+            color: var(--primary);
+            border: 2px solid rgba(26, 82, 118, 0.25);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary-light);
+            background: #f8fbfe;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-danger-outline {
+            background: #fff;
+            color: var(--danger);
+            border: 2px solid rgba(231, 76, 60, 0.3);
+        }
+        .btn-danger-outline:hover {
+            background: var(--danger-bg);
+            border-color: var(--danger);
+            transform: translateY(-2px);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ========== 结果面板 ========== */
+        .result-panel {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 24px;
+            margin-top: 16px;
+            animation: slideUp 0.4s ease;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .result-score {
+            text-align: center;
+            padding: 16px 0;
+        }
+        .result-score .big-score {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .result-score .score-label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-top: 4px;
+        }
+        .result-percent {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 6px;
+        }
+        .result-message {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            padding: 12px;
+            background: #f8fbfe;
+            border-radius: 12px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        .result-compare {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .result-compare.up {
+            color: var(--success);
+        }
+        .result-compare.down {
+            color: var(--danger);
+        }
+        .result-compare.same {
+            color: var(--text-medium);
+        }
+
+        /* ========== 错题列表 ========== */
+        .wrong-list {
+            margin-top: 14px;
+            max-height: 280px;
+            overflow-y: auto;
+            border-radius: 12px;
+            background: #fafcfd;
+        }
+        .wrong-item {
+            padding: 12px 14px;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            font-size: 0.82rem;
+        }
+        .wrong-item:last-child {
+            border-bottom: none;
+        }
+        .wrong-item .wi-word {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        .wrong-item .wi-meaning {
+            color: var(--text-medium);
+            font-size: 0.75rem;
+        }
+        .wrong-item .wi-answers {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+            width: 100%;
+        }
+        .wrong-item .wi-user {
+            background: var(--danger-bg);
+            color: var(--danger);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        .wrong-item .wi-correct {
+            background: var(--success-bg);
+            color: var(--success);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        .wrong-item .wi-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== 模态框 ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            animation: fadeIn 0.25s ease;
+            padding: 16px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+        .modal-content h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: #f0f4f8;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .modal-close:hover {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        /* ========== 题库表格 ========== */
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+        }
+        .verb-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #ecf0f1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .verb-table tr:hover td {
+            background: #f0f8ff;
+        }
+        .verb-table .vt-base {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .verb-table .vt-meaning {
+            color: var(--text-medium);
+            font-size: 0.72rem;
+        }
+
+        /* ========== 历史分数列表 ========== */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: #f8fbfe;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-light);
+            font-size: 0.85rem;
+        }
+        .history-item .hi-score {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        .history-item .hi-date {
+            color: var(--text-medium);
+            font-size: 0.72rem;
+        }
+        .history-item .hi-percent {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ========== 空状态 ========== */
+        .empty-state {
+            text-align: center;
+            padding: 30px 16px;
+            color: var(--text-medium);
+        }
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+        .empty-state p {
+            font-size: 0.9rem;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .quiz-card {
+                padding: 20px 16px;
+                min-height: 320px;
+            }
+            .question-word {
+                font-size: 1.8rem;
+            }
+            .question-word .meaning-hint {
+                font-size: 0.85rem;
+                display: block;
+                margin-left: 0;
+                margin-top: 4px;
+            }
+            .btn {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+            }
+            .answer-input {
+                font-size: 0.95rem;
+                padding: 10px 12px;
+            }
+            .multi-input-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .header h1 {
+                font-size: 1rem;
+            }
+            .modal-content {
+                padding: 16px;
+                max-height: 85vh;
+            }
+            .stat-chip .stat-value {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="app">
+        <!-- 顶部标题 -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-badge">📖</div>
+                <div class="title-group">
+                    <h1>动词不规则变化</h1>
+                    <div class="subtitle">Irregular Verbs Challenge</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" onclick="showHistory()" title="查看历史分数">📊</button>
+                <button class="btn-icon" onclick="showVerbs()" title="显示题库">📚</button>
+                <button class="btn-icon" onclick="showWrongList()" title="查看错题" id="btnWrong" style="display:none;">❌</button>
+            </div>
+        </div>
+
+        <!-- 统计栏 -->
+        <div class="stats-bar">
+            <div class="stat-chip best">
+                <div class="stat-value" id="statBest">--</div>
+                <div class="stat-label">🏆 最高分</div>
+            </div>
+            <div class="stat-chip history">
+                <div class="stat-value" id="statCount">0</div>
+                <div class="stat-label">📈 测试次数</div>
+            </div>
+            <div class="stat-chip">
+                <div class="stat-value" id="statAccuracy">--</div>
+                <div class="stat-label">🎯 正确率</div>
+            </div>
+        </div>
+
+        <!-- 题目卡片 -->
+        <div class="quiz-card" id="quizCard">
+            <div class="card-decoration" id="cardDeco">✏️</div>
+
+            <div class="progress-row">
+                <span class="progress-indicator" id="progressText">准备开始</span>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progressFill" style="width:0%;"></div>
+                </div>
+            </div>
+
+            <div id="quizContent">
+                <!-- 动态内容 -->
+                <div class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <p>点击下方按钮开始测试</p>
+                    <p style="font-size:0.8rem;margin-top:4px;color:var(--text-light);">随机抽取30题 · 四种题型混合</p>
+                </div>
+            </div>
+
+            <div class="btn-row" id="quizActions">
+                <button class="btn btn-primary" onclick="startQuiz()" id="btnStart">🎯 开始测试</button>
+            </div>
+        </div>
+
+        <!-- 结果面板 -->
+        <div id="resultPanel" style="display:none;"></div>
+    </div>
+
+    <!-- 题库模态框 -->
+    <div class="modal-overlay" id="verbsModal" style="display:none;" onclick="if(event.target===this)closeModal('verbsModal')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('verbsModal')">✕</button>
+            <h2>📚 动词不规则变化题库</h2>
+            <div id="verbsTableContainer"></div>
+        </div>
+    </div>
+
+    <!-- 历史分数模态框 -->
+    <div class="modal-overlay" id="historyModal" style="display:none;" onclick="if(event.target===this)closeModal('historyModal')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('historyModal')">✕</button>
+            <h2>📊 历史分数记录</h2>
+            <div id="historyContent"></div>
+        </div>
+    </div>
+
+    <!-- 错题模态框 -->
+    <div class="modal-overlay" id="wrongModal" style="display:none;" onclick="if(event.target===this)closeModal('wrongModal')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('wrongModal')">✕</button>
+            <h2>❌ 本次错题回顾</h2>
+            <div id="wrongModalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 动词数据 ====================
+        const VERBS = [
+            // AAA型
+            { base: 'burst', past: ['burst'], pp: ['burst'], meaning: '爆炸；突发' },
+            { base: 'cast', past: ['cast'], pp: ['cast'], meaning: '投掷；铸造' },
+            { base: 'cost', past: ['cost'], pp: ['cost'], meaning: '花费' },
+            { base: 'cut', past: ['cut'], pp: ['cut'], meaning: '切；割' },
+            { base: 'hit', past: ['hit'], pp: ['hit'], meaning: '打；击中' },
+            { base: 'hurt', past: ['hurt'], pp: ['hurt'], meaning: '伤害' },
+            { base: 'let', past: ['let'], pp: ['let'], meaning: '让' },
+            { base: 'put', past: ['put'], pp: ['put'], meaning: '放' },
+            { base: 'read', past: ['read'], pp: ['read'], meaning: '读' },
+            { base: 'set', past: ['set'], pp: ['set'], meaning: '设置；放置' },
+            { base: 'shut', past: ['shut'], pp: ['shut'], meaning: '关闭' },
+            { base: 'split', past: ['split'], pp: ['split'], meaning: '分裂；劈开' },
+            { base: 'spread', past: ['spread'], pp: ['spread'], meaning: '传播；展开' },
+            { base: 'upset', past: ['upset'], pp: ['upset'], meaning: '使不安' },
+            { base: 'quit', past: ['quit', 'quitted'], pp: ['quit', 'quitted'], meaning: '放弃；辞职' },
+            { base: 'bet', past: ['bet', 'betted'], pp: ['bet', 'betted'], meaning: '打赌' },
+            { base: 'broadcast', past: ['broadcast'], pp: ['broadcast'], meaning: '广播' },
+            { base: 'forecast', past: ['forecast', 'forecasted'], pp: ['forecast', 'forecasted'], meaning: '预报' },
+            { base: 'rid', past: ['rid', 'ridded'], pp: ['rid', 'ridded'], meaning: '摆脱' },
+            // ABB型
+            { base: 'bring', past: ['brought'], pp: ['brought'], meaning: '带来' },
+            { base: 'buy', past: ['bought'], pp: ['bought'], meaning: '买' },
+            { base: 'catch', past: ['caught'], pp: ['caught'], meaning: '抓住' },
+            { base: 'fight', past: ['fought'], pp: ['fought'], meaning: '战斗' },
+            { base: 'seek', past: ['sought'], pp: ['sought'], meaning: '寻找' },
+            { base: 'teach', past: ['taught'], pp: ['taught'], meaning: '教' },
+            { base: 'think', past: ['thought'], pp: ['thought'], meaning: '想' },
+            { base: 'bend', past: ['bent'], pp: ['bent'], meaning: '弯曲' },
+            { base: 'build', past: ['built'], pp: ['built'], meaning: '建造' },
+            { base: 'lend', past: ['lent'], pp: ['lent'], meaning: '借出' },
+            { base: 'send', past: ['sent'], pp: ['sent'], meaning: '发送' },
+            { base: 'spend', past: ['spent'], pp: ['spent'], meaning: '花费' },
+            { base: 'mean', past: ['meant'], pp: ['meant'], meaning: '意味着' },
+            { base: 'deal', past: ['dealt'], pp: ['dealt'], meaning: '处理' },
+            { base: 'feel', past: ['felt'], pp: ['felt'], meaning: '感觉' },
+            { base: 'keep', past: ['kept'], pp: ['kept'], meaning: '保持' },
+            { base: 'sleep', past: ['slept'], pp: ['slept'], meaning: '睡觉' },
+            { base: 'sweep', past: ['swept'], pp: ['swept'], meaning: '扫' },
+            { base: 'weep', past: ['wept'], pp: ['wept'], meaning: '哭泣' },
+            { base: 'creep', past: ['crept'], pp: ['crept'], meaning: '爬行' },
+            { base: 'leave', past: ['left'], pp: ['left'], meaning: '离开' },
+            { base: 'lose', past: ['lost'], pp: ['lost'], meaning: '失去' },
+            { base: 'have', past: ['had'], pp: ['had'], meaning: '有', baseAlt: 'have/has' },
+            { base: 'make', past: ['made'], pp: ['made'], meaning: '制作' },
+            { base: 'sell', past: ['sold'], pp: ['sold'], meaning: '卖' },
+            { base: 'tell', past: ['told'], pp: ['told'], meaning: '告诉' },
+            { base: 'pay', past: ['paid'], pp: ['paid'], meaning: '支付' },
+            { base: 'say', past: ['said'], pp: ['said'], meaning: '说' },
+            { base: 'lay', past: ['laid'], pp: ['laid'], meaning: '放置；产卵' },
+            { base: 'hear', past: ['heard'], pp: ['heard'], meaning: '听见' },
+            { base: 'stand', past: ['stood'], pp: ['stood'], meaning: '站立' },
+            { base: 'understand', past: ['understood'], pp: ['understood'], meaning: '理解' },
+            { base: 'withstand', past: ['withstood'], pp: ['withstood'], meaning: '抵抗；承受' },
+            { base: 'find', past: ['found'], pp: ['found'], meaning: '发现' },
+            { base: 'grind', past: ['ground'], pp: ['ground'], meaning: '磨碎' },
+            { base: 'wind', past: ['wound'], pp: ['wound'], meaning: '缠绕' },
+            { base: 'win', past: ['won'], pp: ['won'], meaning: '赢' },
+            { base: 'hold', past: ['held'], pp: ['held'], meaning: '握住；举行' },
+            { base: 'sit', past: ['sat'], pp: ['sat'], meaning: '坐' },
+            { base: 'shoot', past: ['shot'], pp: ['shot'], meaning: '射击' },
+            { base: 'get', past: ['got'], pp: ['got', 'gotten'], meaning: '得到' },
+            { base: 'dig', past: ['dug'], pp: ['dug'], meaning: '挖' },
+            { base: 'stick', past: ['stuck'], pp: ['stuck'], meaning: '刺；粘贴；卡住' },
+            { base: 'sting', past: ['stung'], pp: ['stung'], meaning: '叮；蜇' },
+            { base: 'swing', past: ['swung'], pp: ['swung'], meaning: '摇摆' },
+            { base: 'spin', past: ['spun'], pp: ['spun'], meaning: '旋转' },
+            { base: 'hang', past: ['hung', 'hanged'], pp: ['hung', 'hanged'], meaning: '悬挂；绞死' },
+            { base: 'shine', past: ['shone', 'shined'], pp: ['shone', 'shined'], meaning: '照耀；擦亮' },
+            { base: 'slide', past: ['slid'], pp: ['slid'], meaning: '滑' },
+            { base: 'speed', past: ['sped', 'speeded'], pp: ['sped', 'speeded'], meaning: '加速' },
+            { base: 'light', past: ['lit', 'lighted'], pp: ['lit', 'lighted'], meaning: '点燃' },
+            { base: 'burn', past: ['burned', 'burnt'], pp: ['burned', 'burnt'], meaning: '燃烧' },
+            { base: 'dream', past: ['dreamed', 'dreamt'], pp: ['dreamed', 'dreamt'], meaning: '做梦' },
+            { base: 'learn', past: ['learned', 'learnt'], pp: ['learned', 'learnt'], meaning: '学习' },
+            { base: 'smell', past: ['smelled', 'smelt'], pp: ['smelled', 'smelt'], meaning: '闻' },
+            { base: 'spell', past: ['spelled', 'spelt'], pp: ['spelled', 'spelt'], meaning: '拼写' },
+            { base: 'spill', past: ['spilled', 'spilt'], pp: ['spilled', 'spilt'], meaning: '溢出' },
+            { base: 'spoil', past: ['spoiled', 'spoilt'], pp: ['spoiled', 'spoilt'], meaning: '宠坏；破坏' },
+            { base: 'lean', past: ['leaned', 'leant'], pp: ['leaned', 'leant'], meaning: '倾斜' },
+            { base: 'leap', past: ['leaped', 'leapt'], pp: ['leaped', 'leapt'], meaning: '跳跃' },
+            // ABC型
+            { base: 'begin', past: ['began'], pp: ['begun'], meaning: '开始' },
+            { base: 'drink', past: ['drank'], pp: ['drunk'], meaning: '喝' },
+            { base: 'ring', past: ['rang'], pp: ['rung'], meaning: '响；打电话' },
+            { base: 'sing', past: ['sang'], pp: ['sung'], meaning: '唱' },
+            { base: 'sink', past: ['sank'], pp: ['sunk'], meaning: '下沉' },
+            { base: 'swim', past: ['swam'], pp: ['swum'], meaning: '游泳' },
+            { base: 'spring', past: ['sprang', 'sprung'], pp: ['sprung'], meaning: '跳跃' },
+            { base: 'be', past: ['was', 'were'], pp: ['been'], meaning: '是' },
+            { base: 'break', past: ['broke'], pp: ['broken'], meaning: '打破' },
+            { base: 'choose', past: ['chose'], pp: ['chosen'], meaning: '选择' },
+            { base: 'freeze', past: ['froze'], pp: ['frozen'], meaning: '结冰' },
+            { base: 'speak', past: ['spoke'], pp: ['spoken'], meaning: '说话' },
+            { base: 'steal', past: ['stole'], pp: ['stolen'], meaning: '偷' },
+            { base: 'wake', past: ['woke', 'waked'], pp: ['woken', 'waked'], meaning: '醒来' },
+            { base: 'awake', past: ['awoke'], pp: ['awoken'], meaning: '醒着的；唤醒' },
+            { base: 'shake', past: ['shook'], pp: ['shaken'], meaning: '摇动' },
+            { base: 'take', past: ['took'], pp: ['taken'], meaning: '拿；带走' },
+            { base: 'mistake', past: ['mistook'], pp: ['mistaken'], meaning: '弄错' },
+            { base: 'forsake', past: ['forsook'], pp: ['forsaken'], meaning: '抛弃' },
+            { base: 'give', past: ['gave'], pp: ['given'], meaning: '给' },
+            { base: 'forgive', past: ['forgave'], pp: ['forgiven'], meaning: '原谅' },
+            { base: 'drive', past: ['drove'], pp: ['driven'], meaning: '驾驶' },
+            { base: 'ride', past: ['rode'], pp: ['ridden'], meaning: '骑' },
+            { base: 'rise', past: ['rose'], pp: ['risen'], meaning: '上升' },
+            { base: 'arise', past: ['arose'], pp: ['arisen'], meaning: '出现；产生' },
+            { base: 'write', past: ['wrote'], pp: ['written'], meaning: '写' },
+            { base: 'bite', past: ['bit'], pp: ['bitten'], meaning: '咬' },
+            { base: 'hide', past: ['hid'], pp: ['hidden'], meaning: '隐藏' },
+            { base: 'eat', past: ['ate'], pp: ['eaten'], meaning: '吃' },
+            { base: 'fall', past: ['fell'], pp: ['fallen'], meaning: '落下' },
+            { base: 'see', past: ['saw'], pp: ['seen'], meaning: '看见' },
+            { base: 'go', past: ['went'], pp: ['gone'], meaning: '去' },
+            { base: 'do', past: ['did'], pp: ['done'], meaning: '做' },
+            { base: 'lie', past: ['lay'], pp: ['lain'], meaning: '躺' },
+            { base: 'beat', past: ['beat'], pp: ['beaten', 'beat'], meaning: '打败' },
+            { base: 'forbid', past: ['forbade', 'forbad'], pp: ['forbidden'], meaning: '禁止' },
+            { base: 'blow', past: ['blew'], pp: ['blown'], meaning: '吹' },
+            { base: 'grow', past: ['grew'], pp: ['grown'], meaning: '生长' },
+            { base: 'know', past: ['knew'], pp: ['known'], meaning: '知道' },
+            { base: 'throw', past: ['threw'], pp: ['thrown'], meaning: '扔' },
+            { base: 'draw', past: ['drew'], pp: ['drawn'], meaning: '画' },
+            { base: 'withdraw', past: ['withdrew'], pp: ['withdrawn'], meaning: '撤回；取钱' },
+            { base: 'fly', past: ['flew'], pp: ['flown'], meaning: '飞' },
+            { base: 'swear', past: ['swore'], pp: ['sworn'], meaning: '发誓' },
+            { base: 'tear', past: ['tore'], pp: ['torn'], meaning: '撕' },
+            { base: 'wear', past: ['wore'], pp: ['worn'], meaning: '穿' },
+            { base: 'bear', past: ['bore'], pp: ['born', 'borne'], meaning: '忍受；生育' },
+            { base: 'weave', past: ['wove'], pp: ['woven'], meaning: '编织' },
+            { base: 'swell', past: ['swelled'], pp: ['swollen', 'swelled'], meaning: '肿胀' },
+            { base: 'sew', past: ['sewed'], pp: ['sewn', 'sewed'], meaning: '缝' },
+            { base: 'show', past: ['showed'], pp: ['shown', 'showed'], meaning: '展示' },
+            { base: 'sow', past: ['sowed'], pp: ['sown', 'sowed'], meaning: '播种' },
+            { base: 'mow', past: ['mowed'], pp: ['mown', 'mowed'], meaning: '割草' },
+            { base: 'prove', past: ['proved'], pp: ['proven', 'proved'], meaning: '证明' },
+            { base: 'strive', past: ['strove', 'strived'], pp: ['striven', 'strived'], meaning: '努力' },
+            { base: 'thrive', past: ['throve', 'thrived'], pp: ['thriven', 'thrived'], meaning: '兴旺' },
+            { base: 'undertake', past: ['undertook'], pp: ['undertaken'], meaning: '承担' },
+            { base: 'undergo', past: ['underwent'], pp: ['undergone'], meaning: '经历' },
+            { base: 'forget', past: ['forgot'], pp: ['forgotten'], meaning: '忘记' },
+            // ABA型
+            { base: 'come', past: ['came'], pp: ['come'], meaning: '来' },
+            { base: 'become', past: ['became'], pp: ['become'], meaning: '变成' },
+            { base: 'overcome', past: ['overcame'], pp: ['overcome'], meaning: '克服' },
+            { base: 'run', past: ['ran'], pp: ['run'], meaning: '跑' },
+        ];
+
+        // ==================== 状态 ====================
+        const TOTAL_QUESTIONS = 30;
+        let questions = []; // 当前测试题目
+        let currentIndex = 0;
+        let userAnswers = []; // 每题的答案
+        let answeredQuestions = []; // 是否已答
+        let isQuizActive = false;
+        let wrongQuestions = []; // 错题列表
+
+        // ==================== 工具函数 ====================
+        function shuffleArray(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function normalizeStr(s) {
+            return s.trim().toLowerCase().replace(/\s+/g, ' ');
+        }
+
+        function isAnswerCorrect(userInput, acceptedForms) {
+            const normalized = normalizeStr(userInput);
+            if (!normalized) return false;
+            return acceptedForms.some(f => normalizeStr(f) === normalized);
+        }
+
+        function getSavedHistory() {
+            try {
+                return JSON.parse(localStorage.getItem('verbQuizHistory') || '[]');
+            } catch { return []; }
+        }
+
+        function saveHistoryEntry(score, total, correctCount) {
+            const history = getSavedHistory();
+            const entry = {
+                score: score,
+                total: total,
+                correct: correctCount,
+                percent: Math.round((correctCount / total) * 100),
+                date: new Date().toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit',
+                    minute: '2-digit' }),
+                timestamp: Date.now()
+            };
+            history.push(entry);
+            localStorage.setItem('verbQuizHistory', JSON.stringify(history));
+            return history;
+        }
+
+        function getBestScore() {
+            const history = getSavedHistory();
+            if (history.length === 0) return null;
+            return Math.max(...history.map(h => h.score));
+        }
+
+        function getHighestPercent() {
+            const history = getSavedHistory();
+            if (history.length === 0) return null;
+            return Math.max(...history.map(h => h.percent));
+        }
+
+        function updateStatsBar() {
+            const best = getBestScore();
+            const history = getSavedHistory();
+            const bestPercent = getHighestPercent();
+            document.getElementById('statBest').textContent = best !== null ? best + '分' : '--';
+            document.getElementById('statCount').textContent = history.length;
+            document.getElementById('statAccuracy').textContent = bestPercent !== null ? bestPercent + '%' : '--';
+        }
+
+        // ==================== 生成题目 ====================
+        function generateQuestions() {
+            const allQuestions = [];
+            VERBS.forEach(verb => {
+                // 题型1：根据原形写过去式
+                allQuestions.push({
+                    type: 1,
+                    verb: verb,
+                    questionText: '请写出该动词的过去式 (Past Tense)',
+                    prompt: '根据原形写过去式',
+                    displayWord: verb.baseAlt || verb.base,
+                    displayMeaning: verb.meaning,
+                    inputs: [{ key: 'past', label: '过去式', placeholder: '输入过去式' }],
+                    check: function(answers) {
+                        return isAnswerCorrect(answers['past'] || '', verb.past);
+                    },
+                    correctAnswerText: verb.past.join(' / '),
+                    userAnswerText: function(answers) { return answers['past'] || '未填写'; }
+                });
+                // 题型2：根据原形写过去分词
+                allQuestions.push({
+                    type: 2,
+                    verb: verb,
+                    questionText: '请写出该动词的过去分词 (Past Participle)',
+                    prompt: '根据原形写过去分词',
+                    displayWord: verb.baseAlt || verb.base,
+                    displayMeaning: verb.meaning,
+                    inputs: [{ key: 'pp', label: '过去分词', placeholder: '输入过去分词' }],
+                    check: function(answers) {
+                        return isAnswerCorrect(answers['pp'] || '', verb.pp);
+                    },
+                    correctAnswerText: verb.pp.join(' / '),
+                    userAnswerText: function(answers) { return answers['pp'] || '未填写'; }
+                });
+                // 题型3：根据过去式和过去分词写原形
+                allQuestions.push({
+                    type: 3,
+                    verb: verb,
+                    questionText: '请写出该动词的原形 (Base Form)',
+                    prompt: '根据过去式和过去分词写原形',
+                    displayWord: verb.past.join(' / ') + ' / ' + verb.pp.join(' / '),
+                    displayMeaning: verb.meaning,
+                    inputs: [{ key: 'base', label: '原形', placeholder: '输入原形' }],
+                    check: function(answers) {
+                        return isAnswerCorrect(answers['base'] || '', [verb.base, verb.baseAlt].filter(Boolean));
+                    },
+                    correctAnswerText: verb.baseAlt || verb.base,
+                    userAnswerText: function(answers) { return answers['base'] || '未填写'; }
+                });
+                // 题型4：根据汉语意思写原形、过去式、过去分词
+                allQuestions.push({
+                    type: 4,
+                    verb: verb,
+                    questionText: '请写出该动词的原形、过去式和过去分词',
+                    prompt: '根据汉语意思写完整形式',
+                    displayWord: verb.meaning,
+                    displayMeaning: '',
+                    inputs: [
+                        { key: 'base', label: '原形', placeholder: '原形' },
+                        { key: 'past', label: '过去式', placeholder: '过去式' },
+                        { key: 'pp', label: '过去分词', placeholder: '过去分词' },
+                    ],
+                    check: function(answers) {
+                        const baseOk = isAnswerCorrect(answers['base'] || '', [verb.base, verb.baseAlt].filter(
+                            Boolean));
+                        const pastOk = isAnswerCorrect(answers['past'] || '', verb.past);
+                        const ppOk = isAnswerCorrect(answers['pp'] || '', verb.pp);
+                        return baseOk && pastOk && ppOk;
+                    },
+                    correctAnswerText: (verb.baseAlt || verb.base) + ' / ' + verb.past.join(' / ') + ' / ' + verb
+                        .pp.join(' / '),
+                    userAnswerText: function(answers) {
+                        return (answers['base'] || '未填写') + ' / ' + (answers['past'] || '未填写') + ' / ' + (
+                            answers['pp'] || '未填写');
+                    }
+                });
+            });
+            return shuffleArray(allQuestions).slice(0, TOTAL_QUESTIONS);
+        }
+
+        // ==================== 开始测试 ====================
+        function startQuiz() {
+            questions = generateQuestions();
+            currentIndex = 0;
+            userAnswers = [];
+            answeredQuestions = [];
+            wrongQuestions = [];
+            isQuizActive = true;
+            document.getElementById('btnWrong').style.display = 'none';
+            document.getElementById('resultPanel').style.display = 'none';
+            document.getElementById('resultPanel').innerHTML = '';
+            renderQuestion();
+        }
+
+        function rerollQuiz() {
+            if (isQuizActive) {
+                if (!confirm('重新随机将丢弃当前所有答案，确定继续吗？')) return;
+            }
+            startQuiz();
+        }
+
+        function renderQuestion() {
+            if (!isQuizActive || currentIndex >= questions.length) {
+                submitQuiz();
+                return;
+            }
+            const q = questions[currentIndex];
+            const content = document.getElementById('quizContent');
+            const actions = document.getElementById('quizActions');
+            const progressText = document.getElementById('progressText');
+            const progressFill = document.getElementById('progressFill');
+            const deco = document.getElementById('cardDeco');
+
+            // 更新进度
+            progressText.textContent = `第 ${currentIndex + 1} 题 / 共 ${TOTAL_QUESTIONS} 题`;
+            progressFill.style.width = `${(currentIndex / TOTAL_QUESTIONS) * 100}%`;
+
+            // 装饰图标
+            const decoMap = { 1: '✏️', 2: '📝', 3: '🔍', 4: '📖' };
+            deco.textContent = decoMap[q.type] || '✏️';
+
+            // 题型徽章
+            const badgeTypeClass = 'type-' + q.type;
+            const badgeTextMap = { 1: '过去式', 2: '过去分词', 3: '原形', 4: '综合' };
+
+            let html = `
+                <span class="question-type-badge ${badgeTypeClass}">${badgeTextMap[q.type]} · ${q.prompt}</span>
+                <div class="question-prompt">${q.questionText}</div>
+                <div class="question-word">${q.displayWord}${q.displayMeaning ? '<span class="meaning-hint">' + q.displayMeaning + '</span>' : ''}</div>
+                ${q.type === 4 ? '<div class="question-sub">请依次填写三个形式，用三个输入框分别作答</div>' : ''}
+                <div class="answer-area" id="answerArea">
+            `;
+
+            if (q.type === 4) {
+                html += `<div class="multi-input-row">`;
+                q.inputs.forEach((input, idx) => {
+                    html += `
+                        <div class="answer-input-group">
+                            <label>${input.label}</label>
+                            <input class="answer-input" id="answer_${input.key}" placeholder="${input.placeholder}" autocomplete="off" spellcheck="false" />
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            } else {
+                const input = q.inputs[0];
+                html += `
+                    <div class="answer-input-group">
+                        <label>${input.label}</label>
+                        <input class="answer-input" id="answer_${input.key}" placeholder="${input.placeholder}" autocomplete="off" spellcheck="false" />
+                    </div>
+                `;
+            }
+            html += `</div>`;
+
+            content.innerHTML = html;
+
+            // 按钮
+            const isLast = currentIndex === questions.length - 1;
+            const isFirst = currentIndex === 0;
+            actions.innerHTML = `
+                <button class="btn btn-outline" onclick="prevQuestion()" ${isFirst ? 'disabled' : ''}>← 上一题</button>
+                <button class="btn btn-outline" onclick="rerollQuiz()" title="重新随机选题">🔄 重新随机</button>
+                <button class="btn ${isLast ? 'btn-success' : 'btn-primary'}" onclick="nextQuestion()">${isLast ? '✅ 完成' : '下一题 →'}</button>
+                <button class="btn btn-danger-outline" onclick="submitQuiz()" style="flex:0.5;min-width:80px;">提交</button>
+            `;
+
+            // 恢复已保存的答案
+            if (userAnswers[currentIndex]) {
+                q.inputs.forEach(input => {
+                    const el = document.getElementById(`answer_${input.key}`);
+                    if (el && userAnswers[currentIndex][input.key]) {
+                        el.value = userAnswers[currentIndex][input.key];
+                    }
+                });
+            }
+
+            // 自动聚焦
+            setTimeout(() => {
+                const firstInput = content.querySelector('.answer-input');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+
+        function getCurrentAnswers() {
+            const q = questions[currentIndex];
+            const answers = {};
+            q.inputs.forEach(input => {
+                const el = document.getElementById(`answer_${input.key}`);
+                if (el) answers[input.key] = el.value;
+            });
+            return answers;
+        }
+
+        function saveCurrentAnswers() {
+            userAnswers[currentIndex] = getCurrentAnswers();
+        }
+
+        function nextQuestion() {
+            saveCurrentAnswers();
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        function prevQuestion() {
+            saveCurrentAnswers();
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        // ==================== 提交与判分 ====================
+        function submitQuiz() {
+            if (!isQuizActive) return;
+            saveCurrentAnswers();
+            isQuizActive = false;
+
+            let correctCount = 0;
+            wrongQuestions = [];
+
+            questions.forEach((q, idx) => {
+                const answers = userAnswers[idx] || {};
+                const isCorrect = q.check(answers);
+                if (isCorrect) {
+                    correctCount++;
+                } else {
+                    wrongQuestions.push({
+                        index: idx,
+                        verb: q.verb,
+                        type: q.type,
+                        prompt: q.prompt,
+                        userAnswer: q.userAnswerText(answers),
+                        correctAnswer: q.correctAnswerText,
+                        displayWord: q.displayWord,
+                        meaning: q.verb.meaning,
+                    });
+                }
+            });
+
+            const score = correctCount;
+            const percent = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+            const history = saveHistoryEntry(score, TOTAL_QUESTIONS, correctCount);
+            const best = Math.max(...history.map(h => h.score));
+            const isNewBest = score >= best && history.length > 1;
+            const prevBest = best === score && history.length > 1 ?
+                Math.max(...history.slice(0, -1).map(h => h.score)) :
+                best;
+            const compareMsg = score > prevBest ? 'up' : (score < prevBest ? 'down' : 'same');
+
+            // 显示结果
+            displayResult(score, TOTAL_QUESTIONS, correctCount, percent, compareMsg, isNewBest, prevBest);
+            updateStatsBar();
+            document.getElementById('btnWrong').style.display = 'inline-flex';
+            document.getElementById('quizContent').innerHTML =
+                '<div class="empty-state"><div class="empty-icon">🎉</div><p>测试完成！查看下方结果</p></div>';
+            document.getElementById('quizActions').innerHTML = `
+                <button class="btn btn-primary" onclick="startQuiz()">🎯 再测一次</button>
+                <button class="btn btn-accent" onclick="rerollQuiz()">🔄 重新随机</button>
+            `;
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = '已完成';
+            document.getElementById('cardDeco').textContent = '🏆';
+        }
+
+        function displayResult(score, total, correctCount, percent, compareMsg, isNewBest, prevBest) {
+            const panel = document.getElementById('resultPanel');
+            panel.style.display = 'block';
+
+            let compareHtml = '';
+            if (compareMsg === 'up') {
+                compareHtml = `<div class="result-compare up">📈 比历史最高分上升了 ${score - prevBest} 分！</div>`;
+            } else if (compareMsg === 'down') {
+                compareHtml = `<div class="result-compare down">📉 比历史最高分下降了 ${prevBest - score} 分</div>`;
+            } else {
+                compareHtml = `<div class="result-compare same">➖ 与历史最高分持平</div>`;
+            }
+
+            let message = '';
+            if (percent >= 90) message = '🌟 太棒了！你对不规则动词掌握得非常扎实！继续保持！';
+            else if (percent >= 75) message = '👍 表现不错！再巩固一下错题就能更上一层楼！';
+            else if (percent >= 60) message = '📖 基础还可以，建议重点复习错题中的动词。';
+            else if (percent >= 40) message = '💪 需要多加练习，建议先浏览题库后再测试。';
+            else message = '📚 别灰心！先认真学习题库中的动词变化规律，再来挑战吧！';
+
+            panel.innerHTML = `
+                <div class="result-score">
+                    <div class="big-score">${score}<span style="font-size:1.5rem;">/${total}</span></div>
+                    <div class="score-label">正确题数 · 满分 ${total} 题</div>
+                    <div class="result-percent">正确率：${percent}%</div>
+                </div>
+                ${compareHtml}
+                <div class="result-message">${message}</div>
+                ${wrongQuestions.length > 0 ? `
+                    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="btn btn-danger-outline" style="flex:1;" onclick="showWrongList()">❌ 查看错题 (${wrongQuestions.length}题)</button>
+                        <button class="btn btn-outline" style="flex:1;" onclick="showVerbs()">📚 查看题库</button>
+                    </div>
+                ` : `
+                    <div class="empty-state" style="padding:16px;">
+                        <div class="empty-icon">🏆</div>
+                        <p>全部答对！完美！</p>
+                    </div>
+                `}
+            `;
+        }
+
+        // ==================== 错题展示 ====================
+        function showWrongList() {
+            if (wrongQuestions.length === 0) return;
+            const modal = document.getElementById('wrongModal');
+            const container = document.getElementById('wrongModalContent');
+            let html = `<div class="wrong-list">`;
+            wrongQuestions.forEach(wq => {
+                html += `
+                    <div class="wrong-item">
+                        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                            <span class="wi-word">${wq.verb.baseAlt || wq.verb.base}</span>
+                            <span class="wi-meaning">(${wq.verb.meaning})</span>
+                            <span class="wi-label">[${wq.prompt}]</span>
+                        </div>
+                        <div class="wi-answers">
+                            <span class="wi-label">你的答案：</span>
+                            <span class="wi-user">${wq.userAnswer}</span>
+                        </div>
+                        <div class="wi-answers">
+                            <span class="wi-label">正确答案：</span>
+                            <span class="wi-correct">${wq.correctAnswer}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+            modal.style.display = 'flex';
+        }
+
+        // ==================== 题库展示 ====================
+        function showVerbs() {
+            const modal = document.getElementById('verbsModal');
+            const container = document.getElementById('verbsTableContainer');
+            let html = `
+                <table class="verb-table">
+                    <thead>
+                        <tr>
+                            <th>原形</th>
+                            <th>过去式</th>
+                            <th>过去分词</th>
+                            <th>汉语</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            VERBS.forEach(v => {
+                html += `
+                    <tr>
+                        <td class="vt-base">${v.baseAlt || v.base}</td>
+                        <td>${v.past.join(' / ')}</td>
+                        <td>${v.pp.join(' / ')}</td>
+                        <td class="vt-meaning">${v.meaning}</td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+            modal.style.display = 'flex';
+        }
+
+        // ==================== 历史分数展示 ====================
+        function showHistory() {
+            const modal = document.getElementById('historyModal');
+            const container = document.getElementById('historyContent');
+            const history = getSavedHistory();
+            if (history.length === 0) {
+                container.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div><p>暂无历史分数记录</p></div>`;
+            } else {
+                const sorted = [...history].reverse();
+                let html = `<div class="history-list">`;
+                sorted.forEach((h, i) => {
+                    const isBest = h.score === Math.max(...history.map(x => x.score));
+                    html += `
+                        <div class="history-item" style="border-left-color:${isBest ? '#f39c12' : '#2980b9'};">
+                            <div>
+                                <span class="hi-score">${h.score}分</span>
+                                <span class="hi-date">${h.date}${isBest ? ' 🏆' : ''}</span>
+                            </div>
+                            <span class="hi-percent">${h.percent}% (${h.correct}/${h.total})</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                container.innerHTML = html;
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // ==================== 键盘支持 ====================
+        document.addEventListener('keydown', function(e) {
+            if (!isQuizActive) return;
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const activeEl = document.activeElement;
+                if (activeEl && activeEl.classList.contains('answer-input')) {
+                    const inputs = document.querySelectorAll('.answer-input');
+                    const idx = Array.from(inputs).indexOf(activeEl);
+                    if (idx < inputs.length - 1) {
+                        inputs[idx + 1].focus();
+                    } else {
+                        nextQuestion();
+                    }
+                } else {
+                    nextQuestion();
+                }
+            }
+            if (e.key === 'ArrowLeft' && e.ctrlKey) {
+                e.preventDefault();
+                prevQuestion();
+            }
+            if (e.key === 'ArrowRight' && e.ctrlKey) {
+                e.preventDefault();
+                nextQuestion();
+            }
+        });
+
+        // ==================== 初始化 ====================
+        updateStatsBar();
+        document.getElementById('quizContent').innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <p>点击下方按钮开始测试</p>
+                <p style="font-size:0.8rem;margin-top:4px;color:var(--text-light);">随机抽取30题 · 四种题型混合</p>
+            </div>
+        `;
+        document.getElementById('quizActions').innerHTML = `
+            <button class="btn btn-primary" onclick="startQuiz()">🎯 开始测试</button>
+            <button class="btn btn-outline" onclick="showVerbs()">📚 查看题库</button>
+        `;
+    </script>
+</body>
+</html>
