@@ -633,7 +633,7 @@
             { type: 'choice', question: '以下哪个不是基本句型？', options: ['主+谓+宾', '主+谓+表', '主+谓+宾+宾', '主+谓+宾+宾补'], answer: 2 }
         ];
 
-        // 语法填空 (51-100) — 题目描述为中文，答案保留英语原文
+        // 语法填空 (51-100) — 大部分仍为填空，但已将术语类题目改为选择题
         const fillData = [
             { type: 'fill', question: '在句子 <em class="en-sentence">"The moon rose."</em> 中，谓语是 <em class="en-sentence">"________"</em>。', answer: 'rose' },
             { type: 'fill', question: '在 <em class="en-sentence">"Everything looks different."</em> 中，主语补足语（表语）是 <em class="en-sentence">"________"</em>。', answer: 'different' },
@@ -646,7 +646,8 @@
             { type: 'fill', question: '<em class="en-sentence">"The photo in the book is my mother\'s."</em> —— 定语是短语 <em class="en-sentence">"________"</em>。', answer: 'in the book' },
             { type: 'fill', question: '在 <em class="en-sentence">"We two went to the bank yesterday."</em> 中，同位语是 <em class="en-sentence">"________"</em>。', answer: 'two' },
             { type: 'fill', question: '<em class="en-sentence">"He can speak English well."</em> —— 状语是 <em class="en-sentence">"________"</em>。', answer: 'well' },
-            { type: 'fill', question: '句子 <em class="en-sentence">"The little girl is singing."</em> 中的动词是 ________ 动词。', answer: 'intransitive' },
+            // 第12题已改为选择题（原为填空，答案'intransitive'）
+            { type: 'choice', question: '在句子 <em class="en-sentence">"The little girl is singing."</em> 中，动词是 ______。', options: ['及物动词', '不及物动词', '系动词', '助动词'], answer: 1 },
             { type: 'fill', question: '<em class="en-sentence">"She often looks cheerful."</em> —— 谓语是 <em class="en-sentence">"________"</em>。', answer: 'looks cheerful' },
             { type: 'fill', question: '在 <em class="en-sentence">"I found a good article."</em> 中，宾语是 <em class="en-sentence">"________"</em>。', answer: 'a good article' },
             { type: 'fill', question: '<em class="en-sentence">"You can teach me many things."</em> —— 直接宾语是 <em class="en-sentence">"________"</em>。', answer: 'many things' },
@@ -655,24 +656,29 @@
             { type: 'fill', question: '在 <em class="en-sentence">"Nancy was born in Berkeley, a small town in California."</em> 中，同位语是 <em class="en-sentence">"________"</em>。', answer: 'a small town in California' },
             { type: 'fill', question: '<em class="en-sentence">"His face turned red."</em> —— 主语补足语（表语）是 <em class="en-sentence">"________"</em>。', answer: 'red' },
             { type: 'fill', question: '<em class="en-sentence">"We go to school every day."</em> —— 时间状语是 <em class="en-sentence">"________"</em>。', answer: 'every day' },
-            { type: 'fill', question: '动词 <em class="en-sentence">"keep"</em> 是 ________ 动词。', answer: 'linking' },
+            // 第21题已改为选择题（原为填空，答案'linking'）
+            { type: 'choice', question: '动词 <em class="en-sentence">"keep"</em> 是 ______ 动词。', options: ['及物动词', '不及物动词', '系动词', '助动词'], answer: 2 },
             { type: 'fill', question: '在 <em class="en-sentence">"He made me happy."</em> 中，宾语是 <em class="en-sentence">"________"</em>。', answer: 'me' },
             { type: 'fill', question: '<em class="en-sentence">"It cost me three dollars."</em> —— 间接宾语是 <em class="en-sentence">"________"</em>。', answer: 'me' },
             { type: 'fill', question: '<em class="en-sentence">"We saw him out."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'out' },
             { type: 'fill', question: '<em class="en-sentence">"I have got something interesting to tell you."</em> —— 定语是 <em class="en-sentence">"________"</em>。', answer: 'interesting' },
             { type: 'fill', question: '<em class="en-sentence">"To see is to believe."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'To see' },
-            { type: 'fill', question: '句子 <em class="en-sentence">"The universe remains."</em> 属于 ________ 句型。', answer: 'S+V' },
-            { type: 'fill', question: '在 <em class="en-sentence">"A mother lost her child."</em> 中，动词 <em class="en-sentence">"lost"</em> 是 ________ 动词。', answer: 'transitive' },
+            // 第27题已改为选择题（原为填空，答案'S+V'）
+            { type: 'choice', question: '句子 <em class="en-sentence">"The universe remains."</em> 属于 ______ 句型。', options: ['主+谓', '主+谓+宾', '主+谓+表', '主+谓+宾+宾补'], answer: 0 },
+            // 第28题已改为选择题（原为填空，答案'transitive'）
+            { type: 'choice', question: '在 <em class="en-sentence">"A mother lost her child."</em> 中，动词 <em class="en-sentence">"lost"</em> 是 ______ 动词。', options: ['及物动词', '不及物动词', '系动词', '助动词'], answer: 0 },
             { type: 'fill', question: '<em class="en-sentence">"He asked me to come back soon."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'to come back soon' },
             { type: 'fill', question: '<em class="en-sentence">"She likes English very much."</em> —— 宾语是 <em class="en-sentence">"________"</em>。', answer: 'English' },
             { type: 'fill', question: '<em class="en-sentence">"Let me read you the notice."</em> —— 间接宾语是 <em class="en-sentence">"________"</em>。', answer: 'you' },
             { type: 'fill', question: '<em class="en-sentence">"You can\'t take photos in the museum."</em> —— 地点状语是 <em class="en-sentence">"________"</em>。', answer: 'in the museum' },
-            { type: 'fill', question: '系动词 <em class="en-sentence">"seem"</em> 属于 ________ 类。', answer: 'appearance' },
+            // 第33题已改为选择题（原为填空，答案'appearance'）
+            { type: 'choice', question: '系动词 <em class="en-sentence">"seem"</em> 属于 ______ 类。', options: ['感官类', '变化类', '外观类', '终止类'], answer: 2 },
             { type: 'fill', question: '在 <em class="en-sentence">"He can never forgive her."</em> 中，状语是 <em class="en-sentence">"________"</em>。', answer: 'never' },
             { type: 'fill', question: '<em class="en-sentence">"This is Miss Yang, our English teacher."</em> —— 同位语是 <em class="en-sentence">"________"</em>。', answer: 'our English teacher' },
             { type: 'fill', question: '<em class="en-sentence">"They appointed him manager."</em> —— 直接宾语是 <em class="en-sentence">"________"</em>。', answer: 'him' },
             { type: 'fill', question: '<em class="en-sentence">"We consider him a good teacher."</em> —— 宾语补足语是 <em class="en-sentence">"________"</em>。', answer: 'a good teacher' },
-            { type: 'fill', question: '<em class="en-sentence">"I find you a good teacher."</em> —— 结构是 主+谓+宾+________。', answer: 'OC' },
+            // 第38题已改为选择题（原为填空，答案'OC'）
+            { type: 'choice', question: '<em class="en-sentence">"I find you a good teacher."</em> 的结构是 主+谓+宾+______。', options: ['直接宾语', '间接宾语', '宾语补足语', '状语'], answer: 2 },
             { type: 'fill', question: '<em class="en-sentence">"The sun was shining."</em> —— 谓语是 <em class="en-sentence">"________"</em>。', answer: 'was shining' },
             { type: 'fill', question: '<em class="en-sentence">"Everything looks different."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'Everything' },
             { type: 'fill', question: '<em class="en-sentence">"His words sound reasonable."</em> —— 主语是 <em class="en-sentence">"________"</em>。', answer: 'His words' },
