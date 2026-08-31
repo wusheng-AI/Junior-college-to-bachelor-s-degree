@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英语听写 · 核心词汇</title>
+    <title>✨ 核心词汇 · 听写工坊</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Georgia', 'Times New Roman', serif;
+            font-family: 'Segoe UI', 'Georgia', 'Times New Roman', serif;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #f0f8ff 0%, #d4e9ff 100%);
+            background: linear-gradient(145deg, #f7faff 0%, #d6e6f5 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,152 +23,156 @@
 
         .container {
             width: 100%;
-            max-width: 720px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            max-width: 760px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-radius: 56px;
-            box-shadow: 0 20px 60px rgba(0, 20, 80, 0.20), 0 8px 24px rgba(0, 0, 0, 0.05);
-            padding: 40px 35px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            transition: all 0.2s;
+            padding: 40px 36px;
+            box-shadow: 0 30px 80px rgba(0, 20, 60, 0.18), 0 8px 24px rgba(0,0,0,0.03);
+            border: 2px solid rgba(255, 215, 0, 0.25);
         }
 
-        /* 英伦装饰 */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 3px double #c0d4e8;
-            padding-bottom: 12px;
+            margin-bottom: 22px;
+            border-bottom: 3px double #c5d9ec;
+            padding-bottom: 14px;
         }
-
         .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a3e6f;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
-        }
-
-        .header h1 small {
-            font-size: 16px;
-            font-weight: 400;
-            color: #4a6a8a;
-            margin-left: 10px;
-        }
-
-        .flag-icon {
             font-size: 32px;
-            line-height: 1;
+            font-weight: 700;
+            color: #1a3f6a;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 6px rgba(255, 215, 0, 0.2);
+        }
+        .header h1 small {
+            font-size: 18px;
+            font-weight: 400;
+            color: #4f7295;
+            margin-left: 12px;
+        }
+        .flag-icon {
+            font-size: 36px;
         }
 
         .progress-area {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background: #eaf3fc;
+            background: #eaf2fa;
             border-radius: 40px;
-            padding: 6px 16px 6px 20px;
-            margin-bottom: 24px;
-            border: 1px solid #b7d0e8;
+            padding: 6px 18px 6px 22px;
+            margin-bottom: 28px;
+            border: 1px solid #b7cfe5;
+            gap: 10px;
         }
-
         .progress-text {
             font-size: 18px;
             font-weight: 600;
-            color: #1f4a7a;
+            color: #1d4570;
         }
-
         .progress-bar-bg {
             flex: 1;
-            height: 8px;
-            background: #c5d9ec;
-            border-radius: 12px;
-            margin: 0 16px;
+            height: 10px;
+            background: #c7d9ec;
+            border-radius: 20px;
             overflow: hidden;
         }
-
         .progress-bar-fill {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #f7d44a, #f0b34b);
-            border-radius: 12px;
-            transition: width 0.35s ease;
+            border-radius: 20px;
+            transition: width 0.4s ease;
         }
-
         .progress-count {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
-            color: #2a4f7a;
+            color: #1d4570;
             min-width: 70px;
             text-align: right;
         }
 
         .question-card {
-            background: #ffffffd9;
-            border-radius: 32px;
-            padding: 28px 24px 30px;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02), 0 6px 18px rgba(30, 60, 120, 0.08);
-            border: 1px solid #e3eef9;
-            margin-bottom: 18px;
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 32px 28px 30px;
+            box-shadow: inset 0 1px 6px rgba(0,0,0,0.02), 0 8px 26px rgba(20, 50, 90, 0.08);
+            border: 1px solid #e5eef9;
+            margin-bottom: 20px;
         }
 
         .chinese-hint {
-            font-size: 38px;
+            font-size: 44px;
             font-weight: 700;
-            color: #0b2b4a;
+            color: #0a294a;
             text-align: center;
             letter-spacing: 1px;
             padding: 10px 0 6px;
             word-break: break-word;
+            line-height: 1.3;
         }
 
         .word-detail {
             text-align: center;
-            font-size: 17px;
-            color: #4f6f8f;
+            font-size: 18px;
+            color: #4d6f8f;
             margin-top: 4px;
-            min-height: 28px;
+            min-height: 32px;
         }
         .word-detail span {
-            background: #eef6fc;
-            padding: 2px 14px;
-            border-radius: 20px;
+            background: #eef6fd;
+            padding: 4px 18px;
+            border-radius: 30px;
             display: inline-block;
         }
 
         .input-area {
-            margin: 28px 0 18px;
+            margin: 28px 0 20px;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-
         .input-area input {
-            padding: 16px 22px;
-            font-size: 22px;
-            border: 2px solid #c7dcee;
+            padding: 18px 24px;
+            font-size: 24px;
+            border: 2.5px solid #c7dcee;
             border-radius: 60px;
             outline: none;
-            background: #f8fcff;
+            background: #f9fcff;
             transition: all 0.25s;
             letter-spacing: 0.5px;
-            font-family: 'Georgia', serif;
-            color: #1a3a5a;
+            color: #0a2a4a;
         }
-
         .input-area input:focus {
             border-color: #f7b731;
-            box-shadow: 0 0 0 4px rgba(247, 183, 49, 0.25);
+            box-shadow: 0 0 0 5px rgba(247, 183, 49, 0.25);
             background: #ffffff;
         }
-
         .input-area input::placeholder {
             color: #a0bcd6;
             font-size: 18px;
             font-style: italic;
+        }
+        .input-area input:disabled {
+            background: #f0f4f8;
+            color: #3a5a7a;
+            opacity: 0.8;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0 14px;
+        }
+        .nav-buttons .btn {
+            flex: 0 1 auto;
+            min-width: 80px;
+            padding: 10px 20px;
+            font-size: 16px;
         }
 
         .action-buttons {
@@ -176,11 +180,11 @@
             flex-wrap: wrap;
             gap: 12px;
             justify-content: center;
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .btn {
-            padding: 14px 28px;
+            padding: 14px 30px;
             border: none;
             border-radius: 60px;
             font-size: 18px;
@@ -192,53 +196,37 @@
             transition: all 0.15s ease;
             border: 1.5px solid #b7d0e8;
             flex: 1 1 auto;
-            min-width: 100px;
+            min-width: 110px;
             letter-spacing: 0.5px;
             background: linear-gradient(0deg, #f5faff, #ffffff);
         }
-
         .btn-primary {
             background: #1a4f8a;
             border-color: #1a4f8a;
             color: white;
-            box-shadow: 0 6px 16px rgba(26, 79, 138, 0.30);
+            box-shadow: 0 6px 18px rgba(26, 79, 138, 0.30);
         }
-        .btn-primary:hover {
-            background: #0f3d6b;
-            transform: scale(1.02);
-        }
-        .btn-primary:active {
-            transform: scale(0.97);
-        }
-
+        .btn-primary:hover { background: #0f3d6b; transform: scale(1.02); }
+        .btn-primary:active { transform: scale(0.97); }
         .btn-success {
             background: #2a7a4a;
             border-color: #2a7a4a;
             color: white;
-            box-shadow: 0 6px 16px rgba(42, 122, 74, 0.25);
+            box-shadow: 0 6px 18px rgba(42, 122, 74, 0.25);
         }
-        .btn-success:hover {
-            background: #1d5f38;
-        }
-
+        .btn-success:hover { background: #1d5f38; }
         .btn-warning {
             background: #e8a72b;
             border-color: #d99a1f;
             color: #1a2a3a;
         }
-        .btn-warning:hover {
-            background: #d6961b;
-        }
-
+        .btn-warning:hover { background: #d6961b; }
         .btn-outline {
             background: transparent;
             border: 2px solid #8eb0d0;
             color: #1f4a7a;
         }
-        .btn-outline:hover {
-            background: #e3effa;
-        }
-
+        .btn-outline:hover { background: #e3effa; }
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -246,40 +234,39 @@
         }
 
         .feedback {
-            margin-top: 18px;
-            padding: 14px 18px;
+            margin-top: 20px;
+            padding: 16px 20px;
             border-radius: 30px;
             font-size: 20px;
             font-weight: 600;
             text-align: center;
             background: #f2f8ff;
             border: 2px solid #cfe0ef;
-            min-height: 58px;
+            min-height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            line-height: 1.4;
+            flex-wrap: wrap;
         }
-
-        .feedback.correct {
-            background: #e3f5e3;
-            border-color: #7bc47f;
-            color: #1d6b2a;
+        .feedback .tag {
+            display: inline-block;
+            margin: 0 4px;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-weight: 700;
         }
-        .feedback.wrong {
-            background: #ffe8e8;
-            border-color: #f7a8a8;
-            color: #a13030;
-        }
+        .tag.correct { background: #7bc47f; color: white; }
+        .tag.wrong { background: #f7a8a8; color: white; }
 
         .stats-panel {
-            margin-top: 20px;
+            margin-top: 22px;
             background: #f0f7fe;
             border-radius: 28px;
-            padding: 18px 20px;
+            padding: 20px 22px;
             border: 1px solid #cfe0ef;
         }
-
         .stats-row {
             display: flex;
             justify-content: space-between;
@@ -288,10 +275,7 @@
             font-size: 17px;
             color: #1d3d5d;
         }
-        .stats-row strong {
-            color: #0b2b4a;
-        }
-
+        .stats-row strong { color: #0a2a4a; }
         .extra-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -299,10 +283,9 @@
             margin-top: 16px;
             justify-content: center;
         }
-
         .extra-buttons .btn {
             font-size: 15px;
-            padding: 10px 18px;
+            padding: 10px 20px;
             min-width: 90px;
             flex: 0 1 auto;
         }
@@ -312,34 +295,30 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 20, 40, 0.5);
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
             z-index: 999;
             padding: 20px;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
-
+        .modal-overlay.active { display: flex; }
         .modal-box {
             background: white;
-            max-width: 700px;
+            max-width: 720px;
             width: 100%;
             max-height: 80vh;
             border-radius: 48px;
-            padding: 30px 30px 20px;
+            padding: 32px 32px 24px;
             box-shadow: 0 30px 80px rgba(0,0,0,0.3);
             overflow-y: auto;
             border: 2px solid #f7d44a;
         }
-
         .modal-box h2 {
             font-size: 26px;
-            color: #1a3e6f;
+            color: #183b66;
             border-bottom: 2px solid #dce8f2;
-            padding-bottom: 12px;
-            margin-bottom: 18px;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -347,59 +326,40 @@
         .modal-box h2 button {
             background: none;
             border: none;
-            font-size: 28px;
+            font-size: 30px;
             cursor: pointer;
             color: #6a8aaa;
-            padding: 0 10px;
+            padding: 0 12px;
+            transition: color 0.2s;
         }
-        .modal-box h2 button:hover {
-            color: #c0392b;
-        }
-
+        .modal-box h2 button:hover { color: #c0392b; }
         .word-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             font-size: 16px;
         }
         .word-item {
             display: flex;
             flex-wrap: wrap;
-            padding: 6px 12px;
+            padding: 8px 14px;
             background: #f5faff;
             border-radius: 30px;
             align-items: baseline;
             border: 1px solid #e3eef9;
+            gap: 4px 10px;
         }
-        .word-item .en {
-            font-weight: 700;
-            color: #0b2b4a;
-            min-width: 100px;
-        }
-        .word-item .pos {
-            color: #4f6f8f;
-            margin: 0 10px;
-            font-style: italic;
-        }
-        .word-item .zh {
-            color: #1f4a7a;
-        }
-        .word-item .phon {
-            color: #6f8faf;
-            margin-right: 10px;
-            font-size: 14px;
-        }
+        .word-item .en { font-weight: 700; color: #0a2a4a; min-width: 110px; }
+        .word-item .phon { color: #5f7f9f; font-size: 14px; }
+        .word-item .pos { color: #4f6f8f; font-style: italic; }
+        .word-item .zh { color: #1a4a7a; flex: 1; }
+        .close-btn { margin-top: 22px; text-align: center; }
 
-        .close-btn {
-            margin-top: 18px;
-            text-align: center;
-        }
-
-        @media (max-width: 520px) {
-            .container { padding: 20px 18px; }
-            .chinese-hint { font-size: 28px; }
-            .input-area input { font-size: 18px; padding: 14px 16px; }
-            .btn { font-size: 15px; padding: 10px 16px; min-width: 70px; }
+        @media (max-width: 550px) {
+            .container { padding: 20px 16px; }
+            .chinese-hint { font-size: 30px; }
+            .input-area input { font-size: 20px; padding: 14px 18px; }
+            .btn { font-size: 15px; padding: 10px 14px; min-width: 70px; }
             .header h1 { font-size: 22px; }
             .progress-text { font-size: 15px; }
         }
@@ -407,20 +367,21 @@
 </head>
 <body>
 
-<div class="container" id="app">
+<div class="container">
+    <!-- 头部 -->
     <div class="header">
         <h1>📖 听写 <small>核心词汇</small></h1>
         <div class="flag-icon">🇬🇧</div>
     </div>
 
+    <!-- 进度 -->
     <div class="progress-area">
         <span class="progress-text">📌 进度</span>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progressFill"></div>
-        </div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
         <span class="progress-count" id="progressCount">0 / 30</span>
     </div>
 
+    <!-- 题目卡片 -->
     <div class="question-card">
         <div class="chinese-hint" id="chineseHint">加载中…</div>
         <div class="word-detail" id="wordDetail"><span>📘 输入英文</span></div>
@@ -429,17 +390,22 @@
             <input type="text" id="answerInput" placeholder="请输入英文单词…" autocomplete="off" />
         </div>
 
+        <!-- 导航按钮（上一题/下一题） -->
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="prevBtn">◀ 上一题</button>
+            <button class="btn btn-outline" id="nextBtn">下一题 ▶</button>
+        </div>
+
         <div class="action-buttons">
-            <button class="btn btn-primary" id="submitBtn">✔ 提交</button>
-            <button class="btn btn-warning" id="nextBtn" disabled>➡ 下一题</button>
+            <button class="btn btn-success" id="submitAllBtn">✔ 提交全部</button>
             <button class="btn btn-outline" id="reshuffleBtn">🔄 重新随机</button>
         </div>
 
-        <div class="feedback" id="feedback">✏️ 输入答案后点击提交</div>
+        <div class="feedback" id="feedback">✏️ 填写答案后点击“提交全部”</div>
     </div>
 
-    <!-- 统计与额外功能 -->
-    <div class="stats-panel" id="statsPanel">
+    <!-- 统计与功能 -->
+    <div class="stats-panel">
         <div class="stats-row">
             <span>✅ 正确：<strong id="correctCount">0</strong></span>
             <span>❌ 错误：<strong id="wrongCount">0</strong></span>
@@ -467,7 +433,9 @@
 </div>
 
 <script>
-    // ---------- 题库（58词） ----------
+    // ================================================================
+    //  1. 完整题库（58词）
+    // ================================================================
     const FULL_WORDS = [
         { en: "define", phon: "/dɪˈfaɪn/", pos: "v.", zh: "定义；明确" },
         { en: "definite", phon: "/ˈdefɪnət/", pos: "adj.", zh: "明确的；肯定的" },
@@ -529,20 +497,21 @@
         { en: "health", phon: "/helθ/", pos: "n.", zh: "健康；健康状况" }
     ];
 
-    // ---------- 状态 ----------
-    let currentQuestions = [];          // 当前30题（对象数组）
-    let currentIndex = 0;             // 当前题目索引（0~29）
-    let results = [];                // 每道题的结果 true/false (长度30)
-    let answered = false;            // 当前题目是否已提交
-    let totalCorrect = 0;
-    let totalWrong = 0;
-    let isFinished = false;          // 是否已完成全部30题
+    // ================================================================
+    //  2. 应用状态
+    // ================================================================
+    let currentQuestions = [];          // 当前30题
+    let currentIndex = 0;              // 当前显示的题号（0~29）
+    let userAnswers = [];              // 存储每道题的输入字符串 (长度30)
+    let results = [];                 // 存储每道题的对错 (true/false) 或 null（未提交）
+    let isSubmitted = false;          // 是否已提交全部
 
     // DOM 引用
     const chineseHint = document.getElementById('chineseHint');
     const wordDetail = document.getElementById('wordDetail');
     const answerInput = document.getElementById('answerInput');
-    const submitBtn = document.getElementById('submitBtn');
+    const submitAllBtn = document.getElementById('submitAllBtn');
+    const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const reshuffleBtn = document.getElementById('reshuffleBtn');
     const feedback = document.getElementById('feedback');
@@ -554,14 +523,15 @@
     const highestDisplay = document.getElementById('highestDisplay');
     const compareDisplay = document.getElementById('compareDisplay');
 
-    // 模态框
     const modalOverlay = document.getElementById('modalOverlay');
     const modalTitle = document.getElementById('modalTitle');
     const modalContent = document.getElementById('modalContent');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
     const modalCloseBtn2 = document.getElementById('modalCloseBtn2');
 
-    // ---------- 辅助函数 ----------
+    // ================================================================
+    //  3. 辅助函数
+    // ================================================================
     function shuffleArray(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -570,45 +540,54 @@
         return arr;
     }
 
-    // 从全题库中随机选30个（不重复）
     function pickRandomQuestions(count = 30) {
         const shuffled = shuffleArray([...FULL_WORDS]);
         return shuffled.slice(0, count);
     }
 
-    // 更新进度条
-    function updateProgress() {
-        const total = currentQuestions.length;
-        const done = Math.min(currentIndex, total); // 已提交题数
-        const pct = total > 0 ? (done / total) * 100 : 0;
-        progressFill.style.width = pct + '%';
-        progressCount.textContent = `${done} / ${total}`;
+    // 保存当前输入到 userAnswers
+    function saveCurrentAnswer() {
+        if (currentIndex >= 0 && currentIndex < userAnswers.length) {
+            userAnswers[currentIndex] = answerInput.value;
+        }
     }
 
-    // 更新统计显示
+    // 加载指定题目的答案到输入框
+    function loadAnswer(index) {
+        if (index >= 0 && index < userAnswers.length) {
+            answerInput.value = userAnswers[index] || '';
+        }
+    }
+
+    // 更新进度条（已作答数量：userAnswers 中非空的数量）
+    function updateProgress() {
+        const total = currentQuestions.length;
+        const answeredCount = userAnswers.filter(a => a && a.trim() !== '').length;
+        const pct = total > 0 ? (answeredCount / total) * 100 : 0;
+        progressFill.style.width = pct + '%';
+        progressCount.textContent = `${answeredCount} / ${total}`;
+    }
+
+    // 更新统计显示（基于 results）
     function updateStats() {
         const total = results.length;
         const correct = results.filter(r => r === true).length;
-        const wrong = total - correct;
-        totalCorrect = correct;
-        totalWrong = wrong;
+        const wrong = results.filter(r => r === false).length;
+        const rate = total > 0 ? Math.round((correct / total) * 100) : 0;
+
         correctCountEl.textContent = correct;
         wrongCountEl.textContent = wrong;
-        const rate = total > 0 ? Math.round((correct / total) * 100) : 0;
         rateDisplay.textContent = rate + '%';
 
-        // 更新最高分显示（从localStorage）
         const highest = getHighestScore();
         highestDisplay.textContent = highest !== null ? highest + '%' : '—';
 
-        // 若已完成，则比较
-        if (isFinished) {
-            const currentRate = rate;
+        if (isSubmitted) {
             if (highest !== null) {
-                if (currentRate > highest) {
+                if (rate > highest) {
                     compareDisplay.textContent = '🎉 上升！新纪录！';
                     compareDisplay.style.color = '#1d6b2a';
-                } else if (currentRate < highest) {
+                } else if (rate < highest) {
                     compareDisplay.textContent = '📉 下降，继续加油';
                     compareDisplay.style.color = '#a13030';
                 } else {
@@ -625,7 +604,9 @@
         }
     }
 
-    // ---------- localStorage 操作 ----------
+    // ================================================================
+    //  4. localStorage 操作
+    // ================================================================
     function getHistoryScores() {
         try {
             const data = localStorage.getItem('wordQuiz_history');
@@ -635,7 +616,7 @@
 
     function saveHistoryScore(score) {
         const history = getHistoryScores();
-        history.push(score); // score 为百分比整数
+        history.push(score);
         localStorage.setItem('wordQuiz_history', JSON.stringify(history));
     }
 
@@ -645,7 +626,6 @@
         return Math.max(...history);
     }
 
-    // 保存错题（每次错误时记录完整词条）
     function saveWrongWord(wordObj) {
         let wrongs = [];
         try {
@@ -663,137 +643,125 @@
         } catch { return []; }
     }
 
-    // ---------- 渲染当前题目 ----------
+    // ================================================================
+    //  5. 核心渲染与交互
+    // ================================================================
     function renderQuestion() {
-        if (currentIndex >= currentQuestions.length) {
-            // 已完成所有题目
-            finishQuiz();
-            return;
-        }
-
+        if (currentQuestions.length === 0) return;
         const q = currentQuestions[currentIndex];
         chineseHint.textContent = q.zh;
         wordDetail.innerHTML = `<span>${q.pos} · ${q.phon}</span>`;
-        answerInput.value = '';
-        answerInput.disabled = false;
-        answerInput.focus();
-        feedback.className = 'feedback';
-        feedback.textContent = '✏️ 输入答案后点击提交';
-        answered = false;
-        submitBtn.disabled = false;
-        nextBtn.disabled = true;
-        // 更新进度（已提交数 = currentIndex）
-        updateProgress();
-        updateStats();
-        // 滚动到顶部
-        document.querySelector('.container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    // ---------- 提交答案 ----------
-    function handleSubmit() {
-        if (answered) {
-            feedback.textContent = '⏳ 本题已作答，请点击“下一题”继续';
-            feedback.className = 'feedback';
-            return;
-        }
-        if (currentIndex >= currentQuestions.length) {
-            feedback.textContent = '🎯 所有题目已完成！';
-            return;
-        }
-
-        const userInput = answerInput.value.trim();
-        const q = currentQuestions[currentIndex];
-        const correctAnswer = q.en;
-        const isCorrect = userInput.toLowerCase() === correctAnswer.toLowerCase();
-
-        // 记录结果
-        results[currentIndex] = isCorrect;
-        if (isCorrect) {
-            feedback.className = 'feedback correct';
-            feedback.textContent = `✅ 正确！ 答案：${correctAnswer}`;
-        } else {
-            feedback.className = 'feedback wrong';
-            feedback.textContent = `❌ 错误。 正确答案：${correctAnswer}，你的答案：${userInput || '(空)'}`;
-            // 保存错题
-            saveWrongWord(q);
-        }
-
-        answered = true;
-        submitBtn.disabled = true;
-        nextBtn.disabled = false;
-        answerInput.disabled = true;
-
-        // 更新统计（当前完成数 = currentIndex + 1）
-        updateProgress();
-        updateStats();
-    }
-
-    // ---------- 下一题 ----------
-    function handleNext() {
-        if (!answered) {
-            feedback.textContent = '⚠️ 请先提交本题答案';
-            feedback.className = 'feedback';
-            return;
-        }
-        currentIndex++;
-        if (currentIndex < currentQuestions.length) {
-            renderQuestion();
-        } else {
-            finishQuiz();
-        }
-    }
-
-    // ---------- 完成全部题目 ----------
-    function finishQuiz() {
-        isFinished = true;
-        answerInput.disabled = true;
-        submitBtn.disabled = true;
-        nextBtn.disabled = true;
-        chineseHint.textContent = '🎉 完成！';
-        wordDetail.innerHTML = '<span>所有题目已作答</span>';
-        feedback.className = 'feedback';
-        const rate = results.length > 0 ? Math.round((results.filter(r=>r).length / results.length) * 100) : 0;
-        feedback.textContent = `🏁 听写结束！正确率 ${rate}%`;
-
-        // 保存分数
-        saveHistoryScore(rate);
-
+        // 加载已保存的答案
+        loadAnswer(currentIndex);
         // 更新进度
         updateProgress();
-        updateStats();
-
-        // 显示错题提示
-        const wrongs = results.map((r, idx) => r ? null : currentQuestions[idx]).filter(w => w !== null);
-        if (wrongs.length > 0) {
-            feedback.textContent += ` 有 ${wrongs.length} 个错题，点击“查看错题”复习。`;
+        // 如果已提交，禁用输入框并显示对错标记
+        if (isSubmitted) {
+            answerInput.disabled = true;
+            const isCorrect = results[currentIndex];
+            if (isCorrect === true) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `✅ 正确！答案：${q.en}`;
+            } else if (isCorrect === false) {
+                feedback.className = 'feedback wrong';
+                feedback.innerHTML = `❌ 错误。正确答案：${q.en}，你的答案：${userAnswers[currentIndex] || '(空)'}`;
+            } else {
+                // 未判定（一般不会出现）
+                feedback.className = 'feedback';
+                feedback.textContent = '⏳ 尚未判定';
+            }
+        } else {
+            answerInput.disabled = false;
+            feedback.className = 'feedback';
+            feedback.textContent = '✏️ 输入答案，完成后点击“提交全部”';
         }
+        // 导航按钮状态
+        prevBtn.disabled = (currentIndex === 0);
+        nextBtn.disabled = (currentIndex === currentQuestions.length - 1);
+        // 聚焦输入框
+        if (!answerInput.disabled) answerInput.focus();
+    }
 
-        // 比较说明已在updateStats中处理
+    // 切换题目
+    function goToPrev() {
+        if (currentIndex > 0) {
+            saveCurrentAnswer();
+            currentIndex--;
+            renderQuestion();
+        }
+    }
+
+    function goToNext() {
+        if (currentIndex < currentQuestions.length - 1) {
+            saveCurrentAnswer();
+            currentIndex++;
+            renderQuestion();
+        }
+    }
+
+    // ---------- 提交全部 ----------
+    function handleSubmitAll() {
+        // 保存当前输入
+        saveCurrentAnswer();
+
+        // 如果已经提交过，可以重新提交（覆盖），所以重置结果
+        results = new Array(currentQuestions.length).fill(null);
+        isSubmitted = false; // 先重置，以便后续更新
+
+        // 遍历所有题目，判断对错
+        let correctCount = 0;
+        let wrongCount = 0;
+        currentQuestions.forEach((q, idx) => {
+            const userAns = (userAnswers[idx] || '').trim();
+            const isCorrect = userAns.toLowerCase() === q.en.toLowerCase();
+            results[idx] = isCorrect;
+            if (isCorrect) correctCount++;
+            else {
+                wrongCount++;
+                // 记录错题（仅当用户有输入或未输入都算错，但未输入也记录为错题）
+                saveWrongWord(q);
+            }
+        });
+
+        // 计算正确率
+        const rate = Math.round((correctCount / currentQuestions.length) * 100);
+        // 保存分数
+        saveHistoryScore(rate);
+        isSubmitted = true;
+
+        // 更新界面
+        renderQuestion(); // 会显示当前题目的对错
+        updateStats();
+        // 反馈信息
+        feedback.className = 'feedback';
+        feedback.innerHTML = `🏁 已提交全部！正确 ${correctCount} 题，错误 ${wrongCount} 题，正确率 ${rate}%。<br>${wrongCount > 0 ? '错题已保存，可点击“查看错题”复习。' : '🎉 全部正确，太棒了！'}`;
+        // 禁用输入框（所有题均不可编辑）
+        answerInput.disabled = true;
+        // 进度条显示完成
+        updateProgress();
     }
 
     // ---------- 重新随机 ----------
     function reshuffle() {
-        if (isFinished) {
-            // 重置状态
-        }
-        // 重置所有
+        // 重置所有状态
         currentQuestions = pickRandomQuestions(30);
         currentIndex = 0;
+        userAnswers = new Array(30).fill('');
         results = new Array(30).fill(null);
-        answered = false;
-        isFinished = false;
-        totalCorrect = 0;
-        totalWrong = 0;
-
-        // 清空反馈
+        isSubmitted = false;
+        // 清空错题？一般不清除历史错题，只重置当前测验
+        // 但也可以选择保留历史错题，不影响
         feedback.className = 'feedback';
         feedback.textContent = '🔄 已重新随机，开始作答！';
         renderQuestion();
-        // 更新统计
         updateStats();
+        // 启用输入框
+        answerInput.disabled = false;
     }
 
-    // ---------- 显示模态框 ----------
+    // ================================================================
+    //  6. 模态框
+    // ================================================================
     function showModal(title, contentHTML) {
         modalTitle.textContent = title;
         modalContent.innerHTML = contentHTML;
@@ -804,17 +772,15 @@
         modalOverlay.classList.remove('active');
     }
 
-    // ---------- 查看错题（历史所有错题） ----------
     function showWrongWords() {
         const wrongs = getWrongWords();
         if (wrongs.length === 0) {
             showModal('📕 错题本', '<p style="text-align:center; font-size:18px; color:#4f6f8f;">🎉 暂无错题记录，继续保持！</p>');
             return;
         }
-        // 按时间倒序
         const sorted = [...wrongs].reverse();
         let html = '';
-        sorted.forEach((w, i) => {
+        sorted.forEach(w => {
             html += `<div class="word-item">
                 <span class="en">${w.en}</span>
                 <span class="phon">${w.phon || ''}</span>
@@ -825,28 +791,26 @@
         showModal(`📕 错题本 (共${wrongs.length}条)`, html);
     }
 
-    // ---------- 查看历史分数 ----------
     function showHistory() {
         const history = getHistoryScores();
         if (history.length === 0) {
             showModal('📜 历史分数', '<p style="text-align:center; font-size:18px; color:#4f6f8f;">暂无历史记录</p>');
             return;
         }
-        let html = '<div style="font-size:16px; margin-bottom:10px;">历次正确率 (%):</div>';
+        let html = '<div style="font-size:16px; margin-bottom:12px;">历次正确率 (%):</div>';
         history.forEach((score, idx) => {
-            html += `<div style="display:flex; justify-content:space-between; padding:6px 12px; background:#f5faff; border-radius:20px; margin-bottom:4px;">
+            html += `<div style="display:flex; justify-content:space-between; padding:6px 14px; background:#f5faff; border-radius:20px; margin-bottom:5px;">
                 <span>第 ${idx+1} 次</span>
                 <span><strong>${score}%</strong></span>
             </div>`;
         });
         const highest = getHighestScore();
         if (highest !== null) {
-            html += `<div style="margin-top:12px; font-weight:700; color:#1a4f8a;">🏆 最高分：${highest}%</div>`;
+            html += `<div style="margin-top:14px; font-weight:700; color:#1a4f8a;">🏆 最高分：${highest}%</div>`;
         }
         showModal('📜 历史分数', html);
     }
 
-    // ---------- 显示题库 ----------
     function showBank() {
         let html = '';
         FULL_WORDS.forEach(w => {
@@ -860,44 +824,52 @@
         showModal(`📚 完整题库 (${FULL_WORDS.length}词)`, html);
     }
 
-    // ---------- 初始化 ----------
+    // ================================================================
+    //  7. 初始化
+    // ================================================================
     function init() {
-        // 首次加载，随机选30题
         currentQuestions = pickRandomQuestions(30);
+        userAnswers = new Array(30).fill('');
         results = new Array(30).fill(null);
         currentIndex = 0;
-        isFinished = false;
-        answered = false;
+        isSubmitted = false;
         renderQuestion();
         updateStats();
 
-        // 绑定事件
-        submitBtn.addEventListener('click', handleSubmit);
-        nextBtn.addEventListener('click', handleNext);
+        // 事件绑定
+        submitAllBtn.addEventListener('click', handleSubmitAll);
+        prevBtn.addEventListener('click', goToPrev);
+        nextBtn.addEventListener('click', goToNext);
         reshuffleBtn.addEventListener('click', reshuffle);
         document.getElementById('showWrongBtn').addEventListener('click', showWrongWords);
         document.getElementById('showHistoryBtn').addEventListener('click', showHistory);
         document.getElementById('showBankBtn').addEventListener('click', showBank);
+
         modalCloseBtn.addEventListener('click', closeModal);
         modalCloseBtn2.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) closeModal();
         });
 
-        // 回车键提交
+        // 当输入框失去焦点时保存答案
+        answerInput.addEventListener('blur', saveCurrentAnswer);
+        // 按回车时保存并跳转下一题（方便连续输入）
         answerInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                if (!submitBtn.disabled) {
-                    handleSubmit();
-                } else if (!nextBtn.disabled) {
-                    handleNext();
+                saveCurrentAnswer();
+                // 如果当前不是最后一题，自动跳转到下一题
+                if (currentIndex < currentQuestions.length - 1) {
+                    goToNext();
+                } else {
+                    // 如果是最后一题，可以提示或直接提交？这里不自动提交，让用户点击提交全部
+                    feedback.textContent = '📌 已保存，请点击“提交全部”完成测验';
+                    feedback.className = 'feedback';
                 }
             }
         });
     }
 
-    // 启动
     init();
 </script>
 </body>
