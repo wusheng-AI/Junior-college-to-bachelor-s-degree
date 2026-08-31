@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定语从句184题 专项训练 · English Grammar Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#d4a017;--gold-light:#f0c75e;--gold-deep:#b8860b;--royal:#4a3f8c;--royal-light:#6b5fb0;--royal-deep:#2d2360;--cream:#fffbf0;--warm-white:#fdf8ee;--parchment:#faf3e0;--ink:#2a1a0a;--ink-soft:#5a4a2a;--correct:#1a8a3a;--correct-bg:#e6f7ed;--wrong:#c43a3a;--wrong-bg:#fdf4f4;--shadow:0 8px 32px rgba(74,63,140,.15);--shadow-lg:0 12px 48px rgba(74,63,140,.22)}
+body{font-family:'Open Sans','Noto Serif SC',serif;background:linear-gradient(135deg,#fffbf0 0%,#f5ecd9 30%,#e8dff0 70%,#ddd6f0 100%);min-height:100vh;color:var(--ink);overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(ellipse at 10% 20%,rgba(212,160,23,.08) 0%,transparent 50%),radial-gradient(ellipse at 90% 80%,rgba(74,63,140,.08) 0%,transparent 50%);pointer-events:none;z-index:0}
+.header{position:relative;z-index:10;background:linear-gradient(135deg,var(--royal) 0%,var(--royal-light) 50%,var(--royal-deep) 100%);padding:18px 30px;box-shadow:0 4px 24px rgba(45,35,96,.3);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo-badge{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--royal-deep);box-shadow:0 4px 12px rgba(212,160,23,.4);flex-shrink:0}
+.header-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.2);line-height:1.2}
+.header-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:8px 18px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s;white-space:nowrap}
+.header-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+.header-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));border-color:var(--gold);color:var(--royal-deep)}
+.header-btn.gold:hover{background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+.container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.quiz-card{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;min-height:480px;position:relative;border:1px solid rgba(212,160,23,.2)}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--royal-light),var(--gold-light),var(--gold))}
+.card-inner{padding:36px 40px}
+.progress-bar{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.progress-track{flex:1;height:10px;background:#f0ead6;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--royal-light));border-radius:10px;transition:width .4s ease;width:0%}
+.progress-text{font-size:14px;font-weight:700;color:var(--royal-deep);white-space:nowrap}
+.progress-badge{display:inline-flex;align-items:center;gap:6px;background:var(--parchment);border:1px solid var(--gold);border-radius:20px;padding:4px 14px;font-size:13px;color:var(--ink-soft);font-weight:600}
+.q-type-tag{display:inline-block;background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;padding:5px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:16px}
+.q-cat-tag{display:inline-block;background:var(--parchment);color:var(--gold-deep);border:1px solid var(--gold-light);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-left:8px}
+.q-number{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-deep);font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.q-text{font-family:'Noto Serif SC',serif;font-size:22px;line-height:1.7;color:var(--ink);margin-bottom:28px;font-weight:500}
+.q-text .blank{display:inline-block;min-width:80px;border-bottom:3px solid var(--gold);margin:0 4px}
+.options-list{display:flex;flex-direction:column;gap:12px}
+.option-btn{display:flex;align-items:center;gap:14px;padding:16px 22px;border:2px solid #e8e0d0;border-radius:16px;cursor:pointer;font-size:17px;transition:all .25s;background:#fffdf8;text-align:left;font-family:'Open Sans',sans-serif}
+.option-btn:hover{border-color:var(--gold);background:var(--warm-white);transform:translateX(4px)}
+.option-btn.selected{border-color:var(--royal);background:#f5f0ff;box-shadow:0 4px 16px rgba(74,63,140,.15)}
+.option-letter{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;background:#f0ead6;color:var(--royal-deep);transition:all .25s}
+.option-btn.selected .option-letter{background:var(--royal);color:#fff}
+.option-text{flex:1}
+.fill-input{width:100%;padding:14px 20px;font-size:18px;border:2px solid #e8e0d0;border-radius:14px;background:#fffdf8;font-family:'Open Sans',sans-serif;transition:all .25s;color:var(--ink)}
+.fill-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,160,23,.15)}
+.fill-label{font-size:14px;color:var(--ink-soft);margin-bottom:6px;font-weight:600}
+.fill-group{margin-bottom:20px}
+.correct-box{display:flex;gap:16px;margin-bottom:20px}
+.correct-field{flex:1}
+.correct-field .fill-label{display:flex;align-items:center;gap:6px}
+.correct-field .fill-label .icon{font-size:16px}
+.correct-field.wrong-field .fill-label{color:var(--wrong)}
+.correct-field.right-field .fill-label{color:var(--correct)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:12px;flex-wrap:wrap}
+.nav-btn{padding:12px 28px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;border:none;display:flex;align-items:center;gap:8px}
+.nav-btn.primary{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;box-shadow:0 4px 16px rgba(74,63,140,.3)}
+.nav-btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,63,140,.4)}
+.nav-btn.secondary{background:var(--parchment);color:var(--royal-deep);border:1px solid var(--gold)}
+.nav-btn.secondary:hover{background:var(--warm-white)}
+.nav-btn.gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep)}
+.nav-btn.gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4)}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.nav-mid{display:flex;gap:10px}
+.q-nav-section{margin-top:28px;padding:20px;border-radius:16px;background:var(--parchment);border:1px solid rgba(212,160,23,.25)}
+.q-nav-title{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:12px;text-align:center}
+.q-nav-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.q-nav-cell{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;border:2px solid #e0d8c0;background:#fff;color:var(--ink-soft)}
+.q-nav-cell:hover{border-color:var(--gold);background:var(--warm-white);transform:scale(1.1)}
+.q-nav-cell.current{background:linear-gradient(135deg,var(--royal),var(--royal-light));color:#fff;border-color:var(--royal);transform:scale(1.15)}
+.q-nav-cell.answered{background:linear-gradient(135deg,var(--correct),#2aa85a);color:#fff;border-color:var(--correct)}
+.result-panel{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;padding:40px;border:1px solid rgba(212,160,23,.2);display:none}
+.result-panel.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.result-header{text-align:center;margin-bottom:30px}
+.result-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal-deep)}
+.result-score-big{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--royal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:16px 0 8px;line-height:1}
+.result-score-label{font-size:16px;color:var(--ink-soft)}
+.result-compare{display:flex;justify-content:center;align-items:center;gap:12px;margin:20px 0;font-size:18px;font-weight:600}
+.result-compare .up{color:var(--correct)}
+.result-compare .down{color:var(--wrong)}
+.result-compare .same{color:var(--ink-soft)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.stat-card{text-align:center;padding:20px 12px;border-radius:16px;background:var(--warm-white);border:1px solid #e8e0d0}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--royal)}
+.stat-label{font-size:13px;color:var(--ink-soft);margin-top:4px}
+.result-suggestion{background:var(--parchment);border-radius:16px;padding:24px;border-left:5px solid var(--gold);margin-top:24px}
+.result-suggestion h3{font-size:18px;color:var(--royal-deep);margin-bottom:12px}
+.result-suggestion ul{list-style:none}
+.result-suggestion li{padding:6px 0;font-size:15px;color:var(--ink-soft);line-height:1.6}
+.result-suggestion li::before{content:'\25B8 ';color:var(--gold);font-weight:700}
+.result-actions{display:flex;justify-content:center;gap:14px;margin-top:30px;flex-wrap:wrap}
+.bank-panel{position:fixed;top:0;right:-100%;width:min(640px,90vw);height:100vh;background:#fff;box-shadow:-8px 0 48px rgba(0,0,0,.15);z-index:100;transition:right .35s ease;overflow-y:auto}
+.bank-panel.show{right:0}
+.bank-header{position:sticky;top:0;background:linear-gradient(135deg,var(--royal),var(--royal-deep));padding:20px 24px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.bank-header h2{color:#fff;font-family:'Playfair Display',serif;font-size:22px}
+.bank-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;transition:all .2s}
+.bank-close:hover{background:rgba(255,255,255,.35)}
+.bank-search{padding:16px 24px;position:sticky;top:72px;background:#fff;border-bottom:1px solid #eee;z-index:4}
+.bank-search input{width:100%;padding:10px 18px;font-size:15px;border:2px solid #e8e0d0;border-radius:30px;background:var(--warm-white);font-family:'Open Sans',sans-serif}
+.bank-search input:focus{outline:none;border-color:var(--gold)}
+.bank-list{padding:0 0 40px}
+.bank-item{padding:20px 24px;border-bottom:1px solid #f0ead6;transition:background .2s}
+.bank-item:hover{background:var(--warm-white)}
+.bank-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.bank-item-id{font-weight:700;color:var(--royal);font-size:14px}
+.bank-item-type{font-size:12px;padding:2px 10px;border-radius:20px;font-weight:600}
+.bank-item-type.choice{background:#e8f4ff;color:#1a5a8a}
+.bank-item-type.fill{background:#fff3e0;color:#b86800}
+.bank-item-type.correct{background:#f0e8ff;color:#5a3f8c}
+.bank-item-cat{font-size:12px;color:var(--ink-soft)}
+.bank-item-q{font-size:16px;line-height:1.7;margin-bottom:12px;color:var(--ink)}
+.bank-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.bank-opt{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:10px;background:#f8f5ee;font-size:14px;border:1px solid #e8e0d0}
+.bank-opt.is-correct{background:var(--correct-bg);border-color:var(--correct)}
+.bank-opt-letter{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#e0d8c0;color:var(--royal-deep);flex-shrink:0}
+.bank-opt.is-correct .bank-opt-letter{background:var(--correct);color:#fff}
+.bank-opt-tag{font-size:12px;color:var(--correct);font-weight:600;margin-left:auto}
+.bank-answer{display:inline-block;padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;background:var(--correct-bg);color:var(--correct);border:1px solid var(--correct);margin-bottom:8px}
+.bank-exp{background:var(--parchment);border-radius:10px;padding:10px 16px;font-size:13px;color:var(--ink-soft);line-height:1.6;border-left:3px solid var(--gold)}
+.wrong-user{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--wrong-bg);border:1px solid var(--wrong);margin-bottom:6px;font-size:14px}
+.wrong-user .tag{font-size:12px;font-weight:700;color:var(--wrong);white-space:nowrap}
+.wrong-correct{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:var(--correct-bg);border:1px solid var(--correct);margin-bottom:10px;font-size:14px}
+.wrong-correct .tag{font-size:12px;font-weight:700;color:var(--correct);white-space:nowrap}
+.wrong-skipped{padding:8px 14px;border-radius:10px;background:#f5f5f5;border:1px solid #ddd;margin-bottom:6px;font-size:14px;color:#999}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.show{opacity:1;pointer-events:auto}
+.history-bar{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.history-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600;background:var(--parchment);border:1px solid var(--gold-light);color:var(--ink-soft)}
+.history-chip.latest{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--royal-deep);border-color:var(--gold)}
+@media(max-width:640px){.card-inner{padding:24px 20px}.q-text{font-size:18px}.header-title{font-size:18px}.result-score-big{font-size:48px}.result-stats{grid-template-columns:1fr}.correct-box{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left"><div class="logo-badge">Rc</div><div><div class="header-title">定语从句184题 专项训练</div><div class="header-sub">Relative Clauses · 184 Questions · Random 30 per round</div></div></div>
+  <div class="header-right"><button class="header-btn" id="bankBtn">📖 题库</button><button class="header-btn gold" id="reshuffleBtn">🎲 重新随机</button></div>
+</div>
+<div class="container">
+  <div class="history-bar" id="historyBar"></div>
+  <div class="quiz-card" id="quizCard"><div class="card-inner" id="cardInner"></div></div>
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header"><div class="result-title">🎯 练习完成</div><div class="result-score-big" id="scoreBig">0</div><div class="result-score-label">分 / 共 30 题</div><div class="result-compare" id="resultCompare"></div></div>
+    <div class="result-stats" id="resultStats"></div>
+    <div class="result-suggestion" id="resultSuggestion"></div>
+    <div class="result-actions"><button class="nav-btn gold" id="againBtn">🔄 再来一轮</button><button class="nav-btn primary" id="wrongBtn">🔍 查看错题</button><button class="nav-btn secondary" id="reviewBtn">📋 查看题库</button></div>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="bank-panel" id="bankPanel"><div class="bank-header"><h2>📖 题库一览</h2><button class="bank-close" id="bankClose">✕</button></div><div class="bank-search"><input type="text" id="bankSearch" placeholder="搜索题号、关键词或分类..."></div><div class="bank-list" id="bankList"></div></div>
+<div class="bank-panel" id="wrongPanel"><div class="bank-header"><h2>🔍 错题回顾</h2><button class="bank-close" id="wrongClose">✕</button></div><div class="bank-search"><div id="wrongSummary" style="padding:4px 8px;font-size:14px;color:var(--ink-soft);font-weight:600;"></div></div><div class="bank-list" id="wrongList"></div></div>
+<script>
+var ALL_Q=[{"id":1,"t":"choice","c":"定语从句","q":"This is the very letter ______ I am looking for.","o":["A. that","B. which","C. who","D. whom"],"a":"A","e":"先行词被“the very”修饰，关系代词只能用that。"},{"id":2,"t":"choice","c":"定语从句","q":"Can you lend me the dictionary ______ you bought the other day?","o":["A. that","B. which","C. who","D. what"],"a":"A","e":"先行词为物，且在从句中作宾语，可用that/which，但此处无特殊限制，A和B均可，但单选题通常选A。"},{"id":3,"t":"choice","c":"定语从句","q":"Great changes have taken place in the village ______ he once worked.","o":["A. that","B. which","C. where","D. when"],"a":"C","e":"先行词village表地点，从句中work是不及物动词，缺地点状语，故用where。"},{"id":4,"t":"choice","c":"定语从句","q":"I don’t like ______ you speak to her.","o":["A. the way","B. the way in that","C. the way which","D. the way of which"],"a":"A","e":"the way作先行词，且从句中不缺成分（you speak to her），关系词可用that/in which/省略，但不能用which直接连接，B中in that错误（in which才对），故选A（省略了关系词）。"},{"id":5,"t":"choice","c":"定语从句","q":"We’re talking about the piano and the pianist ______ we heard in the concert last night.","o":["A. which","B. whom","C. who","D. that"],"a":"D","e":"先行词既有人（pianist）又有物（piano），关系代词只能用that。"},{"id":6,"t":"choice","c":"定语从句","q":"He made a wonderful discovery, ______ I think is of great importance to science.","o":["A. which I think is","B. which I think it is","C. which I think it","D. I think is"],"a":"A","e":"非限制性定语从句，关系词which作主语，I think为插入语，从句谓语为is，故选A。"},{"id":7,"t":"choice","c":"定语从句","q":"It was ten o’clock ______ he came back.","o":["A. that","B. when","C. so","D. which"],"a":"B","e":"先行词为时间ten o’clock，从句不缺主语/宾语，缺时间状语，故用when（注意：若为强调句则用that，但此处不是强调句）。"},{"id":8,"t":"choice","c":"定语从句","q":"Can machines perform the same tasks ______ man does?","o":["A. that","B. what","C. how","D. as"],"a":"D","e":"先行词前有the same，关系代词用as，构成the same...as结构。"},{"id":9,"t":"choice","c":"定语从句","q":"The little girl showed the policeman the corner ______ she was knocked off her bike.","o":["A. and","B. which","C. that","D. where"],"a":"D","e":"corner表地点，从句中she was knocked off her bike结构完整，缺地点状语，故用where。"},{"id":10,"t":"choice","c":"定语从句","q":"Is this the house ______ Shakespeare was born?","o":["A. which","B. in that","C. for which","D. at which"],"a":"D","e":"born at the house，故用at which，也可用where。"},{"id":11,"t":"choice","c":"定语从句","q":"She has fallen in love with Jack, ______ I find hard to imagine.","o":["A. who","B. that","C. whom","D. which"],"a":"D","e":"非限制性定语从句，关系词指代整个主句内容，故用which。"},{"id":12,"t":"choice","c":"定语从句","q":"He has made a discovery, ______ of great importance to the progress of science.","o":["A. I think which is","B. which I think is","C. that I think is","D. of which I think it is"],"a":"B","e":"非限制性定语从句，which作主语，I think插入语，谓语为is。"},{"id":13,"t":"choice","c":"定语从句","q":"All ______ is a continuous supply of fuel.","o":["A. what is needed","B. the thing needed","C. that is needed","D. for their needs"],"a":"C","e":"先行词为all（不定代词），关系代词只能用that。"},{"id":14,"t":"choice","c":"定语从句","q":"Recently I bought an ancient Chinese vase, ______ was very reasonable.","o":["A. which price","B. the price of which","C. its price","D. the price of whose"],"a":"B","e":"非限制性定语从句，表示“花瓶的价格”，用the price of which或whose price，但选项B正确。"},{"id":15,"t":"choice","c":"定语从句","q":"They arrived at a farmhouse, in front of ______ sat a small boy.","o":["A. whom","B. who","C. which","D. that"],"a":"C","e":"farmhouse指物，介词+which引导定语从句。"},{"id":16,"t":"choice","c":"定语从句","q":"I have two grammars, ______ are of great use.","o":["A. all of which","B. either of which","C. both of that","D. both of which"],"a":"D","e":"非限制性定语从句，两者都用both，且介词of后用which。"},{"id":17,"t":"choice","c":"定语从句","q":"I have many friends, ______ some are businessmen.","o":["A. of them","B. from which","C. who of","D. of whom"],"a":"D","e":"非限制性定语从句，表示“其中的一些”，用of whom。"},{"id":18,"t":"choice","c":"定语从句","q":"She and her family bicycle to work, ______ helps them keep fit.","o":["A. which it is","B. who it is","C. as it is","D. that it is"],"a":"C","e":"非限制性定语从句，可用as或which指代整个句子，但as有“正如”之意，此处用which更常见，但选项C为as，也正确（as it is意为“事实上”不符合，此处应为as作关系代词）。标准答案常为which，但此处只能选C（因A、B、D均有误）。实际应选which，但无选项，故本题不严谨。建议改为：______ helps them keep fit. 用which。但按给定选项，选C（as）。"},{"id":19,"t":"choice","c":"定语从句","q":"I want to use the same dictionary ______ you used yesterday.","o":["A. which","B. who","C. what","D. as"],"a":"D","e":""},{"id":20,"t":"choice","c":"定语从句","q":"He isn’t such a man ______ he used to be.","o":["A. who","B. whom","C. that","D. as"],"a":"D","e":""},{"id":21,"t":"choice","c":"定语从句","q":"He talked a lot about things and persons ______ they remembered in the school.","o":["A. which","B. that","C. whom","D. what"],"a":"B","e":""},{"id":22,"t":"choice","c":"定语从句","q":"We were disappointed yesterday because it wasn’t such a good dinner ______ she had promised us.","o":["A. like","B. as","C. which","D. what"],"a":"B","e":""},{"id":23,"t":"choice","c":"定语从句","q":"The girl ______ an English song in the next room is Tom’s sister.","o":["A. who is singing","B. is singing","C. sang","D. was singing"],"a":"A","e":""},{"id":24,"t":"choice","c":"定语从句","q":"Is this the reason ______ he explained for his carelessness in his work?","o":["A. he explained","B. what he explained","C. how he explained","D. why he explained"],"a":"A","e":""},{"id":25,"t":"choice","c":"定语从句","q":"The place ______ interested me most was the Children’s Palace.","o":["A. which","B. where","C. what","D. in which"],"a":"A","e":""},{"id":26,"t":"choice","c":"定语从句","q":"The factory ______ we’ll visit next week is not far from here.","o":["A. where","B. to which","C. which","D. in which"],"a":"C","e":""},{"id":27,"t":"choice","c":"定语从句","q":"The reason ______ he didn’t come was ______ he was ill.","o":["A. why; that","B. that; why","C. for; that","D. for which; that"],"a":"A","e":""},{"id":28,"t":"choice","c":"定语从句","q":"Is that the small town ______ you often refer to?","o":["A. that","B. which","C. where","D. what"],"a":"A","e":""},{"id":29,"t":"choice","c":"定语从句","q":"This is the most interesting movie ______ I have ever seen.","o":["A. that","B. which","C. what","D. as"],"a":"A","e":""},{"id":30,"t":"choice","c":"定语从句","q":"The first thing ______ I want to do is to go home.","o":["A. that","B. which","C. what","D. as"],"a":"A","e":""},{"id":31,"t":"choice","c":"定语从句","q":"Who is the man ______ stands here?","o":["A. that","B. who","C. which","D. whom"],"a":"A","e":""},{"id":32,"t":"choice","c":"定语从句","q":"There is a book on the desk ______ belongs to Jack.","o":["A. which","B. that","C. who","D. whom"],"a":"B","e":""},{"id":33,"t":"choice","c":"定语从句","q":"He built a factory ______ produces things ______ we have never seen before.","o":["A. that; which","B. which; that","C. which; which","D. that; that"],"a":"B","e":""},{"id":34,"t":"choice","c":"定语从句","q":"My mom brought two dogs yesterday. Now I can see the two ______ are playing in the garden.","o":["A. that","B. which","C. who","D. whom"],"a":"A","e":""},{"id":35,"t":"choice","c":"定语从句","q":"He will never forget the day ______ his child was born on.","o":["A. that/which","B. when","C. on which","D. both A and C"],"a":"D","e":""},{"id":36,"t":"choice","c":"定语从句","q":"Tom came back, ______ made me happy.","o":["A. which","B. that","C. who","D. whom"],"a":"A","e":""},{"id":37,"t":"choice","c":"定语从句","q":"I love Tom, ______ always makes me happy.","o":["A. who","B. which","C. that","D. whom"],"a":"A","e":""},{"id":38,"t":"choice","c":"定语从句","q":"The way ______ he explained the sentence to us was simple.","o":["A. that","B. in which","C. which","D. A or B or 省略"],"a":"D","e":""},{"id":39,"t":"choice","c":"定语从句","q":"I forgot the date ______ you came.","o":["A. when","B. on which","C. that","D. A and B"],"a":"D","e":""},{"id":40,"t":"choice","c":"定语从句","q":"This is the factory ______ my father has worked for ten years.","o":["A. where","B. which","C. in which","D. A and C"],"a":"D","e":""},{"id":41,"t":"choice","c":"定语从句","q":"I do not understand the reason ______ he left me.","o":["A. why","B. for which","C. that","D. A or B"],"a":"D","e":""},{"id":42,"t":"choice","c":"定语从句","q":"The number of people ______ are interested in this topic is increasing.","o":["A. who","B. which","C. that","D. whom"],"a":"A","e":""},{"id":43,"t":"choice","c":"定语从句","q":"She is the girl ______ you love.","o":["A. whom","B. that","C. who","D. all of the above"],"a":"D","e":""},{"id":44,"t":"choice","c":"定语从句","q":"This is the same book ______ I lost.","o":["A. as","B. that","C. which","D. what"],"a":"A","e":""},{"id":45,"t":"choice","c":"定语从句","q":"I have a book ______ name is A Dream in Red Mansions.","o":["A. whose","B. which","C. that","D. of which"],"a":"A","e":""},{"id":46,"t":"choice","c":"定语从句","q":"The man ______ you see dead is his friend.","o":["A. whom","B. who","C. that","D. A or C"],"a":"D","e":""},{"id":47,"t":"choice","c":"定语从句","q":"We must never think we are good in everything ______ others are good in nothing.","o":["A. while","B. which","C. that","D. as"],"a":"A","e":""},{"id":48,"t":"choice","c":"定语从句","q":"The sun warms the earth, ______ makes it possible for plants to grow.","o":["A. which","B. that","C. this","D. it"],"a":"A","e":""},{"id":49,"t":"choice","c":"定语从句","q":"He bought a lot of books, none of ______ he had ever read.","o":["A. which","B. them","C. that","D. whom"],"a":"A","e":""},{"id":50,"t":"choice","c":"定语从句","q":"Sarah, ______ has taken part in shows along with top models, wants to prove that she is capable.","o":["A. who","B. whom","C. which","D. that"],"a":"A","e":""},{"id":51,"t":"choice","c":"定语从句","q":"The house ______ roof was damaged has now been repaired.","o":["A. whose","B. which","C. of which","D. that"],"a":"A","e":""},{"id":52,"t":"choice","c":"定语从句","q":"I’ll never forget the days ______ we spent together in the countryside.","o":["A. when","B. on which","C. that","D. where"],"a":"C","e":""},{"id":53,"t":"choice","c":"定语从句","q":"I’ll never forget the days ______ we worked together in the countryside.","o":["A. when","B. which","C. that","D. where"],"a":"A","e":""},{"id":54,"t":"choice","c":"定语从句","q":"This is the only one of the students ______ able to solve the problem.","o":["A. who is","B. who are","C. that is","D. that are"],"a":"C","e":""},{"id":55,"t":"choice","c":"定语从句","q":"This is one of the students ______ able to solve the problem.","o":["A. who is","B. who are","C. that is","D. which are"],"a":"B","e":""},{"id":56,"t":"choice","c":"定语从句","q":"The house ______ I live in is very old.","o":["A. where","B. which","C. that","D. B or C"],"a":"D","e":""},{"id":57,"t":"choice","c":"定语从句","q":"The house ______ I live is very old.","o":["A. where","B. which","C. that","D. in which"],"a":"A","e":""},{"id":58,"t":"choice","c":"定语从句","q":"He is the man ______ I think is honest.","o":["A. who","B. whom","C. which","D. that"],"a":"A","e":""},{"id":59,"t":"choice","c":"定语从句","q":"He is the man ______ I think you should meet.","o":["A. who","B. whom","C. which","D. that"],"a":"B","e":""},{"id":60,"t":"choice","c":"定语从句","q":"The news ______ he told me is exciting.","o":["A. that","B. which","C. what","D. A or B"],"a":"D","e":""},{"id":61,"t":"choice","c":"定语从句","q":"The news ______ he won the game is exciting.","o":["A. that","B. which","C. what","D. when"],"a":"A","e":""},{"id":62,"t":"choice","c":"定语从句","q":"This is the best film ______ I have ever seen.","o":["A. that","B. which","C. what","D. as"],"a":"A","e":""},{"id":63,"t":"choice","c":"定语从句","q":"She is the only person ______ I can trust.","o":["A. whom","B. who","C. that","D. all"],"a":"C","e":""},{"id":64,"t":"choice","c":"定语从句","q":"The reason ______ he was late is unknown.","o":["A. why","B. for which","C. that","D. A or B"],"a":"D","e":""},{"id":65,"t":"choice","c":"定语从句","q":"He works in a factory ______ produces cars.","o":["A. where","B. which","C. in which","D. what"],"a":"B","e":""},{"id":66,"t":"choice","c":"定语从句","q":"He works in a factory ______ cars are produced.","o":["A. where","B. which","C. that","D. in which"],"a":"A","e":""},{"id":67,"t":"choice","c":"定语从句","q":"Please pass me the book ______ cover is red.","o":["A. whose","B. of which","C. which","D. that"],"a":"A","e":""},{"id":68,"t":"choice","c":"定语从句","q":"Those ______ want to go to the Great Wall can sign up here.","o":["A. who","B. which","C. that","D. whom"],"a":"A","e":""},{"id":69,"t":"choice","c":"定语从句","q":"The man ______ you referred to is my teacher.","o":["A. who","B. whom","C. that","D. all"],"a":"D","e":""},{"id":70,"t":"choice","c":"定语从句","q":"I have never met a person ______ is so kind.","o":["A. who","B. which","C. that","D. A or C"],"a":"D","e":""},{"id":71,"t":"choice","c":"定语从句","q":"Is there anything ______ I can do for you?","o":["A. that","B. which","C. what","D. as"],"a":"A","e":""},{"id":72,"t":"choice","c":"定语从句","q":"She is the most beautiful girl ______ I have ever met.","o":["A. that","B. which","C. who","D. whom"],"a":"A","e":""},{"id":73,"t":"choice","c":"定语从句","q":"The book ______ is on the table is mine.","o":["A. which","B. that","C. A or B","D. what"],"a":"C","e":""},{"id":74,"t":"choice","c":"定语从句","q":"The man ______ was here just now is my father.","o":["A. who","B. that","C. A or B","D. which"],"a":"C","e":""},{"id":75,"t":"fill","c":"语法填空","q":"This is the very letter ______ I am looking for.","a":"that","e":""},{"id":76,"t":"fill","c":"语法填空","q":"Can you lend me the dictionary ______ you bought the other day?","a":"that/which","e":""},{"id":77,"t":"fill","c":"语法填空","q":"Great changes have taken place in the village ______ he once worked.","a":"where","e":""},{"id":78,"t":"fill","c":"语法填空","q":"I don’t like the way ______ you speak to her.","a":"that/in which/不填","e":""},{"id":79,"t":"fill","c":"语法填空","q":"We’re talking about the piano and the pianist ______ we heard in the concert.","a":"that","e":""},{"id":80,"t":"fill","c":"语法填空","q":"He made a wonderful discovery, ______ I think is of great importance.","a":"which","e":""},{"id":81,"t":"fill","c":"语法填空","q":"It was ten o’clock ______ he came back.","a":"when","e":""},{"id":82,"t":"fill","c":"语法填空","q":"Can machines perform the same tasks ______ man does?","a":"as","e":""},{"id":83,"t":"fill","c":"语法填空","q":"The little girl showed the policeman the corner ______ she was knocked off her bike.","a":"where","e":""},{"id":84,"t":"fill","c":"语法填空","q":"Is this the house ______ Shakespeare was born?","a":"where/at which","e":""},{"id":85,"t":"fill","c":"语法填空","q":"She has fallen in love with Jack, ______ I find hard to imagine.","a":"which","e":""},{"id":86,"t":"fill","c":"语法填空","q":"He has made a discovery, ______ I think is of great importance.","a":"which","e":""},{"id":87,"t":"fill","c":"语法填空","q":"All ______ is needed is a continuous supply of fuel.","a":"that","e":""},{"id":88,"t":"fill","c":"语法填空","q":"Recently I bought an ancient Chinese vase, the price ______ was very reasonable.","a":"of which","e":""},{"id":89,"t":"fill","c":"语法填空","q":"They arrived at a farmhouse, in front of ______ sat a small boy.","a":"which","e":""},{"id":90,"t":"fill","c":"语法填空","q":"I have two grammars, both ______ are of great use.","a":"of which","e":""},{"id":91,"t":"fill","c":"语法填空","q":"I have many friends, some ______ are businessmen.","a":"of whom","e":""},{"id":92,"t":"fill","c":"语法填空","q":"She and her family bicycle to work, ______ helps them keep fit.","a":"which","e":""},{"id":93,"t":"fill","c":"语法填空","q":"I want to use the same dictionary ______ you used yesterday.","a":"as","e":""},{"id":94,"t":"fill","c":"语法填空","q":"He isn’t such a man ______ he used to be.","a":"as","e":""},{"id":95,"t":"fill","c":"语法填空","q":"He talked a lot about things and persons ______ they remembered.","a":"that","e":""},{"id":96,"t":"fill","c":"语法填空","q":"It wasn’t such a good dinner ______ she had promised us.","a":"as","e":""},{"id":97,"t":"fill","c":"语法填空","q":"The girl ______ is singing in the next room is Tom’s sister.","a":"who/that","e":""},{"id":98,"t":"fill","c":"语法填空","q":"Is this the reason ______ he explained for his carelessness?","a":"that/which/省略","e":""},{"id":99,"t":"fill","c":"语法填空","q":"The place ______ interested me most was the Children’s Palace.","a":"which/that","e":""},{"id":100,"t":"fill","c":"语法填空","q":"The factory ______ we’ll visit next week is not far from here.","a":"which/that","e":""},{"id":101,"t":"fill","c":"语法填空","q":"The reason ______ he didn’t come was that he was ill.","a":"why/for which","e":""},{"id":102,"t":"fill","c":"语法填空","q":"Is that the small town ______ you often refer to?","a":"which/that/省略","e":""},{"id":103,"t":"fill","c":"语法填空","q":"This is the most interesting movie ______ I have ever seen.","a":"that","e":""},{"id":104,"t":"fill","c":"语法填空","q":"The first thing ______ I want to do is to go home.","a":"that","e":""},{"id":105,"t":"fill","c":"语法填空","q":"Who is the man ______ stands here?","a":"that","e":""},{"id":106,"t":"fill","c":"语法填空","q":"There is a book on the desk ______ belongs to Jack.","a":"that","e":""},{"id":107,"t":"fill","c":"语法填空","q":"He built a factory ______ produces things ______ we have never seen before.","a":"which/that; that/which","e":""},{"id":108,"t":"fill","c":"语法填空","q":"My mom brought two dogs. Now I can see the two ______ are playing in the garden.","a":"that","e":""},{"id":109,"t":"fill","c":"语法填空","q":"He will never forget the day ______ his child was born on.","a":"which/that/省略","e":""},{"id":110,"t":"fill","c":"语法填空","q":"Tom came back, ______ made me happy.","a":"which","e":""},{"id":111,"t":"fill","c":"语法填空","q":"I love Tom, ______ always makes me happy.","a":"who","e":""},{"id":112,"t":"fill","c":"语法填空","q":"The way ______ he explained the sentence was simple.","a":"that/in which/省略","e":""},{"id":113,"t":"fill","c":"语法填空","q":"I forgot the date ______ you came.","a":"when/on which","e":""},{"id":114,"t":"fill","c":"语法填空","q":"This is the factory ______ my father has worked for ten years.","a":"where/in which","e":""},{"id":115,"t":"fill","c":"语法填空","q":"I do not understand the reason ______ he left me.","a":"why/for which","e":""},{"id":116,"t":"fill","c":"语法填空","q":"The number of people ______ are interested in this topic is increasing.","a":"who/that","e":""},{"id":117,"t":"fill","c":"语法填空","q":"This is the very girl ______ we are looking for.","a":"that","e":""},{"id":118,"t":"fill","c":"语法填空","q":"She is the girl ______ you love.","a":"whom/that/省略","e":""},{"id":119,"t":"fill","c":"语法填空","q":"This is the same book ______ I lost.","a":"as","e":""},{"id":120,"t":"fill","c":"语法填空","q":"I have a book ______ name is A Dream in Red Mansions.","a":"whose","e":""},{"id":121,"t":"fill","c":"语法填空","q":"The man ______ you see dead is his friend.","a":"whom/that/省略","e":""},{"id":122,"t":"fill","c":"语法填空","q":"The sun warms the earth, ______ makes it possible for plants to grow.","a":"which","e":""},{"id":123,"t":"fill","c":"语法填空","q":"He bought a lot of books, none of ______ he had ever read.","a":"which","e":""},{"id":124,"t":"fill","c":"语法填空","q":"Sarah, ______ has taken part in shows, wants to prove herself.","a":"who","e":""},{"id":125,"t":"fill","c":"语法填空","q":"The house ______ roof was damaged has been repaired.","a":"whose","e":""},{"id":126,"t":"fill","c":"语法填空","q":"I’ll never forget the days ______ we spent together.","a":"which/that/省略","e":""},{"id":127,"t":"fill","c":"语法填空","q":"I’ll never forget the days ______ we worked together.","a":"when/on which","e":""},{"id":128,"t":"fill","c":"语法填空","q":"This is the only one of the students ______ able to solve the problem.","a":"that is","e":""},{"id":129,"t":"fill","c":"语法填空","q":"This is one of the students ______ able to solve the problem.","a":"who/that are","e":""},{"id":130,"t":"fill","c":"语法填空","q":"The house ______ I live in is very old.","a":"which/that/省略","e":""},{"id":131,"t":"fill","c":"语法填空","q":"The house ______ I live is very old.","a":"where/in which","e":""},{"id":132,"t":"fill","c":"语法填空","q":"He is the man ______ I think is honest.","a":"who","e":""},{"id":133,"t":"fill","c":"语法填空","q":"He is the man ______ I think you should meet.","a":"whom/that/省略","e":""},{"id":134,"t":"fill","c":"语法填空","q":"The news ______ he told me is exciting.","a":"which/that/省略","e":""},{"id":135,"t":"correct","c":"改错题","q":"The sun warms the earth, this makes it possible for plants to grow.","w":"this","r":"which","e":""},{"id":136,"t":"correct","c":"改错题","q":"He bought a lot of books, none of them he had ever read.","w":"them","r":"which","e":""},{"id":137,"t":"correct","c":"改错题","q":"This is the very letter which I am looking for.","w":"which","r":"that","e":""},{"id":138,"t":"correct","c":"改错题","q":"Great changes have taken place in the village that he once worked.","w":"that","r":"where","e":""},{"id":139,"t":"correct","c":"改错题","q":"I don’t like the way in that you speak to her.","w":"in that","r":"in which","e":"也可用：省略in"},{"id":140,"t":"correct","c":"改错题","q":"We’re talking about the piano and the pianist which we heard in the concert.","w":"which","r":"that","e":""},{"id":141,"t":"correct","c":"改错题","q":"It was ten o’clock that he came back.","w":"that","r":"when","e":""},{"id":142,"t":"correct","c":"改错题","q":"Can machines perform the same tasks that man does?","w":"that","r":"as","e":""},{"id":143,"t":"correct","c":"改错题","q":"The little girl showed the policeman the corner which she was knocked off her bike.","w":"which","r":"where","e":""},{"id":144,"t":"correct","c":"改错题","q":"Is this the house which Shakespeare was born?","w":"which","r":"where","e":"也可用：at which"},{"id":145,"t":"correct","c":"改错题","q":"She has fallen in love with Jack, who I find hard to imagine.","w":"who","r":"which","e":""},{"id":146,"t":"correct","c":"改错题","q":"He has made a discovery, that I think is of great importance.","w":"that","r":"which","e":""},{"id":147,"t":"correct","c":"改错题","q":"All what is needed is a continuous supply of fuel.","w":"what","r":"that","e":""},{"id":148,"t":"correct","c":"改错题","q":"Recently I bought a vase, the price of whose was reasonable.","w":"whose","r":"which","e":""},{"id":149,"t":"correct","c":"改错题","q":"They arrived at a farmhouse, in front of that sat a small boy.","w":"that","r":"which","e":""},{"id":150,"t":"correct","c":"改错题","q":"I have two grammars, both of that are of great use.","w":"that","r":"which","e":""},{"id":151,"t":"correct","c":"改错题","q":"I have many friends, of them some are businessmen.","w":"them","r":"whom","e":""},{"id":152,"t":"correct","c":"改错题","q":"She and her family bicycle to work, that helps them keep fit.","w":"that","r":"which","e":""},{"id":153,"t":"correct","c":"改错题","q":"I want to use the same dictionary which you used yesterday.","w":"which","r":"as","e":""},{"id":154,"t":"correct","c":"改错题","q":"He isn’t such a man who he used to be.","w":"who","r":"as","e":""},{"id":155,"t":"correct","c":"改错题","q":"He talked a lot about things and persons which they remembered.","w":"which","r":"that","e":""},{"id":156,"t":"correct","c":"改错题","q":"It wasn’t such a good dinner which she had promised us.","w":"which","r":"as","e":""},{"id":157,"t":"correct","c":"改错题","q":"The place where interested me most was the Children’s Palace.","w":"where","r":"which/that","e":""},{"id":158,"t":"correct","c":"改错题","q":"The factory where we’ll visit next week is not far.","w":"where","r":"which/that","e":""},{"id":159,"t":"correct","c":"改错题","q":"The reason for which he didn’t come was because he was ill.","w":"because","r":"that","e":""},{"id":160,"t":"correct","c":"改错题","q":"Is that the small town which you often refer?","w":"which","r":"that","e":"refer后需加to，即refer to which/that，或将which改为that并在refer后加to。"},{"id":161,"t":"correct","c":"改错题","q":"This is the most interesting movie which I have ever seen.","w":"which","r":"that","e":""},{"id":162,"t":"correct","c":"改错题","q":"The first thing which I want to do is to go home.","w":"which","r":"that","e":""},{"id":163,"t":"correct","c":"改错题","q":"Who is the man which stands here?","w":"which","r":"that","e":""},{"id":164,"t":"correct","c":"改错题","q":"He built a factory which produces things which we have never seen before.","w":"which","r":"that","e":"第二个which改为that，避免重复。"},{"id":165,"t":"correct","c":"改错题","q":"My mom brought two dogs. Now I can see the two which are playing.","w":"which","r":"that","e":""},{"id":166,"t":"correct","c":"改错题","q":"Tom came back, that made me happy.","w":"that","r":"which","e":""},{"id":167,"t":"correct","c":"改错题","q":"The way which he explained the sentence was simple.","w":"which","r":"that","e":"the way作先行词，关系词可用that/in which/省略，不能用which。"},{"id":168,"t":"correct","c":"改错题","q":"I forgot the date which you came.","w":"which","r":"when","e":"也可用：on which"},{"id":169,"t":"correct","c":"改错题","q":"This is the factory which my father has worked for ten years.","w":"which","r":"where","e":"也可用：in which"},{"id":170,"t":"correct","c":"改错题","q":"I do not understand the reason which he left me.","w":"which","r":"why","e":"也可用：for which"},{"id":171,"t":"correct","c":"改错题","q":"This is the very girl which we are looking for.","w":"which","r":"that","e":""},{"id":172,"t":"correct","c":"改错题","q":"This is the same book which I lost.","w":"which","r":"as","e":""},{"id":173,"t":"correct","c":"改错题","q":"I have a book which name is A Dream in Red Mansions.","w":"which","r":"whose","e":""},{"id":174,"t":"correct","c":"改错题","q":"The man who you see dead is his friend.","w":"who","r":"whom","e":""},{"id":175,"t":"correct","c":"改错题","q":"The sun warms the earth, this makes it possible.","w":"this","r":"which","e":""},{"id":176,"t":"correct","c":"改错题","q":"He bought a lot of books, none of them he has read.","w":"them","r":"which","e":""},{"id":177,"t":"correct","c":"改错题","q":"The house whose roof was damaged have been repaired.","w":"have","r":"has","e":""},{"id":178,"t":"correct","c":"改错题","q":"I’ll never forget the days when we spent together.","w":"when","r":"which/that","e":"也可用：省略"},{"id":179,"t":"correct","c":"改错题","q":"I’ll never forget the days which we worked together.","w":"which","r":"when","e":"也可用：on which"},{"id":180,"t":"correct","c":"改错题","q":"This is the only one of the students who are able to solve it.","w":"are","r":"is","e":""},{"id":181,"t":"correct","c":"改错题","q":"This is one of the students who is able to solve it.","w":"is","r":"are","e":""},{"id":182,"t":"correct","c":"改错题","q":"The house which I live is very old.","w":"which","r":"where","e":"也可用：in which"},{"id":183,"t":"correct","c":"改错题","q":"He is the man whom I think is honest.","w":"whom","r":"who","e":""},{"id":184,"t":"correct","c":"改错题","q":"The news which he told me are exciting.","w":"are","r":"is","e":""}];
+
+var currentRound=[],currentIndex=0,userAnswers=[];
+var selectedOption=null,fillValue='',correctWrong='',correctRight='';
+var cardInner=document.getElementById('cardInner');
+var resultPanel=document.getElementById('resultPanel');
+var quizCard=document.getElementById('quizCard');
+var bankPanel=document.getElementById('bankPanel');
+var overlay=document.getElementById('overlay');
+var historyBar=document.getElementById('historyBar');
+
+function shuffle(a){a=[...a];for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pickRandom(n){return shuffle(ALL_Q).slice(0,n);}
+function getHistory(){try{return JSON.parse(localStorage.getItem('relative_clause_scores')||'[]');}catch(e){return[];}}
+function saveScore(s,t,c,w,u){var h=getHistory();h.push({score:s,total:t,correct:c,wrong:w,unanswered:u,date:new Date().toLocaleString('zh-CN')});localStorage.setItem('relative_clause_scores',JSON.stringify(h));}
+function getLatest(){var h=getHistory();return h.length>0?h[h.length-1]:null;}
+function renderHistory(){var h=getHistory();if(!h.length){historyBar.innerHTML='';return;}var html='<span style="font-size:13px;color:#5a4a2a;font-weight:600;">历史成绩：</span>';h.slice(-5).forEach(function(r,i){var l=i===h.slice(-5).length-1;html+='<span class="history-chip'+(l?' latest':'')+'">'+r.score+'分'+(l?' (最新)':'')+'</span>';});historyBar.innerHTML=html;}
+
+function initRound(){currentRound=pickRandom(30);currentIndex=0;userAnswers=[];selectedOption=null;fillValue='';correctWrong='';correctRight='';resultPanel.classList.remove('show');quizCard.style.display='block';restoreAnswer();renderQuestion();}
+
+function renderQuestion(){
+  var q=currentRound[currentIndex];
+  var progress=((currentIndex+1)/currentRound.length*100).toFixed(0);
+  var typeLabel=q.t==='choice'?'选择题':q.t==='fill'?'语法填空':'改错题';
+  var html='<div class="progress-bar"><div class="progress-track"><div class="progress-fill" style="width:'+progress+'%"></div></div><span class="progress-text">'+(currentIndex+1)+' / '+currentRound.length+'</span><span class="progress-badge">已答 '+userAnswers.length+'</span></div>';
+  html+='<span class="q-type-tag">'+typeLabel+'</span><span class="q-cat-tag">'+q.c+'</span><div class="q-number">Question #'+q.id+'</div><div class="q-text">'+formatQ(q)+'</div>';
+  if(q.t==='choice'){
+    var L=['A','B','C','D'];
+    html+='<div class="options-list">';
+    q.o.forEach(function(opt,i){var cls='option-btn';if(selectedOption===L[i])cls+=' selected';var co=opt.replace(/^[A-D]\.\s*/,'');html+='<div class="'+cls+'" data-value="'+L[i]+'" onclick="onOptionClick(this,\''+L[i]+'\')"><div class="option-letter">'+L[i]+'</div><div class="option-text">'+co+'</div></div>';});
+    html+='</div>';
+  } else if(q.t==='fill'){
+    html+='<div class="fill-group"><div class="fill-label">请填写答案</div><input type="text" class="fill-input" id="fillInput" placeholder="输入你的答案..." value="'+fillValue+'" oninput="onFillInput(this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div>';
+  } else if(q.t==='correct'){
+    html+='<div class="correct-box"><div class="correct-field wrong-field"><div class="fill-label"><span class="icon">✗</span> 错误部分</div><input type="text" class="fill-input" id="correctWrongInput" placeholder="写出错误的词语" value="'+correctWrong+'" oninput="onCorrectInput(\'wrong\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();document.getElementById(\'correctRightInput\').focus();}"></div><div class="correct-field right-field"><div class="fill-label"><span class="icon">✓</span> 正确形式</div><input type="text" class="fill-input" id="correctRightInput" placeholder="写出正确的形式" value="'+correctRight+'" oninput="onCorrectInput(\'right\',this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();goNext();}"></div></div>';
+  }
+  html+='<div class="nav-row"><button class="nav-btn secondary" onclick="prevQuestion()" '+(currentIndex===0?'disabled':'')+'>上一题</button><div class="nav-mid"><button class="nav-btn gold" onclick="submitQuiz()">提交</button></div><button class="nav-btn primary" onclick="goNext()">'+(currentIndex===currentRound.length-1?'查看结果':'下一题')+'</button></div>';
+  html+='<div class="q-nav-section"><div class="q-nav-title">题号导航 - 点击跳转</div><div class="q-nav-grid">';
+  for(var i=0;i<currentRound.length;i++){var c='q-nav-cell';if(i===currentIndex)c+=' current';if(userAnswers.find(function(a){return a.index===i;}))c+=' answered';html+='<div class="'+c+'" onclick="jumpToQuestion('+i+')">'+(i+1)+'</div>';}
+  html+='</div></div>';
+  cardInner.innerHTML=html;
+  setTimeout(function(){var fi=document.getElementById('fillInput');if(fi)fi.focus();var cwi=document.getElementById('correctWrongInput');if(cwi)cwi.focus();},100);
+}
+
+function formatQ(q){return q.q.replace(/______/g,'<span class="blank"></span>').replace(/_____/g,'<span class="blank"></span>').replace(/____/g,'<span class="blank"></span>').replace(/___/g,'<span class="blank"></span>');}
+
+function saveOrUpdate(index,type,answer){var i=userAnswers.findIndex(function(a){return a.index===index;});if(i>=0)userAnswers[i]={index:index,type:type,answer:answer};else userAnswers.push({index:index,type:type,answer:answer});}
+function onOptionClick(btn,letter){selectedOption=letter;saveOrUpdate(currentIndex,'choice',letter);renderQuestion();}
+function onFillInput(v){fillValue=v;if(v.trim())saveOrUpdate(currentIndex,'fill',v.trim());else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}}
+function onCorrectInput(f,v){
+  if(f==='wrong')correctWrong=v;else correctRight=v;
+  var ansObj={wrong:correctWrong.trim(),right:correctRight.trim()};
+  if(ansObj.wrong||ansObj.right)saveOrUpdate(currentIndex,'correct',ansObj);
+  else{var i=userAnswers.findIndex(function(a){return a.index===currentIndex;});if(i>=0)userAnswers.splice(i,1);}
+}
+function goNext(){if(currentIndex<currentRound.length-1){currentIndex++;restoreAnswer();renderQuestion();}else{submitQuiz();}}
+function jumpToQuestion(i){if(i<0||i>=currentRound.length)return;currentIndex=i;restoreAnswer();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function prevQuestion(){if(currentIndex>0){currentIndex--;restoreAnswer();renderQuestion();}}
+function restoreAnswer(){
+  selectedOption=null;fillValue='';correctWrong='';correctRight='';
+  var a=userAnswers.find(function(x){return x.index===currentIndex;});
+  if(a){
+    if(a.type==='choice')selectedOption=a.answer;
+    if(a.type==='fill')fillValue=a.answer;
+    if(a.type==='correct'){
+      if(typeof a.answer==='object'){correctWrong=a.answer.wrong||'';correctRight=a.answer.right||'';}
+      else{correctWrong=a.answer;correctRight='';}
+    }
+  }
+}
+
+function checkAnswer(q,ans){
+  if(!ans)return false;
+  if(q.t==='choice')return ans.answer===q.a;
+  if(q.t==='fill'){
+    var acc=q.a.split(';').map(function(s){return s.trim().toLowerCase();});
+    var ua='';
+    if(typeof ans.answer==='string')ua=ans.answer.trim().toLowerCase();
+    return acc.indexOf(ua)>=0;
+  }
+  if(q.t==='correct'){
+    var uw='',ur='';
+    if(typeof ans.answer==='object'){uw=ans.answer.wrong||'';ur=ans.answer.right||'';}
+    else{uw=ans.answer;ur='';}
+    uw=uw.trim().toLowerCase();
+    ur=ur.trim().toLowerCase();
+    var qw=(q.w||'').trim().toLowerCase();
+    var qr=(q.r||'').trim().toLowerCase();
+    return uw===qw&&ur===qr;
+  }
+  return false;
+}
+
+function submitQuiz(){
+  var correct=0,wrong=0,unanswered=0;
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans||ans.answer===''||(typeof ans.answer==='object'&&!ans.answer.wrong&&!ans.answer.right)){unanswered++;return;}
+    if(checkAnswer(q,ans))correct++;else wrong++;
+  });
+  var score=Math.round(correct/currentRound.length*100);
+  var latest=getLatest();
+  saveScore(score,currentRound.length,correct,wrong,unanswered);
+  quizCard.style.display='none';resultPanel.classList.add('show');
+  document.getElementById('scoreBig').textContent=score;
+  var ce=document.getElementById('resultCompare');
+  if(latest&&latest.score!==undefined){var d=score-latest.score;if(d>0)ce.innerHTML='<span class="up">↑ 较上次 '+latest.score+' 分上升了 '+d+' 分！</span>';else if(d<0)ce.innerHTML='<span class="down">↓ 较上次 '+latest.score+' 分下降了 '+Math.abs(d)+' 分</span>';else ce.innerHTML='<span class="same">→ 与上次 '+latest.score+' 分持平</span>';}
+  else ce.innerHTML='<span class="same">首次答题，继续加油！</span>';
+  document.getElementById('resultStats').innerHTML='<div class="stat-card"><div class="stat-num" style="color:var(--correct)">'+correct+'</div><div class="stat-label">正确</div></div><div class="stat-card"><div class="stat-num" style="color:var(--wrong)">'+wrong+'</div><div class="stat-label">错误</div></div><div class="stat-card"><div class="stat-num" style="color:#999">'+unanswered+'</div><div class="stat-label">未答</div></div>';
+  var sugg=[];
+  if(score>=90)sugg.push('表现优异！定语从句掌握扎实，可以挑战更高难度的语法题。');
+  else if(score>=70)sugg.push('基础不错，建议重点复习错题中涉及的定语从句知识点。');
+  else if(score>=50)sugg.push('需要加强练习，建议重点复习关系代词that/which/who/whom/whose和关系副词when/where/why的用法。');
+  else sugg.push('基础薄弱，建议系统学习定语从句的关系词选择和限制性/非限制性用法后再来练习。');
+  var wt={};
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    if(!ans||!checkAnswer(q,ans)){var cat=q.c||'未分类';wt[cat]=(wt[cat]||0)+1;}
+  });
+  var so=Object.keys(wt).map(function(k){return[k,wt[k]];}).sort(function(a,b){return b[1]-a[1];});
+  if(so.length)sugg.push('薄弱环节：'+so.map(function(s){return s[0]+'('+s[1]+'题错)';}).join('、'));
+  if(unanswered>0)sugg.push('有 '+unanswered+' 题未作答，建议合理分配时间。');
+  document.getElementById('resultSuggestion').innerHTML='<h3>学习建议</h3><ul>'+sugg.map(function(s){return '<li>'+s+'</li>';}).join('')+'</ul>';
+  renderHistory();
+}
+
+function renderBank(filter){
+  filter=filter||'';
+  var f=filter.trim().toLowerCase();
+  var filtered=f===''?ALL_Q:ALL_Q.filter(function(q){return q.q.toLowerCase().indexOf(f)>=0||(q.c||'').toLowerCase().indexOf(f)>=0||String(q.id).indexOf(f)>=0;});
+  var html='';
+  filtered.forEach(function(q){
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,i){var co=o.replace(/^[A-D]\.\s*/,'');var ic=L[i]===q.a;ah+='<div class="bank-opt'+(ic?' is-correct':'')+'"><span class="bank-opt-letter">'+L[i]+'</span><span>'+co+'</span>'+(ic?'<span class="bank-opt-tag">正确</span>':'')+'</div>';});
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      ah='<div class="bank-answer">答案：'+q.a+'</div>';
+    } else {
+      ah='<div class="bank-answer">错误：'+q.w+' → 正确：'+q.r+'</div>';
+    }
+    var exp=q.e||'';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+exp+'</div></div>';
+  });
+  document.getElementById('bankList').innerHTML=html||'<div style="padding:40px;text-align:center;color:#999;">未找到匹配题目</div>';
+}
+
+function showWrongAnswers(){
+  var wrongPanel=document.getElementById('wrongPanel');
+  var wrongList=document.getElementById('wrongList');
+  var wrongSummary=document.getElementById('wrongSummary');
+  var wrongCount=0,skipCount=0;
+  var html='';
+  currentRound.forEach(function(q,i){
+    var ans=userAnswers.find(function(a){return a.index===i;});
+    var isWrong=false,isSkip=false;
+    if(!ans||ans.answer===''||(typeof ans.answer==='object'&&!ans.answer.wrong&&!ans.answer.right)){isSkip=true;skipCount++;}
+    else{if(!checkAnswer(q,ans)){isWrong=true;wrongCount++;}}
+    if(!isWrong&&!isSkip)return;
+    var tl=q.t==='choice'?'选择':q.t==='fill'?'填空':'改错';
+    var tc=q.t==='choice'?'choice':q.t==='fill'?'fill':'correct';
+    var ah='';
+    if(q.t==='choice'){
+      var L=['A','B','C','D'];
+      ah='<div class="bank-opts">';
+      q.o.forEach(function(o,j){
+        var co=o.replace(/^[A-D]\.\s*/,'');
+        var ic=L[j]===q.a;
+        var iu=ans&&typeof ans.answer==='string'&&L[j]===ans.answer;
+        var cls='bank-opt';if(ic)cls+=' is-correct';
+        var tag='';if(ic)tag='<span class="bank-opt-tag">正确</span>';if(iu&&!ic)tag='<span class="bank-opt-tag" style="color:var(--wrong)">你的选择</span>';
+        ah+='<div class="'+cls+'" style="'+(iu&&!ic?'background:var(--wrong-bg);border-color:var(--wrong);':'')+'"><span class="bank-opt-letter" style="'+(iu&&!ic?'background:var(--wrong);color:#fff;':'')+'">'+L[j]+'</span><span>'+co+'</span>'+tag+'</div>';
+      });
+      ah+='</div>';
+    } else if(q.t==='fill'){
+      if(isSkip)ah='<div class="wrong-skipped">未作答</div>';
+      else ah='<div class="wrong-user"><span class="tag">你的答案：</span><span>'+ans.answer+'</span></div>';
+      ah+='<div class="wrong-correct"><span class="tag">正确答案：</span><span>'+q.a+'</span></div>';
+    } else if(q.t==='correct'){
+      if(isSkip){
+        ah='<div class="wrong-skipped">未作答</div>';
+      } else {
+        var uw='',ur='';
+        if(typeof ans.answer==='object'){uw=ans.answer.wrong||'';ur=ans.answer.right||'';}
+        else{uw=ans.answer;ur='';}
+        ah='<div class="wrong-user"><span class="tag">你写的错误部分：</span><span>'+(uw||'(空)')+'</span></div>';
+        ah+='<div class="wrong-correct"><span class="tag">实际错误部分：</span><span>'+q.w+'</span></div>';
+        ah+='<div class="wrong-user"><span class="tag">你写的正确形式：</span><span>'+(ur||'(空)')+'</span></div>';
+        ah+='<div class="wrong-correct"><span class="tag">正确形式：</span><span>'+q.r+'</span></div>';
+      }
+    }
+    var exp=q.e||'';
+    html+='<div class="bank-item"><div class="bank-item-top"><span class="bank-item-id">#'+q.id+'</span><span class="bank-item-type '+tc+'">'+tl+'</span><span class="bank-item-cat">'+q.c+'</span></div><div class="bank-item-q">'+q.q+'</div>'+ah+'<div class="bank-exp">'+exp+'</div></div>';
+  });
+  wrongSummary.textContent='共 '+wrongCount+' 题错误，'+skipCount+' 题未答，'+(currentRound.length-wrongCount-skipCount)+' 题正确';
+  wrongList.innerHTML=html||'<div style="padding:40px;text-align:center;color:var(--correct);font-size:18px;font-weight:700;">全部正确，没有错题！</div>';
+  wrongPanel.classList.add('show');
+  overlay.classList.add('show');
+}
+
+document.getElementById('reshuffleBtn').addEventListener('click',initRound);
+document.getElementById('bankBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('bankClose').addEventListener('click',function(){bankPanel.classList.remove('show');overlay.classList.remove('show');});
+overlay.addEventListener('click',function(){bankPanel.classList.remove('show');document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.getElementById('bankSearch').addEventListener('input',function(e){renderBank(e.target.value);});
+document.getElementById('againBtn').addEventListener('click',initRound);
+document.getElementById('reviewBtn').addEventListener('click',function(){bankPanel.classList.add('show');overlay.classList.add('show');renderBank();});
+document.getElementById('wrongBtn').addEventListener('click',showWrongAnswers);
+document.getElementById('wrongClose').addEventListener('click',function(){document.getElementById('wrongPanel').classList.remove('show');overlay.classList.remove('show');});
+document.addEventListener('keydown',function(e){
+  if(bankPanel.classList.contains('show')||document.getElementById('wrongPanel').classList.contains('show'))return;
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft')prevQuestion();
+  if(e.key==='ArrowRight')goNext();
+  if(['a','A'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="A"]');if(b)onOptionClick(b,'A');}
+  if(['b','B'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="B"]');if(b)onOptionClick(b,'B');}
+  if(['c','C'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="C"]');if(b)onOptionClick(b,'C');}
+  if(['d','D'].indexOf(e.key)>=0){var b=document.querySelector('.option-btn[data-value="D"]');if(b)onOptionClick(b,'D');}
+});
+renderHistory();initRound();
+</script>
+</body>
+</html>
