@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 基础词汇听写大师 · 十三</title>
+    <style>
+        /* ===== 全局重置 & 字体 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #f7f2e9 0%, #e8dccc 100%);
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* ===== 主容器 ===== */
+        .app-container {
+            width: 100%;
+            max-width: 820px;
+            background: rgba(255, 252, 245, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 56px;
+            padding: 30px 35px 40px;
+            box-shadow:
+                0 30px 60px rgba(26, 42, 74, 0.20),
+                0 0 0 1px rgba(201, 168, 76, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-container::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -30%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app-container::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(26, 42, 74, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-icon {
+            font-size: 36px;
+            line-height: 1;
+            filter: drop-shadow(0 2px 8px rgba(201, 168, 76, 0.35));
+        }
+
+        .header-title {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a2a4a 20%, #3a4a6a 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title span {
+            background: linear-gradient(135deg, #c9a84c, #e8c84a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .high-score-badge {
+            background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
+            color: #f5ede0;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(26, 42, 74, 0.25);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .high-score-badge .score-num {
+            color: #e8c84a;
+            font-size: 18px;
+            font-weight: 800;
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .btn-history {
+            background: rgba(26, 42, 74, 0.08);
+            border: 1px solid rgba(26, 42, 74, 0.15);
+            color: #1a2a4a;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-history:hover {
+            background: rgba(26, 42, 74, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 42, 74, 0.12);
+        }
+
+        /* ===== 进度条 ===== */
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 26px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar-track {
+            flex: 1;
+            height: 6px;
+            background: rgba(26, 42, 74, 0.10);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #c9a84c, #e8c84a);
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.35);
+        }
+
+        .progress-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2a4a;
+            min-width: 82px;
+            text-align: right;
+            letter-spacing: 0.3px;
+        }
+
+        .progress-text .current-num {
+            color: #c9a84c;
+            font-weight: 800;
+        }
+
+        /* ===== 题目卡片 ===== */
+        .question-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 32px 34px 36px;
+            border: 1px solid rgba(201, 168, 76, 0.20);
+            box-shadow: 0 8px 32px rgba(26, 42, 74, 0.06);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .question-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7a6a5a;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .question-label .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #c9a84c;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        .question-chinese {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a2a4a;
+            margin: 8px 0 20px 0;
+            line-height: 1.3;
+            letter-spacing: 1px;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-chinese .hint-emoji {
+            font-size: 30px;
+            margin-right: 14px;
+            opacity: 0.6;
+        }
+
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 6px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper .input-icon {
+            position: absolute;
+            left: 18px;
+            font-size: 20px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 22px 16px 56px;
+            font-size: 20px;
+            font-weight: 500;
+            border: 2px solid rgba(26, 42, 74, 0.12);
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            color: #1a2a4a;
+            outline: none;
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .input-field:focus {
+            border-color: #c9a84c;
+            box-shadow: 0 0 0 6px rgba(201, 168, 76, 0.12), 0 4px 20px rgba(201, 168, 76, 0.08);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .input-field::placeholder {
+            color: #b0a898;
+            font-weight: 400;
+            font-size: 17px;
+            letter-spacing: 0.2px;
+        }
+
+        .input-field:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .input-field.correct {
+            border-color: #2d9b6e;
+            background: rgba(45, 155, 110, 0.06);
+        }
+
+        .input-field.wrong {
+            border-color: #c0392b;
+            background: rgba(192, 57, 43, 0.06);
+        }
+
+        /* ===== 按钮组 ===== */
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 12px;
+            margin-top: 22px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 26px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(26, 42, 74, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(26, 42, 74, 0.30);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #c9a84c, #e8c84a);
+            color: #1a2a4a;
+            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.30);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(201, 168, 76, 0.40);
+        }
+
+        .btn-gold:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(26, 42, 74, 0.15);
+            color: #1a2a4a;
+        }
+
+        .btn-outline:hover {
+            background: rgba(26, 42, 74, 0.06);
+            border-color: #1a2a4a;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid rgba(201, 168, 76, 0.35);
+            color: #1a2a4a;
+        }
+
+        .btn-outline-gold:hover {
+            background: rgba(201, 168, 76, 0.10);
+            border-color: #c9a84c;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(192, 57, 43, 0.25);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(192, 57, 43, 0.30);
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 14px;
+        }
+
+        /* ===== 结果区域 ===== */
+        .result-section {
+            margin-top: 28px;
+            position: relative;
+            z-index: 1;
+            display: none;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .result-section.visible {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 28px 32px 32px;
+            border: 1px solid rgba(201, 168, 76, 0.20);
+            box-shadow: 0 8px 40px rgba(26, 42, 74, 0.08);
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid rgba(26, 42, 74, 0.06);
+        }
+
+        .stat-item .stat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8a7a6a;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .stat-item .stat-value {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a2a4a;
+            margin-top: 2px;
+        }
+
+        .stat-item .stat-value.gold {
+            color: #c9a84c;
+        }
+
+        .stat-item .stat-value.green {
+            color: #2d9b6e;
+        }
+
+        .stat-item .stat-value.red {
+            color: #c0392b;
+        }
+
+        .result-comparison {
+            background: rgba(26, 42, 74, 0.04);
+            border-radius: 20px;
+            padding: 14px 20px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid rgba(26, 42, 74, 0.06);
+        }
+
+        .comparison-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a2a4a;
+        }
+
+        .comparison-text .highlight {
+            color: #c9a84c;
+            font-weight: 800;
+        }
+
+        .comparison-badge {
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .comparison-badge.up {
+            background: rgba(45, 155, 110, 0.15);
+            color: #2d9b6e;
+        }
+
+        .comparison-badge.down {
+            background: rgba(192, 57, 43, 0.12);
+            color: #c0392b;
+        }
+
+        .comparison-badge.same {
+            background: rgba(201, 168, 76, 0.15);
+            color: #b8952a;
+        }
+
+        .result-suggestion {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(26, 42, 74, 0.04));
+            border-radius: 20px;
+            padding: 16px 22px;
+            margin-bottom: 22px;
+            border-left: 4px solid #c9a84c;
+            font-size: 17px;
+            font-weight: 500;
+            color: #1a2a4a;
+        }
+
+        .result-suggestion .suggestion-emoji {
+            margin-right: 10px;
+        }
+
+        /* ===== 错题列表 ===== */
+        .wrong-words-section {
+            margin-top: 16px;
+        }
+
+        .wrong-toggle {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a2a4a;
+            cursor: pointer;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            border-top: 1px solid rgba(26, 42, 74, 0.06);
+            padding-top: 18px;
+        }
+
+        .wrong-toggle:hover {
+            color: #c9a84c;
+        }
+
+        .wrong-toggle .arrow {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+        }
+
+        .wrong-toggle .arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .wrong-list {
+            display: none;
+            margin-top: 14px;
+            gap: 10px;
+            flex-direction: column;
+            max-height: 340px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .wrong-list.open {
+            display: flex;
+        }
+
+        .wrong-list::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .wrong-list::-webkit-scrollbar-track {
+            background: rgba(26, 42, 74, 0.04);
+            border-radius: 10px;
+        }
+
+        .wrong-list::-webkit-scrollbar-thumb {
+            background: #c9a84c;
+            border-radius: 10px;
+        }
+
+        .wrong-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 18px;
+            border-left: 4px solid #c0392b;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .wrong-item .word-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .wrong-item .word-en {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1a2a4a;
+        }
+
+        .wrong-item .word-phonetic {
+            font-size: 15px;
+            color: #7a6a5a;
+            font-weight: 400;
+        }
+
+        .wrong-item .word-pos {
+            font-size: 14px;
+            color: #7a6a5a;
+            background: rgba(26, 42, 74, 0.06);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .wrong-item .word-meaning {
+            font-size: 16px;
+            font-weight: 500;
+            color: #c0392b;
+        }
+
+        .wrong-item .your-answer {
+            font-size: 14px;
+            color: #8a7a6a;
+            background: rgba(192, 57, 43, 0.06);
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .wrong-item .your-answer .wrong-text {
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        /* ===== 题库弹窗 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 42, 74, 0.40);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: rgba(255, 252, 245, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 48px;
+            max-width: 820px;
+            width: 100%;
+            max-height: 80vh;
+            padding: 30px 34px 34px;
+            box-shadow: 0 40px 80px rgba(26, 42, 74, 0.30);
+            border: 1px solid rgba(201, 168, 76, 0.20);
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-shrink: 0;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a2a4a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header h2 span {
+            background: linear-gradient(135deg, #c9a84c, #e8c84a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-close {
+            background: rgba(26, 42, 74, 0.06);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a2a4a;
+        }
+
+        .modal-close:hover {
+            background: rgba(26, 42, 74, 0.12);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            flex: 1;
+            padding-right: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(26, 42, 74, 0.04);
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #c9a84c;
+            border-radius: 10px;
+        }
+
+        .modal-word-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+        }
+
+        .modal-word-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            border-bottom: 1px solid rgba(26, 42, 74, 0.04);
+        }
+
+        .modal-word-item .mw-en {
+            font-weight: 700;
+            color: #1a2a4a;
+            min-width: 70px;
+        }
+
+        .modal-word-item .mw-phonetic {
+            color: #8a7a6a;
+            font-size: 13px;
+            min-width: 70px;
+        }
+
+        .modal-word-item .mw-pos {
+            color: #7a6a5a;
+            font-size: 12px;
+            background: rgba(26, 42, 74, 0.04);
+            padding: 0 10px;
+            border-radius: 12px;
+            min-width: 38px;
+            text-align: center;
+        }
+
+        .modal-word-item .mw-meaning {
+            color: #1a2a4a;
+            font-weight: 500;
+        }
+
+        /* ===== 历史分数弹窗 ===== */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: #c9a84c;
+            border-radius: 10px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(26, 42, 74, 0.04);
+        }
+
+        .history-item .h-score {
+            font-weight: 700;
+            color: #c9a84c;
+        }
+
+        .history-item .h-time {
+            color: #8a7a6a;
+            font-size: 13px;
+        }
+
+        .history-empty {
+            color: #8a7a6a;
+            font-size: 15px;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* ===== 历史分数模态框 ===== */
+        .modal-history .modal-content {
+            max-width: 520px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            .app-container {
+                padding: 20px 16px 28px;
+                border-radius: 32px;
+            }
+
+            .header-title {
+                font-size: 20px;
+            }
+
+            .header-icon {
+                font-size: 28px;
+            }
+
+            .high-score-badge {
+                font-size: 13px;
+                padding: 6px 14px;
+            }
+
+            .question-chinese {
+                font-size: 30px;
+                min-height: 50px;
+            }
+
+            .input-field {
+                font-size: 17px;
+                padding: 14px 18px 14px 48px;
+            }
+
+            .input-wrapper .input-icon {
+                left: 14px;
+                font-size: 17px;
+            }
+
+            .action-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .action-group {
+                justify-content: center;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 14px;
+                justify-content: center;
+            }
+
+            .result-stats {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 8px;
+            }
+
+            .stat-item .stat-value {
+                font-size: 24px;
+            }
+
+            .result-comparison {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modal-content {
+                padding: 20px 16px 24px;
+                border-radius: 32px;
+                max-height: 90vh;
+            }
+
+            .modal-word-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wrong-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .wrong-item .word-info {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .header-left {
+                justify-content: center;
+            }
+
+            .header-right {
+                justify-content: center;
+            }
+
+            .question-chinese {
+                font-size: 26px;
+                min-height: 44px;
+            }
+
+            .result-stats {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+
+            .stat-item {
+                padding: 12px 8px;
+            }
+
+            .stat-item .stat-value {
+                font-size: 20px;
+            }
+        }
+
+        /* ===== 工具类 ===== */
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .gap-6 {
+            gap: 6px;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== 分数动画 ===== */
+        .score-pop {
+            animation: pop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== 完成状态 ===== */
+        .complete-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(45, 155, 110, 0.10);
+            color: #2d9b6e;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid rgba(45, 155, 110, 0.15);
+        }
+
+        .all-done-message {
+            text-align: center;
+            padding: 12px 0 4px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d9b6e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 主应用 ===== -->
+    <div class="app-container" id="app">
+
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-left">
+                <span class="header-icon">📚</span>
+                <span class="header-title">基础词汇 <span>听写大师 · 十三</span></span>
+            </div>
+            <div class="header-right">
+                <div class="high-score-badge">
+                    🏅 最高
+                    <span class="score-num" id="highestScoreDisplay">0</span>
+                    分
+                </div>
+                <button class="btn-history" id="btnShowHistory">
+                    📜 历史
+                </button>
+            </div>
+        </header>
+
+        <!-- 进度 -->
+        <div class="progress-section">
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressFill" style="width:0%;"></div>
+            </div>
+            <div class="progress-text">
+                <span class="current-num" id="currentNum">1</span> / <span id="totalNum">30</span>
+            </div>
+        </div>
+
+        <!-- 题目卡片 -->
+        <div class="question-card" id="questionCard">
+            <div class="question-label">
+                <span class="dot"></span>
+                <span id="questionStatus">第 1 题</span>
+            </div>
+
+            <div class="question-chinese" id="questionChinese">
+                <span class="hint-emoji">✍️</span>
+                <span id="chineseText">跑</span>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <span class="input-icon">🔤</span>
+                    <input
+                    type="text"
+                    class="input-field"
+                    id="answerInput"
+                    placeholder="输入英文单词…"
+                    autocomplete="off"
+                    spellcheck="false"
+                    >
+                </div>
+
+                <div class="action-row">
+                    <div class="action-group">
+                        <button class="btn btn-outline btn-sm" id="btnPrev" disabled>
+                            ◀ 上一题
+                        </button>
+                        <button class="btn btn-gold btn-sm" id="btnNext">
+                            下一题 ▶
+                        </button>
+                    </div>
+                    <div class="action-group">
+                        <button class="btn btn-primary btn-sm" id="btnSubmit">
+                            ✅ 提交批改
+                        </button>
+                        <button class="btn btn-outline-gold btn-sm" id="btnRandom">
+                            🎲 重新随机
+                        </button>
+                    </div>
+                </div>
+
+                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; justify-content:flex-end;">
+                    <button class="btn btn-outline btn-sm" id="btnShowBank">
+                        📖 查看题库
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果区域 -->
+        <div class="result-section" id="resultSection">
+            <div class="result-card">
+                <div class="result-stats" id="resultStats">
+                    <div class="stat-item">
+                        <div class="stat-label">✅ 正确</div>
+                        <div class="stat-value green" id="correctCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">📊 正确率</div>
+                        <div class="stat-value gold" id="accuracyRate">0%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">⭐ 得分</div>
+                        <div class="stat-value" id="scoreValue">0</div>
+                    </div>
+                </div>
+
+                <div class="result-comparison" id="comparisonArea">
+                    <span class="comparison-text" id="comparisonText">
+                        与历史最高分 <span class="highlight" id="highestRef">0</span> 分对比
+                    </span>
+                    <span class="comparison-badge" id="comparisonBadge">—</span>
+                </div>
+
+                <div class="result-suggestion" id="suggestionArea">
+                    <span class="suggestion-emoji">💡</span>
+                    <span id="suggestionText">继续加油！</span>
+                </div>
+
+                <div class="wrong-words-section">
+                    <button class="wrong-toggle" id="wrongToggle">
+                        ❌ 查看错题 (<span id="wrongCount">0</span>)
+                        <span class="arrow" id="wrongArrow">▼</span>
+                    </button>
+                    <div class="wrong-list" id="wrongList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 题库弹窗 ===== -->
+    <div class="modal-overlay" id="bankModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📖 完整词库 <span>(56 词)</span></h2>
+                <button class="modal-close" id="bankModalClose">✕</button>
+            </div>
+            <div class="modal-body" id="bankModalBody">
+                <!-- 动态渲染 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 历史分数弹窗 ===== -->
+    <div class="modal-overlay modal-history" id="historyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📜 历史分数</h2>
+                <button class="modal-close" id="historyModalClose">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="historyListContainer">
+                    <!-- 动态渲染 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  1. 数据：56 个基础词汇（来自“基础词汇（十三）”）
+        // ================================================================
+        const ALL_WORDS = [
+            { word: 'run', phonetic: '/rʌn/', pos: 'v.', meaning: '跑' },
+            { word: 'mouse', phonetic: '/maʊs/', pos: 'n.', meaning: '老鼠；鼠标' },
+            { word: 'shout', phonetic: '/ʃaʊt/', pos: 'v./n.', meaning: '喊叫' },
+            { word: 'language', phonetic: '/ˈlæŋɡwɪdʒ/', pos: 'n.', meaning: '语言' },
+            { word: 'fly', phonetic: '/flaɪ/', pos: 'v./n.', meaning: '飞；苍蝇' },
+            { word: 'fire', phonetic: '/ˈfaɪə/', pos: 'n.', meaning: '火' },
+            { word: 'painting', phonetic: '/ˈpeɪntɪŋ/', pos: 'n.', meaning: '绘画' },
+            { word: 'exciting', phonetic: '/ɪkˈsaɪtɪŋ/', pos: 'adj.', meaning: '令人兴奋的' },
+            { word: 'slow', phonetic: '/sləʊ/', pos: 'adj./adv.', meaning: '慢的' },
+            { word: 'fast', phonetic: '/fɑːst/', pos: 'adj./adv.', meaning: '快的' },
+            { word: 'robot', phonetic: '/ˈrəʊbɒt/', pos: 'n.', meaning: '机器人' },
+            { word: 'guide', phonetic: '/ɡaɪd/', pos: 'n./v.', meaning: '向导；引导' },
+            { word: 'gift', phonetic: '/ɡɪft/', pos: 'n.', meaning: '礼物' },
+            { word: 'all', phonetic: '/ɔːl/', pos: 'adj./pron./adv.', meaning: '全部的；完全' },
+            { word: 'dark', phonetic: '/dɑːk/', pos: 'adj./n.', meaning: '黑暗的；黑暗' },
+            { word: 'hear', phonetic: '/hɪə/', pos: 'v.', meaning: '听见' },
+            { word: 'camp', phonetic: '/kæmp/', pos: 'n./v.', meaning: '营地；露营' },
+            { word: 'lake', phonetic: '/leɪk/', pos: 'n.', meaning: '湖' },
+            { word: 'milk', phonetic: '/mɪlk/', pos: 'n./v.', meaning: '牛奶；挤奶' },
+            { word: 'cow', phonetic: '/kaʊ/', pos: 'n.', meaning: '奶牛' },
+            { word: 'horse', phonetic: '/hɔːs/', pos: 'n.', meaning: '马' },
+            { word: 'quite', phonetic: '/kwaɪt/', pos: 'adv.', meaning: '相当' },
+            { word: 'anything', phonetic: '/ˈeniθɪŋ/', pos: 'pron.', meaning: '任何事物' },
+            { word: 'grow', phonetic: '/ɡrəʊ/', pos: 'v.', meaning: '生长；种植' },
+            { word: 'pick', phonetic: '/pɪk/', pos: 'v.', meaning: '摘；挑选' },
+            { word: 'countryside', phonetic: '/ˈkʌntrisaɪd/', pos: 'n.', meaning: '乡村' },
+            { word: 'in', phonetic: '/ɪn/', pos: 'prep./adv.', meaning: '在...里' },
+            { word: 'yesterday', phonetic: '/ˈjestədeɪ/', pos: 'n./adv.', meaning: '昨天' },
+            { word: 'flower', phonetic: '/ˈflaʊə/', pos: 'n./v.', meaning: '花；开花' },
+            { word: 'worry', phonetic: '/ˈwʌri/', pos: 'v./n.', meaning: '担心' },
+            { word: 'museum', phonetic: '/mjuːˈziːəm/', pos: 'n.', meaning: '博物馆' },
+            { word: 'around', phonetic: '/əˈraʊnd/', pos: 'adv./prep.', meaning: '大约；周围' },
+            { word: 'answer', phonetic: '/ˈɑːnsə/', pos: 'v./n.', meaning: '回答；答案' },
+            { word: 'different', phonetic: '/ˈdɪfrənt/', pos: 'adj.', meaning: '不同的' },
+            { word: 'candle', phonetic: '/ˈkændl/', pos: 'n.', meaning: '蜡烛' },
+            { word: 'age', phonetic: '/eɪdʒ/', pos: 'n.', meaning: '年龄' },
+            { word: 'make', phonetic: '/meɪk/', pos: 'v.', meaning: '制作；使' },
+            { word: 'blow', phonetic: '/bləʊ/', pos: 'v.', meaning: '吹' },
+            { word: 'the', phonetic: '/ðə; ðiː/', pos: 'art.', meaning: '这；那' },
+            { word: 'candy', phonetic: '/ˈkændi/', pos: 'n.', meaning: '糖果' },
+            { word: 'lucky', phonetic: '/ˈlʌki/', pos: 'adj.', meaning: '幸运的' },
+            { word: 'cut', phonetic: '/kʌt/', pos: 'v./n.', meaning: '切；割' },
+            { word: 'idea', phonetic: '/aɪˈdɪə/', pos: 'n.', meaning: '想法' },
+            { word: 'large', phonetic: '/lɑːdʒ/', pos: 'adj.', meaning: '大的' },
+            { word: 'order', phonetic: '/ˈɔːdə/', pos: 'n./v.', meaning: '顺序；点餐' },
+            { word: 'take', phonetic: '/teɪk/', pos: 'v.', meaning: '拿；花费' },
+            { word: 'size', phonetic: '/saɪz/', pos: 'n.', meaning: '尺寸' },
+            { word: 'bowl', phonetic: '/bəʊl/', pos: 'n.', meaning: '碗' },
+            { word: 'one', phonetic: '/wʌn/', pos: 'num./pron.', meaning: '一；一个' },
+            { word: 'tofu', phonetic: '/ˈtəʊfuː/', pos: 'n.', meaning: '豆腐' },
+            { word: 'meat', phonetic: '/miːt/', pos: 'n.', meaning: '肉' },
+            { word: 'dumpling', phonetic: '/ˈdʌmplɪŋ/', pos: 'n.', meaning: '饺子' },
+            { word: 'porridge', phonetic: '/ˈpɒrɪdʒ/', pos: 'n.', meaning: '粥' },
+            { word: 'onion', phonetic: '/ˈʌnjən/', pos: 'n.', meaning: '洋葱' },
+            { word: 'pancake', phonetic: '/ˈpænkeɪk/', pos: 'n.', meaning: '薄煎饼' },
+            { word: 'world', phonetic: '/wɜːld/', pos: 'n.', meaning: '世界' }
+        ];
+
+        // ================================================================
+        //  2. 状态
+        // ================================================================
+        const TOTAL_QUESTIONS = 30;
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let submitted = false;
+        let currentScore = 0;
+        let wrongIndices = [];
+        let historyScores = [];
+        let highestScore = 0;
+
+        // DOM 引用
+        const $ = id => document.getElementById(id);
+        const highestScoreDisplay = $('highestScoreDisplay');
+        const progressFill = $('progressFill');
+        const currentNum = $('currentNum');
+        const totalNum = $('totalNum');
+        const questionStatus = $('questionStatus');
+        const chineseText = $('chineseText');
+        const answerInput = $('answerInput');
+        const btnPrev = $('btnPrev');
+        const btnNext = $('btnNext');
+        const btnSubmit = $('btnSubmit');
+        const btnRandom = $('btnRandom');
+        const btnShowBank = $('btnShowBank');
+        const btnShowHistory = $('btnShowHistory');
+        const resultSection = $('resultSection');
+        const correctCount = $('correctCount');
+        const accuracyRate = $('accuracyRate');
+        const scoreValue = $('scoreValue');
+        const highestRef = $('highestRef');
+        const comparisonText = $('comparisonText');
+        const comparisonBadge = $('comparisonBadge');
+        const suggestionText = $('suggestionText');
+        const wrongToggle = $('wrongToggle');
+        const wrongCount = $('wrongCount');
+        const wrongArrow = $('wrongArrow');
+        const wrongList = $('wrongList');
+
+        // ================================================================
+        //  3. 工具函数
+        // ================================================================
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function pickRandomWords(n) {
+            const shuffled = shuffleArray([...ALL_WORDS]);
+            return shuffled.slice(0, n);
+        }
+
+        function normalizeAnswer(str) {
+            return str.trim().toLowerCase().replace(/\s+/g, ' ');
+        }
+
+        function isCorrect(userAns, correctWord) {
+            return normalizeAnswer(userAns) === normalizeAnswer(correctWord);
+        }
+
+        function getCurrentQuestion() {
+            return currentQuestions[currentIndex] || null;
+        }
+
+        function getCurrentAnswer() {
+            return userAnswers[currentIndex] || '';
+        }
+
+        function saveCurrentAnswer() {
+            const val = answerInput.value.trim();
+            if (val) {
+                userAnswers[currentIndex] = val;
+            } else {
+                delete userAnswers[currentIndex];
+            }
+        }
+
+        // ================================================================
+        //  4. 渲染当前题目
+        // ================================================================
+        function renderQuestion() {
+            if (!currentQuestions.length) {
+                initRandomQuestions();
+                return;
+            }
+
+            const q = getCurrentQuestion();
+            if (!q) {
+                chineseText.textContent = '🎉 所有题目已完成！';
+                answerInput.disabled = true;
+                answerInput.value = '';
+                questionStatus.textContent = '已完成';
+                btnNext.disabled = true;
+                btnPrev.disabled = currentIndex <= 0;
+                return;
+            }
+
+            chineseText.textContent = q.meaning;
+            const saved = getCurrentAnswer();
+            answerInput.value = saved;
+            answerInput.disabled = false;
+            answerInput.focus();
+
+            currentNum.textContent = currentIndex + 1;
+            totalNum.textContent = currentQuestions.length;
+            const progress = ((currentIndex + 1) / currentQuestions.length) * 100;
+            progressFill.style.width = Math.min(progress, 100) + '%';
+
+            questionStatus.textContent = `第 ${currentIndex + 1} 题 / 共 ${currentQuestions.length} 题`;
+
+            btnPrev.disabled = currentIndex <= 0;
+            if (currentIndex === currentQuestions.length - 1) {
+                btnNext.textContent = '📌 完成';
+            } else {
+                btnNext.textContent = '下一题 ▶';
+            }
+            btnNext.disabled = false;
+
+            answerInput.classList.remove('correct', 'wrong');
+
+            if (submitted) {
+                answerInput.disabled = true;
+                const ans = getCurrentAnswer();
+                if (ans) {
+                    const qq = getCurrentQuestion();
+                    if (qq && isCorrect(ans, qq.word)) {
+                        answerInput.classList.add('correct');
+                    } else if (qq) {
+                        answerInput.classList.add('wrong');
+                    }
+                }
+            }
+        }
+
+        // ================================================================
+        //  5. 初始化 / 随机选题
+        // ================================================================
+        function initRandomQuestions() {
+            currentQuestions = pickRandomWords(TOTAL_QUESTIONS);
+            currentIndex = 0;
+            userAnswers = {};
+            submitted = false;
+            wrongIndices = [];
+            currentScore = 0;
+            resultSection.classList.remove('visible');
+            resultSection.style.display = 'none';
+            answerInput.disabled = false;
+            answerInput.classList.remove('correct', 'wrong');
+            renderQuestion();
+            btnSubmit.disabled = false;
+            progressFill.style.width = ((currentIndex + 1) / currentQuestions.length * 100) + '%';
+        }
+
+        // ================================================================
+        //  6. 导航
+        // ================================================================
+        function goToPrev() {
+            if (currentIndex > 0) {
+                saveCurrentAnswer();
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        function goToNext() {
+            saveCurrentAnswer();
+            if (currentIndex === currentQuestions.length - 1) {
+                if (submitted) return;
+                renderQuestion();
+                return;
+            }
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            }
+        }
+
+        // ================================================================
+        //  7. 提交批改
+        // ================================================================
+        function handleSubmit() {
+            if (submitted) return;
+            saveCurrentAnswer();
+
+            const answeredCount = Object.keys(userAnswers).length;
+            if (answeredCount < currentQuestions.length) {
+                if (!confirm(`您还有 ${currentQuestions.length - answeredCount} 题未作答，确定提交吗？未答的题将计为错误。`)) {
+                    return;
+                }
+            }
+
+            let correct = 0;
+            const wrongs = [];
+            for (let i = 0; i < currentQuestions.length; i++) {
+                const q = currentQuestions[i];
+                const ans = userAnswers[i] || '';
+                if (isCorrect(ans, q.word)) {
+                    correct++;
+                } else {
+                    wrongs.push(i);
+                }
+            }
+
+            currentScore = correct;
+            wrongIndices = wrongs;
+            submitted = true;
+
+            answerInput.disabled = true;
+            btnSubmit.disabled = true;
+
+            showResult(correct, wrongs);
+            saveScore(correct);
+            renderQuestion();
+        }
+
+        // ================================================================
+        //  8. 显示结果
+        // ================================================================
+        function showResult(correct, wrongs) {
+            const total = currentQuestions.length;
+            const rate = (correct / total * 100);
+            const rateDisplay = Math.round(rate);
+
+            correctCount.textContent = correct;
+            accuracyRate.textContent = rateDisplay + '%';
+            scoreValue.textContent = correct;
+
+            let suggestion = '';
+            let emoji = '';
+            if (rateDisplay >= 90) {
+                suggestion = '🌟 优秀！词汇掌握非常扎实，继续保持！';
+                emoji = '🏆';
+            } else if (rateDisplay >= 70) {
+                suggestion = '👍 良好！大部分词汇已掌握，复习错题会更棒！';
+                emoji = '📈';
+            } else if (rateDisplay >= 50) {
+                suggestion = '📖 一般，需要加强练习！建议每天复习一遍词库。';
+                emoji = '🔁';
+            } else {
+                suggestion = '💪 别灰心！词汇需要反复记忆，多听多写一定进步！';
+                emoji = '🔥';
+            }
+            suggestionText.textContent = suggestion;
+            document.querySelector('.result-suggestion .suggestion-emoji').textContent = emoji;
+
+            wrongCount.textContent = wrongs.length;
+            renderWrongList(wrongs);
+
+            const highest = getHighestScore();
+            highestRef.textContent = highest;
+            const diff = correct - highest;
+            let badgeText = '';
+            let badgeClass = '';
+            if (diff > 0) {
+                badgeText = `📈 上升了 ${diff} 分！新纪录！`;
+                badgeClass = 'up';
+            } else if (diff < 0) {
+                badgeText = `📉 下降了 ${Math.abs(diff)} 分`;
+                badgeClass = 'down';
+            } else {
+                badgeText = '✨ 平了历史最高分！';
+                badgeClass = 'same';
+            }
+            comparisonBadge.textContent = badgeText;
+            comparisonBadge.className = 'comparison-badge ' + badgeClass;
+
+            resultSection.style.display = 'block';
+            resultSection.classList.remove('visible');
+            void resultSection.offsetWidth;
+            resultSection.classList.add('visible');
+
+            scoreValue.classList.remove('score-pop');
+            void scoreValue.offsetWidth;
+            scoreValue.classList.add('score-pop');
+        }
+
+        // ================================================================
+        //  9. 错题列表渲染
+        // ================================================================
+        function renderWrongList(wrongs) {
+            wrongList.innerHTML = '';
+            if (wrongs.length === 0) {
+                wrongList.innerHTML = '<div style="padding:12px 0;color:#2d9b6e;font-weight:600;text-align:center;">🎉 全部正确，没有错题！</div>';
+                wrongList.classList.add('open');
+                wrongToggle.querySelector('.arrow').classList.add('open');
+                return;
+            }
+
+            for (const idx of wrongs) {
+                const q = currentQuestions[idx];
+                const userAns = userAnswers[idx] || '(未作答)';
+                const div = document.createElement('div');
+                div.className = 'wrong-item';
+                div.innerHTML = `
+                    <div class="word-info">
+                        <span class="word-en">${q.word}</span>
+                        <span class="word-phonetic">${q.phonetic}</span>
+                        <span class="word-pos">${q.pos}</span>
+                        <span class="word-meaning">${q.meaning}</span>
+                    </div>
+                    <div class="your-answer">
+                        你的答案: <span class="wrong-text">${userAns}</span>
+                    </div>
+                `;
+                wrongList.appendChild(div);
+            }
+            wrongList.classList.add('open');
+            wrongToggle.querySelector('.arrow').classList.add('open');
+        }
+
+        // ================================================================
+        //  10. 分数存储
+        // ================================================================
+        function getHistoryScores() {
+            try {
+                const data = localStorage.getItem('vocab_history_scores_basic13');
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
+
+        function saveHistoryScores(scores) {
+            localStorage.setItem('vocab_history_scores_basic13', JSON.stringify(scores));
+        }
+
+        function getHighestScore() {
+            const scores = getHistoryScores();
+            if (scores.length === 0) return 0;
+            return Math.max(...scores);
+        }
+
+        function saveScore(score) {
+            const scores = getHistoryScores();
+            scores.push(score);
+            saveHistoryScores(scores);
+            const highest = getHighestScore();
+            highestScoreDisplay.textContent = highest;
+        }
+
+        // ================================================================
+        //  11. 显示历史分数
+        // ================================================================
+        function showHistoryModal() {
+            const scores = getHistoryScores();
+            const container = $('historyListContainer');
+            if (scores.length === 0) {
+                container.innerHTML = '<div class="history-empty">暂无历史记录，快去练习吧！</div>';
+            } else {
+                let html = '<div class="history-list">';
+                const reversed = [...scores].reverse();
+                for (const s of reversed) {
+                    html += `
+                        <div class="history-item">
+                            <span>📝 得分</span>
+                            <span class="h-score">${s} 分</span>
+                        </div>
+                    `;
+                }
+                html += '</div>';
+                const highest = getHighestScore();
+                const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+                html += `
+                    <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(26,42,74,0.06);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:15px;color:#1a2a4a;">
+                        <span>🏅 最高: <strong style="color:#c9a84c;">${highest}</strong> 分</span>
+                        <span>📊 平均: <strong>${Math.round(avg)}</strong> 分</span>
+                        <span>📝 共 <strong>${scores.length}</strong> 次</span>
+                    </div>
+                `;
+                container.innerHTML = html;
+            }
+            $('historyModal').classList.add('open');
+        }
+
+        // ================================================================
+        //  12. 显示题库
+        // ================================================================
+        function showBankModal() {
+            const body = $('bankModalBody');
+            let html = '<div class="modal-word-grid">';
+            for (const w of ALL_WORDS) {
+                html += `
+                    <div class="modal-word-item">
+                        <span class="mw-en">${w.word}</span>
+                        <span class="mw-phonetic">${w.phonetic}</span>
+                        <span class="mw-pos">${w.pos}</span>
+                        <span class="mw-meaning">${w.meaning}</span>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            body.innerHTML = html;
+            $('bankModal').classList.add('open');
+        }
+
+        // ================================================================
+        //  13. 事件绑定
+        // ================================================================
+
+        btnPrev.addEventListener('click', goToPrev);
+        btnNext.addEventListener('click', goToNext);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    goToPrev();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    goToNext();
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveCurrentAnswer();
+                    if (currentIndex === currentQuestions.length - 1) {
+                        if (!submitted) {
+                            renderQuestion();
+                        }
+                    } else {
+                        goToNext();
+                    }
+                }
+            }
+        });
+
+        btnSubmit.addEventListener('click', handleSubmit);
+
+        btnRandom.addEventListener('click', () => {
+            if (submitted) {
+                submitted = false;
+                btnSubmit.disabled = false;
+                resultSection.style.display = 'none';
+                resultSection.classList.remove('visible');
+            }
+            if (Object.keys(userAnswers).length > 0 && !submitted) {
+                if (!confirm('重新随机将清除当前所有答案，确定吗？')) return;
+            }
+            initRandomQuestions();
+            resultSection.style.display = 'none';
+            resultSection.classList.remove('visible');
+            highestScoreDisplay.textContent = getHighestScore();
+        });
+
+        btnShowBank.addEventListener('click', showBankModal);
+
+        $('bankModalClose').addEventListener('click', () => {
+            $('bankModal').classList.remove('open');
+        });
+        $('bankModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) $('bankModal').classList.remove('open');
+        });
+
+        btnShowHistory.addEventListener('click', showHistoryModal);
+        $('historyModalClose').addEventListener('click', () => {
+            $('historyModal').classList.remove('open');
+        });
+        $('historyModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) $('historyModal').classList.remove('open');
+        });
+
+        wrongToggle.addEventListener('click', () => {
+            const list = wrongList;
+            const arrow = wrongArrow;
+            if (list.classList.contains('open')) {
+                list.classList.remove('open');
+                arrow.classList.remove('open');
+            } else {
+                list.classList.add('open');
+                arrow.classList.add('open');
+            }
+        });
+
+        answerInput.addEventListener('blur', () => {
+            saveCurrentAnswer();
+        });
+
+        // ================================================================
+        //  14. 初始化
+        // ================================================================
+        function init() {
+            highestScoreDisplay.textContent = getHighestScore();
+            initRandomQuestions();
+            totalNum.textContent = TOTAL_QUESTIONS;
+            wrongList.classList.remove('open');
+            wrongArrow.classList.remove('open');
+        }
+
+        init();
+        console.log('🏆 基础词汇听写大师 · 十三 已启动！');
+        console.log(`📚 共 ${ALL_WORDS.length} 个词汇，每次随机抽取 ${TOTAL_QUESTIONS} 题。`);
+    </script>
+
+</body>
+</html>
