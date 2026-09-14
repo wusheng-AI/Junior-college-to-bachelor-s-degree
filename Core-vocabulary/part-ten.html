@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>英语单词听写挑战 · Unit 10</title>
+<style>
+  :root{
+    --indigo:#4f46e5;
+    --indigo-2:#6366f1;
+    --sky:#0ea5e9;
+    --pink:#ec4899;
+    --green:#10b981;
+    --amber:#f59e0b;
+    --red:#ef4444;
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    background:
+      radial-gradient(1200px 600px at 8% -10%, #dbeafe 0%, transparent 60%),
+      radial-gradient(1000px 500px at 108% 5%, #fce7f3 0%, transparent 55%),
+      radial-gradient(900px 520px at 50% 112%, #cffafe 0%, transparent 62%),
+      #f8fafc;
+    background-attachment:fixed;
+    display:flex;
+    justify-content:center;
+    padding:28px 16px 80px;
+    position:relative;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* 背景漂浮字母 */
+  .bg-letters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+  .bg-letters span{
+    position:absolute;
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;
+    color:rgba(79,70,229,.075);
+    user-select:none;
+    animation:floatY linear infinite;
+  }
+  @keyframes floatY{
+    0%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-30px) rotate(9deg);}
+    100%{transform:translateY(0) rotate(0deg);}
+  }
+
+  .app{position:relative;z-index:1;width:100%;max-width:680px;}
+
+  /* ---------- 头部 ---------- */
+  .hero{text-align:center;margin-bottom:20px;}
+  .hero-top{display:flex;justify-content:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .badge{
+    display:inline-block;
+    font-size:11px;font-weight:800;letter-spacing:1.6px;
+    padding:5px 13px;border-radius:999px;
+    background:linear-gradient(135deg,#4f46e5,#6366f1);
+    color:#fff;
+    box-shadow:0 8px 18px -8px rgba(79,70,229,.9);
+  }
+  .badge-alt{
+    background:linear-gradient(135deg,#f59e0b,#ec4899);
+    box-shadow:0 8px 18px -8px rgba(236,72,153,.85);
+  }
+  .hero h1{
+    margin:0 0 8px;
+    font-size:clamp(24px,5.4vw,33px);
+    font-weight:800;
+    letter-spacing:.5px;
+    background:linear-gradient(100deg,#4f46e5 0%,#0ea5e9 45%,#ec4899 100%);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
+  }
+  .hero .sub{margin:0;color:var(--muted);font-size:13.5px;}
+
+  /* ---------- 工具栏 ---------- */
+  .toolbar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:18px;}
+  .btn{
+    border:1px solid rgba(148,163,184,.35);
+    background:#fff;
+    color:var(--ink);
+    font-size:13.5px;font-weight:700;
+    padding:10px 16px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:transform .15s, box-shadow .2s, background .2s, border-color .2s, opacity .2s;
+    box-shadow:0 4px 14px -8px rgba(15,23,42,.35);
+    font-family:inherit;
+    white-space:nowrap;
+  }
+  .btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 22px -12px rgba(79,70,229,.75);border-color:rgba(99,102,241,.55);}
+  .btn:active:not(:disabled){transform:translateY(0) scale(.97);}
+  .btn:disabled{opacity:.6;cursor:not-allowed;}
+  .btn-primary{
+    background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff;border-color:transparent;
+    box-shadow:0 12px 24px -12px rgba(79,70,229,1);
+  }
+  .btn-success{
+    background:linear-gradient(135deg,#10b981,#059669);color:#fff;border-color:transparent;
+    box-shadow:0 12px 24px -12px rgba(16,185,129,1);
+  }
+  .btn-primary:hover:not(:disabled),.btn-success:hover:not(:disabled){box-shadow:0 16px 26px -12px rgba(79,70,229,.9);}
+  .btn-ghost{background:#f1f5f9;border-color:transparent;}
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 26px 54px -28px rgba(79,70,229,.5), 0 6px 18px -12px rgba(15,23,42,.14);
+    margin-bottom:18px;
+  }
+  .hidden{display:none !important;}
+
+  /* ---------- 进度 ---------- */
+  .progress-top{
+    display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);
+    font-weight:700;margin-bottom:8px;letter-spacing:.3px;
+  }
+  .progress-bar{height:9px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-bottom:22px;}
+  .progress-bar i{
+    display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,#6366f1,#0ea5e9,#10b981);
+    transition:width .35s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ---------- 题目 ---------- */
+  .q-body{text-align:center;padding:6px 0 4px;}
+  .q-meta{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;}
+  .q-index{
+    font-size:12px;font-weight:800;letter-spacing:1px;color:#4f46e5;
+    background:#eef2ff;padding:4px 11px;border-radius:999px;
+  }
+  .q-pos{
+    font-size:12px;font-weight:800;color:#b45309;
+    background:#fef3c7;padding:4px 11px;border-radius:999px;
+    font-family:Georgia,"Times New Roman",serif;letter-spacing:.4px;
+  }
+  .q-cn{
+    font-size:clamp(20px,4.6vw,26px);
+    font-weight:800;
+    color:#0f172a;
+    line-height:1.55;
+    margin-bottom:24px;
+    min-height:44px;
+    letter-spacing:.5px;
+  }
+  #answerInput{
+    width:100%;
+    padding:15px 18px;
+    font-size:20px;
+    font-family:Georgia,"Times New Roman",serif;
+    letter-spacing:.8px;
+    text-align:center;
+    border:2px solid #e2e8f0;
+    border-radius:16px;
+    background:#f8fafc;
+    outline:none;
+    transition:border-color .22s, box-shadow .22s, background .22s;
+    color:#0f172a;
+  }
+  #answerInput::placeholder{
+    color:#9aa8bd;font-size:14.5px;letter-spacing:0;
+    font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  #answerInput:focus{
+    border-color:#6366f1;background:#fff;
+    box-shadow:0 0 0 5px rgba(99,102,241,.14);
+  }
+  .q-tip{
+    margin-top:12px;font-size:12px;color:#9aa8bd;letter-spacing:.3px;
+  }
+  .q-tip kbd{
+    background:#eef2f7;border-radius:5px;padding:1px 6px;font-size:11px;
+    border:1px solid #e2e8f0;color:#64748b;font-family:inherit;
+  }
+
+  .q-nav{display:flex;gap:10px;margin-top:20px;}
+  .q-nav .btn{flex:1;}
+
+  .dots{
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:16px;
+  }
+  .dot{
+    width:30px;height:30px;border-radius:9px;
+    border:1px solid #e2e8f0;background:#fff;color:#94a3b8;
+    font-size:12px;font-weight:800;cursor:pointer;
+    transition:all .18s;font-family:inherit;
+    display:grid;place-items:center;padding:0;
+  }
+  .dot:hover{border-color:#a5b4fc;color:#4f46e5;transform:translateY(-1px);}
+  .dot.done{background:#eef2ff;color:#4f46e5;border-color:#c7d2fe;}
+  .dot.active{
+    background:linear-gradient(135deg,#4f46e5,#6366f1);
+    color:#fff;border-color:transparent;
+    box-shadow:0 8px 16px -8px rgba(79,70,229,1);
+    transform:translateY(-1px);
+  }
+
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+  /* ---------- 结果 ---------- */
+  .result-card{text-align:center;animation:popIn .45s cubic-bezier(.2,1.35,.5,1);}
+  @keyframes popIn{from{opacity:0;transform:scale(.94) translateY(12px);}to{opacity:1;transform:none;}}
+  .res-title{margin:0 0 18px;font-size:19px;font-weight:800;letter-spacing:.5px;}
+
+  .res-main{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;margin-bottom:20px;}
+  .score-ring{
+    width:132px;height:132px;border-radius:50%;
+    display:grid;place-items:center;
+    background:conic-gradient(#6366f1 0deg,#e8edf5 0deg);
+    transition:background .85s ease;
+    box-shadow:0 14px 34px -18px rgba(79,70,229,.9);
+  }
+  .score-inner{
+    width:104px;height:104px;border-radius:50%;background:#fff;
+    display:flex;align-items:baseline;justify-content:center;gap:2px;
+    box-shadow:inset 0 2px 10px rgba(15,23,42,.07);
+  }
+  #scoreNum{font-size:38px;font-weight:800;color:#4f46e5;line-height:1;letter-spacing:-1px;}
+  .score-inner small{font-size:13px;color:var(--muted);font-weight:800;}
+
+  .res-stats{display:flex;flex-direction:column;gap:8px;min-width:160px;}
+  .stat{
+    display:flex;justify-content:space-between;align-items:center;gap:18px;
+    background:#f8fafc;border-radius:11px;padding:9px 15px;
+    font-size:13.5px;color:var(--muted);font-weight:700;
+    border:1px solid #f1f5f9;
+  }
+  .stat b{font-size:16px;color:#0f172a;font-weight:800;}
+
+  .cmp{
+    padding:13px 16px;border-radius:14px;font-size:13.5px;font-weight:700;
+    margin-bottom:12px;text-align:left;line-height:1.6;
+  }
+  .cmp b{font-size:15px;}
+  .cmp-up{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;}
+  .cmp-down{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;}
+  .cmp-same{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+  .cmp-first{background:#fffbeb;color:#b45309;border:1px solid #fde68a;}
+
+  .advice{
+    background:linear-gradient(135deg,#eef2ff,#f0f9ff);
+    border:1px dashed #c7d2fe;color:#334155;
+    font-size:13.5px;line-height:1.75;padding:14px 16px;
+    border-radius:14px;text-align:left;margin-bottom:18px;font-weight:500;
+  }
+  .advice b{color:#4f46e5;}
+  .res-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+
+  /* ---------- 错题条目 ---------- */
+  .wrong-item{
+    text-align:left;background:#fff;border:1px solid #fee2e2;
+    border-left:4px solid #ef4444;border-radius:13px;
+    padding:13px 15px;margin-bottom:10px;
+    animation:fadeSlide .3s ease;
+  }
+  .wi-en{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:19px;font-weight:700;color:#0f172a;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
+  }
+  .wi-ipa{font-size:12.5px;color:#94a3b8;font-weight:400;}
+  .wi-pos{
+    font-size:11px;font-weight:800;color:#b45309;background:#fef3c7;
+    padding:2px 8px;border-radius:999px;font-family:Georgia,serif;
+  }
+  .wi-cn{font-size:13.5px;color:#475569;margin-top:5px;line-height:1.6;}
+  .wi-user{font-size:13px;margin-top:7px;color:#64748b;font-weight:600;}
+  .wi-user .bad{color:#ef4444;font-weight:800;font-family:Georgia,serif;font-size:15px;}
+  .wi-user .good{color:#10b981;font-weight:800;font-family:Georgia,serif;font-size:15px;}
+
+  /* ---------- 弹窗 ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(30,41,59,.42);
+    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;z-index:100;
+    opacity:0;pointer-events:none;transition:opacity .25s;
+  }
+  .modal-overlay.show{opacity:1;pointer-events:auto;}
+  .modal{
+    background:#fff;border-radius:22px;width:100%;max-width:620px;
+    max-height:84vh;display:flex;flex-direction:column;overflow:hidden;
+    transform:translateY(18px) scale(.97);transition:transform .28s cubic-bezier(.2,1.2,.5,1);
+    box-shadow:0 34px 70px -24px rgba(15,23,42,.55);
+  }
+  .modal-overlay.show .modal{transform:none;}
+  .modal-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:17px 22px;border-bottom:1px solid #eef2f7;
+    background:linear-gradient(135deg,#f8fafc,#eef2ff);
+  }
+  .modal-head h3{margin:0;font-size:17px;font-weight:800;letter-spacing:.3px;}
+  .modal-close{
+    width:34px;height:34px;border-radius:10px;border:none;
+    background:#fff;color:#64748b;font-size:16px;cursor:pointer;
+    transition:.2s;box-shadow:0 2px 8px -4px rgba(15,23,42,.3);
+  }
+  .modal-close:hover{background:#fee2e2;color:#ef4444;transform:rotate(90deg);}
+  .modal-body{overflow-y:auto;padding:16px 22px 22px;}
+
+  .search-box{
+    width:100%;padding:11px 14px;border-radius:11px;
+    border:1.5px solid #e2e8f0;font-size:14px;margin-bottom:12px;
+    outline:none;font-family:inherit;transition:.2s;background:#f8fafc;
+  }
+  .search-box:focus{border-color:#6366f1;background:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.12);}
+
+  .bank-item{
+    display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+    padding:10px 4px;border-bottom:1px dashed #eef2f7;
+  }
+  .bank-item:last-child{border-bottom:none;}
+  .bank-item .en{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;font-size:16px;color:#1e293b;min-width:104px;
+  }
+  .bank-item .ip{color:#94a3b8;font-size:12px;font-family:Georgia,serif;}
+  .bank-item .po{
+    font-size:11px;color:#b45309;background:#fef3c7;
+    padding:2px 7px;border-radius:6px;font-weight:800;
+    font-family:Georgia,serif;
+  }
+  .bank-item .cn{color:#475569;flex:1 1 100%;font-size:13.5px;line-height:1.5;}
+
+  .hist-item{
+    display:flex;align-items:center;gap:14px;
+    padding:12px 15px;border-radius:13px;background:#f8fafc;
+    margin-bottom:9px;border:1px solid #eef2f7;position:relative;
+  }
+  .hist-item.best{
+    background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    border-color:#fcd34d;
+  }
+  .hi-score{font-size:22px;font-weight:800;color:#4f46e5;min-width:66px;letter-spacing:-.5px;}
+  .hist-item.best .hi-score{color:#b45309;}
+  .hi-score small{font-size:11px;color:#94a3b8;margin-left:2px;font-weight:800;}
+  .hi-info{flex:1;font-size:13px;color:#475569;font-weight:700;}
+  .hi-time{font-size:11px;color:#94a3b8;margin-top:3px;font-weight:500;}
+  .hi-badge{
+    position:absolute;top:-8px;right:12px;font-size:10px;font-weight:800;
+    color:#fff;background:linear-gradient(135deg,#f59e0b,#f97316);
+    padding:3px 9px;border-radius:999px;
+    box-shadow:0 5px 12px -5px rgba(245,158,11,1);
+    letter-spacing:.5px;
+  }
+  .empty-tip{
+    text-align:center;color:#94a3b8;font-size:14px;
+    padding:34px 10px;line-height:1.7;margin:0;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-letters" id="bgLetters"></div>
+
+<div class="app">
+  <!-- 头部 -->
+  <header class="hero">
+    <div class="hero-top">
+      <span class="badge">UNIT 10</span>
+      <span class="badge badge-alt">66 WORDS</span>
+    </div>
+    <h1>英语单词听写挑战</h1>
+    <p class="sub">看中文释义 &amp; 词性 · 写出正确英文拼写</p>
+  </header>
+
+  <!-- 工具栏 -->
+  <div class="toolbar">
+    <button class="btn btn-primary" id="btnReshuffle">🎲 重新随机</button>
+    <button class="btn btn-success" id="btnSubmit">✅ 提交答卷</button>
+    <button class="btn" id="btnBank">📚 题库</button>
+    <button class="btn" id="btnHistory">📈 历史成绩</button>
+    <button class="btn" id="btnWrong">❌ 我的错题</button>
+  </div>
+
+  <!-- 答题卡 -->
+  <section class="card quiz-card" id="quizCard">
+    <div class="progress-top">
+      <span id="progressText">第 1 / 30 题</span>
+      <span id="answeredText">已作答 0 / 30</span>
+    </div>
+    <div class="progress-bar"><i id="progressFill"></i></div>
+
+    <div class="q-body" id="qBody">
+      <div class="q-meta">
+        <span class="q-index" id="qIndex">Q1</span>
+        <span class="q-pos" id="qPos">n.</span>
+      </div>
+      <div class="q-cn" id="qCn">中文释义</div>
+      <input id="answerInput" type="text" placeholder="Type the English word…"
+             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+      <div class="q-tip">按 <kbd>Enter</kbd> 快速跳到下一题 · 不确定也可以先跳过</div>
+    </div>
+
+    <div class="q-nav">
+      <button class="btn btn-ghost" id="btnPrev">← 上一题</button>
+      <button class="btn btn-ghost" id="btnNext">下一题 →</button>
+    </div>
+
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- 结果卡 -->
+  <section class="card result-card hidden" id="resultCard">
+    <h2 class="res-title">🎯 本轮成绩单</h2>
+
+    <div class="res-main">
+      <div class="score-ring" id="scoreRing">
+        <div class="score-inner"><span id="scoreNum">0</span><small>分</small></div>
+      </div>
+      <div class="res-stats">
+        <div class="stat"><span>✅ 答对</span><b id="resCorrect">0</b></div>
+        <div class="stat"><span>❌ 答错</span><b id="resWrong">0</b></div>
+        <div class="stat"><span>📊 正确率</span><b id="resRate">0%</b></div>
+      </div>
+    </div>
+
+    <div id="compareBox"></div>
+    <div class="advice" id="adviceBox"></div>
+
+    <div class="res-actions">
+      <button class="btn" id="btnWrong2">❌ 查看错题</button>
+      <button class="btn btn-primary" id="btnRestart">🔁 再来一轮</button>
+      <button class="btn" id="btnHistory2">📈 历史成绩</button>
+    </div>
+  </section>
+</div>
+
+<!-- 通用弹窗 -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">标题</h3>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   1. 词库数据（66 词）
+   ========================================================= */
+const WORDS = [
+  {en:"access",       ipa:"/ˈækses/",        pos:"n./v.",       cn:"通道，使用权；访问，存取"},
+  {en:"accident",     ipa:"/ˈæksɪdənt/",     pos:"n.",          cn:"事故；意外"},
+  {en:"accompany",    ipa:"/əˈkʌmpəni/",     pos:"v.",          cn:"陪伴；伴随"},
+  {en:"accord",       ipa:"/əˈkɔːrd/",       pos:"n./v.",       cn:"协议；一致，符合"},
+  {en:"accordance",   ipa:"/əˈkɔːrdns/",     pos:"n.",          cn:"一致；符合（in accordance with）"},
+  {en:"according",    ipa:"/əˈkɔːrdɪŋ/",     pos:"adv.",        cn:"根据（according to）"},
+  {en:"accumulate",   ipa:"/əˈkjuːmjəleɪt/", pos:"v.",          cn:"积累；积聚"},
+  {en:"accuse",       ipa:"/əˈkjuːz/",       pos:"v.",          cn:"指控；指责"},
+  {en:"achieve",      ipa:"/əˈtʃiːv/",       pos:"v.",          cn:"实现；取得"},
+  {en:"admit",        ipa:"/ədˈmɪt/",        pos:"v.",          cn:"承认；准许进入"},
+  {en:"appoint",      ipa:"/əˈpɔɪnt/",       pos:"v.",          cn:"任命；约定"},
+  {en:"appointment",  ipa:"/əˈpɔɪntmənt/",   pos:"n.",          cn:"约会；任命"},
+  {en:"appropriate",  ipa:"/əˈproʊpriət/",   pos:"adj./v.",     cn:"适当的；拨款，挪用"},
+  {en:"arrange",      ipa:"/əˈreɪndʒ/",      pos:"v.",          cn:"安排；整理"},
+  {en:"arrangement",  ipa:"/əˈreɪndʒmənt/",  pos:"n.",          cn:"安排；布置"},
+  {en:"be",           ipa:"/biː/",           pos:"v.",          cn:"是；存在"},
+  {en:"beside",       ipa:"/bɪˈsaɪd/",       pos:"prep.",       cn:"在旁边"},
+  {en:"besides",      ipa:"/bɪˈsaɪdz/",      pos:"adv./prep.",  cn:"此外；除...之外"},
+  {en:"blame",        ipa:"/bleɪm/",         pos:"v./n.",       cn:"责备；责任"},
+  {en:"by",           ipa:"/baɪ/",           pos:"prep.",       cn:"通过；被；在...旁"},
+  {en:"case",         ipa:"/keɪs/",          pos:"n.",          cn:"情况；案件；箱子"},
+  {en:"charge",       ipa:"/tʃɑːrdʒ/",       pos:"v./n.",       cn:"收费；充电；指控；费用"},
+  {en:"commit",       ipa:"/kəˈmɪt/",        pos:"v.",          cn:"犯（罪）；承诺；委托"},
+  {en:"commitment",   ipa:"/kəˈmɪtmənt/",    pos:"n.",          cn:"承诺；投入"},
+  {en:"company",      ipa:"/ˈkʌmpəni/",      pos:"n.",          cn:"公司；陪伴"},
+  {en:"condemn",      ipa:"/kənˈdem/",       pos:"v.",          cn:"谴责；判刑"},
+  {en:"courage",      ipa:"/ˈkɜːrɪdʒ/",      pos:"n.",          cn:"勇气"},
+  {en:"courageous",   ipa:"/kəˈreɪdʒəs/",    pos:"adj.",        cn:"勇敢的"},
+  {en:"date",         ipa:"/deɪt/",          pos:"n./v.",       cn:"日期；约会；追溯"},
+  {en:"disappoint",   ipa:"/ˌdɪsəˈpɔɪnt/",   pos:"v.",          cn:"使失望"},
+  {en:"discourage",   ipa:"/dɪsˈkɜːrɪdʒ/",   pos:"v.",          cn:"使泄气；劝阻"},
+  {en:"disgust",      ipa:"/dɪsˈɡʌst/",      pos:"n./v.",       cn:"厌恶；使厌恶"},
+  {en:"dismiss",      ipa:"/dɪsˈmɪs/",       pos:"v.",          cn:"解雇；解散；驳回"},
+  {en:"encourage",    ipa:"/ɪnˈkɜːrɪdʒ/",    pos:"v.",          cn:"鼓励"},
+  {en:"exceed",       ipa:"/ɪkˈsiːd/",       pos:"v.",          cn:"超过；超越"},
+  {en:"excess",       ipa:"/ɪkˈses/",        pos:"n./adj.",     cn:"过度；额外的"},
+  {en:"excessive",    ipa:"/ɪkˈsesɪv/",      pos:"adj.",        cn:"过度的"},
+  {en:"fail",         ipa:"/feɪl/",          pos:"v.",          cn:"失败；不及格"},
+  {en:"free",         ipa:"/friː/",          pos:"adj./v.",     cn:"免费的；自由的；释放"},
+  {en:"graduate",     ipa:"/ˈɡrædʒuət/",     pos:"n./v.",       cn:"毕业生；毕业"},
+  {en:"in",           ipa:"/ɪn/",            pos:"prep./adv.",  cn:"在...里；进入"},
+  {en:"missing",      ipa:"/ˈmɪsɪŋ/",        pos:"adj.",        cn:"失踪的；缺少的"},
+  {en:"mission",      ipa:"/ˈmɪʃn/",         pos:"n.",          cn:"任务；使命"},
+  {en:"necessary",    ipa:"/ˈnesəseri/",     pos:"adj.",        cn:"必要的"},
+  {en:"necessity",    ipa:"/nəˈsesəti/",     pos:"n.",          cn:"必要性；必需品"},
+  {en:"occasion",     ipa:"/əˈkeɪʒn/",       pos:"n.",          cn:"场合；时机"},
+  {en:"occasional",   ipa:"/əˈkeɪʒənl/",     pos:"adj.",        cn:"偶尔的"},
+  {en:"on",           ipa:"/ɑːn/",           pos:"prep./adv.",  cn:"在...上；继续"},
+  {en:"out",          ipa:"/aʊt/",           pos:"adv./adj.",   cn:"出去；在外；外面的"},
+  {en:"permit",       ipa:"/pərˈmɪt/",       pos:"v./n.",       cn:"允许；许可证"},
+  {en:"point",        ipa:"/pɔɪnt/",         pos:"n./v.",       cn:"要点；分数；指向"},
+  {en:"progress",     ipa:"/ˈprɑːɡres/",     pos:"n./v.",       cn:"进步；前进"},
+  {en:"promise",      ipa:"/ˈprɑːmɪs/",      pos:"n./v.",       cn:"承诺"},
+  {en:"proper",       ipa:"/ˈprɑːpər/",      pos:"adj.",        cn:"适当的；正确的"},
+  {en:"property",     ipa:"/ˈprɑːpərti/",    pos:"n.",          cn:"财产；性质"},
+  {en:"range",        ipa:"/reɪndʒ/",        pos:"n./v.",       cn:"范围；一系列；变化"},
+  {en:"scold",        ipa:"/skoʊld/",        pos:"v.",          cn:"责骂；训斥"},
+  {en:"spot",         ipa:"/spɑːt/",         pos:"n./v.",       cn:"地点；斑点；发现"},
+  {en:"succeed",      ipa:"/səkˈsiːd/",      pos:"v.",          cn:"成功；继承"},
+  {en:"success",      ipa:"/səkˈses/",       pos:"n.",          cn:"成功"},
+  {en:"successful",   ipa:"/səkˈsesfl/",     pos:"adj.",        cn:"成功的"},
+  {en:"successfully", ipa:"/səkˈsesfəli/",   pos:"adv.",        cn:"成功地"},
+  {en:"up",           ipa:"/ʌp/",            pos:"adv./prep./adj.", cn:"向上；沿着；向上的"},
+  {en:"with",         ipa:"/wɪð/",           pos:"prep.",       cn:"和...一起；用"},
+  {en:"within",       ipa:"/wɪˈðɪn/",        pos:"prep.",       cn:"在...之内"},
+  {en:"without",      ipa:"/wɪˈðaʊt/",       pos:"prep.",       cn:"没有"}
+];
+
+/* =========================================================
+   2. 基础工具 & 常量
+   ========================================================= */
+const QUIZ_SIZE = 30;
+const HISTORY_KEY = 'vocab_unit10_history_v1';
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getHistory(){
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function setHistory(h){
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); } catch(e){}
+}
+
+/* =========================================================
+   3. 状态
+   ========================================================= */
+let quiz = [];        // 本轮抽到的 30 个单词对象
+let answers = [];     // 用户输入
+let current = 0;      // 当前题号
+let submitted = false;
+let lastResult = null;
+
+const quizCard   = $('quizCard');
+const resultCard = $('resultCard');
+const dotsEl     = $('dots');
+const inputEl    = $('answerInput');
+
+/* =========================================================
+   4. 渲染逻辑
+   ========================================================= */
+function startNewQuiz(){
+  quiz = shuffle(WORDS).slice(0, QUIZ_SIZE);
+  answers = new Array(quiz.length).fill('');
+  current = 0;
+  submitted = false;
+  lastResult = null;
+
+  resultCard.classList.add('hidden');
+  quizCard.classList.remove('hidden');
+
+  const sb = $('btnSubmit');
+  sb.disabled = false;
+  sb.textContent = '✅ 提交答卷';
+  sb.classList.add('btn-success');
+
+  buildDots();
+  renderQuestion();
+  updateProgress();
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function buildDots(){
+  dotsEl.innerHTML = '';
+  quiz.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'dot';
+    b.type = 'button';
+    b.textContent = i + 1;
+    b.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(b);
+  });
+}
+
+function renderQuestion(){
+  const w = quiz[current];
+  if(!w) return;
+
+  $('qIndex').textContent = 'Q' + (current + 1);
+  $('qPos').textContent   = w.pos;
+  $('qCn').textContent    = w.cn;
+
+  inputEl.value = answers[current] || '';
+
+  // 重置淡入动画
+  const body = $('qBody');
+  body.style.animation = 'none';
+  void body.offsetWidth;
+  body.style.animation = 'fadeSlide .3s ease';
+}
+
+function goTo(i){
+  if(submitted) return;
+  if(i < 0 || i >= quiz.length) return;
+  answers[current] = inputEl.value;   // 保险起见再存一次
+  current = i;
+  renderQuestion();
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = quiz.length || QUIZ_SIZE;
+  const answered = answers.filter(a => (a || '').trim() !== '').length;
+
+  $('progressText').textContent = `第 ${current + 1} / ${total} 题`;
+  $('answeredText').textContent = `已作答 ${answered} / ${total}`;
+  $('progressFill').style.width = (answered / total * 100) + '%';
+
+  [...dotsEl.children].forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+    d.classList.toggle('done', (answers[i] || '').trim() !== '');
+  });
+}
+
+/* =========================================================
+   5. 提交 & 判分
+   ========================================================= */
+function submitQuiz(){
+  if(submitted) return;
+
+  answers[current] = inputEl.value;   // 同步当前输入框
+  submitted = true;
+
+  let correct = 0;
+  const wrong = [];
+
+  quiz.forEach((w, i) => {
+    const ua = (answers[i] || '').trim();
+    const ok = ua.toLowerCase() === w.en.toLowerCase();
+    if(ok) correct++;
+    else wrong.push({ ...w, user: ua });
+  });
+
+  const total = quiz.length;
+  const score = Math.round(correct / total * 100);
+
+  // 读取历史最高分
+  const history = getHistory();
+  const prevBest = history.length ? Math.max(...history.map(r => r.score)) : null;
+
+  // 保存记录
+  history.push({
+    score, correct, total,
+    time: new Date().toLocaleString('zh-CN', {hour12:false})
+  });
+  setHistory(history);
+
+  lastResult = { score, correct, total, wrong, prevBest };
+
+  // 提交按钮状态
+  const sb = $('btnSubmit');
+  sb.disabled = true;
+  sb.textContent = '✔ 已提交';
+  sb.classList.remove('btn-success');
+
+  showResult();
+  setTimeout(() => {
+    resultCard.scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 120);
+}
+
+function showResult(){
+  const { score, correct, total, wrong, prevBest } = lastResult;
+  const wrongCount = wrong.length;
+
+  quizCard.classList.add('hidden');
+  resultCard.classList.remove('hidden');
+
+  // 圆环颜色
+  const color = score >= 90 ? '#10b981'
+              : score >= 75 ? '#3b82f6'
+              : score >= 60 ? '#f59e0b'
+              : '#ef4444';
+
+  const ring = $('scoreRing');
+  ring.style.background = `conic-gradient(${color} ${score * 3.6}deg, #e8edf5 0deg)`;
+
+  const numEl = $('scoreNum');
+  numEl.style.color = color;
+  animateNumber(numEl, score, 850);
+
+  $('resCorrect').textContent = correct;
+  $('resWrong').textContent   = wrongCount;
+  $('resRate').textContent    = score + '%';
+
+  /* ---- 与历史最高分对比 ---- */
+  const cmpBox = $('compareBox');
+  if(prevBest === null){
+    cmpBox.innerHTML = `<div class="cmp cmp-first">🎉 <b>首次挑战完成！</b>已建立你的基准分数 <b>${score}</b> 分，之后每一轮都会和它比较，加油刷新纪录！</div>`;
+  } else if(score > prevBest){
+    cmpBox.innerHTML = `<div class="cmp cmp-up">📈 较历史最高分 <b>${prevBest}</b> 分 —— <b>上升了 ${score - prevBest} 分</b>！成功刷新纪录 🏆</div>`;
+  } else if(score < prevBest){
+    cmpBox.innerHTML = `<div class="cmp cmp-down">📉 较历史最高分 <b>${prevBest}</b> 分 —— <b>下降了 ${prevBest - score} 分</b>，别灰心，再来一轮找找手感！</div>`;
+  } else {
+    cmpBox.innerHTML = `<div class="cmp cmp-same">➖ 与历史最高分 <b>${prevBest}</b> 分 <b>持平</b>，状态很稳，再冲一冲就能破纪录！</div>`;
+  }
+
+  /* ---- 学习建议 ---- */
+  let advice = '';
+  if(score >= 95){
+    advice = '太强了！这批单词你已经掌握得非常牢固，可以尝试挑战<b>例句填空</b>或<b>英译汉反向听写</b>，进一步巩固语感。';
+  } else if(score >= 85){
+    advice = '很棒！大部分单词都已掌握。把错题每个抄写 <b>3 遍</b> 并造一个句子，基本就能完全拿下。';
+  } else if(score >= 70){
+    advice = '基础不错，但仍有漏洞。建议重点复习错题中的<b>形近词与词性变化</b>（如 success / succeed / successful / successfully），以及 a-/ac- 开头的高频词。';
+  } else if(score >= 50){
+    advice = '还有不少单词没记住。建议用「<b>词根词缀 + 例句</b>」的方法重新记忆，并每天早晚各复习一次错题本。';
+  } else {
+    advice = '别着急，先回到 <b>📚 题库</b> 把 66 个单词整体过一遍，重点记忆中文意思和拼写，然后再来挑战。每天坚持 15 分钟，进步会非常明显！';
+  }
+  $('adviceBox').innerHTML = '💡 <b>学习建议：</b>' + advice;
+}
+
+function animateNumber(el, target, dur){
+  const start = performance.now();
+  function step(now){
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased);
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* =========================================================
+   6. 弹窗系统
+   ========================================================= */
+function openModal(title, bodyHtml){
+  $('modalTitle').textContent = title;
+  $('modalBody').innerHTML = bodyHtml;
+  $('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  $('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+$('modalClose').addEventListener('click', closeModal);
+$('modalOverlay').addEventListener('click', e => {
+  if(e.target === $('modalOverlay')) closeModal();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeModal();
+});
+
+/* ---- 题库 ---- */
+function bankItemsHtml(q){
+  q = (q || '').trim().toLowerCase();
+  const list = q
+    ? WORDS.filter(w =>
+        w.en.toLowerCase().includes(q) ||
+        w.cn.includes(q) ||
+        w.pos.toLowerCase().includes(q))
+    : WORDS;
+
+  if(!list.length) return '<p class="empty-tip">没有找到匹配的单词 🔍</p>';
+
+  return list.map(w => `
+    <div class="bank-item">
+      <span class="en">${w.en}</span>
+      <span class="ip">${w.ipa}</span>
+      <span class="po">${w.pos}</span>
+      <span class="cn">${w.cn}</span>
+    </div>
+  `).join('');
+}
+
+$('btnBank').addEventListener('click', () => {
+  openModal('📚 完整题库（共 66 词）', `
+    <input class="search-box" id="bankSearch" placeholder="🔍 搜索单词 / 中文释义 / 词性…" />
+    <div id="bankList">${bankItemsHtml('')}</div>
+  `);
+  const s = $('bankSearch');
+  s.addEventListener('input', () => {
+    $('bankList').innerHTML = bankItemsHtml(s.value);
+  });
+  setTimeout(() => s.focus(), 120);
+});
+
+/* ---- 历史成绩 ---- */
+function showHistoryModal(){
+  const h = getHistory();
+  if(!h.length){
+    openModal('📈 历史成绩', '<p class="empty-tip">还没有历史成绩记录<br>先完成一轮听写挑战吧！</p>');
+    return;
+  }
+  const best = Math.max(...h.map(r => r.score));
+  const list = h.slice().reverse();
+
+  const html = list.map(r => `
+    <div class="hist-item ${r.score === best ? 'best' : ''}">
+      <div class="hi-score">${r.score}<small>分</small></div>
+      <div class="hi-info">
+        答对 ${r.correct} / ${r.total} 题 · 正确率 ${r.score}%
+        <div class="hi-time">${esc(r.time)}</div>
+      </div>
+      ${r.score === best ? '<span class="hi-badge">最高分</span>' : ''}
+    </div>
+  `).join('');
+
+  openModal(`📈 历史成绩（共 ${h.length} 次）`, html);
+}
+$('btnHistory').addEventListener('click', showHistoryModal);
+$('btnHistory2').addEventListener('click', showHistoryModal);
+
+/* ---- 错题 ---- */
+function showWrongModal(){
+  if(!lastResult){
+    openModal('❌ 我的错题', '<p class="empty-tip">还没有提交过答卷哦<br>先完成一轮听写挑战吧！</p>');
+    return;
+  }
+  if(!lastResult.wrong.length){
+    openModal('❌ 我的错题', '<p class="empty-tip">🎉 太棒了！本轮没有错题<br>继续保持这个状态！</p>');
+    return;
+  }
+  const html = lastResult.wrong.map(w => `
+    <div class="wrong-item">
+      <div class="wi-en">
+        ${w.en}
+        <span class="wi-ipa">${w.ipa}</span>
+        <span class="wi-pos">${w.pos}</span>
+      </div>
+      <div class="wi-cn">${w.cn}</div>
+      <div class="wi-user">
+        你的答案：<span class="bad">${w.user ? esc(w.user) : '（未作答）'}</span>
+      </div>
+    </div>
+  `).join('');
+  openModal(`❌ 我的错题（${lastResult.wrong.length} 个）`, html);
+}
+$('btnWrong').addEventListener('click', showWrongModal);
+$('btnWrong2').addEventListener('click', showWrongModal);
+
+/* =========================================================
+   7. 交互绑定
+   ========================================================= */
+$('btnReshuffle').addEventListener('click', () => {
+  if(!submitted && answers.some(a => (a || '').trim() !== '')){
+    if(!confirm('重新随机将会清空当前作答，确定要继续吗？')) return;
+  }
+  startNewQuiz();
+});
+
+$('btnRestart').addEventListener('click', startNewQuiz);
+
+$('btnSubmit').addEventListener('click', () => {
+  if(submitted) return;
+  const answered = answers.filter(a => (a || '').trim() !== '').length;
+  if(answered < quiz.length){
+    if(!confirm(`你还有 ${quiz.length - answered} 题没有作答，未作答将计为错误。确定提交吗？`)) return;
+  }
+  submitQuiz();
+});
+
+$('btnPrev').addEventListener('click', () => goTo(current - 1));
+$('btnNext').addEventListener('click', () => goTo(current + 1));
+
+inputEl.addEventListener('input', () => {
+  if(submitted) return;
+  answers[current] = inputEl.value;
+  updateProgress();
+});
+
+inputEl.addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    if(current < quiz.length - 1) goTo(current + 1);
+  }
+});
+
+/* =========================================================
+   8. 背景漂浮字母
+   ========================================================= */
+(function buildBgLetters(){
+  const box = $('bgLetters');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  for(let i = 0; i < 20; i++){
+    const s = document.createElement('span');
+    s.textContent = letters[Math.floor(Math.random() * letters.length)];
+    s.style.left = (Math.random() * 96) + '%';
+    s.style.top  = (Math.random() * 96) + '%';
+    s.style.fontSize = (26 + Math.random() * 74).toFixed(0) + 'px';
+    s.style.animationDelay = (Math.random() * 8).toFixed(2) + 's';
+    s.style.animationDuration = (9 + Math.random() * 10).toFixed(2) + 's';
+    box.appendChild(s);
+  }
+})();
+
+/* =========================================================
+   9. 启动
+   ========================================================= */
+startNewQuiz();
+</script>
+</body>
+</html>
