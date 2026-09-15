@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语核心词汇听写测验</title>
+    <style>
+        /* 全局样式设计 - 英伦学术风，浅色明亮 */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --success: #10b981;
+            --error: #ef4444;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.05) 0px, transparent 50%),
+                linear-gradient(90deg, rgba(200, 210, 220, 0.2) 1px, transparent 1px),
+                linear-gradient(rgba(200, 210, 220, 0.2) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* 主容器 */
+        #app {
+            width: 100%;
+            max-width: 650px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* 顶部导航 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+        }
+
+        header h1 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 进度条 */
+        .progress-container {
+            height: 6px;
+            background-color: var(--border-color);
+            width: 100%;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #60a5fa);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* 核心测验区域 */
+        #quiz-screen {
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .card {
+            width: 100%;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-pos {
+            display: inline-block;
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-zh {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        /* 输入区 */
+        .input-wrapper {
+            width: 100%;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            background: white;
+            color: var(--text-main);
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #cbd5e1;
+        }
+
+        /* 按钮组 */
+        .btn-group {
+            display: flex;
+            width: 100%;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        /* 结果页面 */
+        #result-screen {
+            display: none;
+            padding: 35px 25px;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) var(--score-deg, 0deg), #e2e8f0 0deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .score-text {
+            position: relative;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .comp-up { background: #d1fae5; color: #065f46; }
+        .comp-down { background: #fee2e2; color: #991b1b; }
+        .comp-same { background: #fef3c7; color: #92400e; }
+
+        .suggestion-box {
+            background: #f8fafc;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .mistake-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .mistake-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mistake-item:last-child {
+            border-bottom: none;
+        }
+
+        .mistake-item .info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mistake-item .en-word {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+
+        .mistake-item .zh-word {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .mistake-item .user-ans {
+            color: var(--error);
+            font-size: 0.9rem;
+            text-decoration: line-through;
+        }
+
+        /* 弹窗 (题库、历史) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .modal-body {
+            padding: 20px 25px;
+            overflow-y: auto;
+        }
+
+        .word-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .word-table th, .word-table td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .word-table th {
+            background: #f8fafc;
+            color: var(--text-secondary);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .history-score {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .card-zh { font-size: 1.6rem; }
+            .btn { padding: 12px 10px; font-size: 0.9rem; }
+            .card { padding: 30px 15px; }
+            header { padding: 15px; }
+            #quiz-screen, #result-screen { padding: 20px 15px; }
+            .btn-group { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- 头部 -->
+    <header>
+        <h1>📖 核心词汇听写</h1>
+        <div class="header-actions">
+            <button class="btn-icon" onclick="toggleModal('history-modal')">📊 历史</button>
+            <button class="btn-icon" onclick="toggleModal('bank-modal')">📚 题库</button>
+        </div>
+    </header>
+
+    <!-- 进度条 -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- 测验界面 -->
+    <div id="quiz-screen">
+        <div class="question-meta">
+            <span id="question-counter">第 1 / 30 题</span>
+            <span id="current-score">历史最高分: -</span>
+        </div>
+
+        <div class="card" id="question-card">
+            <span class="card-pos" id="question-pos">n.</span>
+            <div class="card-zh" id="question-zh">加载中...</div>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="text" id="answer-input" placeholder="请输入对应的英文单词..." autocomplete="off" spellcheck="false">
+        </div>
+
+        <!-- 翻页操作按钮组 -->
+        <div class="btn-group">
+            <button class="btn btn-secondary" onclick="prevQuestion()" id="btn-prev">⬅ 上一题</button>
+            <button class="btn btn-primary" onclick="nextQuestion()" id="btn-next">下一题 (Enter) ➡</button>
+        </div>
+
+        <!-- 全局操作按钮组 -->
+        <div class="btn-group">
+            <button class="btn btn-secondary" onclick="initGame()">🔄 重新随机</button>
+            <button class="btn btn-primary" onclick="submitTest()">✅ 提交试卷</button>
+        </div>
+    </div>
+
+    <!-- 结果界面 -->
+    <div id="result-screen">
+        <div class="result-header">
+            <div class="score-circle" id="score-circle">
+                <span class="score-text" id="result-score-text">0%</span>
+            </div>
+            <h2>测验完成！</h2>
+            <div id="comparison-badge" class="comparison-badge comp-same">历史最高分: -</div>
+        </div>
+
+        <div class="suggestion-box" id="suggestion-text">
+            正在生成建议...
+        </div>
+
+        <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--text-main);">❌ 错题本 (点击查看正确答案)</h3>
+        <div class="mistake-list" id="mistake-list">
+            <!-- 错题列表由 JS 生成 -->
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-secondary" onclick="toggleModal('history-modal')">查看历史</button>
+            <button class="btn btn-primary" onclick="closeResult()">返回首页</button>
+        </div>
+    </div>
+</div>
+
+<!-- 题库弹窗 -->
+<div class="modal-overlay" id="bank-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>📚 核心词汇库 (89词)</h2>
+            <button class="btn-icon" onclick="toggleModal('bank-modal')">✖ 关闭</button>
+        </div>
+        <div class="modal-body">
+            <table class="word-table">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>单词</th>
+                        <th>词性</th>
+                        <th>中文释义</th>
+                    </tr>
+                </thead>
+                <tbody id="bank-tbody">
+                    <!-- 题库渲染 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 历史分数弹窗 -->
+<div class="modal-overlay" id="history-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>📊 历史测验分数</h2>
+            <button class="btn-icon" onclick="toggleModal('history-modal')">✖ 关闭</button>
+        </div>
+        <div class="modal-body" id="history-list">
+            <!-- 历史记录渲染 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // ================= 题库数据 =================
+    const wordBank = [
+        { id: 1, en: 'training', pos: 'n.', zh: '训练；培训', phonetic: '/ˈtreɪnɪŋ/' },
+        { id: 2, en: 'prison', pos: 'n.', zh: '监狱；牢狱', phonetic: '/ˈprɪzn/' },
+        { id: 3, en: 'prisoner', pos: 'n.', zh: '囚犯；犯人', phonetic: '/ˈprɪzənər/' },
+        { id: 4, en: 'arrest', pos: 'v. / n.', zh: '逮捕；拘留', phonetic: '/əˈrest/' },
+        { id: 5, en: 'secretary', pos: 'n.', zh: '秘书；书记；部长', phonetic: '/ˈsekrəteri/' },
+        { id: 6, en: 'shake', pos: 'v. / n.', zh: '摇动；颤抖；震动', phonetic: '/ʃeɪk/' },
+        { id: 7, en: 'rate', pos: 'n. / v.', zh: '比率；速度；评估', phonetic: '/reɪt/' },
+        { id: 8, en: 'at', pos: 'prep.', zh: '在；向；处于', phonetic: '/æt/' },
+        { id: 9, en: 'row', pos: 'n. / v.', zh: '排；行；划船', phonetic: '/roʊ/' },
+        { id: 10, en: 'victim', pos: 'n.', zh: '受害者；牺牲品', phonetic: '/ˈvɪktɪm/' },
+        { id: 11, en: 'deliver', pos: 'v.', zh: '递送；发表；接生', phonetic: '/dɪˈlɪvər/' },
+        { id: 12, en: 'weight', pos: 'n. / v.', zh: '重量；体重；加重于', phonetic: '/weɪt/' },
+        { id: 13, en: 'approach', pos: 'v. / n.', zh: '接近；方法；途径', phonetic: '/əˈproʊtʃ/' },
+        { id: 14, en: 'will', pos: 'aux. / n.', zh: '将；愿意；意志；遗嘱', phonetic: '/wɪl/' },
+        { id: 15, en: 'willing', pos: 'adj.', zh: '乐意的；自愿的', phonetic: '/ˈwɪlɪŋ/' },
+        { id: 16, en: 'discuss', pos: 'v.', zh: '讨论；商量', phonetic: '/dɪˈskʌs/' },
+        { id: 17, en: 'discussion', pos: 'n.', zh: '讨论；谈论', phonetic: '/dɪˈskʌʃn/' },
+        { id: 18, en: 'worth', pos: 'adj. / n.', zh: '值得的；价值', phonetic: '/wɜːrθ/' },
+        { id: 19, en: 'worthy', pos: 'adj.', zh: '值得的；有价值的', phonetic: '/ˈwɜːrði/' },
+        { id: 20, en: 'worthwhile', pos: 'adj.', zh: '值得做的；值得花时间的', phonetic: '/ˌwɜːrθˈwaɪl/' },
+        { id: 21, en: 'apologize', pos: 'v.', zh: '道歉；谢罪', phonetic: '/əˈpɑːlədʒaɪz/' },
+        { id: 22, en: 'apology', pos: 'n.', zh: '道歉；谢罪', phonetic: '/əˈpɑːlədʒi/' },
+        { id: 23, en: 'traffic', pos: 'n.', zh: '交通；运输', phonetic: '/ˈtræfɪk/' },
+        { id: 24, en: 'mixture', pos: 'n.', zh: '混合；混合物', phonetic: '/ˈmɪkstʃər/' },
+        { id: 25, en: 'moderate', pos: 'adj. / v.', zh: '适度的；温和的；缓和', phonetic: '/ˈmɑːdərət/' },
+        { id: 26, en: 'relieve', pos: 'v.', zh: '减轻；缓解；救济', phonetic: '/rɪˈliːv/' },
+        { id: 27, en: 'reluctant', pos: 'adj.', zh: '不情愿的；勉强的', phonetic: '/rɪˈlʌktənt/' },
+        { id: 28, en: 'pleasant', pos: 'adj.', zh: '令人愉快的；宜人的', phonetic: '/ˈpleznt/' },
+        { id: 29, en: 'please', pos: 'int. / v.', zh: '请；使高兴', phonetic: '/pliːz/' },
+        { id: 30, en: 'pleasure', pos: 'n.', zh: '快乐；愉悦', phonetic: '/ˈpleʒər/' },
+        { id: 31, en: 'with', pos: 'prep.', zh: '和...一起；用；具有', phonetic: '/wɪð/' },
+        { id: 32, en: 'take', pos: 'v.', zh: '拿；取；花费；乘坐', phonetic: '/teɪk/' },
+        { id: 33, en: 'tired', pos: 'adj.', zh: '疲倦的；厌倦的', phonetic: '/ˈtaɪərd/' },
+        { id: 34, en: 'title', pos: 'n. / v.', zh: '标题；头衔；加标题于', phonetic: '/ˈtaɪtl/' },
+        { id: 35, en: 'argue', pos: 'v.', zh: '争论；辩论；主张', phonetic: '/ˈɑːrɡjuː/' },
+        { id: 36, en: 'argument', pos: 'n.', zh: '争论；论点', phonetic: '/ˈɑːrɡjumənt/' },
+        { id: 37, en: 'variety', pos: 'n.', zh: '多样；种类', phonetic: '/vəˈraɪəti/' },
+        { id: 38, en: 'various', pos: 'adj.', zh: '各种各样的', phonetic: '/ˈveriəs/' },
+        { id: 39, en: 'vary', pos: 'v.', zh: '变化；不同', phonetic: '/ˈveri/' },
+        { id: 40, en: 'infer', pos: 'v.', zh: '推断；推论', phonetic: '/ɪnˈfɜːr/' },
+        { id: 41, en: 'confer', pos: 'v.', zh: '授予；协商', phonetic: '/kənˈfɜːr/' },
+        { id: 42, en: 'conference', pos: 'n.', zh: '会议；讨论会', phonetic: '/ˈkɑːnfərəns/' },
+        { id: 43, en: 'instance', pos: 'n.', zh: '例子；实例', phonetic: '/ˈɪnstəns/' },
+        { id: 44, en: 'for', pos: 'prep. / conj.', zh: '为了；对于；因为', phonetic: '/fɔːr/' },
+        { id: 45, en: 'spare', pos: 'adj. / v.', zh: '空闲的；备用的；抽出', phonetic: '/sper/' },
+        { id: 46, en: 'moreover', pos: 'adv.', zh: '此外；而且', phonetic: '/mɔːrˈoʊvər/' },
+        { id: 47, en: 'nevertheless', pos: 'adv.', zh: '然而；尽管如此', phonetic: '/ˌnevərðəˈles/' },
+        { id: 48, en: 'blood', pos: 'n.', zh: '血；血液', phonetic: '/blʌd/' },
+        { id: 49, en: 'bleed', pos: 'v.', zh: '流血；渗出', phonetic: '/bliːd/' },
+        { id: 50, en: 'relief', pos: 'n.', zh: '宽慰；减轻；救济', phonetic: '/rɪˈliːf/' },
+        { id: 51, en: 'under', pos: 'prep.', zh: '在...下面；少于', phonetic: '/ˈʌndər/' },
+        { id: 52, en: 'direct', pos: 'adj. / v.', zh: '直接的；指导；导演', phonetic: '/dəˈrekt/' },
+        { id: 53, en: 'direction', pos: 'n.', zh: '方向；指导；说明', phonetic: '/dəˈrekʃn/' },
+        { id: 54, en: 'director', pos: 'n.', zh: '导演；主管；董事', phonetic: '/dəˈrektər/' },
+        { id: 55, en: 'offer', pos: 'v. / n.', zh: '提供；出价；提议', phonetic: '/ˈɔːfər/' },
+        { id: 56, en: 'differ', pos: 'v.', zh: '不同；相异', phonetic: '/ˈdɪfər/' },
+        { id: 57, en: 'difference', pos: 'n.', zh: '差异；不同', phonetic: '/ˈdɪfrəns/' },
+        { id: 58, en: 'different', pos: 'adj.', zh: '不同的', phonetic: '/ˈdɪfrənt/' },
+        { id: 59, en: 'interfere', pos: 'v.', zh: '干涉；妨碍', phonetic: '/ˌɪntərˈfɪr/' },
+        { id: 60, en: 'suffer', pos: 'v.', zh: '遭受；忍受', phonetic: '/ˈsʌfər/' },
+        { id: 61, en: 'refer', pos: 'v.', zh: '参考；提到；涉及', phonetic: '/rɪˈfɜːr/' },
+        { id: 62, en: 'reference', pos: 'n.', zh: '参考；参照；提及', phonetic: '/ˈrefrəns/' },
+        { id: 63, en: 'prefer', pos: 'v.', zh: '更喜欢；宁愿', phonetic: '/prɪˈfɜːr/' },
+        { id: 64, en: 'relate', pos: 'v.', zh: '叙述；使有联系', phonetic: '/rɪˈleɪt/' },
+        { id: 65, en: 'compete', pos: 'v.', zh: '竞争；比赛', phonetic: '/kəmˈpiːt/' },
+        { id: 66, en: 'competition', pos: 'n.', zh: '竞争；比赛', phonetic: '/ˌkɑːmpəˈtɪʃn/' },
+        { id: 67, en: 'competitive', pos: 'adj.', zh: '竞争的；有竞争力的', phonetic: '/kəmˈpetətɪv/' },
+        { id: 68, en: 'competitor', pos: 'n.', zh: '竞争者；对手', phonetic: '/kəmˈpetɪtər/' },
+        { id: 69, en: 'competent', pos: 'adj.', zh: '胜任的；有能力的', phonetic: '/ˈkɑːmpɪtənt/' },
+        { id: 70, en: 'concern', pos: 'n. / v.', zh: '关心；担心；涉及', phonetic: '/kənˈsɜːrn/' },
+        { id: 71, en: 'as', pos: 'conj. / prep.', zh: '因为；随着；作为', phonetic: '/æz/' },
+        { id: 72, en: 'concerning', pos: 'prep.', zh: '关于；就...而言', phonetic: '/kənˈsɜːrnɪŋ/' },
+        { id: 73, en: 'hurry', pos: 'v. / n.', zh: '匆忙；催促；匆忙', phonetic: '/ˈhɜːri/' },
+        { id: 74, en: 'in', pos: 'prep. / adv.', zh: '在...里面；进入', phonetic: '/ɪn/' },
+        { id: 75, en: 'control', pos: 'v. / n.', zh: '控制；管理', phonetic: '/kənˈtroʊl/' },
+        { id: 76, en: 'out', pos: 'adv. / prep.', zh: '出去；在外；从...出去', phonetic: '/aʊt/' },
+        { id: 77, en: 'conquer', pos: 'v.', zh: '征服；战胜', phonetic: '/ˈkɑːŋkər/' },
+        { id: 78, en: 'determine', pos: 'v.', zh: '决定；确定；查明', phonetic: '/dɪˈtɜːrmɪn/' },
+        { id: 79, en: 'be', pos: 'v. / aux.', zh: '是；存在（动词原形）', phonetic: '/biː/' },
+        { id: 80, en: 'determination', pos: 'n.', zh: '决心；测定', phonetic: '/dɪˌtɜːrmɪˈneɪʃn/' },
+        { id: 81, en: 'make', pos: 'v. / n.', zh: '制造；使得；品牌', phonetic: '/meɪk/' },
+        { id: 82, en: 'develop', pos: 'v.', zh: '发展；开发；冲洗', phonetic: '/dɪˈveləp/' },
+        { id: 83, en: 'development', pos: 'n.', zh: '发展；开发', phonetic: '/dɪˈveləpmənt/' },
+        { id: 84, en: 'confuse', pos: 'v.', zh: '使困惑；混淆', phonetic: '/kənˈfjuːz/' },
+        { id: 85, en: 'confused', pos: 'adj.', zh: '困惑的；混乱的', phonetic: '/kənˈfjuːzd/' },
+        { id: 86, en: 'confusing', pos: 'adj.', zh: '令人困惑的', phonetic: '/kənˈfjuːzɪŋ/' },
+        { id: 87, en: 'confusion', pos: 'n.', zh: '困惑；混淆；混乱', phonetic: '/kənˈfjuːʒn/' },
+        { id: 88, en: 'refuse', pos: 'v. / n.', zh: '拒绝；垃圾', phonetic: '/rɪˈfjuːz/' },
+        { id: 89, en: 'reject', pos: 'v. / n.', zh: '拒绝；抵制；废品', phonetic: '/rɪˈdʒekt/' }
+    ];
+
+    // ================= 状态变量 =================
+    let currentQuestions = []; 
+    let currentIndex = 0; 
+    let userAnswers = []; 
+    let highestScore = 0; 
+    let historyScores = []; 
+
+    const TOTAL_QUESTIONS = 30;
+
+    // ================= 初始化 =================
+    function init() {
+        loadHistory();
+        renderBank();
+        initGame();
+    }
+
+    // 加载历史记录
+    function loadHistory() {
+        const saved = localStorage.getItem('english_dictation_history');
+        if (saved) {
+            historyScores = JSON.parse(saved);
+            if (historyScores.length > 0) {
+                highestScore = Math.max(...historyScores.map(item => item.score));
+            }
+        }
+        document.getElementById('current-score').innerText = `历史最高分: ${highestScore}%`;
+    }
+
+    // 保存分数
+    function saveScore(score) {
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        historyScores.push({ date: dateStr, score: score });
+        localStorage.setItem('english_dictation_history', JSON.stringify(historyScores));
+        
+        if (score > highestScore) {
+            highestScore = score;
+            document.getElementById('current-score').innerText = `历史最高分: ${highestScore}%`;
+        }
+    }
+
+    // ================= 测验逻辑 =================
+    
+    // 洗牌算法
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // 开始 / 重新随机
+    function initGame() {
+        document.getElementById('result-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'flex';
+
+        const shuffled = shuffleArray([...wordBank]);
+        currentQuestions = shuffled.slice(0, TOTAL_QUESTIONS);
+        
+        currentIndex = 0;
+        userAnswers = new Array(TOTAL_QUESTIONS).fill('');
+        
+        document.getElementById('answer-input').value = '';
+        document.getElementById('answer-input').disabled = false;
+        
+        renderQuestion();
+    }
+
+    // 渲染当前题目
+    function renderQuestion() {
+        const q = currentQuestions[currentIndex];
+        
+        // 更新进度条
+        const progress = ((currentIndex) / TOTAL_QUESTIONS) * 100;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+        
+        // 更新题号
+        document.getElementById('question-counter').innerText = `第 ${currentIndex + 1} / ${TOTAL_QUESTIONS} 题`;
+        
+        // 更新卡片内容
+        document.getElementById('question-pos').innerText = q.pos;
+        document.getElementById('question-zh').innerText = q.zh;
+        
+        // 控制按钮状态
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        
+        btnPrev.disabled = (currentIndex === 0);
+        
+        if (currentIndex === TOTAL_QUESTIONS - 1) {
+            btnNext.innerText = '提交试卷 (Enter) ✅';
+        } else {
+            btnNext.innerText = '下一题 (Enter) ➡';
+        }
+        
+        // 聚焦输入框并恢复当前输入内容
+        const input = document.getElementById('answer-input');
+        input.value = userAnswers[currentIndex] || '';
+        input.focus();
+    }
+
+    // 上一题
+    function prevQuestion() {
+        if (currentIndex > 0) {
+            userAnswers[currentIndex] = document.getElementById('answer-input').value.trim();
+            currentIndex--;
+            renderQuestion();
+        }
+    }
+
+    // 下一题
+    function nextQuestion() {
+        // 记录当前输入
+        userAnswers[currentIndex] = document.getElementById('answer-input').value.trim();
+        
+        if (currentIndex < TOTAL_QUESTIONS - 1) {
+            currentIndex++;
+            renderQuestion();
+        } else {
+            // 已经是最后一题，按下一题等于提交
+            submitTest();
+        }
+    }
+
+    // 输入框回车监听
+    document.getElementById('answer-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            nextQuestion();
+        }
+    });
+
+    // 实时记录输入
+    document.getElementById('answer-input').addEventListener('input', function() {
+        userAnswers[currentIndex] = this.value.trim();
+    });
+
+    // ================= 提交与结果 =================
+    function submitTest() {
+        userAnswers[currentIndex] = document.getElementById('answer-input').value.trim();
+        
+        let correctCount = 0;
+        const mistakes = [];
+        
+        currentQuestions.forEach((q, index) => {
+            const userAns = userAnswers[index] ? userAnswers[index].toLowerCase().trim() : '';
+            const correctAns = q.en.toLowerCase().trim();
+            
+            if (userAns === correctAns) {
+                correctCount++;
+            } else {
+                mistakes.push({
+                    ...q,
+                    userAnswer: userAnswers[index] || '(未作答)'
+                });
+            }
+        });
+        
+        const score = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+        
+        const previousHighest = highestScore;
+        saveScore(score);
+        
+        renderResult(score, previousHighest, mistakes);
+    }
+
+    function renderResult(score, previousHighest, mistakes) {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        
+        const circle = document.getElementById('score-circle');
+        const deg = (score / 100) * 360;
+        circle.style.setProperty('--score-deg', `${deg}deg`);
+        document.getElementById('result-score-text').innerText = `${score}%`;
+        
+        const badge = document.getElementById('comparison-badge');
+        if (score > previousHighest) {
+            badge.className = 'comparison-badge comp-up';
+            badge.innerText = `🎉 分数上升！历史最高分: ${score}%`;
+        } else if (score < previousHighest) {
+            badge.className = 'comparison-badge comp-down';
+            badge.innerText = `📉 分数下降。历史最高分: ${previousHighest}%`;
+        } else {
+            badge.className = 'comparison-badge comp-same';
+            badge.innerText = `持平。历史最高分: ${previousHighest}%`;
+        }
+        
+        const suggestionBox = document.getElementById('suggestion-text');
+        if (score >= 90) {
+            suggestionBox.innerHTML = `🌟 <strong>太棒了！</strong> 你的词汇基础非常扎实，几乎全对。建议可以挑战例句翻译或练习听力拼写，继续保持！`;
+        } else if (score >= 70) {
+            suggestionBox.innerHTML = `👍 <strong>表现不错！</strong> 大部分单词都已掌握。建议重点复习错题本中的单词，特别是易混淆词形（如 relief/relieve）和同根词（如 compete/competent/competitive）。`;
+        } else if (score >= 50) {
+            suggestionBox.innerHTML = `💪 <strong>基础尚可，仍需努力。</strong> 建议按词根词缀系统记忆单词，不要死记硬背。仔细查看错题本，多读多写，加强拼写印象。`;
+        } else {
+            suggestionBox.innerHTML = `📚 <strong>需要加强复习。</strong> 建议每天背诵 20-30 个单词，采用艾宾浩斯记忆曲线进行滚动复习。先把错题本里的单词全部背熟，再进行下一次听写。`;
+        }
+        
+        const mistakeList = document.getElementById('mistake-list');
+        mistakeList.innerHTML = '';
+        if (mistakes.length === 0) {
+            mistakeList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--success);">🎉 完美！没有错题。</div>';
+        } else {
+            mistakes.forEach(m => {
+                const div = document.createElement('div');
+                div.className = 'mistake-item';
+                div.innerHTML = `
+                    <div class="info">
+                        <span class="en-word">${m.en} <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">${m.phonetic}</span></span>
+                        <span class="zh-word">${m.pos} ${m.zh}</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="user-ans">你的答案: ${m.userAnswer}</div>
+                        <div style="color: var(--error); font-size: 0.85rem;">正确拼写: ${m.en}</div>
+                    </div>
+                `;
+                mistakeList.appendChild(div);
+            });
+        }
+    }
+
+    function closeResult() {
+        document.getElementById('result-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'flex';
+        initGame(); 
+    }
+
+    // ================= 弹窗与展示 =================
+    function renderBank() {
+        const tbody = document.getElementById('bank-tbody');
+        tbody.innerHTML = '';
+        wordBank.forEach((w, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td style="font-weight:600;">${w.en}</td>
+                <td style="color:#64748b;">${w.pos}</td>
+                <td>${w.zh}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderHistory() {
+        const list = document.getElementById('history-list');
+        list.innerHTML = '';
+        
+        if (historyScores.length === 0) {
+            list.innerHTML = '<div style="text-align:center; padding:20px; color:#64748b;">暂无历史记录</div>';
+            return;
+        }
+        
+        const reversed = [...historyScores].reverse();
+        reversed.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `
+                <span class="history-date">${item.date}</span>
+                <span class="history-score" style="color: ${item.score >= 80 ? 'var(--success)' : (item.score >= 60 ? 'var(--primary-color)' : 'var(--error)')}">${item.score}%</span>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        } else {
+            if (modalId === 'history-modal') {
+                renderHistory();
+            }
+            modal.style.display = 'flex';
+        }
+    }
+
+    window.onload = init;
+
+</script>
+</body>
+</html>

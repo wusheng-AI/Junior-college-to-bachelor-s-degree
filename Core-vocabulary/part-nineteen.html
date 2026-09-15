@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>核心词汇19单元 · 汉译英听写</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  body{
+    font-family:'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(140deg,#eef3ff 0%,#f6f0ff 35%,#fff0f7 70%,#f0fbf7 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:20px 14px;gap:15px;
+    position:relative;overflow-x:hidden;
+    color:#1e1b4b;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* 背景光斑 */
+  body::before,body::after{
+    content:'';position:fixed;border-radius:50%;filter:blur(72px);z-index:0;pointer-events:none;
+  }
+  body::before{width:380px;height:380px;background:rgba(129,140,248,.38);top:-130px;left:-110px;}
+  body::after{width:420px;height:420px;background:rgba(236,72,153,.22);bottom:-170px;right:-130px;}
+
+  /* 背景字母 */
+  .letters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+  .letters span{
+    position:absolute;font-family:Georgia,'Times New Roman',serif;
+    font-size:clamp(56px,9vw,130px);font-weight:900;
+    color:rgba(99,102,241,.07);user-select:none;
+  }
+
+  .topbar,.card,.toolbar{position:relative;z-index:2;}
+
+  /* ===== 顶栏 ===== */
+  .topbar{
+    width:min(680px,94vw);
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .logo{
+    width:46px;height:46px;border-radius:14px;
+    background:linear-gradient(135deg,#6366f1,#a855f7);
+    display:grid;place-items:center;font-size:23px;
+    box-shadow:0 10px 22px -9px rgba(99,102,241,.9);
+  }
+  .brand h1{font-size:18px;font-weight:800;letter-spacing:.6px;color:#312e81;}
+  .brand p{font-size:11.5px;color:#7c7aa0;font-weight:600;letter-spacing:1.6px;margin-top:1px;}
+
+  .best-badge{
+    display:flex;align-items:center;gap:9px;
+    background:rgba(255,255,255,.9);padding:7px 15px;border-radius:16px;
+    box-shadow:0 8px 20px -12px rgba(99,102,241,.8);
+    border:1.5px solid #ede9fe;
+  }
+  .best-badge .star{font-size:19px;}
+  .best-badge b{font-size:18px;color:#7c3aed;display:block;line-height:1.1;font-weight:900;}
+  .best-badge small{font-size:9.5px;color:#9a97b8;letter-spacing:1.2px;font-weight:700;}
+
+  /* ===== 主卡片 ===== */
+  .card{
+    width:min(680px,94vw);
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:22px 26px 20px;
+    box-shadow:0 26px 62px -32px rgba(79,70,229,.55),0 3px 12px -5px rgba(79,70,229,.12);
+    border:1.5px solid rgba(255,255,255,.95);
+    position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,#6366f1,#a855f7,#ec4899,#f59e0b);
+  }
+
+  .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .pill{
+    font-size:12px;font-weight:800;padding:5px 13px;border-radius:99px;
+    background:#eef1ff;color:#4f46e5;letter-spacing:.5px;
+  }
+  .pill.ghost{background:#f5f3ff;color:#8b5cf6;}
+  #hintBtn{
+    margin-left:auto;cursor:pointer;background:#fff7ed;color:#ea580c;
+    transition:all .2s ease;user-select:none;
+  }
+  #hintBtn:hover{background:#ffedd5;transform:translateY(-1.5px);box-shadow:0 6px 14px -8px rgba(249,115,22,.9);}
+
+  .progress{height:8px;background:#eef0fa;border-radius:99px;overflow:hidden;margin:12px 0 16px;}
+  .progress .bar{
+    height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,#6366f1,#a855f7,#ec4899);
+    transition:width .38s cubic-bezier(.3,.9,.3,1);
+  }
+
+  /* ===== 题目区 ===== */
+  .question{padding:4px 0 0;text-align:center;animation:qIn .38s cubic-bezier(.2,.85,.3,1);}
+  @keyframes qIn{from{opacity:0;transform:translateY(12px) scale(.975);}to{opacity:1;transform:none;}}
+
+  .pos-tag{
+    display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.2px;
+    padding:4px 13px;border-radius:99px;
+    background:linear-gradient(135deg,#fce7f3,#ede9fe);color:#a21caf;
+    margin-bottom:10px;
+  }
+  .cn{
+    font-size:29px;font-weight:800;color:#1e1b4b;
+    letter-spacing:1.6px;line-height:1.35;
+    min-height:40px;display:flex;align-items:center;justify-content:center;
+  }
+
+  .input-wrap{margin:16px auto 0;max-width:460px;position:relative;}
+  #answerInput{
+    width:100%;padding:15px 18px;font-size:24px;font-weight:800;
+    border-radius:16px;border:2.5px solid #e5e7f5;background:#fafbff;
+    text-align:center;letter-spacing:1.5px;color:#312e81;
+    transition:all .22s ease;font-family:inherit;
+  }
+  #answerInput::placeholder{color:#c3c6e0;font-weight:600;font-size:16px;letter-spacing:.5px;}
+  #answerInput:focus{
+    outline:none;border-color:#818cf8;background:#fff;
+    box-shadow:0 0 0 5px rgba(129,140,248,.16);
+  }
+  #answerInput:disabled{opacity:.9;cursor:not-allowed;}
+  #answerInput.correct{border-color:#34d399;background:#f0fdf9;color:#047857;}
+  #answerInput.wrong{border-color:#fb7185;background:#fff1f3;color:#be123c;}
+
+  .hint-text{min-height:19px;margin-top:9px;font-size:13px;color:#f97316;font-weight:700;letter-spacing:1px;}
+  .correct-line{
+    margin-top:9px;font-size:15px;font-weight:800;color:#059669;
+    opacity:0;transition:.3s ease;min-height:0;
+  }
+  .correct-line.show{opacity:1;min-height:22px;}
+  .correct-line b{font-size:18px;letter-spacing:.8px;color:#047857;}
+  .correct-line .ph{color:#9ca3af;font-weight:600;font-size:12px;margin-left:7px;}
+
+  /* ===== 按钮 ===== */
+  .btn{
+    font-family:inherit;font-size:14px;font-weight:800;letter-spacing:.6px;
+    border:none;border-radius:14px;padding:11px 18px;cursor:pointer;
+    transition:all .2s ease;background:#f1f2fb;color:#4f46e5;
+  }
+  .btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(99,102,241,.85);}
+  .btn:active:not(:disabled){transform:translateY(0) scale(.98);}
+  .btn:disabled{opacity:.38;cursor:not-allowed;}
+  .btn.primary{
+    background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;
+    box-shadow:0 12px 26px -13px rgba(124,58,237,.95);
+  }
+  .btn.primary:hover:not(:disabled){box-shadow:0 16px 32px -13px rgba(124,58,237,1);}
+  .btn.orange{
+    background:linear-gradient(135deg,#fb923c,#f97316);color:#fff;
+    box-shadow:0 12px 26px -13px rgba(249,115,22,.95);
+  }
+  .btn.orange:hover:not(:disabled){box-shadow:0 16px 32px -13px rgba(249,115,22,1);}
+
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:14px;}
+  .actions{display:flex;gap:10px;margin-top:10px;}
+  .actions .btn{flex:1;}
+
+  .toolbar{width:min(680px,94vw);display:flex;gap:10px;}
+  .toolbar .btn{
+    flex:1;background:rgba(255,255,255,.92);color:#4f46e5;
+    box-shadow:0 10px 22px -16px rgba(79,70,229,.95);
+    font-size:12.5px;padding:11px 6px;border:1.5px solid #eef1ff;
+  }
+  .toolbar .btn:hover{background:#f5f3ff;border-color:#ddd6fe;}
+
+  /* ===== 弹窗 ===== */
+  .overlay{
+    position:fixed;inset:0;background:rgba(49,46,129,.3);
+    backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+    display:grid;place-items:center;padding:20px;z-index:60;
+    opacity:0;pointer-events:none;transition:.28s ease;
+  }
+  .overlay.show{opacity:1;pointer-events:auto;}
+
+  .modal-wrap{
+    position:relative;width:min(560px,94vw);max-height:86vh;
+    transform:translateY(18px) scale(.965);
+    transition:transform .34s cubic-bezier(.2,.85,.3,1.15);
+  }
+  .overlay.show .modal-wrap{transform:none;}
+
+  .modal{
+    width:100%;max-height:86vh;overflow-y:auto;
+    background:#fff;border-radius:24px;
+    padding:52px 24px 26px;
+    box-shadow:0 34px 76px -32px rgba(49,46,129,.8);
+  }
+  .modal::-webkit-scrollbar{width:8px;}
+  .modal::-webkit-scrollbar-track{background:transparent;}
+  .modal::-webkit-scrollbar-thumb{background:#ddd6fe;border-radius:99px;}
+  .modal::-webkit-scrollbar-thumb:hover{background:#c4b5fd;}
+
+  .close{
+    position:absolute;top:9px;right:9px;z-index:5;
+    width:36px;height:36px;border-radius:50%;border:none;
+    background:#f5f3ff;color:#6366f1;font-size:15px;font-weight:800;
+    cursor:pointer;transition:all .25s ease;display:grid;place-items:center;
+  }
+  .close:hover{background:#ede9fe;transform:rotate(90deg) scale(1.08);}
+
+  .modal-title{
+    font-size:20px;font-weight:900;color:#312e81;
+    margin-bottom:16px;letter-spacing:.6px;
+  }
+
+  /* 成绩 */
+  .result-top{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:18px;}
+  .score-circle{
+    width:120px;height:120px;border-radius:50%;flex-shrink:0;
+    background:conic-gradient(#6366f1 0deg,#a855f7 var(--deg),#e9eaf5 var(--deg) 360deg);
+    display:grid;place-items:center;
+    box-shadow:0 14px 32px -16px rgba(124,58,237,.95);
+    animation:pop .55s cubic-bezier(.2,.9,.3,1.4);
+  }
+  @keyframes pop{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .score-circle .inner{
+    width:96px;height:96px;border-radius:50%;background:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .score-circle .num{font-size:34px;font-weight:900;color:#4f46e5;line-height:1;}
+  .score-circle .unit{font-size:9.5px;color:#9a97b8;letter-spacing:2.5px;margin-top:3px;font-weight:800;}
+
+  .result-info{flex:1;min-width:190px;}
+  .res-line{font-size:15px;color:#4b5563;margin-bottom:8px;font-weight:700;}
+  .res-line b{color:#4f46e5;font-size:17px;}
+  .trend{
+    font-size:13px;font-weight:800;padding:10px 14px;border-radius:14px;
+    line-height:1.55;letter-spacing:.3px;
+  }
+  .trend-up{background:#ecfdf5;color:#047857;border:1.5px solid #a7f3d0;}
+  .trend-down{background:#fff1f2;color:#be123c;border:1.5px solid #fecdd3;}
+  .trend-same{background:#eff6ff;color:#1d4ed8;border:1.5px solid #bfdbfe;}
+
+  .advice{
+    background:linear-gradient(135deg,#f5f3ff,#fdf2f8);
+    border-left:4px solid #a855f7;
+    padding:14px 16px;border-radius:0 14px 14px 0;
+    font-size:13.5px;line-height:1.75;color:#4c1d95;font-weight:600;
+    margin-bottom:20px;
+  }
+  .advice b{color:#7c3aed;}
+
+  .section-title{
+    font-size:14px;font-weight:900;color:#be123c;
+    margin-bottom:11px;letter-spacing:.5px;
+  }
+
+  .wrong-item{
+    background:#fff7f8;border:1.5px solid #ffe4e8;border-radius:14px;
+    padding:12px 14px;margin-bottom:9px;
+  }
+  .wi-main{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .wi-word{font-size:17px;font-weight:900;color:#be123c;letter-spacing:.6px;}
+  .wi-ph{font-size:12px;color:#a5a3b8;}
+  .wi-pos{font-size:10.5px;font-weight:800;background:#ede9fe;color:#7c3aed;padding:2px 8px;border-radius:99px;}
+  .wi-cn{font-size:13px;color:#4b5563;margin-top:5px;font-weight:700;}
+  .wi-you{font-size:12.5px;color:#9ca3af;margin-top:6px;font-weight:600;}
+  .wi-you .bad{color:#e11d48;font-weight:900;}
+
+  .bank-item{
+    display:flex;gap:12px;padding:10px 12px;border-radius:12px;transition:.2s;
+  }
+  .bank-item:nth-child(odd){background:#fafbff;}
+  .bank-item:hover{background:#f0f4ff;}
+  .bi-idx{font-size:11.5px;font-weight:900;color:#c7d2fe;width:22px;flex-shrink:0;padding-top:3px;}
+  .bi-body{flex:1;}
+  .bi-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .bi-top b{font-size:16px;color:#312e81;letter-spacing:.5px;}
+  .bi-ph{font-size:11.5px;color:#a5a3b8;}
+  .bi-pos{font-size:10.5px;font-weight:800;background:#ede9fe;color:#7c3aed;padding:1px 7px;border-radius:99px;}
+  .bi-cn{font-size:12.5px;color:#6b7280;margin-top:3px;font-weight:600;}
+
+  .hist-item{
+    display:flex;align-items:center;gap:14px;padding:12px 15px;
+    border-radius:14px;background:#fafbff;margin-bottom:9px;
+    border:1.5px solid #eef1ff;
+  }
+  .hist-idx{
+    width:27px;height:27px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;
+    display:grid;place-items:center;font-size:12px;font-weight:900;
+  }
+  .hist-score{font-size:20px;font-weight:900;color:#4f46e5;line-height:1.1;}
+  .hist-score small{font-size:11px;margin-left:2px;}
+  .hist-sub{font-size:11.5px;color:#9ca3af;margin-top:3px;font-weight:600;}
+
+  .empty{text-align:center;color:#9ca3af;font-size:14px;padding:28px 0;font-weight:700;line-height:1.7;}
+
+  /* 响应式 */
+  @media (max-width:520px){
+    body{padding:14px 10px;gap:12px;}
+    .cn{font-size:23px;letter-spacing:1px;}
+    #answerInput{font-size:20px;padding:13px 14px;letter-spacing:1px;}
+    .card{padding:18px 16px 16px;border-radius:22px;}
+    .brand h1{font-size:15px;}
+    .brand p{font-size:9.5px;letter-spacing:1px;}
+    .logo{width:40px;height:40px;font-size:20px;border-radius:12px;}
+    .best-badge{padding:6px 11px;gap:6px;}
+    .best-badge b{font-size:16px;}
+    .toolbar .btn{font-size:11px;padding:10px 3px;}
+    .btn{font-size:13px;padding:10px 14px;}
+    .result-top{gap:16px;}
+    .score-circle{width:104px;height:104px;}
+    .score-circle .inner{width:82px;height:82px;}
+    .score-circle .num{font-size:29px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 背景装饰字母 -->
+<div class="letters" aria-hidden="true">
+  <span style="top:5%;left:3%;transform:rotate(-13deg)">A</span>
+  <span style="top:16%;right:5%;transform:rotate(11deg)">B</span>
+  <span style="bottom:12%;left:7%;transform:rotate(8deg)">C</span>
+  <span style="bottom:20%;right:3%;transform:rotate(-15deg)">D</span>
+  <span style="top:45%;left:1%;transform:rotate(7deg)">E</span>
+  <span style="top:72%;right:9%;transform:rotate(-9deg)">F</span>
+  <span style="top:7%;right:24%;transform:rotate(15deg)">G</span>
+  <span style="bottom:5%;right:32%;transform:rotate(-7deg)">H</span>
+</div>
+
+<!-- 顶栏 -->
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">📚</div>
+    <div>
+      <h1>核心词汇 19 单元</h1>
+      <p>汉译英 · 听写测验</p>
+    </div>
+  </div>
+  <div class="best-badge">
+    <span class="star">🏆</span>
+    <div>
+      <b id="bestVal">--</b>
+      <small>历史最高</small>
+    </div>
+  </div>
+</div>
+
+<!-- 主卡片 -->
+<main class="card">
+  <div class="meta">
+    <span class="pill" id="qCounter">第 1 / 30 题</span>
+    <span class="pill ghost" id="answeredCounter">已答 0 / 30</span>
+    <span class="pill" id="hintBtn">💡 提示</span>
+  </div>
+
+  <div class="progress"><div class="bar" id="progressBar"></div></div>
+
+  <div class="question" id="questionArea">
+    <div class="pos-tag" id="posTag">n.</div>
+    <div class="cn" id="cnText">信心；信任</div>
+    <div class="input-wrap">
+      <input id="answerInput" type="text" placeholder="请输入英文单词…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="hint-text" id="hintText"></div>
+    <div class="correct-line" id="correctLine"></div>
+  </div>
+
+  <div class="nav">
+    <button class="btn" id="prevBtn">← 上一题</button>
+    <button class="btn" id="nextBtn">下一题 →</button>
+  </div>
+
+  <div class="actions">
+    <button class="btn primary" id="submitBtn">提交答卷</button>
+    <button class="btn orange" id="reshuffleBtn">🔄 重新随机</button>
+  </div>
+</main>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+  <button class="btn" id="bankBtn">📖 查看题库</button>
+  <button class="btn" id="historyBtn">🏆 历史分数</button>
+  <button class="btn" id="wrongBtn">❌ 查看错题</button>
+</div>
+
+<!-- 弹窗 -->
+<div class="overlay" id="overlay">
+  <div class="modal-wrap">
+    <button class="close" id="closeModal">✕</button>
+    <div class="modal" id="modal">
+      <div id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================== 词库 ===================== */
+const WORDS = [
+  {w:'normal',        p:'/ˈnɔːml/',        t:'adj.',        c:'正常的；一般的'},
+  {w:'abnormal',      p:'/æbˈnɔːml/',      t:'adj.',        c:'反常的，异常的'},
+  {w:'confidence',    p:'/ˈkɒnfɪdəns/',    t:'n.',          c:'信心；信任；秘密'},
+  {w:'confident',     p:'/ˈkɒnfɪdənt/',    t:'adj.',        c:'自信的；确信的'},
+  {w:'continual',     p:'/kənˈtɪnjuəl/',   t:'adj.',        c:'持续不断的；频繁的'},
+  {w:'continue',      p:'/kənˈtɪnjuː/',    t:'v.',          c:'继续；持续'},
+  {w:'continuous',    p:'/kənˈtɪnjuəs/',   t:'adj.',        c:'连续的；持续的'},
+  {w:'rely',          p:'/rɪˈlaɪ/',        t:'v.',          c:'依赖；依靠'},
+  {w:'reliable',      p:'/rɪˈlaɪəbl/',     t:'adj.',        c:'可靠的；可信赖的'},
+  {w:'fetch',         p:'/fetʃ/',          t:'v.',          c:'去取来；卖得'},
+  {w:'schoolyard',    p:'/ˈskuːljɑːd/',    t:'n.',          c:'校园；操场'},
+  {w:'measure',       p:'/ˈmeʒə(r)/',      t:'v./n.',       c:'测量；措施；尺寸'},
+  {w:'take',          p:'/teɪk/',          t:'v.',          c:'拿；取；花费；乘坐'},
+  {w:'stress',        p:'/stres/',         t:'n./v.',       c:'压力；强调；使焦虑'},
+  {w:'under',         p:'/ˈʌndə(r)/',      t:'prep./adv.',  c:'在...之下；少于'},
+  {w:'tough',         p:'/tʌf/',           t:'adj.',        c:'艰难的；坚强的；坚韧的'},
+  {w:'choice',        p:'/tʃɔɪs/',         t:'n.',          c:'选择；抉择'},
+  {w:'have',          p:'/hæv/',           t:'v.',          c:'有；吃；使'},
+  {w:'choose',        p:'/tʃuːz/',         t:'v.',          c:'选择；挑选'},
+  {w:'firm',          p:'/fɜːm/',          t:'n./adj.',     c:'公司；坚定的；牢固的'},
+  {w:'confirm',       p:'/kənˈfɜːm/',      t:'v.',          c:'确认；证实；批准'},
+  {w:'conflict',      p:'/ˈkɒnflɪkt/',     t:'n./v.',       c:'冲突；矛盾；抵触'},
+  {w:'confront',      p:'/kənˈfrʌnt/',     t:'v.',          c:'面对；遭遇；对抗'},
+  {w:'confrontation', p:'/ˌkɒnfrʌnˈteɪʃn/',t:'n.',          c:'对抗；冲突；对峙'},
+  {w:'entire',        p:'/ɪnˈtaɪə(r)/',    t:'adj.',        c:'全部的；整个的'},
+  {w:'anxious',       p:'/ˈæŋkʃəs/',       t:'adj.',        c:'焦虑的；担忧的；渴望的'},
+  {w:'anxiety',       p:'/æŋˈzaɪəti/',     t:'n.',          c:'焦虑；担心；渴望'},
+  {w:'invest',        p:'/ɪnˈvest/',       t:'v.',          c:'投资；投入（时间、精力）'},
+  {w:'meantime',      p:'/ˈmiːntaɪm/',     t:'n./adv.',     c:'其间；同时'},
+  {w:'meanwhile',     p:'/ˈmiːnwaɪl/',     t:'adv.',        c:'同时；与此同时'},
+  {w:'civil',         p:'/ˈsɪvl/',         t:'adj.',        c:'公民的；民用的；文明的'},
+  {w:'civilization',  p:'/ˌsɪvəlaɪˈzeɪʃn/',t:'n.',          c:'文明；文明社会'},
+  {w:'cloth',         p:'/klɒθ/',          t:'n.',          c:'布料；一块布'},
+  {w:'clothe',        p:'/kləʊð/',         t:'v.',          c:'给...穿衣；覆盖'},
+  {w:'clothes',       p:'/kləʊðz/',        t:'n.',          c:'衣服；服装（复数）'},
+  {w:'clothing',      p:'/ˈkləʊðɪŋ/',      t:'n.',          c:'衣服（总称）；衣着'},
+  {w:'wipe',          p:'/waɪp/',          t:'v./n.',       c:'擦；拭去；擦拭'},
+  {w:'wise',          p:'/waɪz/',          t:'adj.',        c:'明智的；聪明的'},
+  {w:'wisdom',        p:'/ˈwɪzdəm/',       t:'n.',          c:'智慧；明智'},
+  {w:'physics',       p:'/ˈfɪzɪks/',       t:'n.',          c:'物理学'},
+  {w:'physical',      p:'/ˈfɪzɪkl/',       t:'adj.',        c:'身体的；物质的；物理的'},
+  {w:'energy',        p:'/ˈenədʒi/',       t:'n.',          c:'能量；精力；能源'},
+  {w:'engage',        p:'/ɪnˈɡeɪdʒ/',      t:'v.',          c:'吸引；参与；雇佣；订婚'},
+  {w:'enough',        p:'/ɪˈnʌf/',         t:'adj./adv.',   c:'足够的；足够地'},
+  {w:'amount',        p:'/əˈmaʊnt/',       t:'n./v.',       c:'数量；总额；合计'},
+  {w:'similar',       p:'/ˈsɪmələ(r)/',    t:'adj.',        c:'相似的；类似的'},
+  {w:'be',            p:'/biː/',           t:'v.',          c:'是；存在'},
+  {w:'similarity',    p:'/ˌsɪməˈlærəti/',  t:'n.',          c:'相似性；类似点'},
+  {w:'similarly',     p:'/ˈsɪmələli/',     t:'adv.',        c:'同样地；类似地'},
+  {w:'resemble',      p:'/rɪˈzembl/',      t:'v.',          c:'像；类似于'},
+  {w:'single',        p:'/ˈsɪŋɡl/',        t:'adj.',        c:'单一的；单身的'},
+  {w:'belong',        p:'/bɪˈlɒŋ/',        t:'v.',          c:'属于；应在（某处）'},
+  {w:'allow',         p:'/əˈlaʊ/',         t:'v.',          c:'允许；准许；给予'},
+  {w:'circumstance',  p:'/ˈsɜːkəmstəns/',  t:'n.',          c:'环境；情况；境遇'},
+  {w:'tourist',       p:'/ˈtʊərɪst/',      t:'n.',          c:'旅游者；观光客'},
+  {w:'before',        p:'/bɪˈfɔː(r)/',     t:'prep./conj.', c:'在...之前；以前'},
+  {w:'long',          p:'/lɒŋ/',           t:'adj./v.',     c:'长的；长期的；渴望'},
+  {w:'beg',           p:'/beɡ/',           t:'v.',          c:'乞求；请求；恳求'}
+];
+
+const QUIZ_SIZE = 30;
+const BEST_KEY = 'vocab19_best_v1';
+const HIST_KEY = 'vocab19_hist_v1';
+
+/* ===================== 状态 ===================== */
+let quiz = [];
+let answers = [];
+let idx = 0;
+let submitted = false;
+let lastWrong = [];
+
+/* ===================== 工具 ===================== */
+const $ = id => document.getElementById(id);
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function getBest(){
+  const v = localStorage.getItem(BEST_KEY);
+  return v === null ? null : parseInt(v, 10);
+}
+function setBest(v){ localStorage.setItem(BEST_KEY, String(v)); }
+function getHist(){
+  try { return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function addHist(rec){
+  const h = getHist();
+  h.unshift(rec);
+  localStorage.setItem(HIST_KEY, JSON.stringify(h.slice(0, 30)));
+}
+function updateBestDisplay(){
+  const b = getBest();
+  $('bestVal').textContent = b === null ? '--' : b;
+}
+function fmtTime(ts){
+  const d = new Date(ts);
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+/* ===================== 弹窗 ===================== */
+function openModal(html){
+  $('modalBody').innerHTML = html;
+  $('overlay').classList.add('show');
+  $('modal').scrollTop = 0;
+}
+function closeModal(){
+  $('overlay').classList.remove('show');
+}
+
+/* ===================== 抽题 ===================== */
+function pickQuiz(){
+  const pool = WORDS.slice();
+  for(let i = pool.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, Math.min(QUIZ_SIZE, pool.length));
+}
+
+function startQuiz(){
+  quiz = pickQuiz();
+  answers = new Array(quiz.length).fill('');
+  idx = 0;
+  submitted = false;
+  lastWrong = [];
+  render();
+}
+
+/* ===================== 渲染 ===================== */
+function render(){
+  const n = quiz.length;
+  const q = quiz[idx];
+
+  $('qCounter').textContent = `第 ${idx + 1} / ${n} 题`;
+  const done = answers.filter(a => a && a.trim()).length;
+  $('answeredCounter').textContent = `已答 ${done} / ${n}`;
+  $('progressBar').style.width = ((idx + 1) / n * 100) + '%';
+
+  // 重新触发动画
+  const qArea = $('questionArea');
+  qArea.style.animation = 'none';
+  void qArea.offsetWidth;
+  qArea.style.animation = '';
+
+  $('posTag').textContent = q.t;
+  $('cnText').textContent = q.c;
+  $('hintText').textContent = '';
+
+  const input = $('answerInput');
+  input.value = answers[idx] || '';
+  input.disabled = submitted;
+  input.classList.remove('correct', 'wrong');
+
+  const line = $('correctLine');
+  line.className = 'correct-line';
+  line.innerHTML = '';
+
+  if(submitted){
+    const ua = (answers[idx] || '').trim();
+    const ok = ua.toLowerCase() === q.w.toLowerCase();
+    input.classList.add(ok ? 'correct' : 'wrong');
+    if(ok){
+      line.innerHTML = `✅ 正确！ <b>${q.w}</b>`;
+    } else {
+      line.innerHTML = `❌ 正确答案：<b>${q.w}</b><span class="ph">${q.p} ${q.t}</span>`;
+    }
+    line.classList.add('show');
+  }
+
+  $('prevBtn').disabled = idx === 0;
+  $('nextBtn').disabled = idx === n - 1;
+  $('submitBtn').disabled = submitted;
+  $('submitBtn').textContent = submitted ? '✅ 已提交' : '提交答卷';
+  $('hintBtn').style.display = submitted ? 'none' : '';
+}
+
+/* ===================== 提交 ===================== */
+function submitQuiz(){
+  if(submitted) return;
+  submitted = true;
+
+  const total = quiz.length;
+  let correct = 0;
+  lastWrong = [];
+
+  quiz.forEach((q, i) => {
+    const ua = (answers[i] || '').trim();
+    if(ua.toLowerCase() === q.w.toLowerCase()){
+      correct++;
+    } else {
+      lastWrong.push({ q, ua });
+    }
+  });
+
+  const score = Math.round(correct / total * 100);
+
+  /* —— 分数对比 —— */
+  const prevBest = getBest();
+  let trendClass, trendText;
+
+  if(prevBest === null){
+    trendClass = 'trend-up';
+    trendText = `🌟 首次挑战完成！本次成绩已记录为历史最高分。`;
+    setBest(score);
+  } else if(score > prevBest){
+    trendClass = 'trend-up';
+    trendText = `🎉 比历史最高分（${prevBest} 分）<b>提高了 ${score - prevBest} 分</b>，成绩上升啦！`;
+    setBest(score);
+  } else if(score < prevBest){
+    trendClass = 'trend-down';
+    trendText = `📉 比历史最高分（${prevBest} 分）<b>低了 ${prevBest - score} 分</b>，成绩有所下降，继续加油！`;
+  } else {
+    trendClass = 'trend-same';
+    trendText = `➖ 与历史最高分（${prevBest} 分）<b>持平</b>，表现很稳定！`;
+  }
+
+  addHist({ score, correct, total, ts: Date.now() });
+  updateBestDisplay();
+  render();
+
+  /* —— 学习建议 —— */
+  let advice;
+  if(score >= 90){
+    advice = '🏅 <b>太棒了！</b>词汇基础非常扎实。可以试着用这些词造句或写一段短文，把它们变成能主动运用的词汇。';
+  } else if(score >= 75){
+    advice = '👍 <b>表现不错！</b>大部分单词已经掌握。重点复习错题，特别注意形近词（如 cloth / clothes / clothing、choice / choose）的拼写与词性差异。';
+  } else if(score >= 60){
+    advice = '💪 <b>基础尚可，仍需加强。</b>建议把错题抄写 3 遍，并结合词根词缀记忆（如 con- 表示"共同/加强"，-tion 结尾多为名词）。';
+  } else {
+    advice = '📚 <b>需要下功夫啦！</b>建议先按词性分组记忆，再遮住中文反复默写；每天早晚各听写一遍错题，坚持一周会有明显提升。';
+  }
+
+  /* —— 错题区 —— */
+  let wrongHtml = '';
+  if(lastWrong.length){
+    wrongHtml = `<div class="section-title">❌ 错题回顾（${lastWrong.length} 题）</div>`;
+    lastWrong.forEach(({ q, ua }) => {
+      wrongHtml += `
+        <div class="wrong-item">
+          <div class="wi-main">
+            <span class="wi-word">${q.w}</span>
+            <span class="wi-ph">${q.p}</span>
+            <span class="wi-pos">${q.t}</span>
+          </div>
+          <div class="wi-cn">${q.c}</div>
+          <div class="wi-you">你的答案：<span class="bad">${ua ? escapeHtml(ua) : '（未作答）'}</span></div>
+        </div>`;
+    });
+  } else {
+    wrongHtml = `<div class="section-title" style="color:#059669">🎉 全部答对，没有错题！</div>`;
+  }
+
+  const html = `
+    <h2 class="modal-title">📊 本次成绩</h2>
+    <div class="result-top">
+      <div class="score-circle" style="--deg:${Math.min(score * 3.6, 360)}deg">
+        <div class="inner">
+          <span class="num">${score}</span>
+          <span class="unit">SCORE</span>
+        </div>
+      </div>
+      <div class="result-info">
+        <div class="res-line">答对 <b>${correct}</b> / ${total} 题</div>
+        <div class="res-line">正确率 <b>${score}%</b></div>
+        <div class="trend ${trendClass}">${trendText}</div>
+      </div>
+    </div>
+    <div class="advice">${advice}</div>
+    ${wrongHtml}
+  `;
+
+  openModal(html);
+}
+
+/* ===================== 事件绑定 ===================== */
+$('answerInput').addEventListener('input', e => {
+  answers[idx] = e.target.value;
+  const done = answers.filter(a => a && a.trim()).length;
+  $('answeredCounter').textContent = `已答 ${done} / ${quiz.length}`;
+});
+
+$('answerInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    if(submitted) return;
+    if(idx < quiz.length - 1){
+      idx++;
+      render();
+    }
+  }
+});
+
+$('prevBtn').addEventListener('click', () => {
+  if(idx > 0){ idx--; render(); }
+});
+
+$('nextBtn').addEventListener('click', () => {
+  if(idx < quiz.length - 1){ idx++; render(); }
+});
+
+$('submitBtn').addEventListener('click', submitQuiz);
+
+$('reshuffleBtn').addEventListener('click', () => {
+  const done = answers.filter(a => a && a.trim()).length;
+  if(!submitted && done > 0){
+    if(!confirm('重新随机将清空当前所有作答记录，确定要继续吗？')) return;
+  }
+  startQuiz();
+});
+
+$('hintBtn').addEventListener('click', () => {
+  if(submitted) return;
+  const q = quiz[idx];
+  const mask = q.w.split('').map((ch, i) => i === 0 ? ch : '_').join(' ');
+  $('hintText').textContent = `提示：${mask}　（共 ${q.w.length} 个字母）`;
+});
+
+/* —— 题库 —— */
+$('bankBtn').addEventListener('click', () => {
+  let html = `<h2 class="modal-title">📖 完整题库（共 ${WORDS.length} 词）</h2>`;
+  WORDS.forEach((w, i) => {
+    html += `
+      <div class="bank-item">
+        <div class="bi-idx">${String(i + 1).padStart(2, '0')}</div>
+        <div class="bi-body">
+          <div class="bi-top">
+            <b>${w.w}</b>
+            <span class="bi-ph">${w.p}</span>
+            <span class="bi-pos">${w.t}</span>
+          </div>
+          <div class="bi-cn">${w.c}</div>
+        </div>
+      </div>`;
+  });
+  openModal(html);
+});
+
+/* —— 历史分数 —— */
+$('historyBtn').addEventListener('click', () => {
+  const h = getHist();
+  let html = `<h2 class="modal-title">🏆 历史成绩</h2>`;
+  if(!h.length){
+    html += `<p class="empty">暂无历史记录<br>快去挑战一次吧！</p>`;
+  } else {
+    const best = getBest();
+    html += `<div class="advice" style="margin-bottom:16px">历史最高分：<b>${best === null ? '--' : best} 分</b>　·　共记录 <b>${h.length}</b> 次</div>`;
+    h.forEach((r, i) => {
+      html += `
+        <div class="hist-item">
+          <div class="hist-idx">${i + 1}</div>
+          <div>
+            <div class="hist-score">${r.score}<small>分</small></div>
+            <div class="hist-sub">答对 ${r.correct}/${r.total} 题　·　${fmtTime(r.ts)}</div>
+          </div>
+        </div>`;
+    });
+  }
+  openModal(html);
+});
+
+/* —— 查看错题 —— */
+$('wrongBtn').addEventListener('click', () => {
+  if(!submitted){
+    openModal(`<h2 class="modal-title">❌ 错题本</h2><p class="empty">还没有提交答卷哦～<br>提交后就能查看本次的错题啦！</p>`);
+    return;
+  }
+  if(!lastWrong.length){
+    openModal(`<h2 class="modal-title">🎉 完美！</h2><p class="empty">全部答对，没有错题！</p>`);
+    return;
+  }
+  let html = `<h2 class="modal-title">❌ 本次错题（${lastWrong.length} 题）</h2>`;
+  lastWrong.forEach(({ q, ua }) => {
+    html += `
+      <div class="wrong-item">
+        <div class="wi-main">
+          <span class="wi-word">${q.w}</span>
+          <span class="wi-ph">${q.p}</span>
+          <span class="wi-pos">${q.t}</span>
+        </div>
+        <div class="wi-cn">${q.c}</div>
+        <div class="wi-you">你的答案：<span class="bad">${ua ? escapeHtml(ua) : '（未作答）'}</span></div>
+      </div>`;
+  });
+  openModal(html);
+});
+
+/* —— 关闭弹窗 —— */
+$('closeModal').addEventListener('click', closeModal);
+$('overlay').addEventListener('click', e => {
+  if(e.target === $('overlay')) closeModal();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeModal();
+});
+
+/* ===================== 启动 ===================== */
+updateBestDisplay();
+startQuiz();
+</script>
+</body>
+</html>
